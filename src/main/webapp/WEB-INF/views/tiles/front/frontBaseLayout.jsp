@@ -11,6 +11,7 @@
 	<!-- <link href="resources/css/menu.css" rel="stylesheet" type="text/css" /> -->
 	<link href="resources/css/news.css" rel="stylesheet" type="text/css" />
 	<link href="resources/css/nav.css" rel="stylesheet" type="text/css" />
+	<link href="resources/css/default.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
 	<script type="text/javascript" src="resources/js/menus.js" ></script>
 	<script type="text/javascript" src="resources/js/box.js"></script>

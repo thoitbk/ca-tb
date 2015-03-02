@@ -16,9 +16,11 @@
 		<div class="Tin_Theo_DM">
 			<div class="Tin_Theo_DM_Left">
 				<div class="TieuDe">
+					<div class="TieuDe_dau"> </div>
 					<div class="TieuDe_ND">
 						<a href='Tin-Tuc/Tin_Hoat_Dong.html'>TIN HOẠT ĐỘNG</a>
 					</div>
+					<div class="TieuDe_Cuoi"> </div>
 				</div>
 				<div class="Khung">
 					<div class='TinTC'>

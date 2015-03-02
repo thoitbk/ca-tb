@@ -149,7 +149,7 @@ body
 	}
 .TieuDe
 {
-	color: Blue;
+	color: White;
 	font-weight: bold;
 	text-transform: uppercase;
 	line-height: 27px;
@@ -161,7 +161,7 @@ body
 .TieuDe_dau
 {
 	background: url(../images/logo1.png) no-repeat 0 0 transparent;
-	margin:7px;
+	margin:8px;
 	width: 5%;
 	height:28px;
 	float:left;
@@ -170,7 +170,8 @@ body
 {
 	width: 75%;
 	height:28px;
-	padding-left:2px;
+	padding-left:1px;
+	padding-top:4px;
 	float:left;
 	}
 .TieuDe_Cuoi
@@ -1742,6 +1743,7 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 }
 #Tin_Theo_DM .TieuDe
 {
+	background-size: 100%;
 	background: url(  "../images/Tieude_DM_under.jpg" ) 0 bottom repeat-x;
 	}
 #Tin_Theo_DM .TieuDe a
@@ -1750,7 +1752,7 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	text-decoration: none;
 	color:#0000FF;
 	}
-#Tin_Theo_DM .TieuDeRight 
+#Tin_Theo_DM .TieuDeRight
 {
 	float:right;
 	width:80px;
