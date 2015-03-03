@@ -68,6 +68,8 @@
 	<bean id="userDAO" class="com.catb.dao.impl.UserDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	
+	<bean id="userBO" class="com.catb.bo.impl.UserBOImpl" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -96,9 +98,10 @@
 	</bean>
 	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-    	<property name="realm" ref="myRealm"/>
+    	<property name="realm" ref="authRealm"/>
 	</bean>
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-	<bean id="myRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm" />
+	<bean id="authRealm" class="com.catb.auth.AuthRealm">
+		<property name="userBO" ref="userBO" />
+	</bean>
 </beans>
