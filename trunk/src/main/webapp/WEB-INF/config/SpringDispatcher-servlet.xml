@@ -34,15 +34,12 @@
     <bean id="viewResolver"
          class="org.springframework.web.servlet.view.ResourceBundleViewResolver"
          p:basename="views" />
-	
-<!-- 	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean> -->
-	
+    
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+    
+    <bean id="applicationProperties" class="com.catb.common.PropertiesUtil">
+	    <property name="location" value="classpath:messages.properties" />
+	</bean>
 </beans>

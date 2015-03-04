@@ -80,9 +80,9 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login.jsp"/>
-		<property name="successUrl" value="/home.jsp"/> 
-		<property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+		<property name="loginUrl" value="/cm/login"/>
+		<property name="successUrl" value="/cm/home"/> 
+		<property name="unauthorizedUrl" value="/cm/unauthorized"/>
 		<property name="filterChainDefinitions">
 			<value>
 				# some example chain definitions:
