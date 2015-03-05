@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-
+        
 	<context:component-scan base-package="com.catb">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -82,26 +82,38 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/cm/login"/>
 		<property name="successUrl" value="/cm/home"/> 
-		<property name="unauthorizedUrl" value="/cm/unauthorized"/>
+		<property name="unauthorizedUrl" value="/cm/unauthorized"/><!-- this url is applied only for web filter, not for annotation -->
 		<property name="filterChainDefinitions">
 			<value>
 				# some example chain definitions:
-				/admin/** = authc, roles[admin]
-				/docs/** = authc, perms[document:read]
-				/ckeditor/** = authc
 				/ckfinder/** = authc
-				/login.jsp = authc
+				/ckeditor/** = authc
+				/cm/login = anon
+				/cm/** = authc
 				/** = anon
 				# more URL-to-FilterChain definitions here
 			</value>
 		</property>
 	</bean>
 	
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-    	<property name="realm" ref="authRealm"/>
+	<!-- Configure security manager -->
+	<bean id="hashService" class="org.apache.shiro.crypto.hash.DefaultHashService">
+		<property name="hashIterations" value="500000"></property>
+		<property name="hashAlgorithmName" value="SHA-256"></property>
+		<property name="generatePublicSalt" value="true"></property>
+		<!-- <property name="privateSalt" value="this is a private salt"></property> -->
 	</bean>
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	<bean id="passwordService" class="org.apache.shiro.authc.credential.DefaultPasswordService">
+		<property name="hashService" ref="hashService"></property>
+	</bean>
+	<bean id="passwordMatcher" class="org.apache.shiro.authc.credential.PasswordMatcher">
+		<property name="passwordService" ref="passwordService"></property>
+	</bean>
 	<bean id="authRealm" class="com.catb.auth.AuthRealm">
 		<property name="userBO" ref="userBO" />
+		<property name="credentialsMatcher" ref="passwordMatcher"></property>
+	</bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    	<property name="realm" ref="authRealm"/>
 	</bean>
 </beans>

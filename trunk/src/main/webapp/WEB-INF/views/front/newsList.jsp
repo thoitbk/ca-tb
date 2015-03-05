@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %>
-<%@ taglib uri="http://cksource.com/ckfinder" prefix="ckfinder" %>
-
-<textarea name="textareaId" id="textareaId"></textarea>
-
-<ckfinder:setupCKEditor basePath="/ckfinder" />
-<ckeditor:replace replace="textareaId" basePath="/ckeditor" />
 
 <div id="MainDMTin">
 	<div id="Khau_HieuKH">
