@@ -1,5 +1,7 @@
 package com.catb.web.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +25,11 @@ public class HomeController {
 	
 	@RequestMapping(value = "/cm", method = RequestMethod.GET)
 	public ModelAndView cm() {
-		return new ModelAndView(new RedirectView("/cm/login"));
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			return new ModelAndView(new RedirectView("/cm/home"));
+		} else {
+			return new ModelAndView(new RedirectView("/cm/login"));
+		}
 	}
 }
