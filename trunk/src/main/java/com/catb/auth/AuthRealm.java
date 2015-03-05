@@ -16,11 +16,14 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 
 import com.catb.bo.UserBO;
 import com.catb.model.User;
 
+// Don't need to store salt in separated column here because salt value is encoded in hashed password and
+// is already stored in the password field.
+// If don't use PasswordService, we can manually generate salts and store them in separated column. And when
+// implementing doGetAuthenticationInfo, we have to select salt value and set it to AuthenticationInfo
 public class AuthRealm extends JdbcRealm {
 	
 	private UserBO userBO;
@@ -33,42 +36,29 @@ public class AuthRealm extends JdbcRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         String username = upToken.getUsername();
-        
         if (username == null) {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
         
-        String password = null;
-        String salt = null;
-        
         String[] queryResults = getPasswordForUser(username);
-        password = queryResults[0];
-        salt = queryResults[1];
-
+        String password = queryResults[0];
         if (password == null) {
             throw new UnknownAccountException("No account found for user [" + username + "]");
         }
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password.toCharArray(), getName());
         
-        if (salt != null) {
-            info.setCredentialsSalt(ByteSource.Util.bytes(salt));
-        }
-
-
         return info;
 	}
 	
 	private String[] getPasswordForUser(String username) {
 
-        String[] result = new String[2];
+        String[] result = new String[1];
         User user = userBO.getUserByUsername(username);
         if (user == null) {
             throw new AuthenticationException("User: [" + username + "] doesn't exist");
         }
-        
         result[0] = user.getPassword();
-        result[1] = user.getSalt();
 
         return result;
     }
