@@ -1,6 +1,9 @@
 package com.catb.web.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -9,6 +12,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +43,7 @@ public class AuthenticationController {
 	public ModelAndView login(@RequestParam(value = "username", required = true) String username, 
 							  @RequestParam(value = "password", required = true) String password, 
 							  @RequestParam(value = "rememberMe", required = false, defaultValue = "false") Boolean rememberMe, 
-							  HttpServletRequest request) {
+							  HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Subject subject = SecurityUtils.getSubject();
 		if (!subject.isAuthenticated()) {
 			AuthenticationToken token = new UsernamePasswordToken(username, password, rememberMe);
@@ -52,10 +57,16 @@ public class AuthenticationController {
 			}
 			
 			logger.info(String.format("Login successfully - user: %s at %s", username, Util.getIpAddress(request)));
+			SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
+			if (savedRequest != null) {
+				return new ModelAndView(new RedirectView(savedRequest.getRequestUrl()));
+			} else {
+				System.out.println("empty");
+				return new ModelAndView(new RedirectView("/cm/home"));
+			}
+		} else {
 			return new ModelAndView(new RedirectView("/cm/home"));
 		}
-		
-		return null;
 	}
 	
 	@RequestMapping(value = "/cm/unauthorized", method = RequestMethod.GET)
