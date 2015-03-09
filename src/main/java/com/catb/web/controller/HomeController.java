@@ -1,6 +1,7 @@
 package com.catb.web.controller;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/cm", method = RequestMethod.GET)
-	public ModelAndView cm() {
+	public ModelAndView showContentManagerment() {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
 			return new ModelAndView(new RedirectView("/cm/home"));
 		} else {
 			return new ModelAndView(new RedirectView("/cm/login"));
 		}
+	}
+	
+	@RequiresAuthentication
+	@RequestMapping(value = "/cm/home", method = RequestMethod.GET)
+	public ModelAndView showContentManagementHome() {
+		return new ModelAndView("cm/home");
 	}
 }
