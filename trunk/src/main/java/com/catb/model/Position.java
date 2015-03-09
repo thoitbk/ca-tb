@@ -1,12 +1,16 @@
 package com.catb.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -27,6 +31,9 @@ public class Position implements Serializable {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
+	private Set<User> users = new HashSet<User>();
 
 	public Position() {
 		
@@ -37,6 +44,15 @@ public class Position implements Serializable {
 		this.name = name;
 		this.code = code;
 		this.description = description;
+	}
+
+	public Position(Integer id, String name, String code, String description,
+			Set<User> users) {
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.description = description;
+		this.users = users;
 	}
 
 	public Integer getId() {
@@ -69,5 +85,13 @@ public class Position implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

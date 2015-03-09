@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -50,14 +52,16 @@ public class User implements Serializable {
 	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "position_id")
-	private Integer positionId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "position_id")
+	private Position position;
 	
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "department_id")
-	private Integer departmentId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id")
+	private Department department;
 	
 	@Column(name = "description")
 	private String description;
@@ -72,8 +76,8 @@ public class User implements Serializable {
 	public User(Integer id, String username, String password, String salt,
 			String fullName, Boolean gender, String homePhoneNumber,
 			String officePhoneNumber, String mobileNumber, String address,
-			Integer positionId, String email, Integer departmentId,
-			String description) {
+			Position position, String email, Department department,
+			String description, Set<Role> roles) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -84,10 +88,11 @@ public class User implements Serializable {
 		this.officePhoneNumber = officePhoneNumber;
 		this.mobileNumber = mobileNumber;
 		this.address = address;
-		this.positionId = positionId;
+		this.position = position;
 		this.email = email;
-		this.departmentId = departmentId;
+		this.department = department;
 		this.description = description;
+		this.roles = roles;
 	}
 
 	public Integer getId() {
@@ -170,12 +175,12 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public Integer getPositionId() {
-		return positionId;
+	public Position getPosition() {
+		return position;
 	}
 
-	public void setPositionId(Integer positionId) {
-		this.positionId = positionId;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
 	public String getEmail() {
@@ -186,12 +191,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
+	public Department getDepartment() {
+		return department;
 	}
 
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public String getDescription() {
