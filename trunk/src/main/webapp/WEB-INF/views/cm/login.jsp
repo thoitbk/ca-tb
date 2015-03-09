@@ -18,6 +18,7 @@
 				return false;
 			}
 		});
+		
 		$("#close").click(function() {
 			$("#notice").hide();
 		});

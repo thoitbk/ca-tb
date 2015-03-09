@@ -3,8 +3,14 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+	<!-- front -->
 	<definition name="home" template="/WEB-INF/views/tiles/front/frontBaseLayout.jsp">
 		<put-attribute name="left_high" value="/WEB-INF/views/front/hightlights.jsp"></put-attribute>
 		<put-attribute name="left_low" value="/WEB-INF/views/front/newsList.jsp"></put-attribute>
+	</definition>
+	
+	<!-- content management -->
+	<definition name="cm/home" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/tiles/cm/content.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>
