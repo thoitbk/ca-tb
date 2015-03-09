@@ -36,14 +36,20 @@ public class AuthenticationController {
 			subject.logout();
 		}
 		
-		return new ModelAndView("login");
+		return new ModelAndView("cm/login");
 	}
 	
 	@RequestMapping(value = "/cm/login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam(value = "username", required = true) String username, 
-							  @RequestParam(value = "password", required = true) String password, 
+	public ModelAndView login(@RequestParam(value = "username") String username, 
+							  @RequestParam(value = "password") String password, 
 							  @RequestParam(value = "rememberMe", required = false, defaultValue = "false") Boolean rememberMe, 
 							  HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if (username == null || "".equals(username.trim()) || password == null || "".equals(password.trim())) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMsg", PropertiesUtil.getProperty("username.password.not.empty"));
+			return new ModelAndView(new RedirectView("/cm/login"));
+		}
+		
 		Subject subject = SecurityUtils.getSubject();
 		if (!subject.isAuthenticated()) {
 			AuthenticationToken token = new UsernamePasswordToken(username, password, rememberMe);
@@ -61,7 +67,6 @@ public class AuthenticationController {
 			if (savedRequest != null) {
 				return new ModelAndView(new RedirectView(savedRequest.getRequestUrl()));
 			} else {
-				System.out.println("empty");
 				return new ModelAndView(new RedirectView("/cm/home"));
 			}
 		} else {
@@ -71,6 +76,6 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/cm/unauthorized", method = RequestMethod.GET)
 	public ModelAndView unauthorized() {
-		return new ModelAndView("unauthorized");
+		return new ModelAndView("cm/unauthorized");
 	}
 }
