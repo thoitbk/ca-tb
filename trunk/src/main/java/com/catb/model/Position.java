@@ -39,6 +39,12 @@ public class Position implements Serializable {
 		
 	}
 
+	public Position(String name, String code, String description) {
+		this.name = name;
+		this.code = code;
+		this.description = description;
+	}
+
 	public Position(Integer id, String name, String code, String description) {
 		this.id = id;
 		this.name = name;

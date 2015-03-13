@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locations>
+	<location>
+		<code>top</code>
+		<name>Trên đỉnh</name>
+	</location>
+	<location>
+		<code>bottom</code>
+		<name>Dưới đáy</name>
+	</location>
+	<location>
+		<code>left</code>
+		<name>Bên trái</name>
+	</location>
+	<location>
+		<code>rightTop</code>
+		<name>Phải trên</name>
+	</location>
+	<location>
+		<code>rightCenter</code>
+		<name>Phải giữa</name>
+	</location>
+</locations>

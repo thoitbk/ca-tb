@@ -97,7 +97,7 @@ ul.accordion ul.child li {
 	border-bottom: solid 1px #ccc;
 	line-height:25px;
 	background:none;
-	background-color:none;
+	background-color:#FEFDF9;
 }
 ul.child li a {
 	color:#333;
@@ -143,12 +143,7 @@ ul.accordion li.item h3 a.important{
 .item .selected_counts {
 	background-position: 0px -19px!important;
 }
-input[type="text"]{
-	color: #777;
-	border: solid 1px #f7f7f7;
-	border-color:#777 #ccc #e7e7e7 #e7e7e7;
-	height:20px;
-}
+
 button{
 	color:#000;
 	margin-left:2px;

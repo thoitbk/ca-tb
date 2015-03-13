@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+	<config name="webTitle">Công an tỉnh Thái Bình</config>
+	<config name="recentNews">5</config>
+	<config name="questionAnswer">5</config>
+	<config name="tcCatalogs">3</config>
+	<config name="sameSubjects">10</config>
+	<config name="headlines">6</config>
+	<config name="headlineCaption">Sự kiện nổi bật</config>
+	<config name="imageCaption">Ảnh</config>
+	<config name="videoCaption">Videos</config>
+	<config name="audioCaption">Audios</config>
+	<config name="detailsCaption">Xem chi tiết >></config>
+	<config name="administrativeProcedures">Thủ tục hành chính</config>
+	<config name="administrativeProceduresInstruction">Hướng dẫn thủ tục hành chính</config>
+	<config name="views">Số lượt truy cập:</config>
+	<config name="introduction">Giới thiệu chung</config>
+	<config name="organizationalStructure">Lãnh đạo công an Thái Bình</config>
+	<config name="mostViewed">5</config>
+	<config name="adAmount">5</config>
+	<config name="newsInSameCatalog">10</config>
+	<config name="newsInSearchResult">50</config>
+	<config name="sameSubjectTitle">Các tin khác cùng chủ đề</config>
+	<config name="today">Hôm nay</config>
+	<config name="postedDate">Ngày đăng:</config>
+	<config name="author"></config>
+	<config name="print">In bài này</config>
+	<config name="homePage">Trang chủ >></config>
+	<config name="document">Văn bản</config>
+	<config name="legalDocument">Văn bản pháp quy pháp luật</config>
+	<config name="goTop">Về đầu trang</config>
+	<config name="duty">Chức năng nhiệm vụ</config>
+	<config name="achievement">Thành tích đã đạt được</config>
+</configurations>

@@ -10,12 +10,14 @@
 	<!-- css -->
 	<link href="/resources/css/Admin.css" rel="stylesheet" type="text/css" />
 	<link href="/resources/css/accordion.css" rel="stylesheet" type="text/css" />
+	<link href="/resources/css/notification.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
 	<script src="/resources/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 	<script src="/resources/js/box.js" type="text/javascript"></script>
 	<script src="/resources/js/popcalendar.js" type="text/javascript"></script>
 	<script src="/resources/js/Utils.js" type="text/javascript"></script>
 	<script src="/resources/js/accordion.js" type="text/javascript"></script>
+	<script src="/resources/js/cmUtil.js" type="text/javascript"></script>
 	<!-- icon -->
 	<link href="/resources/images/ControlPanel.ico" rel="shortcut icon" />
 </head>
@@ -34,12 +36,12 @@
 				<div class="admincontentRight">
 					<div id="TopInfo">
 						<div class="InfoLeft">
-							<span><span id="TopInfor1_lblNgay"></span></span>
+							<span id="ngay"></span>
 						</div>
 						<div class="InfoRight">
-							<span><span id="TopInfor1_lblUser"></span>Xin chào: Công An tỉnh</span>
+							<span>Xin chào: ${userInfo.fullName}</span>
 							<a href="" ><img border="0px" alt="Thông tin người sử dụng" src="/resources/images/user_info.png" width="30px" /></a>
-							<a href="/LogOut.aspx"><img border="0px" alt="Logout"  src="/resources/images/Logout.gif" width="30px" /></a>        
+							<a href="/cm/logout"><img border="0px" alt="Logout"  src="/resources/images/logout.png" width="30px" /></a>        
 						</div>
 					</div>
 					<tiles:insertAttribute name="content" />
