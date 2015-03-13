@@ -14,7 +14,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-
+        
+    <!-- Auto scan controller -->
 	<context:component-scan base-package="com.catb.web.controller">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -32,20 +33,21 @@
 	<mvc:resources mapping="/ckeditor/**" location="/ckeditor" />
 	<mvc:resources mapping="/ckfinder/**" location="/ckfinder/" /> -->
 	
+	<!-- Configure url template of resources -->
 	<mvc:resources mapping="/**" location="/" />
 	
+	<!-- Configure tiles -->
 	<bean id="tilesConfigurer"
          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
          p:definitions="/WEB-INF/config/tiles-defs.xml" />
-         
     <bean id="viewResolver"
          class="org.springframework.web.servlet.view.ResourceBundleViewResolver"
          p:basename="views" />
     
+    <!-- Configure message resources -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages" />
 	</bean>
-    
     <bean id="applicationProperties" class="com.catb.common.PropertiesUtil">
 	    <property name="location" value="classpath:messages.properties" />
 	</bean>

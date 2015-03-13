@@ -11,9 +11,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,18 +23,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.catb.bo.UserBO;
 import com.catb.common.PropertiesUtil;
 import com.catb.common.web.Util;
+import com.catb.model.User;
+import com.catb.vo.UserInfo;
 
 @Controller
 public class AuthenticationController {
 	
 	static Logger logger = Logger.getLogger(AuthenticationController.class.getCanonicalName());
 	
+	@Autowired
+	private UserBO userBO;
+	
 	@RequestMapping(value = "/cm/login", method = RequestMethod.GET)
 	public ModelAndView showLogin() {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated() || subject.isRemembered()) {
+			logger.info(String.format("User: %s logged out", subject.getPrincipal()));
 			subject.logout();
 		}
 		
@@ -62,6 +71,13 @@ public class AuthenticationController {
 				return new ModelAndView(new RedirectView("/cm/login"));
 			}
 			
+			// Store userInfo in session in order to avoid access db to get user info
+			User user = userBO.getUserByUsername(username);
+			if (user != null) {
+				UserInfo userInfo = new UserInfo(user.getId(), user.getUsername(), user.getFullName(), user.getGender());
+				request.getSession().setAttribute("userInfo", userInfo);
+			}
+			
 			logger.info(String.format("Login successfully - user: %s at %s", username, Util.getIpAddress(request)));
 			SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
 			if (savedRequest != null) {
@@ -74,8 +90,22 @@ public class AuthenticationController {
 		}
 	}
 	
+	@RequiresAuthentication
 	@RequestMapping(value = "/cm/unauthorized", method = RequestMethod.GET)
-	public ModelAndView unauthorized() {
+	public ModelAndView unauthorized(HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
+		logger.info(String.format("Unauthorized access of %s from ip address of %s", subject.getPrincipal(), Util.getIpAddress(request)));
+		
 		return new ModelAndView("cm/unauthorized");
+	}
+	
+	@RequiresAuthentication
+	@RequestMapping(value = "/cm/logout", method = RequestMethod.GET)
+	public ModelAndView logout() {
+		Subject subject = SecurityUtils.getSubject();
+		logger.info(String.format("User: %s logged out", subject.getPrincipal()));
+		subject.logout();
+		
+		return new ModelAndView(new RedirectView("/cm"));
 	}
 }

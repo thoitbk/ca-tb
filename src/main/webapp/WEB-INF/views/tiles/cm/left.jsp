@@ -80,23 +80,19 @@
 			<ul class="child">
 				<li>
 					<img src="/resources/images/home_f.gif" class="bullet_menu" />
-					<a href="#">Quản trị chức danh</a>
+					<a href="/cm/position/add">Quản trị chức danh</a>
 				</li>
 				<li>
 					<img src="/resources/images/Depart.png" class="bullet_menu" />
-					<a href="#">Quản trị phòng ban</a>
+					<a href="/cm/department/add">Quản trị phòng ban</a>
 				</li>
 				<li>
 					<img src="/resources/images/Depart.png" class="bullet_menu" />
-					<a href="#">Quản trị đơn vị</a>
+					<a href="/cm/documentType/add">Quản trị loại văn bản</a>
 				</li>
 				<li>
 					<img src="/resources/images/Depart.png" class="bullet_menu" />
-					<a href="#">Quản trị loại văn bản</a>
-				</li>
-				<li>
-					<img src="/resources/images/Depart.png" class="bullet_menu" />
-					<a href="#">Quản trị lĩnh vực</a>
+					<a href="/cm/field/add">Quản trị lĩnh vực</a>
 				</li>
 			</ul>
 		</li>
@@ -106,19 +102,19 @@
 			<ul class="child">
 				<li>
 					<img src="/resources/images/add_news.gif" class="bullet_menu" />
-					<a href="#">Quản trị liên kết</a>
+					<a href="/cm/link/add">Quản trị liên kết</a>
 				</li>
 				<li>
 					<img src="/resources/images/earth_f.gif" class="bullet_menu" />
-					<a href="#">Quản trị quảng cáo</a>
+					<a href="/cm/adv/add">Quản trị quảng cáo</a>
 				</li>
 				<li>
 					<img src="/resources/images/template_f.gif" class="bullet_menu" />
-					<a href="#">Thông tin chung</a>
+					<a href="/cm/intro/add">Thông tin chung</a>
 				</li>
 				<li>
 					<img src="/resources/images/book_f.gif" class="bullet_menu" />
-					<a href="#">Thông tin liên hệ</a>
+					<a href="/cm/criminalDenouncement">Thông tin liên hệ</a>
 				</li>
 			</ul>
 		</li>

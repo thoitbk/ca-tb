@@ -3,14 +3,27 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<!-- front -->
+	<!-- ==============================================================================
+	  										FRONT
+         ============================================================================== -->
 	<definition name="home" template="/WEB-INF/views/tiles/front/frontBaseLayout.jsp">
 		<put-attribute name="left_high" value="/WEB-INF/views/front/hightlights.jsp"></put-attribute>
 		<put-attribute name="left_low" value="/WEB-INF/views/front/newsList.jsp"></put-attribute>
 	</definition>
 	
-	<!-- content management -->
+	
+	<!-- ==============================================================================
+	  									CONTENT MANAGEMENT
+         ============================================================================== -->
 	<definition name="cm/home" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/tiles/cm/content.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/position/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/addPosition.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/position/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updatePosition.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>
