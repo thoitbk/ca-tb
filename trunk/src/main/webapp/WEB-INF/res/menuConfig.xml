@@ -2,27 +2,26 @@
 <menus>
 	<menu id="info">
 		<menuItem id="info_1">
-			<links>
-				<link>/cm/news/add</link>
-				<link>/cm/position/update</link>
-				<link>/cm/position/delete</link>
-			</links>
+			<link>/cm/news/add</link>
+			<link>/cm/position/update</link>
+			<link>/cm/position/delete</link>
 		</menuItem>
 		<menuItem id="info_2">
-			<links>
-				<link>/cm/position/add</link>
-				<link>/cm/position/update</link>
-				<link>/cm/position/delete</link>
-			</links>
+			<link>/cm/position/add</link>
+			<link>/cm/position/update</link>
+			<link>/cm/position/delete</link>
 		</menuItem>
 	</menu>
 	<menu id="catalog">
 		<menuItem id="catalog_1">
-			<links>
-				<link>/cm/position/add</link>
-				<link>/cm/position/update</link>
-				<link>/cm/position/delete</link>
-			</links>
+			<link>/cm/position/add</link>
+			<link>/cm/position/update</link>
+			<link>/cm/position/delete</link>
+		</menuItem>
+		<menuItem id="catalog_2">
+			<link>/cm/department/add</link>
+			<link>/cm/department/update</link>
+			<link>/cm/department/delete</link>
 		</menuItem>
 	</menu>
 	<!-- Using inverse indexing to find menuId and menuItemId from path requested by user
