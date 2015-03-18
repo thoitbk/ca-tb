@@ -2,6 +2,7 @@ package com.catb.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -44,7 +45,7 @@ public class PositionController {
 	public ModelAndView processCreatePosition(
 								@Valid PositionViewModel positionViewModel, 
 								BindingResult bindingResult, 
-								HttpSession session, ModelMap model) {
+								HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<Position> positions = positionBO.getPositions();
 			model.addAttribute("positions", positions);
@@ -56,9 +57,9 @@ public class PositionController {
 								positionViewModel.getDescription());
 			
 			positionBO.addPosition(position);
-			session.setAttribute("msg", PropertiesUtil.getProperty("position.created.success"));
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("position.created.success"));
 			
-			return new ModelAndView(new RedirectView("/cm/position/add"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/position/add"));
 		}
 	}
 	
@@ -84,8 +85,7 @@ public class PositionController {
 			@PathVariable("id") Integer id, 
 			@Valid PositionViewModel positionViewModel,
 			BindingResult bindingResult, 
-			ModelMap model, 
-			HttpSession session) {
+			ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<Position> positions = positionBO.getPositions();
 			model.addAttribute("positions", positions);
@@ -98,9 +98,9 @@ public class PositionController {
 			position.setId(id);
 			
 			positionBO.updatePosition(position);
-			session.setAttribute("msg", PropertiesUtil.getProperty("position.updated.success"));
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("position.updated.success"));
 			
-			return new ModelAndView(new RedirectView("/cm/position/add"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/position/add"));
 		}
 	}
 	

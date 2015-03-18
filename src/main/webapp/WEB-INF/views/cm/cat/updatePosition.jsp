@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="/resources/css/table.css" rel="stylesheet" type="text/css" />
+<link href="resources/css/table.css" rel="stylesheet" type="text/css" />
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
@@ -18,7 +18,7 @@
 					<span class="lblBlack">Tên chức danh</span>
 				</td>
 				<td width="80%">
-					<form:input path="name" id="name" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="name" id="name" maxlength="500" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -26,7 +26,7 @@
 					<span class="lblBlack">Mã chức danh</span>
 				</td>
 				<td>
-					<form:input path="code" id="code" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="code" id="code" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -67,17 +67,17 @@
 				<td width="25%"><c:out value="${position.name}"></c:out></td>
 				<td width="35%"><c:out value="${position.description}"></c:out></td>
 				<td>
-					<a href="/cm/position/update/${position.id}">
-						<img src="/resources/images/update.png" alt="Cập nhật" class="update" />
+					<a href="cm/position/update/${position.id}">
+						<img src="resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
 			</tr>
 		</c:forEach>
 		<tr>
 	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="/cm/position/delete" id="delPosition">
-	    			<img alt="Xóa" src="/resources/images/delete.png" class="delete" title="Xóa" />
-	    		</a>
+	    		<a href="cm/position/delete" id="delPosition">
+	    			<img alt="Xóa" src="resources/images/delete.png" class="delete" title="Xóa" />
+	    		</a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>
 	</table>

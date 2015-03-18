@@ -1,7 +1,7 @@
 $(document).ready(function() {
-        document.getElementById("ngay").innerHTML = getDate();
+    document.getElementById("ngay").innerHTML = getDate();
         
-        $('#selectAll').click(function(event) {
+    $('#selectAll').click(function(event) {
         if(this.checked) {
             $('.checkbox').each(function() {
                 this.checked = true;
@@ -12,41 +12,50 @@ $(document).ready(function() {
             });         
         }
     });
-        
-        $("#delPosition").click(function(event){
-            event.preventDefault();
-            postUrl = $('#delPosition').attr('href');
-            reloadUrl = '/cm/position/add';
-            post(postUrl, reloadUrl);
-        });
-        
-        function post(postUrl, reloadUrl) {
-                var _ids = $(".checkbox:checked").map(function(){
-                return $(this).val();
-            }).get();
-            if (_ids.length == 0) {
-                alert('Chưa chọn mục nào');
-                return;
-            }
-            if (!confirm('Bạn có chắc chắn muốn xóa ?')) {
-                return;
-            }
-            
-            $.ajax({
-                type : "POST",
-                url : postUrl,
-                dataType: "json",
-                data : {
-                    ids: _ids
-                },
-                success : function(response) {
-                        window.location.href=reloadUrl;
-                },
-                error : function(e) {
-                        window.location.href=reloadUrl;
-                }
-            });
+    
+    var baseHref = document.getElementsByTagName('base')[0].href;
+    
+    $("#delPosition").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delPosition').attr('href');
+        reloadUrl = baseHref + 'cm/position/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    $("#delDepartment").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delDepartment').attr('href');
+        reloadUrl = baseHref + 'cm/department/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    function post(postUrl, reloadUrl) {
+            var _ids = $(".checkbox:checked").map(function(){
+            return $(this).val();
+        }).get();
+        if (_ids.length == 0) {
+            alert('Chưa chọn mục cần xóa');
+            return;
         }
+        if (!confirm('Bạn có chắc chắn muốn xóa ?')) {
+            return;
+        }
+        
+        $.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+                ids: _ids
+            },
+            success : function(response) {
+                    window.location.href=reloadUrl;
+            },
+            error : function(e) {
+                    window.location.href=reloadUrl;
+            }
+        });
+    }
 });
 
 function getDate() {
