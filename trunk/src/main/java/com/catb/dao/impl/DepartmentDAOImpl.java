@@ -50,6 +50,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		query.setParameter("phone", department.getPhone());
 		query.setParameter("fax", department.getFax());
 		query.setParameter("description", department.getDescription());
+		query.setParameter("id", department.getId());
 		
 		query.executeUpdate();
 	}

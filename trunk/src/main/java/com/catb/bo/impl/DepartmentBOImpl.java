@@ -37,7 +37,11 @@ public class DepartmentBOImpl implements DepartmentBO {
 	}
 	
 	@Transactional
-	public void deleteDepartment(Integer id) {
-		departmentDAO.deleteDepartment(id);
+	public void deleteDepartments(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				departmentDAO.deleteDepartment(id);
+			}
+		}
 	}
 }

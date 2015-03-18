@@ -30,4 +30,8 @@
 	<definition name="cm/department/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/cat/addDepartment.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/department/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updateDepartment.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
