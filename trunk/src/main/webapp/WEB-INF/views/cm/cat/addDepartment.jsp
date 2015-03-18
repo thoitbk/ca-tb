@@ -6,7 +6,7 @@
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
-		QUẢN TRỊ DANH MỤC CHỨC DANH
+		QUẢN TRỊ DANH MỤC PHÒNG BAN
 	</div>
 </div>
 <div>
@@ -14,28 +14,44 @@
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
 	</c:if>
-	<form:form method="post" commandName="positionViewModel">
+	<form:form method="post" commandName="departmentViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="center">
 			<tr>
 				<td width="20%">
-					<span class="lblBlack">Tên chức danh</span>
+					<span class="lblBlack">Mã phòng ban</span>
 				</td>
 				<td width="80%">
+					<form:input path="code" id="code" maxlength="200" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="lblBlack">Tên phòng ban</span>
+				</td>
+				<td>
 					<form:input path="name" id="name" maxlength="500" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<span class="lblBlack">Mã chức danh</span>
+					<span class="lblBlack">Số điện thoại</span>
 				</td>
 				<td>
-					<form:input path="code" id="code" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="phone" id="phone" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="lblBlack">Fax</span>
+				</td>
+				<td>
+					<form:input path="fax" id="fax" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
 				<td valign="middle">
-					<span class="lblBlack">Mô tả chi tiết</span>
+					<span class="lblBlack">Ghi chú</span>
 				</td>
 				<td>
 					<form:textarea path="description" id="description" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error" />
@@ -57,21 +73,25 @@
 			<th width="5%">
 				<input type="checkbox" name="selectAll" id="selectAll">
 			</th>
-			<th width="20%">Mã chức danh</th>
-			<th width="25%">Tên chức danh</th>
+			<th width="20%">Mã phòng ban</th>
+			<th width="25%">Tên phòng ban</th>
+			<th width="35%">Số điện thoại</th>
+			<th width="35%">Fax</th>
 			<th width="35%">Ghi chú</th>
 			<th>Cập nhật</th>
 		</tr>
-		<c:forEach items="${positions}" var="position">
+		<c:forEach items="${departments}" var="department">
 			<tr>
 				<td width="5%">
-					<input type="checkbox" name="positionId" id="positionId" value="${position.id}" class="checkbox" />
+					<input type="checkbox" name="departmentId" id="departmentId" value="${department.id}" class="checkbox" />
 				</td>
-				<td width="20%"><c:out value="${position.code}"></c:out></td>
-				<td width="25%"><c:out value="${position.name}"></c:out></td>
-				<td width="35%"><c:out value="${position.description}"></c:out></td>
+				<td width="20%"><c:out value="${department.code}"></c:out></td>
+				<td width="25%"><c:out value="${department.name}"></c:out></td>
+				<td width="25%"><c:out value="${department.phone}"></c:out></td>
+				<td width="25%"><c:out value="${department.fax}"></c:out></td>
+				<td width="35%"><c:out value="${department.description}"></c:out></td>
 				<td>
-					<a href="cm/position/update/${position.id}">
+					<a href="cm/department/update/${department.id}">
 						<img src="resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
@@ -79,7 +99,7 @@
 		</c:forEach>
 	    <tr>
 	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="cm/position/delete" id="delPosition">
+	    		<a href="cm/department/delete" id="delDepartment">
 	    			<img alt="Xóa" src="resources/images/delete.png" class="delete" title="Xóa" />
 	    		</a>&#8592; Click vào đây để xóa
 	    	</td>

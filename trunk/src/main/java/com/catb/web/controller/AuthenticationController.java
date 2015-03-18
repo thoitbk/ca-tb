@@ -56,7 +56,7 @@ public class AuthenticationController {
 		if (username == null || "".equals(username.trim()) || password == null || "".equals(password.trim())) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMsg", PropertiesUtil.getProperty("username.password.not.empty"));
-			return new ModelAndView(new RedirectView("/cm/login"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/login"));
 		}
 		
 		Subject subject = SecurityUtils.getSubject();
@@ -68,7 +68,7 @@ public class AuthenticationController {
 				logger.info(String.format("Login attempt of user %s at %s failed", username, Util.getIpAddress(request)));
 				HttpSession session = request.getSession();
 				session.setAttribute("loginMsg", PropertiesUtil.getProperty("login.failed"));
-				return new ModelAndView(new RedirectView("/cm/login"));
+				return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/login"));
 			}
 			
 			// Store userInfo in session in order to avoid access db to get user info
@@ -83,10 +83,10 @@ public class AuthenticationController {
 			if (savedRequest != null) {
 				return new ModelAndView(new RedirectView(savedRequest.getRequestUrl()));
 			} else {
-				return new ModelAndView(new RedirectView("/cm/home"));
+				return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/home"));
 			}
 		} else {
-			return new ModelAndView(new RedirectView("/cm/home"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/home")); 
 		}
 	}
 	
@@ -101,11 +101,11 @@ public class AuthenticationController {
 	
 	@RequiresAuthentication
 	@RequestMapping(value = "/cm/logout", method = RequestMethod.GET)
-	public ModelAndView logout() {
+	public ModelAndView logout(HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		logger.info(String.format("User: %s logged out", subject.getPrincipal()));
 		subject.logout();
 		
-		return new ModelAndView(new RedirectView("/cm"));
+		return new ModelAndView(new RedirectView(request.getContextPath() + "/cm"));
 	}
 }

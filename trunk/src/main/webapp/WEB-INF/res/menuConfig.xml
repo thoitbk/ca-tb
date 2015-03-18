@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+	<menu id="info">
+		<menuItem id="info_1">
+			<links>
+				<link>/cm/news/add</link>
+				<link>/cm/position/update</link>
+				<link>/cm/position/delete</link>
+			</links>
+		</menuItem>
+		<menuItem id="info_2">
+			<links>
+				<link>/cm/position/add</link>
+				<link>/cm/position/update</link>
+				<link>/cm/position/delete</link>
+			</links>
+		</menuItem>
+	</menu>
+	<menu id="catalog">
+		<menuItem id="catalog_1">
+			<links>
+				<link>/cm/position/add</link>
+				<link>/cm/position/update</link>
+				<link>/cm/position/delete</link>
+			</links>
+		</menuItem>
+	</menu>
+	<!-- Using inverse indexing to find menuId and menuItemId from path requested by user
+		 - Read this file and store it as a map in application context with key is link and
+		   value is id of menu and menuItem when starting up
+		 - Create tag function for retrieving menuId and menuItemId from link by looking up above map
+		 - Every time user requests a link, tag function will lookup the map to find out menuId and menuItemId
+		   corresponding to requested link
+		 - In left.jsp, using following code to set clicked menu active
+		 <li class="item isActiveMenu('info')" id="info">
+			<img src="/resources/images/info.png" class="icon_menu" />
+			<h3>Quản trị tin tức</h3>
+			<ul class="child">
+				<li class="isActiveMenuItem('info_1')" id="info_1">
+					<img src="/resources/images/add_news.gif" class="bullet_menu" />
+					<a href="#">Thêm mới tin</a>
+				</li>
+				<li class="isActiveMenuItem('info_2')" id="info_2">
+					<img src="/resources/images/earth_f.gif" class="bullet_menu" />
+					<a href="#">Quản trị tin</a>
+				</li>
+			</ul>
+		</li>
+		
+		- what isActiveMenu('menu id') function returns 'active' or '' depends on whether current menu was just clicked
+		- Similarly, isActiveMenuItem('menu item id') function returns 'active' or '' depends on whether current submenu was just clicked
+	 -->
+</menus>

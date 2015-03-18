@@ -1,5 +1,7 @@
 package com.catb.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
@@ -25,18 +27,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/cm", method = RequestMethod.GET)
-	public ModelAndView showContentManagerment() {
+	public ModelAndView showContentManagerment(HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
-			return new ModelAndView(new RedirectView("/cm/home"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/home"));
 		} else {
-			return new ModelAndView(new RedirectView("/cm/login"));
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/login"));
 		}
 	}
 	
 	@RequiresAuthentication
 	@RequestMapping(value = "/cm/home", method = RequestMethod.GET)
 	public ModelAndView showContentManagementHome() {
-		return new ModelAndView("cm/home");
+		return new ModelAndView("cm/home"); 
 	}
 }

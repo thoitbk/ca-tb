@@ -61,6 +61,15 @@ public class Department implements Serializable {
 		this.description = description;
 	}
 
+	public Department(String code, String name, String phone, String fax,
+			String description) {
+		this.code = code;
+		this.name = name;
+		this.phone = phone;
+		this.fax = fax;
+		this.description = description;
+	}
+
 	public Integer getId() {
 		return id;
 	}
