@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.catb.bo.DepartmentBO;
+import com.catb.bo.PositionBO;
 import com.catb.bo.UserBO;
 import com.catb.dao.UserDAO;
+import com.catb.model.Department;
 import com.catb.model.Permission;
+import com.catb.model.Position;
 import com.catb.model.Role;
 import com.catb.model.User;
 
@@ -19,6 +23,12 @@ public class UserBOImpl implements UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private DepartmentBO departmentBO;
+	
+	@Autowired
+	private PositionBO positionBO;
 	
 	@Transactional
 	public List<User> getUsers() {
@@ -68,5 +78,23 @@ public class UserBOImpl implements UserBO {
 		}
 		
 		return permissionSet;
+	}
+	
+	@Transactional
+	public void addUser(User user, Integer positionId, Integer departmentId) {
+		if (positionId != null) {
+			Position position = positionBO.getPositionById(positionId);
+			if (position != null) {
+				user.setPosition(position);
+			}
+		}
+		if (departmentId != null) {
+			Department department = departmentBO.getDepartmentById(departmentId);
+			if (department != null) {
+				user.setDepartment(department);
+			}
+		}
+		
+		userDAO.addUser(user);
 	}
 }

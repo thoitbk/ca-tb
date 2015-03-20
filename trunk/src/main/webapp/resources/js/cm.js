@@ -1,6 +1,6 @@
 $(document).ready(function() {
     document.getElementById("ngay").innerHTML = getDate();
-        
+    
     $('#selectAll').click(function(event) {
         if(this.checked) {
             $('.checkbox').each(function() {

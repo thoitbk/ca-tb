@@ -1,19 +1,48 @@
 package com.catb.web.viewmodel;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 public class UserViewModel {
 	
+	@NotBlank
+	@Size(min = 0, max = 100)
 	private String username;
+	
+	@NotBlank
+	@Size(min = 0, max = 200)
 	private String fullName;
+	
+	@NotBlank
+	@Size(min = 0, max = 100)
 	private String password;
-	private Boolean gender;
+	
+	private Integer gender;
+	
+	@Size(min = 0, max = 500)
 	private String address;
+	
+	@Size(min = 0, max = 50)
 	private String homePhoneNumber;
+	
+	@Size(min = 0, max = 50)
 	private String mobileNumber;
+	
+	@Size(min = 0, max = 50)
 	private String officePhoneNumber;
+	
+	@Email
+	@Size(min = 0, max = 100)
 	private String email;
+	
 	private Integer position;
+	
 	private Integer department;
+	
+	@Size(min = 0, max = 500)
 	private String description;
 	
 	public UserViewModel() {
@@ -21,7 +50,7 @@ public class UserViewModel {
 	}
 
 	public UserViewModel(String username, String fullName, String password,
-			Boolean gender, String address, String homePhoneNumber,
+			Integer gender, String address, String homePhoneNumber,
 			String mobileNumber, String officePhoneNumber, String email,
 			Integer position, Integer department, String description) {
 		this.username = username;
@@ -62,11 +91,11 @@ public class UserViewModel {
 		this.password = password;
 	}
 
-	public Boolean getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 
-	public void setGender(Boolean gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 

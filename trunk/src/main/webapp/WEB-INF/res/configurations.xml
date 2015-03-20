@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurations>
-	<config name="webTitle">Công an tỉnh Thái Bình</config>
-	<config name="recentNews">5</config>
-	<config name="questionAnswer">5</config>
-	<config name="tcCatalogs">3</config>
-	<config name="sameSubjects">10</config>
-	<config name="headlines">6</config>
-	<config name="headlineCaption">Sự kiện nổi bật</config>
-	<config name="imageCaption">Ảnh</config>
-	<config name="videoCaption">Videos</config>
-	<config name="audioCaption">Audios</config>
-	<config name="detailsCaption">Xem chi tiết >></config>
-	<config name="administrativeProcedures">Thủ tục hành chính</config>
-	<config name="administrativeProceduresInstruction">Hướng dẫn thủ tục hành chính</config>
-	<config name="views">Số lượt truy cập:</config>
-	<config name="introduction">Giới thiệu chung</config>
-	<config name="organizationalStructure">Lãnh đạo công an Thái Bình</config>
-	<config name="mostViewed">5</config>
-	<config name="adAmount">5</config>
-	<config name="newsInSameCatalog">10</config>
-	<config name="newsInSearchResult">50</config>
-	<config name="sameSubjectTitle">Các tin khác cùng chủ đề</config>
-	<config name="today">Hôm nay</config>
-	<config name="postedDate">Ngày đăng:</config>
-	<config name="author"></config>
-	<config name="print">In bài này</config>
-	<config name="homePage">Trang chủ >></config>
-	<config name="document">Văn bản</config>
-	<config name="legalDocument">Văn bản pháp quy pháp luật</config>
-	<config name="goTop">Về đầu trang</config>
-	<config name="duty">Chức năng nhiệm vụ</config>
-	<config name="achievement">Thành tích đã đạt được</config>
+	<webTitle>Công an tỉnh Thái Bình</webTitle>
+	<recentNews>5</recentNews>
+	<questionAnswer>5</questionAnswer>
+	<tcCatalogs>3</tcCatalogs>
+	<sameSubjects>10</sameSubjects>
+	<headlines>6</headlines>
+	<headlineCaption>Sự kiện nổi bật</headlineCaption>
+	<imageCaption>Ảnh</imageCaption>
+	<videoCaption>Videos</videoCaption>
+	<audioCaption>Audios</audioCaption>
+	<detailsCaption>Xem chi tiết >></detailsCaption>
+	<administrativeProcedures>Thủ tục hành chính</administrativeProcedures>
+	<administrativeProceduresInstruction>Hướng dẫn thủ tục hành chính</administrativeProceduresInstruction>
+	<views>Số lượt truy cập:</views>
+	<introduction>Giới thiệu chung</introduction>
+	<organizationalStructure>Lãnh đạo công an Thái Bình</organizationalStructure>
+	<mostViewed>5</mostViewed>
+	<adAmount>5</adAmount>
+	<newsInSameCatalog>10</newsInSameCatalog>
+	<newsInSearchResult>50</newsInSearchResult>
+	<sameSubjectTitle>Các tin khác cùng chủ đề</sameSubjectTitle>
+	<today>Hôm nay</today>
+	<postedDate>Ngày đăng:</postedDate>
+	<author></author>
+	<print>In bài này</print>
+	<homePage>Trang chủ >></homePage>
+	<document>Văn bản</document>
+	<legalDocument>Văn bản pháp quy pháp luật</legalDocument>
+	<goTop>Về đầu trang</goTop>
+	<duty>Chức năng nhiệm vụ</duty>
+	<achievement>Thành tích đã đạt được</achievement>
+	<pageSize>10</pageSize>
 </configurations>
