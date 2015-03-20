@@ -3,13 +3,13 @@
 	<menu id="info">
 		<menuItem id="info_1">
 			<link>/cm/news/add</link>
-			<link>/cm/position/update</link>
-			<link>/cm/position/delete</link>
+			<link>/cm/news/update</link>
+			<link>/cm/news/delete</link>
 		</menuItem>
 		<menuItem id="info_2">
-			<link>/cm/position/add</link>
-			<link>/cm/position/update</link>
-			<link>/cm/position/delete</link>
+			<link>/cm/ok1/add</link>
+			<link>/cm/ok2/update</link>
+			<link>/cm/ok3/delete</link>
 		</menuItem>
 	</menu>
 	<menu id="catalog">
@@ -22,6 +22,13 @@
 			<link>/cm/department/add</link>
 			<link>/cm/department/update</link>
 			<link>/cm/department/delete</link>
+		</menuItem>
+	</menu>
+	<menu id="system">
+		<menuItem id="system_1">
+			<link>/cm/user/add</link>
+			<link>/cm/user/update</link>
+			<link>/cm/user/delete</link>
 		</menuItem>
 	</menu>
 	<!-- Using inverse indexing to find menuId and menuItemId from path requested by user

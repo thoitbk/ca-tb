@@ -94,7 +94,7 @@
 			</tr>
 		</c:forEach>
 	    <tr>
-	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
+	    	<td colspan="7" style="text-align: left; background-color: #FFF; padding: 0.7em;">
 	    		<a href="cm/department/delete" id="delDepartment">
 	    			<img alt="Xóa" src="resources/images/delete.png" class="delete" title="Xóa" />
 	    		</a>&#8592; Click vào đây để xóa

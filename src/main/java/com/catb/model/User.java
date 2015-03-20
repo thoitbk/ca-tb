@@ -73,6 +73,22 @@ public class User implements Serializable {
 		
 	}
 
+	public User(String username, String password, String fullName,
+			Boolean gender, String homePhoneNumber, String officePhoneNumber,
+			String mobileNumber, String address, String email,
+			String description) {
+		this.username = username;
+		this.password = password;
+		this.fullName = fullName;
+		this.gender = gender;
+		this.homePhoneNumber = homePhoneNumber;
+		this.officePhoneNumber = officePhoneNumber;
+		this.mobileNumber = mobileNumber;
+		this.address = address;
+		this.email = email;
+		this.description = description;
+	}
+
 	public User(Integer id, String username, String password, String salt,
 			String fullName, Boolean gender, String homePhoneNumber,
 			String officePhoneNumber, String mobileNumber, String address,

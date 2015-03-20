@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="resources/css/table.css" rel="stylesheet" type="text/css" />
+<script src="resources/js/anim.js" type="text/javascript"></script>
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
