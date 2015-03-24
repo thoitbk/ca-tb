@@ -15,4 +15,7 @@ public interface UserBO {
 	public Set<String> getRoleNamesForUser(String username);
 	public Set<String> getPermissions(String roleName);
 	public void addUser(User user, Integer positionId, Integer departmentId);
+	public User getUserById(Integer id);
+	public void updateUser(User user, Integer positionId, Integer departmentId);
+	public void deleteUsers(Integer[] ids);
 }

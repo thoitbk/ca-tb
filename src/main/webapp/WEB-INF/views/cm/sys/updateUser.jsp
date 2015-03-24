@@ -11,11 +11,7 @@
 	</div>
 </div>
 <div>
-	<c:if test="${not empty msg}">
-		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
-		<c:remove var="msg" scope="session" />
-	</c:if>
-	<form:form method="post" commandName="userViewModel">
+	<form:form method="post" commandName="updateUserViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="" style="width: 100%">
 			<tr>
@@ -37,7 +33,8 @@
 					<span id="" class="lblBlack">Password</span>
 				</td>
 				<td>
-					<form:password path="password" id="password" maxlength="100" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
+					<form:password path="password" id="password" maxlength="100" cssClass="textbox" cssStyle="width: 90%" cssErrorClass="textbox_error" disabled="true" />
+					<a href="javascript:void(0);" id="enablePassword"><img src="${ct}/resources/images/enable.png" alt="edit" style="width: 1em; height: 1em; vertical-align: middle" /></a>
 				</td>
 				<td align="left" style="padding-left: 2%;">
 					<span class="lblBlack">Giới tính</span>
@@ -114,7 +111,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<input type="submit" value="Thêm mới" class="button" />
+					<input type="submit" value="Cập nhật" class="update_button" />
 				</td>
 			</tr>
 		</table>

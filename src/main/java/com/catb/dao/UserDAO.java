@@ -11,4 +11,7 @@ public interface UserDAO {
 	public void addUser(User user);
 	public User getUserByUsername(String username);
 	public List<Permission> getPermissionsByRole(String roleName);
+	public User getUserById(Integer id);
+	public void updateUser(User user);
+	public void deleteUser(Integer id);
 }

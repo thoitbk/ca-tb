@@ -38,4 +38,8 @@
 	<definition name="cm/user/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/addUser.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/user/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/sys/updateUser.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

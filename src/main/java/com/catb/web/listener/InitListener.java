@@ -29,6 +29,8 @@ public class InitListener implements ServletContextListener {
 		context.setAttribute("CM_MENU", ResReader.readCMMenuConfig(context.getRealPath(Constants.CM_MENU_CONFIG_FILE)));
 		context.setAttribute("COMMONINFO", ResReader.readCommonInfo(context.getRealPath(Constants.COMMONINFO_CONFIG_FILE)));
 		
+		context.setAttribute("ct", event.getServletContext().getContextPath());
+		
 		logger.info("\n------------------------- Complete starting web application successfully -------------------------");
 	}
 }
