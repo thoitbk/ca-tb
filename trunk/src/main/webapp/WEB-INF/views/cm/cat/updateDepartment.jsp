@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="resources/css/table.css" rel="stylesheet" type="text/css" />
+<link href="${ct}/resources/css/table.css" rel="stylesheet" type="text/css" />
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
@@ -87,16 +87,16 @@
 				<td width="15%"><c:out value="${department.fax}"></c:out></td>
 				<td width="30%"><c:out value="${department.description}"></c:out></td>
 				<td>
-					<a href="cm/department/update/${department.id}">
-						<img src="resources/images/update.png" alt="Cập nhật" class="update" />
+					<a href="${ct}/cm/department/update/${department.id}">
+						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
 			</tr>
 		</c:forEach>
 	    <tr>
 	    	<td colspan="7" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="cm/department/delete" id="delDepartment">
-	    			<img alt="Xóa" src="resources/images/delete.png" class="delete" title="Xóa" />
+	    		<a href="${ct}/cm/department/delete" id="delDepartment">
+	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
 	    		</a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>

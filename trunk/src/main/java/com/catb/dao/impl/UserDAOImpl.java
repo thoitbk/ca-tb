@@ -55,4 +55,24 @@ public class UserDAOImpl implements UserDAO {
 		
 		return permissions;
 	}
+
+	public User getUserById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (User) session.get(User.class, id);
+	}
+
+	public void updateUser(User user) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(user);
+	}
+
+	public void deleteUser(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		String delete = "DELETE FROM User " + 
+						"WHERE id = :id";
+		Query query = session.createQuery(delete);
+		query.setParameter("id", id);
+		
+		query.executeUpdate();
+	}
 }

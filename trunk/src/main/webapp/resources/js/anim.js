@@ -1,4 +1,6 @@
 $(document).ready(function() {
-	alert('sldkfjglksdfjg');
-	$(".alert-box.success").delay(5000).fadeOut();
+	$("#alert").hide().slideDown();
+	setTimeout(function(){
+		$("#alert").fadeOut();        
+	}, 5000);
 });

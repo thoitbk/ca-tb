@@ -13,19 +13,32 @@ $(document).ready(function() {
         }
     });
     
-    var baseHref = document.getElementsByTagName('base')[0].href;
+    $('#enablePassword').click(function() {
+    	$('#password').attr("disabled",false);
+    });
     
+    //var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    
+	var cp = '';
+	
     $("#delPosition").click(function(event){
         event.preventDefault();
         postUrl = $('#delPosition').attr('href');
-        reloadUrl = baseHref + 'cm/position/add';
+        reloadUrl = cp + '/cm/position/add';
         post(postUrl, reloadUrl);
     });
     
     $("#delDepartment").click(function(event){
         event.preventDefault();
         postUrl = $('#delDepartment').attr('href');
-        reloadUrl = baseHref + 'cm/department/add';
+        reloadUrl = cp + '/cm/department/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    $("#delUser").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delUser').attr('href');
+        reloadUrl = cp + '/cm/user/add';
         post(postUrl, reloadUrl);
     });
     

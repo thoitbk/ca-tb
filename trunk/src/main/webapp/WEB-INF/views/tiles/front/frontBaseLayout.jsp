@@ -8,19 +8,17 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
 	<title><!-- insert title --></title>
-	<c:set var="url">${pageContext.request.requestURL}</c:set>
-    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
 	<!-- css -->
 	<!-- <link href="resources/css/menu.css" rel="stylesheet" type="text/css" /> -->
-	<link href="resources/css/news.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/nav.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/default.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/news.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/nav.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/default.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
-	<script type="text/javascript" src="resources/js/menus.js" ></script>
-	<script type="text/javascript" src="resources/js/box.js"></script>
-	<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="resources/js/jquery-ui-1.8.18.custom.min.js"></script>
-	<link href="resources/images/Home.ico" rel="shortcut icon" />
+	<script type="text/javascript" src="${ct}/resources/js/menus.js" ></script>
+	<script type="text/javascript" src="${ct}/resources/js/box.js"></script>
+	<script type="text/javascript" src="${ct}/resources/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="${ct}/resources/js/jquery-ui-1.8.18.custom.min.js"></script>
+	<link href="${ct}/resources/images/Home.ico" rel="shortcut icon" />
 </head>
 <body>
 	<div id="wrapper">

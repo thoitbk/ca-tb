@@ -2,8 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="resources/css/table.css" rel="stylesheet" type="text/css" />
-<script src="resources/js/anim.js" type="text/javascript"></script>
+<link href="${ct}/resources/css/table.css" rel="stylesheet" type="text/css" />
+<script src="${ct}/resources/js/anim.js" type="text/javascript"></script>
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
@@ -72,16 +72,16 @@
 				<td width="25%"><c:out value="${position.name}"></c:out></td>
 				<td width="35%"><c:out value="${position.description}"></c:out></td>
 				<td>
-					<a href="cm/position/update/${position.id}">
-						<img src="resources/images/update.png" alt="Cập nhật" class="update" />
+					<a href="${ct}/cm/position/update/${position.id}">
+						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
 			</tr>
 		</c:forEach>
 	    <tr>
 	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="cm/position/delete" id="delPosition">
-	    			<img alt="Xóa" src="resources/images/delete.png" class="delete" title="Xóa" />
+	    		<a href="${ct}/cm/position/delete" id="delPosition">
+	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
 	    		</a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>

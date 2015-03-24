@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,5 +97,64 @@ public class UserBOImpl implements UserBO {
 		}
 		
 		userDAO.addUser(user);
+	}
+
+	@Transactional
+	public User getUserById(Integer id) {
+		User user = userDAO.getUserById(id);
+		if (user != null) {
+			Hibernate.initialize(user.getPosition());
+			Hibernate.initialize(user.getDepartment());
+		}
+		
+		return user;
+	}
+	
+	@Transactional
+	public void updateUser(User user, Integer positionId, Integer departmentId) {
+		if (user.getId() != null) {
+			User u = userDAO.getUserById(user.getId());
+			if (u != null) {
+				u.setUsername(user.getUsername());
+				u.setFullName(user.getFullName());
+				if (user.getPassword() != null) {
+					u.setPassword(user.getPassword());
+				}
+				u.setGender(user.getGender());
+				u.setHomePhoneNumber(user.getHomePhoneNumber());
+				u.setMobileNumber(user.getMobileNumber());
+				u.setOfficePhoneNumber(user.getOfficePhoneNumber());
+				u.setAddress(user.getAddress());
+				u.setEmail(user.getEmail());
+				u.setDescription(user.getDescription());
+				if (positionId != null) {
+					Position position = positionBO.getPositionById(positionId);
+					if (position != null) {
+						u.setPosition(position);
+					}
+				} else {
+					u.setPosition(null);
+				}
+				if (departmentId != null) {
+					Department department = departmentBO.getDepartmentById(departmentId);
+					if (department != null) {
+						u.setDepartment(department);
+					}
+				} else {
+					u.setDepartment(null);
+				}
+				
+				userDAO.updateUser(u);
+			}
+		}
+	}
+	
+	@Transactional
+	public void deleteUsers(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				userDAO.deleteUser(id);
+			}
+		}
 	}
 }

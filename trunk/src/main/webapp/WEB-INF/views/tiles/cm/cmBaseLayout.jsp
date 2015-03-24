@@ -8,21 +8,19 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head id="Head1">
 	<title>Content Management</title>
-	<c:set var="url">${pageContext.request.requestURL}</c:set>
-    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
 	<!-- css -->
-	<link href="resources/css/Admin.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/accordion.css" rel="stylesheet" type="text/css" />
-	<link href="resources/css/notification.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/Admin.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/accordion.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/notification.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
-	<script src="resources/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-	<script src="resources/js/box.js" type="text/javascript"></script>
-	<script src="resources/js/popcalendar.js" type="text/javascript"></script>
-	<script src="resources/js/Utils.js" type="text/javascript"></script>
-	<script src="resources/js/accordion.js" type="text/javascript"></script>
-	<script src="resources/js/cm.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/box.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/popcalendar.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/Utils.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/accordion.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/cm.js" type="text/javascript"></script>
 	<!-- icon -->
-	<link href="resources/images/ControlPanel.ico" rel="shortcut icon" />
+	<link href="${ct}/resources/images/ControlPanel.ico" rel="shortcut icon" />
 </head>
 <body>
 	<div id="wrapper">
@@ -43,8 +41,8 @@
 						</div>
 						<div class="InfoRight">
 							<span>Xin chào: ${userInfo.fullName}</span>
-							<a href="" ><img border="0px" alt="Thông tin người sử dụng" src="resources/images/user_info.png" width="30px" /></a>
-							<a href="cm/logout"><img border="0px" alt="Logout"  src="resources/images/logout.png" width="30px" /></a>        
+							<a href="" ><img border="0px" alt="Thông tin người sử dụng" src="${ct}/resources/images/user_info.png" width="30px" /></a>
+							<a href="${ct}/cm/logout"><img border="0px" alt="Logout"  src="${ct}/resources/images/logout.png" width="30px" /></a>        
 						</div>
 					</div>
 					<tiles:insertAttribute name="content" />
