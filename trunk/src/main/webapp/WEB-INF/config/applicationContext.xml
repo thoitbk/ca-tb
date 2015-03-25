@@ -97,6 +97,7 @@
 				/ckeditor/** = authc
 				/cm/login = anon
 				/cm/** = authc
+				/resources/js/cm/** = authc
 				/** = anon
 				# more URL-to-FilterChain definitions here
 			</value>
