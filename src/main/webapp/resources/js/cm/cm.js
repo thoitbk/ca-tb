@@ -42,6 +42,13 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    $("#delRole").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delRole').attr('href');
+        reloadUrl = cp + '/cm/role/add';
+        post(postUrl, reloadUrl);
+    });
+    
     function post(postUrl, reloadUrl) {
             var _ids = $(".checkbox:checked").map(function(){
             return $(this).val();

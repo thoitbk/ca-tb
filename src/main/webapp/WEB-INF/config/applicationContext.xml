@@ -83,6 +83,9 @@
 	<bean id="departmentDAO" class="com.catb.dao.impl.DepartmentDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="roleDAO" class="com.catb.dao.impl.RoleDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

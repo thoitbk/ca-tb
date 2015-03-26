@@ -143,7 +143,7 @@
 				</li>
 				<li id="system_4" class="${f:getMenuClass(menuItemId, 'system_4', 'selected_subitem')}">
 					<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
-					<a href="#">Quản trị nhóm người sử dụng</a>
+					<a href="${ct}/cm/role/add">Quản trị nhóm người sử dụng</a>
 				</li>
 				<li id="system_5" class="${f:getMenuClass(menuItemId, 'system_5', 'selected_subitem')}">
 					<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
@@ -155,7 +155,7 @@
 				</li>
 				<li id="system_7" class="${f:getMenuClass(menuItemId, 'system_7', 'selected_subitem')}">
 					<img src="${ct}/resources/images/User.png" class="bullet_menu" />
-					<a href="#">URL</a>
+					<a href="#">Quản lý quyền</a>
 				</li>
 				<li id="system_8" class="${f:getMenuClass(menuItemId, 'system_8', 'selected_subitem')}">
 					<img src="${ct}/resources/images/home_f.gif" class="bullet_menu" />
