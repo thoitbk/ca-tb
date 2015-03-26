@@ -44,6 +44,12 @@ public class Permission implements Serializable {
 		
 	}
 
+	public Permission(String name, String perStr, String description) {
+		this.name = name;
+		this.perStr = perStr;
+		this.description = description;
+	}
+
 	public Permission(Integer id, String name, String perStr, String description) {
 		this.id = id;
 		this.name = name;

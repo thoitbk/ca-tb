@@ -35,6 +35,11 @@
 			<link>/cm/role/update</link>
 			<link>/cm/role/delete</link>
 		</menuItem>
+		<menuItem id="system_7">
+			<link>/cm/permission/add</link>
+			<link>/cm/permission/update</link>
+			<link>/cm/permission/delete</link>
+		</menuItem>
 	</menu>
 	<!-- Using inverse indexing to find menuId and menuItemId from path requested by user
 		 - Read this file and store it as a map in application context with key is link and

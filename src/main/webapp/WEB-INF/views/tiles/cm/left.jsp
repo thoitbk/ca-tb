@@ -155,7 +155,7 @@
 				</li>
 				<li id="system_7" class="${f:getMenuClass(menuItemId, 'system_7', 'selected_subitem')}">
 					<img src="${ct}/resources/images/User.png" class="bullet_menu" />
-					<a href="#">Quản lý quyền</a>
+					<a href="${ct}/cm/permission/add">Quản trị quyền</a>
 				</li>
 				<li id="system_8" class="${f:getMenuClass(menuItemId, 'system_8', 'selected_subitem')}">
 					<img src="${ct}/resources/images/home_f.gif" class="bullet_menu" />
