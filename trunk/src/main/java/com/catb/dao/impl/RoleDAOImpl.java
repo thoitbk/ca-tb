@@ -45,7 +45,7 @@ public class RoleDAOImpl implements RoleDAO {
 		query.setParameter("name", name);
 		
 		List<Role> roles = (List<Role>) query.list();
-		return roles.size() > 0 ? roles.get(0) : null;
+		return roles != null && roles.size() > 0 ? roles.get(0) : null;
 	}
 
 	public void updateRole(Role role) {

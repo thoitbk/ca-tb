@@ -49,6 +49,13 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    $("#delPermission").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delPermission').attr('href');
+        reloadUrl = cp + '/cm/permission/add';
+        post(postUrl, reloadUrl);
+    });
+    
     function post(postUrl, reloadUrl) {
             var _ids = $(".checkbox:checked").map(function(){
             return $(this).val();

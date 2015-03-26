@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
 		query.setParameter("username", username);
 		List<User> users = (List<User>) query.list();
 		
-		return users.size() > 0 ? users.get(0) : null;
+		return users != null && users.size() > 0 ? users.get(0) : null;
 	}
 
 	@SuppressWarnings("unchecked")
