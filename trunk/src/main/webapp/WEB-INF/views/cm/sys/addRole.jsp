@@ -7,7 +7,7 @@
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
-		QUẢN TRỊ DANH MỤC CHỨC DANH
+		QUẢN TRỊ NHÓM NGƯỜI SỬ DỤNG
 	</div>
 </div>
 <div>
@@ -15,28 +15,20 @@
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
 	</c:if>
-	<form:form method="post" commandName="positionViewModel">
+	<form:form method="post" commandName="roleViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="center">
 			<tr>
 				<td width="20%">
-					<span class="lblBlack">Tên chức danh</span>
+					<span class="lblBlack">Tên nhóm</span>
 				</td>
 				<td width="80%">
-					<form:input path="name" id="name" maxlength="500" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<span class="lblBlack">Mã chức danh</span>
-				</td>
-				<td>
-					<form:input path="code" id="code" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="name" id="name" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
 				<td valign="middle">
-					<span class="lblBlack">Mô tả chi tiết</span>
+					<span class="lblBlack">Mô tả</span>
 				</td>
 				<td>
 					<form:textarea path="description" id="description" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error" />
@@ -58,29 +50,27 @@
 			<th width="5%">
 				<input type="checkbox" name="selectAll" id="selectAll">
 			</th>
-			<th width="20%">Mã chức danh</th>
-			<th width="25%">Tên chức danh</th>
-			<th width="35%">Ghi chú</th>
+			<th width="30%">Tên nhóm</th>
+			<th width="55%">Mô tả</th>
 			<th>Cập nhật</th>
 		</tr>
-		<c:forEach items="${positions}" var="position">
+		<c:forEach items="${roles}" var="role">
 			<tr>
 				<td width="5%">
-					<input type="checkbox" name="positionId" id="positionId" value="${position.id}" class="checkbox" />
+					<input type="checkbox" name="roleId" id="roleId" value="${role.id}" class="checkbox" />
 				</td>
-				<td width="20%"><c:out value="${position.code}"></c:out></td>
-				<td width="25%"><c:out value="${position.name}"></c:out></td>
-				<td width="35%"><c:out value="${position.description}"></c:out></td>
+				<td width="30%"><c:out value="${role.name}"></c:out></td>
+				<td width="55%"><c:out value="${role.description}"></c:out></td>
 				<td>
-					<a href="${ct}/cm/position/update/${position.id}">
+					<a href="${ct}/cm/role/update/${role.id}">
 						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
 			</tr>
 		</c:forEach>
 	    <tr>
-	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/position/delete" id="delPosition">
+	    	<td colspan="4" style="text-align: left; background-color: #FFF; padding: 0.7em;">
+	    		<a href="${ct}/cm/role/delete" id="delRole">
 	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
 	    		</a>&#8592; Click vào đây để xóa
 	    	</td>

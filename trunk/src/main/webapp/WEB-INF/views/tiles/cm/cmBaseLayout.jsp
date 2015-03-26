@@ -18,9 +18,9 @@
 	<script src="${ct}/resources/js/popcalendar.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/Utils.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/accordion.js" type="text/javascript"></script>
-	<script src="${ct}/resources/js/cm.js" type="text/javascript"></script>
+	<script src="${ct}/resources/js/cm/cm.js" type="text/javascript"></script>
 	<!-- icon -->
-	<link href="${ct}/resources/images/ControlPanel.ico" rel="shortcut icon" />
+	<link href="${ct}/resources/images/cm_logo.ico" rel="shortcut icon" />
 </head>
 <body>
 	<div id="wrapper">

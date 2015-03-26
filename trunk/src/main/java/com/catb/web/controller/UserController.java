@@ -217,7 +217,7 @@ public class UserController {
 	@ResponseBody
 	public Status deleteUser(@RequestParam("ids") Integer[] ids, HttpSession session) {
 		userBO.deleteUsers(ids);
-		session.setAttribute("msg", PropertiesUtil.getProperty("user.deleted.success"));
+		session.setAttribute("msg", PropertiesUtil.getProperty("user.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
 		return status;
 	}
