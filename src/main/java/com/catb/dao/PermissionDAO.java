@@ -13,4 +13,5 @@ public interface PermissionDAO {
 	public Permission getPermissionById(Integer id);
 	public Permission getPermissionByName(String name);
 	public Permission getPermissionByPerStr(String perStr);
+	public List<Permission> getPermissionsOfRole(Integer roleId);
 }
