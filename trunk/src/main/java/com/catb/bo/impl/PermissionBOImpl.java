@@ -2,6 +2,7 @@ package com.catb.bo.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,5 +63,14 @@ public class PermissionBOImpl implements PermissionBO {
 	@Transactional
 	public Permission getPermissionByPerStr(String perStr) {
 		return permissionDAO.getPermissionByPerStr(perStr);
+	}
+	
+	@Transactional
+	public List<Permission> getPermissionsOfRole(Integer roleId) {
+		List<Permission> permissions = permissionDAO.getPermissionsOfRole(roleId);
+//		for (Permission permission : permissions) {
+//			Hibernate.initialize(permission.getRoles());
+//		}
+		return permissions;
 	}
 }

@@ -77,4 +77,17 @@ public class PermissionDAOImpl implements PermissionDAO {
 		
 		return permissions != null && permissions.size() > 0 ? permissions.get(0) : null;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Permission> getPermissionsOfRole(Integer roleId) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT p " +
+						"FROM Permission AS p INNER JOIN p.roles AS r " +
+						"WHERE r.id = :id " +
+						"ORDER BY p.id";
+		Query query = session.createQuery(select);
+		query.setParameter("id", roleId);
+		
+		return (List<Permission>) query.list();
+	}
 }
