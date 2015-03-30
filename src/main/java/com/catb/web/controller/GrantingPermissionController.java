@@ -59,15 +59,12 @@ public class GrantingPermissionController {
 			HttpServletRequest request) {
 		Status status = new Status(Status.OK, "ok");
 		
-		System.out.println(roleId + " " + permissionIds.length);
-		
-		for (Integer pId : permissionIds) {
-			System.out.println(pId);
-		}
-		
-		if (roleId < 0 || permissionIds == null || roleBO.getRoleById(roleId) == null) {
+		if (roleId < 0 || roleBO.getRoleById(roleId) == null) {
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("invalid.parameter"));
 		} else {
+			if (permissionIds != null && permissionIds.length == 1 && permissionIds[0] == -100) {
+				permissionIds = new Integer[0];
+			}
 			roleBO.updatePermissionsOfRole(roleId, permissionIds);
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("grant.permission.successfully"));
 		}
