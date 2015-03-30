@@ -1,5 +1,53 @@
 $(document).ready(function() {
+	
+	var cp = '';
+	
     document.getElementById("ngay").innerHTML = getDate();
+    
+    $("#role").change(function () {
+    	var id = $(this).find('option:selected').val();
+    	if (id < 0) {
+    		window.location.href = cp + '/cm/showPermission';
+    	} else {
+    		window.location.href = cp + '/cm/showPermission?id=' + id;
+    	}
+    });
+    
+    $('#updatePerOfRole').click(function(event) {
+    	event.preventDefault();
+    	
+    	var _roleId = $('#role').val();
+    	if (_roleId < 0) {
+    		alert('Chưa chọn nhóm người dùng');
+    		return;
+    	}
+    	var _permissionIds = $(".checkbox:checked").map(function(){
+            return $(this).val();
+        }).get();
+    	
+    	postUrl = cp + '/cm/changePermission';
+    	reloadUrl = cp + '/cm/showPermission?id=' + _roleId;
+    	
+    	if (!confirm('Bạn có chắc chắn muốn cập nhật ?')) {
+            return;
+        }
+    	
+    	$.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+            	roleId: _roleId,
+                permissionIds: _permissionIds
+            },
+            success : function(response) {
+                    window.location.href=reloadUrl;
+            },
+            error : function(e) {
+                    window.location.href=reloadUrl;
+            }
+        });
+    });
     
     $('#selectAll').click(function(event) {
         if(this.checked) {
@@ -18,8 +66,6 @@ $(document).ready(function() {
     });
     
     //var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
-    
-	var cp = '';
 	
     $("#delPosition").click(function(event){
         event.preventDefault();
@@ -57,7 +103,7 @@ $(document).ready(function() {
     });
     
     function post(postUrl, reloadUrl) {
-            var _ids = $(".checkbox:checked").map(function(){
+        var _ids = $(".checkbox:checked").map(function(){
             return $(this).val();
         }).get();
         if (_ids.length == 0) {
