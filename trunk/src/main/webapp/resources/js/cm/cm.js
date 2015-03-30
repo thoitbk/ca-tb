@@ -25,6 +25,10 @@ $(document).ready(function() {
             return $(this).val();
         }).get();
     	
+    	if (_permissionIds == null || _permissionIds.length == 0) {
+    		_permissionIds = [-100];
+    	}
+    	
     	postUrl = cp + '/cm/changePermission';
     	reloadUrl = cp + '/cm/showPermission?id=' + _roleId;
     	
