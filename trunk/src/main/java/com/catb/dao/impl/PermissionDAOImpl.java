@@ -1,5 +1,6 @@
 package com.catb.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -92,13 +93,17 @@ public class PermissionDAOImpl implements PermissionDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Permission> getPermissionsByIds(Integer[] ids) {
-		Session session = sessionFactory.getCurrentSession();
-		String select = "SELECT p " + 
-						"FROM Permission p " +
-						"WHERE p.id IN (:ids)";
-		Query query = session.createQuery(select);
-		query.setParameterList("ids", ids);
+		if (ids != null && ids.length > 0) {
+			Session session = sessionFactory.getCurrentSession();
+			String select = "SELECT p " + 
+							"FROM Permission p " +
+							"WHERE p.id IN (:ids)";
+			Query query = session.createQuery(select);
+			query.setParameterList("ids", ids);
+			
+			return (List<Permission>) query.list();
+		}
 		
-		return (List<Permission>) query.list();
+		return new ArrayList<Permission>();
 	}
 }
