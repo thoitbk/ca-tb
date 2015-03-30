@@ -17,70 +17,47 @@
 	</c:if>
 	<table class="center">
 		<tr>
-			<td width="20%">
-				<span class="lblBlack">Tên nhóm</span>
-			</td>
 			<td width="80%">
-				
-			</td>
-		</tr>
-		<tr>
-			<td width="20%">
-				<span class="lblBlack">Chuỗi quyền</span>
-			</td>
-			<td width="80%">
-				<form:input path="perStr" id="perStr" maxlength="200" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
-			</td>
-		</tr>
-		<tr>
-			<td valign="middle">
-				<span class="lblBlack">Mô tả</span>
+				<span class="lblBlack">Vai trò</span>
 			</td>
 			<td>
-				<form:textarea path="description" id="description" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error" />
+				<select name="role" id="role" class="combobox">
+					<option value="-1">--- Chọn vai trò ---</option>
+					<c:forEach items="${roleMap}" var="r">
+						<c:if test="${r.key == param.id}">
+							<option value="${r.key}" selected="selected">${r.value}</option>
+						</c:if>
+						<c:if test="${r.key != param.id}">
+							<option value="${r.key}">${r.value}</option>
+						</c:if>
+					</c:forEach>
+				</select>
 			</td>
-		</tr>
-		<tr>
 			<td>
-				&nbsp;
-			</td>
-			<td>
-				<input type="submit" value="Thêm mới" class="button" />
+				<input type="button" id="updatePerOfRole" value="Cập nhật" class="button" style="margin-left: 100px;" />
 			</td>
 		</tr>
 	</table>
 
 	<table class="responstable">
 		<tr class="header">
-			<th width="5%">
-				<input type="checkbox" name="selectAll" id="selectAll">
-			</th>
-			<th width="25%">Tên quyền</th>
-			<th width="20%">Chuỗi quyền</th>
-			<th width="40%">Mô tả</th>
-			<th>Cập nhật</th>
+			<th width="80%">Danh sách các quyền</th>
+			<th>Cấp phép <br /><input type="checkbox" name="selectAll" id="selectAll"></th>
 		</tr>
-		<c:forEach items="${permissions}" var="permission">
+		<c:forEach items="${permissionInfos}" var="permissionInfo">
 			<tr>
-				<td width="5%">
-					<input type="checkbox" name="permissionId" id="permissionId" value="${permission.id}" class="checkbox" />
+				<td width="80%" style="text-align: left;">
+					<c:out value="${permissionInfo.permission.name}"></c:out>
 				</td>
-				<td width="25%"><c:out value="${permission.name}"></c:out></td>
-				<td width="20%"><c:out value="${permission.perStr}"></c:out></td>
-				<td width="40%"><c:out value="${permission.description}"></c:out></td>
-				<td>
-					<a href="${ct}/cm/permission/update/${permission.id}">
-						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
-					</a>
+				<td style="text-align: center;">
+					<c:if test="${permissionInfo.granted}">
+						<input type="checkbox" name="granted" id="granted" class="checkbox" value="${permissionInfo.permission.id}" checked="checked" />
+					</c:if>
+					<c:if test="${!permissionInfo.granted}">
+						<input type="checkbox" name="granted" id="granted" class="checkbox" value="${permissionInfo.permission.id}" />
+					</c:if>
 				</td>
 			</tr>
 		</c:forEach>
-	    <tr>
-	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/permission/delete" id="delPermission">
-	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
-	    		</a>&#8592; Click vào đây để xóa
-	    	</td>
-	    </tr>
 	</table>
 </div>

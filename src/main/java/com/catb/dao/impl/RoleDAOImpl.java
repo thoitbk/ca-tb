@@ -62,4 +62,18 @@ public class RoleDAOImpl implements RoleDAO {
 		
 		query.executeUpdate();
 	}
+
+	@SuppressWarnings("unchecked")
+	public Role fetchRoleById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT r " + 
+						"FROM Role r INNER JOIN FETCH r.permissions p " + 
+						"WHERE r.id = :id";
+		Query query = session.createQuery(select);
+		query.setParameter("id", id);
+		
+		List<Role> roles = (List<Role>) query.list();
+		
+		return roles != null && roles.size() > 0 ? roles.get(0) : null;
+	}
 }

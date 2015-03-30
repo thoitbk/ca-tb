@@ -12,4 +12,5 @@ public interface RoleDAO {
 	public Role getRoleByName(String name);
 	public void updateRole(Role role);
 	public void deleteRole(Integer id);
+	public Role fetchRoleById(Integer id);
 }

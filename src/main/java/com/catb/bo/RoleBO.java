@@ -12,4 +12,5 @@ public interface RoleBO {
 	public Role getRoleByName(String name);
 	public void updateRole(Role role);
 	public void deleteRoles(Integer[] ids);
+	public void updatePermissionsOfRole(Integer roleId, Integer[] permissionIds);
 }

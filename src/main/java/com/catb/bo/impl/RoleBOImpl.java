@@ -1,6 +1,7 @@
 package com.catb.bo.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.catb.bo.RoleBO;
+import com.catb.dao.PermissionDAO;
 import com.catb.dao.RoleDAO;
+import com.catb.model.Permission;
 import com.catb.model.Role;
 
 @Service
@@ -16,6 +19,9 @@ public class RoleBOImpl implements RoleBO {
 	
 	@Autowired
 	private RoleDAO roleDAO;
+	
+	@Autowired
+	private PermissionDAO permissionDAO;
 	
 	@Transactional
 	public List<Role> getRoles() {
@@ -55,6 +61,34 @@ public class RoleBOImpl implements RoleBO {
 		if (ids != null && ids.length > 0) {
 			for (Integer id : ids) {
 				roleDAO.deleteRole(id);
+			}
+		}
+	}
+	
+	@Transactional
+	public void updatePermissionsOfRole(Integer roleId, Integer[] permissionIds) {
+		Role role = roleDAO.getRoleById(roleId);
+		if (role != null) {
+			if (permissionIds != null) {
+				List<Permission> permissions = permissionDAO.getPermissionsByIds(permissionIds);
+				if (permissions != null) {
+					Set<Permission> currentPermissions = role.getPermissions(); 
+					for (Permission currentPermission : currentPermissions) {
+						currentPermission.getRoles().remove(role);
+						permissionDAO.updatePermission(currentPermission);
+					}
+					
+					for (Permission permission : permissions) {
+						permission.getRoles().add(role);
+						permissionDAO.updatePermission(permission);
+					}
+					
+					role.getPermissions().clear();
+					roleDAO.updateRole(role);
+					
+					role.getPermissions().addAll(permissions);
+					roleDAO.updateRole(role);
+				}
 			}
 		}
 	}
