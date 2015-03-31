@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.catb.bo.PermissionBO;
 import com.catb.bo.RoleBO;
+import com.catb.bo.UserBO;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.Role;
+import com.catb.model.User;
 import com.catb.vo.PermissionInfo;
 import com.catb.web.viewmodel.Status;
 
@@ -31,6 +33,9 @@ public class GrantingPermissionController {
 	
 	@Autowired
 	private RoleBO roleBO;
+	
+	@Autowired
+	private UserBO userBO;
 	
 	@ModelAttribute("roleMap")
 	public Map<Integer, String> populateRoles() {
@@ -68,6 +73,35 @@ public class GrantingPermissionController {
 			roleBO.updatePermissionsOfRole(roleId, permissionIds);
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("grant.permission.successfully"));
 		}
+		
+		return status;
+	}
+	
+	@RequestMapping(value = "/cm/manageUserRole", method = RequestMethod.GET)
+	public ModelAndView assignRoleToUser(
+			@RequestParam(value = "id", required = false, defaultValue = "-1") Integer roleId, 
+			ModelMap model) {
+		if (roleId > 0) {
+			List<User> notAssignedUsers = userBO.getUsersDontHaveRoleId(roleId);
+			List<User> assignedUsers = userBO.getUsersByRoleId(roleId);
+			
+			model.addAttribute("notAssignedUsers", notAssignedUsers);
+			model.addAttribute("assignedUsers", assignedUsers);
+		}
+		
+		return new ModelAndView("cm/manageUserRole");
+	}
+	
+	@RequestMapping(value = "/cm/assignRoleToUser", method = RequestMethod.POST)
+	@ResponseBody
+	public Status assignRoleToUser(
+			@RequestParam(value = "roleId", required = true) Integer roleId, 
+			@RequestParam(value = "userIds", required = true) Integer[] userIds, 
+			HttpServletRequest request) {
+		Status status = new Status(Status.OK, "ok");
+		
+		userBO.assignRoleToUsers(roleId, userIds);
+		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("assign.role.successfully"));
 		
 		return status;
 	}

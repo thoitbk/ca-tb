@@ -4,6 +4,89 @@ $(document).ready(function() {
 	
     document.getElementById("ngay").innerHTML = getDate();
     
+    $("#roleId").change(function () {
+    	var id = $(this).find('option:selected').val();
+    	if (id < 0) {
+    		window.location.href = cp + '/cm/manageUserRole';
+    	} else {
+    		window.location.href = cp + '/cm/manageUserRole?id=' + id;
+    	}
+    });
+    
+    $('#assignRole').click(function(event) {
+    	event.preventDefault();
+    	
+    	var _roleId = $('#roleId').val();
+    	if (_roleId < 0) {
+    		alert('Chưa chọn quyền');
+    		return;
+    	}
+    	
+    	var _userIds = $("#unAssigned option:selected").map(function(){
+            return $(this).val();
+        }).get();
+    	if (_userIds == null || _userIds.length == 0) {
+    		alert('Chưa chọn người dùng cần cấp quyền');
+    		return;
+    	}
+    	
+    	postUrl = cp + '/cm/assignRoleToUser';
+    	reloadUrl = cp + '/cm/manageUserRole?id=' + _roleId;
+    	
+    	$.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+            	roleId: _roleId,
+                userIds: _userIds
+            },
+            success : function(response) {
+                    window.location.href=reloadUrl;
+            },
+            error : function(e) {
+                    window.location.href=reloadUrl;
+            }
+        });
+    });
+    
+    $('#revokeRole').click(function(event) {
+    	event.preventDefault();
+    	
+    	var _roleId = $('#roleId').val();
+    	if (_roleId < 0) {
+    		alert('Chưa chọn quyền');
+    		return;
+    	}
+    	
+    	var _userIds = $("#assigned option:selected").map(function(){
+            return $(this).val();
+        }).get();
+    	if (_userIds == null || _userIds.length == 0) {
+    		alert('Chưa chọn người dùng cần thu hồi quyền');
+    		return;
+    	}
+    	
+    	postUrl = cp + '/cm/revokeRoleFromUser';
+    	reloadUrl = cp + '/cm/revokeRoleFromUser?id=' + _roleId;
+    	
+    	$.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+            	roleId: _roleId,
+                userIds: _userIds
+            },
+            success : function(response) {
+                    window.location.href=reloadUrl;
+            },
+            error : function(e) {
+                    window.location.href=reloadUrl;
+            }
+        });
+    });
+    
     $("#role").change(function () {
     	var id = $(this).find('option:selected').val();
     	if (id < 0) {

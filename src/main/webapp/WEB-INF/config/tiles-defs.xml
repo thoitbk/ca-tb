@@ -62,4 +62,8 @@
 	<definition name="cm/showPermission" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/grantPermission.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/manageUserRole" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/sys/manageUserRole.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
