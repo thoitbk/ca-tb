@@ -30,6 +30,15 @@
 			<link>/cm/user/update</link>
 			<link>/cm/user/delete</link>
 		</menuItem>
+		<menuItem id="system_2">
+			<link>/cm/manageUserRole</link>
+			<link>/cm/assignRoleToUser</link>
+			<link>/cm/revokeRoleFromUser</link>
+		</menuItem>
+		<menuItem id="system_3">
+			<link>/cm/showPermission</link>
+			<link>/cm/changePermission</link>
+		</menuItem>
 		<menuItem id="system_4">
 			<link>/cm/role/add</link>
 			<link>/cm/role/update</link>

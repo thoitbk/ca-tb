@@ -18,4 +18,8 @@ public interface UserBO {
 	public User getUserById(Integer id);
 	public void updateUser(User user, Integer positionId, Integer departmentId);
 	public void deleteUsers(Integer[] ids);
+	public List<User> getUsersByRoleId(Integer roleId);
+	public List<User> getUsersDontHaveRoleId(Integer roleId);
+	public void assignRoleToUser(Integer roleId, Integer userId);
+	public void assignRoleToUsers(Integer roleId, Integer[] userIds);
 }

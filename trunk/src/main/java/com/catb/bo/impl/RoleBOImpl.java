@@ -84,8 +84,6 @@ public class RoleBOImpl implements RoleBO {
 					}
 					
 					role.getPermissions().clear();
-					roleDAO.updateRole(role);
-					
 					role.getPermissions().addAll(permissions);
 					roleDAO.updateRole(role);
 				}

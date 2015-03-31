@@ -135,11 +135,11 @@
 				</li>
 				<li id="system_2" class="${f:getMenuClass(menuItemId, 'system_2', 'selected_subitem')}">
 					<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-					<a href="#">Phân quyền người dùng</a>
+					<a href="${ct}/cm/manageUserRole">Phân quyền người dùng</a>
 				</li>
 				<li id="system_3" class="${f:getMenuClass(menuItemId, 'system_3', 'selected_subitem')}">
 					<img src="${ct}/resources/images/template_f.gif" class="bullet_menu" />
-					<a href="#">Phân quyền nhóm người dùng</a>
+					<a href="${ct}/cm/showPermission">Phân quyền nhóm người dùng</a>
 				</li>
 				<li id="system_4" class="${f:getMenuClass(menuItemId, 'system_4', 'selected_subitem')}">
 					<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />

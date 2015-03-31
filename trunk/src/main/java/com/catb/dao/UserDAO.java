@@ -14,4 +14,6 @@ public interface UserDAO {
 	public User getUserById(Integer id);
 	public void updateUser(User user);
 	public void deleteUser(Integer id);
+	public List<User> getUsersByRoleId(Integer roleId);
+	public List<User> getUsersDontHaveRoleId(Integer roleId);
 }

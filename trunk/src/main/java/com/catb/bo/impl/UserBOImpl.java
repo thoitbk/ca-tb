@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.catb.bo.DepartmentBO;
 import com.catb.bo.PositionBO;
 import com.catb.bo.UserBO;
+import com.catb.dao.RoleDAO;
 import com.catb.dao.UserDAO;
 import com.catb.model.Department;
 import com.catb.model.Permission;
@@ -27,6 +28,9 @@ public class UserBOImpl implements UserBO {
 	
 	@Autowired
 	private DepartmentBO departmentBO;
+	
+	@Autowired
+	private RoleDAO roleDAO;
 	
 	@Autowired
 	private PositionBO positionBO;
@@ -154,6 +158,40 @@ public class UserBOImpl implements UserBO {
 		if (ids != null && ids.length > 0) {
 			for (Integer id : ids) {
 				userDAO.deleteUser(id);
+			}
+		}
+	}
+	
+	@Transactional
+	public List<User> getUsersByRoleId(Integer roleId) {
+		return userDAO.getUsersByRoleId(roleId);
+	}
+	
+	@Transactional
+	public List<User> getUsersDontHaveRoleId(Integer roleId) {
+		return userDAO.getUsersDontHaveRoleId(roleId);
+	}
+	
+	@Transactional
+	public void assignRoleToUser(Integer roleId, Integer userId) {
+		Role role = roleDAO.getRoleById(roleId);
+		if (role != null) {
+			User user = userDAO.getUserById(userId);
+			if (user != null) {
+				role.getUsers().add(user);
+				user.getRoles().add(role);
+				
+				roleDAO.updateRole(role);
+				userDAO.updateUser(user);
+			}
+		}
+	}
+	
+	@Transactional
+	public void assignRoleToUsers(Integer roleId, Integer[] userIds) {
+		if (userIds != null && userIds.length > 0) {
+			for (Integer userId : userIds) {
+				assignRoleToUser(roleId, userId);
 			}
 		}
 	}

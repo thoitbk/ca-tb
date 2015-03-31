@@ -75,4 +75,31 @@ public class UserDAOImpl implements UserDAO {
 		
 		query.executeUpdate();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getUsersByRoleId(Integer roleId) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT u " +
+						"FROM User u INNER JOIN u.roles r " + 
+						"WHERE r.id = :id";
+		Query query = session.createQuery(select);
+		query.setParameter("id", roleId);
+		
+		return (List<User>) query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getUsersDontHaveRoleId(Integer roleId) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT u " + 
+						"FROM User u " + 
+						"WHERE u.id NOT IN ( " + 
+										"SELECT u1.id " + 
+										"FROM User u1 INNER JOIN u1.roles r " + 
+										"WHERE r.id = :roleId)";
+		Query query = session.createQuery(select);
+		query.setParameter("roleId", roleId);
+		
+		return (List<User>) query.list();
+	}
 }
