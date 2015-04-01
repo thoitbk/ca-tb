@@ -195,4 +195,28 @@ public class UserBOImpl implements UserBO {
 			}
 		}
 	}
+	
+	@Transactional
+	public void revokeRoleFromUser(Integer roleId, Integer userId) {
+		Role role = roleDAO.getRoleById(roleId);
+		if (role != null) {
+			User user = userDAO.getUserById(userId);
+			if (user != null) {
+				role.getUsers().remove(user);
+				user.getRoles().remove(role);
+				
+				roleDAO.updateRole(role);
+				userDAO.updateUser(user);
+			}
+		}
+	}
+	
+	@Transactional
+	public void revokeRoleFromUsers(Integer roleId, Integer[] userIds) {
+		if (userIds != null && userIds.length > 0) {
+			for (Integer userId : userIds) {
+				revokeRoleFromUser(roleId, userId);
+			}
+		}
+	}
 }

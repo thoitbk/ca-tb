@@ -22,4 +22,6 @@ public interface UserBO {
 	public List<User> getUsersDontHaveRoleId(Integer roleId);
 	public void assignRoleToUser(Integer roleId, Integer userId);
 	public void assignRoleToUsers(Integer roleId, Integer[] userIds);
+	public void revokeRoleFromUser(Integer roleId, Integer userId);
+	public void revokeRoleFromUsers(Integer roleId, Integer[] userIds);
 }
