@@ -16,4 +16,5 @@ public interface UserDAO {
 	public void deleteUser(Integer id);
 	public List<User> getUsersByRoleId(Integer roleId);
 	public List<User> getUsersDontHaveRoleId(Integer roleId);
+	public User fetchUserByUsername(String username);
 }
