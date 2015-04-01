@@ -86,7 +86,7 @@ public class AuthRealm extends JdbcRealm {
     protected Set<String> getPermissions(String username, Collection<String> roleNames) {
     	Set<String> permissions = new LinkedHashSet<String>();
     	for (String roleName : roleNames) {
-    		permissions.addAll(userBO.getPermissions(roleName));
+    		permissions.addAll(userBO.getPermissionStringsByRoleName(roleName));
     	}
     	
         return permissions;

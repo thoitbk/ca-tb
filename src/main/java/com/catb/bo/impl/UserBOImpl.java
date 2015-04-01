@@ -52,8 +52,9 @@ public class UserBOImpl implements UserBO {
 	
 	@Transactional
 	public Set<Role> getRolesForUser(String username) {
-		User user = getUserByUsername(username);
-		return user.getRoles();
+		User user = userDAO.fetchUserByUsername(username);
+		
+		return user != null ? user.getRoles() : null;
 	}
 	
 	@Transactional
@@ -73,12 +74,12 @@ public class UserBOImpl implements UserBO {
 	}
 	
 	@Transactional
-	public Set<String> getPermissions(String roleName) {
+	public Set<String> getPermissionStringsByRoleName(String roleName) {
 		List<Permission> permissions = userDAO.getPermissionsByRole(roleName);
 		Set<String> permissionSet = new LinkedHashSet<String>();
 		for (Permission p : permissions) {
-			if (p.getName() != null) {
-				permissionSet.add(p.getName());
+			if (p.getPerStr() != null) {
+				permissionSet.add(p.getPerStr());
 			}
 		}
 		

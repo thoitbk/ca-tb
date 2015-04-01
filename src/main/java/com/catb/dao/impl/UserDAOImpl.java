@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
 	@SuppressWarnings("unchecked")
 	public List<Permission> getPermissionsByRole(String roleName) {
 		Session session = sessionFactory.getCurrentSession();
-		String select = "SELECT p FROM Role AS r INNER JOIN r.permissions p WHERE r.name = :roleName";
+		String select = "SELECT p FROM Permission AS p INNER JOIN FETCH p.roles AS r WHERE r.name = :roleName";
 		Query query = session.createQuery(select);
 		query.setParameter("roleName", roleName);
 		List<Permission> permissions = (List<Permission>) query.list();
@@ -101,5 +101,16 @@ public class UserDAOImpl implements UserDAO {
 		query.setParameter("roleId", roleId);
 		
 		return (List<User>) query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public User fetchUserByUsername(String username) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT u FROM User u INNER JOIN FETCH u.roles r WHERE u.username = :username";
+		Query query = session.createQuery(select);
+		query.setParameter("username", username);
+		List<User> users = (List<User>) query.list();
+		
+		return users != null && users.size() > 0 ? users.get(0) : null;
 	}
 }

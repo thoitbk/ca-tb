@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +31,7 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentBO departmentBO;
 	
+	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/add", method = RequestMethod.GET)
 	public ModelAndView showCreateDepartment(ModelMap model) {
 		DepartmentViewModel departmentViewModel = new DepartmentViewModel();
@@ -41,6 +43,7 @@ public class DepartmentController {
 		return new ModelAndView("cm/department/add");
 	}
 	
+	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/add", method = RequestMethod.POST)
 	public ModelAndView processCreateDepartment(
 			@Valid DepartmentViewModel departmentViewModel,
@@ -66,6 +69,7 @@ public class DepartmentController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdateDepartment(@PathVariable("id") Integer id, ModelMap model) {
 		DepartmentViewModel departmentViewModel = new DepartmentViewModel();
@@ -85,6 +89,7 @@ public class DepartmentController {
 		return new ModelAndView("cm/department/update");
 	}
 	
+	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateDepartment(
 			@PathVariable("id") Integer id, 
@@ -111,6 +116,7 @@ public class DepartmentController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Status deleteDepartment(@RequestParam("ids") Integer[] ids, HttpSession session) {
