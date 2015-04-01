@@ -105,4 +105,18 @@ public class GrantingPermissionController {
 		
 		return status;
 	}
+	
+	@RequestMapping(value = "/cm/revokeRoleFromUser", method = RequestMethod.POST)
+	@ResponseBody
+	public Status revokeRoleFromUser(
+			@RequestParam(value = "roleId", required = true) Integer roleId, 
+			@RequestParam(value = "userIds", required = true) Integer[] userIds, 
+			HttpServletRequest request) {
+		Status status = new Status(Status.OK, "ok");
+		
+		userBO.revokeRoleFromUsers(roleId, userIds);
+		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("revoke.role.successfully"));
+		
+		return status;
+	}
 }

@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+//	$(document).on({
+//	    ajaxStart: function() { $('body').addClass("loading"); },
+//	     ajaxStop: function() { $('body').removeClass("loading"); }    
+//	});
+	
 	var cp = '';
 	
     document.getElementById("ngay").innerHTML = getDate();
@@ -33,13 +38,15 @@ $(document).ready(function() {
     	postUrl = cp + '/cm/assignRoleToUser';
     	reloadUrl = cp + '/cm/manageUserRole?id=' + _roleId;
     	
+    	$("body").addClass("loading");
+    	
     	$.ajax({
             type : "POST",
             url : postUrl,
             dataType: "json",
             data : {
             	roleId: _roleId,
-                userIds: _userIds
+                userIds: _userIds.toString()
             },
             success : function(response) {
                     window.location.href=reloadUrl;
@@ -68,7 +75,9 @@ $(document).ready(function() {
     	}
     	
     	postUrl = cp + '/cm/revokeRoleFromUser';
-    	reloadUrl = cp + '/cm/revokeRoleFromUser?id=' + _roleId;
+    	reloadUrl = cp + '/cm/manageUserRole?id=' + _roleId;
+    	
+    	$('body').addClass("loading");
     	
     	$.ajax({
             type : "POST",
@@ -76,7 +85,7 @@ $(document).ready(function() {
             dataType: "json",
             data : {
             	roleId: _roleId,
-                userIds: _userIds
+                userIds: _userIds.toString()
             },
             success : function(response) {
                     window.location.href=reloadUrl;
@@ -119,13 +128,15 @@ $(document).ready(function() {
             return;
         }
     	
+    	$('body').addClass("loading");
+    	
     	$.ajax({
             type : "POST",
             url : postUrl,
             dataType: "json",
             data : {
             	roleId: _roleId,
-                permissionIds: _permissionIds
+                permissionIds: _permissionIds.toString()
             },
             success : function(response) {
                     window.location.href=reloadUrl;
@@ -201,12 +212,14 @@ $(document).ready(function() {
             return;
         }
         
+        $('body').addClass("loading");
+        
         $.ajax({
             type : "POST",
             url : postUrl,
             dataType: "json",
             data : {
-                ids: _ids
+                ids: _ids.toString()
             },
             success : function(response) {
                     window.location.href=reloadUrl;

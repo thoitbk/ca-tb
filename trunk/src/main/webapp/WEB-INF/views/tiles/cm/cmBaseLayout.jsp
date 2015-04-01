@@ -12,11 +12,10 @@
 	<link href="${ct}/resources/css/Admin.css" rel="stylesheet" type="text/css" />
 	<link href="${ct}/resources/css/accordion.css" rel="stylesheet" type="text/css" />
 	<link href="${ct}/resources/css/notification.css" rel="stylesheet" type="text/css" />
+	<link href="${ct}/resources/css/anim.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
 	<script src="${ct}/resources/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/box.js" type="text/javascript"></script>
-	<script src="${ct}/resources/js/popcalendar.js" type="text/javascript"></script>
-	<script src="${ct}/resources/js/Utils.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/accordion.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/cm/cm.js" type="text/javascript"></script>
 	<!-- icon -->
@@ -53,5 +52,6 @@
 			<jsp:include page="bottom.jsp"></jsp:include>
 		</div>
 	</div>
+	<div class="modal"></div>
 </body>
 </html>
