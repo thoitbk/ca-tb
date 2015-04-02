@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,6 +42,7 @@ public class RoleController {
 	@Autowired
 	private UpdateRoleValidator updateRoleValidator;
 	
+	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/add", method = RequestMethod.GET)
 	public ModelAndView showCreateRole(ModelMap model) {
 		RoleViewModel roleViewModel = new RoleViewModel();
@@ -52,6 +54,7 @@ public class RoleController {
 		return new ModelAndView("cm/role/add");
 	}
 	
+	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/add", method = RequestMethod.POST)
 	public ModelAndView processCreateRole(
 								@Valid RoleViewModel roleViewModel, 
@@ -74,6 +77,7 @@ public class RoleController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdateRole(@PathVariable("id") Integer id, ModelMap model) {
 		RoleViewModel roleViewModel = new RoleViewModel();
@@ -90,6 +94,7 @@ public class RoleController {
 		return new ModelAndView("cm/role/update");
 	}
 	
+	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateRole(
 			@PathVariable("id") Integer id, 
@@ -114,6 +119,7 @@ public class RoleController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Status deleteRole(@RequestParam("ids") Integer[] ids, HttpSession session) {

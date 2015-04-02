@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -76,6 +77,7 @@ public class UserController {
 		return departments;
 	}
 	
+	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/add", method = RequestMethod.GET)
 	public ModelAndView showCreateUser(ModelMap model) {
 		UserViewModel userViewModel = new UserViewModel();
@@ -87,6 +89,7 @@ public class UserController {
 		return new ModelAndView("cm/user/add");
 	}
 	
+	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/add", method = RequestMethod.POST)
 	public ModelAndView processCreateUser(
 			@Valid UserViewModel userViewModel,
@@ -128,6 +131,7 @@ public class UserController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdateUser(@PathVariable("id") Integer id, ModelMap model) {
 		UpdateUserViewModel updateUserViewModel = new UpdateUserViewModel();
@@ -166,6 +170,7 @@ public class UserController {
 		return new ModelAndView("cm/user/update");
 	}
 	
+	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateUser(
 			@PathVariable("id") Integer id, 
@@ -213,6 +218,7 @@ public class UserController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Status deleteUser(@RequestParam("ids") Integer[] ids, HttpSession session) {

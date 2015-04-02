@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,6 +49,7 @@ public class GrantingPermissionController {
 		return roleMap;
 	}
 	
+	@RequiresPermissions(value = {"permission:assign"})
 	@RequestMapping(value = "/cm/showPermission", method = RequestMethod.GET)
 	public ModelAndView showGrantingPermission(ModelMap model, @RequestParam(value = "id", required = false) Integer id) {
 		List<PermissionInfo> permissionInfos = permissionBO.getPermissionInfoByRoleId(id);
@@ -56,6 +58,7 @@ public class GrantingPermissionController {
 		return new ModelAndView("cm/showPermission");
 	}
 	
+	@RequiresPermissions(value = {"permission:assign"})
 	@RequestMapping(value = "/cm/changePermission", method = RequestMethod.POST)
 	@ResponseBody
 	public Status changePermissionsOfRole(
@@ -77,8 +80,9 @@ public class GrantingPermissionController {
 		return status;
 	}
 	
+	@RequiresPermissions(value = {"role:assign"})
 	@RequestMapping(value = "/cm/manageUserRole", method = RequestMethod.GET)
-	public ModelAndView assignRoleToUser(
+	public ModelAndView showManageUserRole(
 			@RequestParam(value = "id", required = false, defaultValue = "-1") Integer roleId, 
 			ModelMap model) {
 		if (roleId > 0) {
@@ -92,6 +96,7 @@ public class GrantingPermissionController {
 		return new ModelAndView("cm/manageUserRole");
 	}
 	
+	@RequiresPermissions(value = {"permission:assign"})
 	@RequestMapping(value = "/cm/assignRoleToUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Status assignRoleToUser(
@@ -106,6 +111,7 @@ public class GrantingPermissionController {
 		return status;
 	}
 	
+	@RequiresPermissions(value = {"permission:assign"})
 	@RequestMapping(value = "/cm/revokeRoleFromUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Status revokeRoleFromUser(

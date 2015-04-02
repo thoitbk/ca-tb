@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +31,7 @@ public class PositionController {
 	@Autowired
 	private PositionBO positionBO;
 	
+	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/add", method = RequestMethod.GET)
 	public ModelAndView showCreatePosition(ModelMap model) {
 		PositionViewModel positionViewModel = new PositionViewModel();
@@ -41,6 +43,7 @@ public class PositionController {
 		return new ModelAndView("cm/position/add");
 	}
 	
+	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/add", method = RequestMethod.POST)
 	public ModelAndView processCreatePosition(
 								@Valid PositionViewModel positionViewModel, 
@@ -63,6 +66,7 @@ public class PositionController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdatePosition(@PathVariable("id") Integer id, ModelMap model) {
 		PositionViewModel positionViewModel = new PositionViewModel();
@@ -80,6 +84,7 @@ public class PositionController {
 		return new ModelAndView("cm/position/update");
 	}
 	
+	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdatePosition(
 			@PathVariable("id") Integer id, 
@@ -104,6 +109,7 @@ public class PositionController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Status deletePosition(@RequestParam("ids") Integer[] ids, HttpSession session) {
