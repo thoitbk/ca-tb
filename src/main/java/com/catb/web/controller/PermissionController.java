@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,6 +39,7 @@ public class PermissionController {
 	@Autowired
 	private UpdatePermissionValidator updatePermissionValidator;
 	
+	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/add", method = RequestMethod.GET)
 	public ModelAndView showCreatePermission(ModelMap model) {
 		PermissionViewModel permissionViewModel = new PermissionViewModel();
@@ -49,6 +51,7 @@ public class PermissionController {
 		return new ModelAndView("cm/permission/add");
 	}
 	
+	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/add", method = RequestMethod.POST)
 	public ModelAndView processCreatePermission(
 								@Valid PermissionViewModel permissionViewModel, 
@@ -74,6 +77,7 @@ public class PermissionController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdatepPermission(@PathVariable("id") Integer id, ModelMap model) {
 		PermissionViewModel permissionViewModel = new PermissionViewModel();
@@ -91,6 +95,7 @@ public class PermissionController {
 		return new ModelAndView("cm/permission/update");
 	}
 	
+	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdatePermission(
 			@PathVariable("id") Integer id, 
@@ -118,9 +123,10 @@ public class PermissionController {
 		}
 	}
 	
+	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public Status deleteRole(@RequestParam("ids") Integer[] ids, HttpSession session) {
+	public Status deletePermission(@RequestParam("ids") Integer[] ids, HttpSession session) {
 		permissionBO.deletePermissions(ids);
 		session.setAttribute("msg", PropertiesUtil.getProperty("permission.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
