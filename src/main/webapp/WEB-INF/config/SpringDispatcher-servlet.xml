@@ -51,4 +51,7 @@
     <bean id="applicationProperties" class="com.catb.common.PropertiesUtil">
 	    <property name="location" value="classpath:messages.properties" />
 	</bean>
+	
+	<!-- Forwarding-only controllers -->
+	<mvc:view-controller path="/cm/internalError" view-name="cm/internalError" />
 </beans>

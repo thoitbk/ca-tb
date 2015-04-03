@@ -12,4 +12,8 @@ public class Util {
 		
 		return ipAddress;
 	}
+	
+	public static boolean isAjaxRequest(HttpServletRequest request) {
+		return "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+	}
 }

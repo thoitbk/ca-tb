@@ -4,11 +4,18 @@ $(document).ready(function() {
 //	    ajaxStart: function() { $('body').addClass("loading"); },
 //	     ajaxStop: function() { $('body').removeClass("loading"); }    
 //	});
+	//var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 	
 	var cp = '';
-	
-    document.getElementById("ngay").innerHTML = getDate();
     
+    var errorUrl = cp + '/cm/internalError';
+    var unauthenticatedUrl = cp + '/cm/login';
+    var unauthorizedUrl = cp + '/cm/unauthorized';
+    var notOkUrl = cp + '/cm/requestError';
+    
+    $('#ngay').text(getDate());
+    
+    // Assign and revoke role to/from user
     $("#roleId").change(function () {
     	var id = $(this).find('option:selected').val();
     	if (id < 0) {
@@ -49,10 +56,10 @@ $(document).ready(function() {
                 userIds: _userIds.toString()
             },
             success : function(response) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             },
-            error : function(e) {
-                    window.location.href=reloadUrl;
+            error : function(response) {
+            	reload(response.code, reloadUrl);
             }
         });
     });
@@ -88,14 +95,15 @@ $(document).ready(function() {
                 userIds: _userIds.toString()
             },
             success : function(response) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             },
-            error : function(e) {
-                    window.location.href=reloadUrl;
+            error : function(response) {
+            	reload(response.code, reloadUrl);
             }
         });
     });
     
+    // Assign permissions to roles
     $("#role").change(function () {
     	var id = $(this).find('option:selected').val();
     	if (id < 0) {
@@ -139,14 +147,15 @@ $(document).ready(function() {
                 permissionIds: _permissionIds.toString()
             },
             success : function(response) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             },
             error : function(e) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             }
         });
     });
     
+    // select all checkboxs
     $('#selectAll').click(function(event) {
         if(this.checked) {
             $('.checkbox').each(function() {
@@ -162,9 +171,8 @@ $(document).ready(function() {
     $('#enablePassword').click(function() {
     	$('#password').attr("disabled",false);
     });
-    
-    //var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 	
+    // Delete position
     $("#delPosition").click(function(event){
         event.preventDefault();
         postUrl = $('#delPosition').attr('href');
@@ -172,6 +180,7 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete department
     $("#delDepartment").click(function(event){
         event.preventDefault();
         postUrl = $('#delDepartment').attr('href');
@@ -179,6 +188,7 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete user
     $("#delUser").click(function(event){
         event.preventDefault();
         postUrl = $('#delUser').attr('href');
@@ -186,6 +196,7 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete role
     $("#delRole").click(function(event){
         event.preventDefault();
         postUrl = $('#delRole').attr('href');
@@ -193,6 +204,7 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete permission
     $("#delPermission").click(function(event){
         event.preventDefault();
         postUrl = $('#delPermission').attr('href');
@@ -200,6 +212,7 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){
             return $(this).val();
@@ -222,15 +235,38 @@ $(document).ready(function() {
                 ids: _ids.toString()
             },
             success : function(response) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             },
             error : function(e) {
-                    window.location.href=reloadUrl;
+            	reload(response.code, reloadUrl);
             }
         });
     }
+    
+    function reload(statusCode, reloadUrl) {
+    	_reload = reloadUrl;
+    	switch (statusCode) {
+    	case 1:
+    		_reload = reloadUrl;
+    		break;
+    	case 2:
+    		_reload = errorUrl;
+    		break;
+    	case 3:
+    		_reload = unauthenticatedUrl;
+    		break;
+    	case 4:
+    		_reload = unauthorizedUrl;
+    		break;
+    	default:
+    		_reload = notOkUrl;
+    		break;
+    	}
+    	window.location.href = _reload;
+    }
 });
 
+// Get current date
 function getDate() {
         var d = new Date();
         var weekday = new Array(7);

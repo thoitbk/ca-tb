@@ -66,4 +66,12 @@
 	<definition name="cm/manageUserRole" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/manageUserRole.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/unauthorized" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/share/unauthorized.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/internalError" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/share/internalError.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

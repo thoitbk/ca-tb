@@ -96,7 +96,7 @@ public class GrantingPermissionController {
 		return new ModelAndView("cm/manageUserRole");
 	}
 	
-	@RequiresPermissions(value = {"permission:assign"})
+	@RequiresPermissions(value = {"role:assign"})
 	@RequestMapping(value = "/cm/assignRoleToUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Status assignRoleToUser(
@@ -111,7 +111,7 @@ public class GrantingPermissionController {
 		return status;
 	}
 	
-	@RequiresPermissions(value = {"permission:assign"})
+	@RequiresPermissions(value = {"role:assign"})
 	@RequestMapping(value = "/cm/revokeRoleFromUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Status revokeRoleFromUser(
