@@ -129,7 +129,7 @@
 		<property name="credentialsMatcher" ref="passwordMatcher"></property>
 	</bean>
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="/WEB-INF/config/ehcache.xml"/>
+        <!-- <property name="cacheManagerConfigFile" value="/WEB-INF/config/ehcache.xml"/> -->
     </bean>
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager"/>
