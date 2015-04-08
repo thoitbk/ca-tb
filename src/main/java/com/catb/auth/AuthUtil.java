@@ -12,7 +12,7 @@ public class AuthUtil {
 	
 	// Getting passwordService instance from SecurityManager initialized by Spring at startup
 	// to hash password
-	public static String hashPassword(String password) {
+	public static String hashPasword(String password) {
 		SecurityManager securityManager = SecurityUtils.getSecurityManager();
 		if (securityManager instanceof DefaultSecurityManager) {
 			DefaultSecurityManager defaultSecurityManager = (DefaultSecurityManager) securityManager;

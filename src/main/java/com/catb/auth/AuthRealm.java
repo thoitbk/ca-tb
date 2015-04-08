@@ -16,6 +16,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import com.catb.bo.UserBO;
 import com.catb.model.User;
@@ -39,6 +40,9 @@ public class AuthRealm extends JdbcRealm {
         if (username == null) {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
+        
+        SimplePrincipalCollection principalCollection = new SimplePrincipalCollection(username, "authRealm");
+        super.doClearCache(principalCollection);
         
         String[] queryResults = getPasswordForUser(username);
         String password = queryResults[0];
@@ -91,4 +95,9 @@ public class AuthRealm extends JdbcRealm {
     	
         return permissions;
     }
+
+	@Override
+	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthorizationInfo(principals);
+	}
 }
