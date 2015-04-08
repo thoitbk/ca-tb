@@ -1,77 +1,142 @@
-package com.catb.common;
+package com.catb.web.viewmodel;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-public class CommonInfo {
+public class CommonInfoViewModel {
 	
-	private String webTitle;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
-	private Integer recentNews;
+private String webTitle;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer questionAnswer;
+	private String recentNews;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer tcCatalogs;
+	private String questionAnswer;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer sameSubjects;
+	private String tcCatalogs;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer headlines;
+	private String sameSubjects;
+	
+	@NotBlank
+	@Range(min = 1, max = 100)
+	private String headlines;
 	
 	private String headlineCaption;
+	
 	private String imageCaption;
+	
 	private String videoCaption;
+	
 	private String audioCaption;
+	
 	private String detailsCaption;
+	
 	private String administrativeProcedures;
+	
 	private String administrativeProceduresInstruction;
+	
 	private String views;
+	
 	private String introduction;
+
 	private String organizationalStructure;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer mostViewed;
+	private String mostViewed;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer adAmount;
+	private String adAmount;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer newsInSameCatalog;
+	private String newsInSameCatalog;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer newsInSearchResult;
+	private String newsInSearchResult;
 	
 	private String sameSubjectTitle;
+	
 	private String today;
+	
 	private String postedDate;
+	
 	private String author;
+
 	private String print;
+	
 	private String homePage;
+	
 	private String document;
+	
 	private String legalDocument;
+	
 	private String goTop;
+	
 	private String duty;
+	
 	private String achievement;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
-	private Integer pageSize;
-	
-	public CommonInfo() {
+	private String pageSize;
+
+	public CommonInfoViewModel() {
 		
+	}
+
+	public CommonInfoViewModel(String webTitle, String recentNews,
+			String questionAnswer, String tcCatalogs, String sameSubjects,
+			String headlines, String headlineCaption, String imageCaption,
+			String videoCaption, String audioCaption, String detailsCaption,
+			String administrativeProcedures,
+			String administrativeProceduresInstruction, String views,
+			String introduction, String organizationalStructure,
+			String mostViewed, String adAmount, String newsInSameCatalog,
+			String newsInSearchResult, String sameSubjectTitle, String today,
+			String postedDate, String author, String print, String homePage,
+			String document, String legalDocument, String goTop, String duty,
+			String achievement, String pageSize) {
+		this.webTitle = webTitle;
+		this.recentNews = recentNews;
+		this.questionAnswer = questionAnswer;
+		this.tcCatalogs = tcCatalogs;
+		this.sameSubjects = sameSubjects;
+		this.headlines = headlines;
+		this.headlineCaption = headlineCaption;
+		this.imageCaption = imageCaption;
+		this.videoCaption = videoCaption;
+		this.audioCaption = audioCaption;
+		this.detailsCaption = detailsCaption;
+		this.administrativeProcedures = administrativeProcedures;
+		this.administrativeProceduresInstruction = administrativeProceduresInstruction;
+		this.views = views;
+		this.introduction = introduction;
+		this.organizationalStructure = organizationalStructure;
+		this.mostViewed = mostViewed;
+		this.adAmount = adAmount;
+		this.newsInSameCatalog = newsInSameCatalog;
+		this.newsInSearchResult = newsInSearchResult;
+		this.sameSubjectTitle = sameSubjectTitle;
+		this.today = today;
+		this.postedDate = postedDate;
+		this.author = author;
+		this.print = print;
+		this.homePage = homePage;
+		this.document = document;
+		this.legalDocument = legalDocument;
+		this.goTop = goTop;
+		this.duty = duty;
+		this.achievement = achievement;
+		this.pageSize = pageSize;
 	}
 
 	public String getWebTitle() {
@@ -82,43 +147,43 @@ public class CommonInfo {
 		this.webTitle = webTitle;
 	}
 
-	public Integer getRecentNews() {
+	public String getRecentNews() {
 		return recentNews;
 	}
 
-	public void setRecentNews(Integer recentNews) {
+	public void setRecentNews(String recentNews) {
 		this.recentNews = recentNews;
 	}
 
-	public Integer getQuestionAnswer() {
+	public String getQuestionAnswer() {
 		return questionAnswer;
 	}
 
-	public void setQuestionAnswer(Integer questionAnswer) {
+	public void setQuestionAnswer(String questionAnswer) {
 		this.questionAnswer = questionAnswer;
 	}
 
-	public Integer getTcCatalogs() {
+	public String getTcCatalogs() {
 		return tcCatalogs;
 	}
 
-	public void setTcCatalogs(Integer tcCatalogs) {
+	public void setTcCatalogs(String tcCatalogs) {
 		this.tcCatalogs = tcCatalogs;
 	}
 
-	public Integer getSameSubjects() {
+	public String getSameSubjects() {
 		return sameSubjects;
 	}
 
-	public void setSameSubjects(Integer sameSubjects) {
+	public void setSameSubjects(String sameSubjects) {
 		this.sameSubjects = sameSubjects;
 	}
 
-	public Integer getHeadlines() {
+	public String getHeadlines() {
 		return headlines;
 	}
 
-	public void setHeadlines(Integer headlines) {
+	public void setHeadlines(String headlines) {
 		this.headlines = headlines;
 	}
 
@@ -203,35 +268,35 @@ public class CommonInfo {
 		this.organizationalStructure = organizationalStructure;
 	}
 
-	public Integer getMostViewed() {
+	public String getMostViewed() {
 		return mostViewed;
 	}
 
-	public void setMostViewed(Integer mostViewed) {
+	public void setMostViewed(String mostViewed) {
 		this.mostViewed = mostViewed;
 	}
 
-	public Integer getAdAmount() {
+	public String getAdAmount() {
 		return adAmount;
 	}
 
-	public void setAdAmount(Integer adAmount) {
+	public void setAdAmount(String adAmount) {
 		this.adAmount = adAmount;
 	}
 
-	public Integer getNewsInSameCatalog() {
+	public String getNewsInSameCatalog() {
 		return newsInSameCatalog;
 	}
 
-	public void setNewsInSameCatalog(Integer newsInSameCatalog) {
+	public void setNewsInSameCatalog(String newsInSameCatalog) {
 		this.newsInSameCatalog = newsInSameCatalog;
 	}
 
-	public Integer getNewsInSearchResult() {
+	public String getNewsInSearchResult() {
 		return newsInSearchResult;
 	}
 
-	public void setNewsInSearchResult(Integer newsInSearchResult) {
+	public void setNewsInSearchResult(String newsInSearchResult) {
 		this.newsInSearchResult = newsInSearchResult;
 	}
 
@@ -323,11 +388,11 @@ public class CommonInfo {
 		this.achievement = achievement;
 	}
 
-	public Integer getPageSize() {
+	public String getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
 }

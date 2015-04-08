@@ -229,7 +229,7 @@
 					<shiro:hasPermission name="configuration:manage">
 					<li id="system_8" class="${f:getMenuClass(menuItemId, 'system_8', 'selected_subitem')}">
 						<img src="${ct}/resources/images/home_f.gif" class="bullet_menu" />
-						<a href="#">Quản trị cấu hình</a>
+						<a href="${ct}/cm/configurations">Quản trị cấu hình</a>
 					</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="ui:manage">
