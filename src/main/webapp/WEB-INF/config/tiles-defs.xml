@@ -74,4 +74,8 @@
 	<definition name="cm/internalError" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/share/internalError.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/configurations" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/sys/configurations.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

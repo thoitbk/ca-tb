@@ -6,9 +6,6 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 
 import com.catb.common.Constants;
 import com.catb.common.web.ResReader;
@@ -20,9 +17,9 @@ public class InitListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		logger.info("------------------------- Begin stopping web application -------------------------");
 		// Destroy cache manager instance
-		DefaultSecurityManager securityManager = (DefaultSecurityManager) SecurityUtils.getSecurityManager();
-		EhCacheManager cacheManager = (EhCacheManager) securityManager.getCacheManager();
-		cacheManager.destroy();
+//		DefaultSecurityManager securityManager = (DefaultSecurityManager) SecurityUtils.getSecurityManager();
+//		EhCacheManager cacheManager = (EhCacheManager) securityManager.getCacheManager();
+//		cacheManager.destroy();
 		logger.info("------------------------- Stop web application successfully -------------------------");
 	}
 
