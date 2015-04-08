@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catb.auth.AuthRealm;
 import com.catb.bo.PermissionBO;
 import com.catb.bo.RoleBO;
 import com.catb.bo.UserBO;
@@ -37,6 +39,9 @@ public class GrantingPermissionController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private AuthRealm authRealm;
 	
 	@ModelAttribute("roleMap")
 	public Map<Integer, String> populateRoles() {
@@ -75,6 +80,7 @@ public class GrantingPermissionController {
 			}
 			roleBO.updatePermissionsOfRole(roleId, permissionIds);
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("grant.permission.successfully"));
+			authRealm.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 		}
 		
 		return status;
@@ -107,6 +113,7 @@ public class GrantingPermissionController {
 		
 		userBO.assignRoleToUsers(roleId, userIds);
 		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("assign.role.successfully"));
+		authRealm.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 		
 		return status;
 	}
@@ -122,6 +129,7 @@ public class GrantingPermissionController {
 		
 		userBO.revokeRoleFromUsers(roleId, userIds);
 		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("revoke.role.successfully"));
+		authRealm.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
 		
 		return status;
 	}

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.catb.auth.AuthUtil;
 import com.catb.bo.DepartmentBO;
 import com.catb.bo.PositionBO;
 import com.catb.bo.UserBO;
@@ -48,6 +48,8 @@ public class UserController {
 	@Autowired
 	private DepartmentBO departmentBO;
 	
+	@Autowired
+	private PasswordService passwordService;
 	
 	@Autowired
 	private CreateUserValidator createUserValidator;
@@ -105,7 +107,7 @@ public class UserController {
 		} else {
 			User user = new User();
 			user.setUsername(userViewModel.getUsername());
-			user.setPassword(AuthUtil.hashPassword(userViewModel.getPassword()));
+			user.setPassword(passwordService.encryptPassword(userViewModel.getPassword()));
 			user.setFullName(userViewModel.getFullName());
 			Boolean gender = null;
 			if (userViewModel.getGender().equals(0)) {
@@ -192,7 +194,7 @@ public class UserController {
 			user.setUsername(updateUserViewModel.getUsername());
 			user.setFullName(updateUserViewModel.getFullName());
 			if (updateUserViewModel.getPassword() != null && !"".equals(updateUserViewModel.getPassword().trim())) {
-				user.setPassword(AuthUtil.hashPassword(updateUserViewModel.getPassword()));
+				user.setPassword(passwordService.encryptPassword(updateUserViewModel.getPassword()));
 			}
 			Boolean gender = null;
 			if (updateUserViewModel.getGender().equals(0)) {
