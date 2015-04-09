@@ -2,7 +2,9 @@ package com.catb.common.web;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -99,5 +101,32 @@ public class ResReader {
 		}
 		
 		return commonInfo;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Map<String, String> readDisplayLocation(String fileName) {
+		SAXBuilder builder = new SAXBuilder();
+		File file = new File(fileName);
+		
+		try {
+			Document document = (Document) builder.build(file);
+			Element rootNode = document.getRootElement();
+			
+			List locations = rootNode.getChildren("location");
+			Map<String, String> displayLocations = new HashMap<String, String>();
+			for (int i = 0; i < locations.size(); i++) {
+				Element location = (Element) locations.get(i);
+				String code = location.getChildText("code");
+				String name = location.getChildText("name");
+				if (code != null && name != null && !"".equals(code.trim()) && !"".equals(name.trim())) {
+					displayLocations.put(code, name);
+				}
+			}
+			
+			return displayLocations;
+		} catch (Exception ex) {
+			logger.error("Reading dislay location failed: ", ex);
+			throw new AppException(ex);
+		}
 	}
 }

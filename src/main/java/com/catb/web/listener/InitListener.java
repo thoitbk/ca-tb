@@ -33,6 +33,7 @@ public class InitListener implements ServletContextListener {
 		ServletContext context = event.getServletContext();
 		context.setAttribute("CM_MENU", ResReader.readCMMenuConfig(context.getRealPath(Constants.CM_MENU_CONFIG_FILE)));
 		context.setAttribute("COMMONINFO", ResReader.readCommonInfo(context.getRealPath(Constants.COMMONINFO_CONFIG_FILE)));
+		context.setAttribute("DISPLAY_LOCATION", ResReader.readCommonInfo(context.getRealPath(Constants.COMMONINFO_CONFIG_FILE)));
 		
 		context.setAttribute("ct", event.getServletContext().getContextPath());
 		
