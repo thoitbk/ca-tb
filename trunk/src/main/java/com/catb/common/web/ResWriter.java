@@ -1,7 +1,7 @@
 package com.catb.common.web;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -11,12 +11,13 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import com.catb.common.CommonInfo;
+import com.catb.common.exception.AppException;
 
 public class ResWriter {
 	
 	static Logger logger = Logger.getLogger(ResReader.class);
 	
-	public static void readCommonInfo(CommonInfo commonInfo, String fileName) {
+	public static void writeCommonInfo(CommonInfo commonInfo, String fileName) {
 		SAXBuilder builder = new SAXBuilder();
 		File file = new File(fileName);
 		
@@ -60,9 +61,10 @@ public class ResWriter {
 			XMLOutputter xmlOutput = new XMLOutputter();
 			 
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(document, new FileWriter(fileName));
+			xmlOutput.output(document, new FileOutputStream(fileName));
 		} catch (Exception ex) {
 			logger.error("Updating configuration failed: ", ex);
+			throw new AppException(ex);
 		}
 	}
 }

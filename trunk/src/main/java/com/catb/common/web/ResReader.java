@@ -10,6 +10,7 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 import com.catb.common.CommonInfo;
+import com.catb.common.exception.AppException;
 
 public class ResReader {
 	
@@ -47,7 +48,7 @@ public class ResReader {
 			return menuList;
 		} catch (Exception ex) {
 			logger.error("Reading menuConfig failed: ", ex);
-			return null;
+			throw new AppException(ex);
 		}
 	}
 	
@@ -94,6 +95,7 @@ public class ResReader {
 			commonInfo.setPageSize(Integer.parseInt(rootNode.getChildText("pageSize")));
 		} catch (Exception ex) {
 			logger.error("Reading commonInfo failed: ", ex);
+			throw new AppException(ex);
 		}
 		
 		return commonInfo;
