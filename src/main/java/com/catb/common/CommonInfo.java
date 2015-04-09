@@ -1,32 +1,14 @@
 package com.catb.common;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 public class CommonInfo {
 	
 	private String webTitle;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer recentNews;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer questionAnswer;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer tcCatalogs;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer sameSubjects;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer headlines;
-	
 	private String headlineCaption;
 	private String imageCaption;
 	private String videoCaption;
@@ -37,23 +19,10 @@ public class CommonInfo {
 	private String views;
 	private String introduction;
 	private String organizationalStructure;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer mostViewed;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer adAmount;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer newsInSameCatalog;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer newsInSearchResult;
-	
 	private String sameSubjectTitle;
 	private String today;
 	private String postedDate;
@@ -65,9 +34,6 @@ public class CommonInfo {
 	private String goTop;
 	private String duty;
 	private String achievement;
-	
-	@NotBlank
-	@Range(min = 1, max = 100)
 	private Integer pageSize;
 	
 	public CommonInfo() {

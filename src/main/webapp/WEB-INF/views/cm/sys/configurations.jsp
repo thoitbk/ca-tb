@@ -15,7 +15,7 @@
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
 	</c:if>
-	<form:form method="post" commandName="commonInfo">
+	<form:form method="post" commandName="commonInfoViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="" style="width: 100%">
 			<tr>
