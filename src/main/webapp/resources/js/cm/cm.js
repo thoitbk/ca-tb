@@ -155,6 +155,36 @@ $(document).ready(function() {
         });
     });
     
+    // Manage news catalog
+    $("#displayLocation").change(function () {
+    	var location = $(this).find('option:selected').val();
+    	if (location == null || location == '') {
+    		window.location.href = cp + '/cm/newsCatalog/add';
+    	} else {
+    		window.location.href = cp + '/cm/newsCatalog/add?location=' + location;
+    	}
+    });
+    
+    $("#parentId").change(function () {
+    	var location = $('#displayLocation').val();
+    	var parent = $(this).find('option:selected').val();
+    	var _url = '';
+    	if (location == null || location == '') {
+    		if (parent == null || parent < 0) {
+    			_url = cp + '/cm/newsCatalog/add';
+    		} else {
+    			_url = cp + '/cm/newsCatalog/add?parent=' + parent;
+    		}
+    	} else {
+    		if (parent == null || parent < 0) {
+    			_url = cp + '/cm/newsCatalog/add?location=' + location;
+    		} else {
+    			_url = cp + '/cm/newsCatalog/add?location=' + location + "&parent=" + parent;
+    		}
+    	}
+		window.location.href = _url;
+    });
+    
     // select all checkboxs
     $('#selectAll').click(function(event) {
         if(this.checked) {

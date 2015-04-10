@@ -30,7 +30,7 @@ public class NewsCatalog implements Serializable {
 	private String url;
 	
 	@Column(name = "sq_number")
-	private String sqNumber;
+	private Integer sqNumber;
 	
 	@Column(name = "display")
 	private Boolean display;
@@ -54,7 +54,7 @@ public class NewsCatalog implements Serializable {
 		
 	}
 
-	public NewsCatalog(Integer id, String name, String url, String sqNumber,
+	public NewsCatalog(Integer id, String name, String url, Integer sqNumber,
 			Boolean display, Boolean specialSite, String displayLocation,
 			Integer parentId, Integer childLevel) {
 		this.id = id;
@@ -92,11 +92,11 @@ public class NewsCatalog implements Serializable {
 		this.url = url;
 	}
 
-	public String getSqNumber() {
+	public Integer getSqNumber() {
 		return sqNumber;
 	}
 
-	public void setSqNumber(String sqNumber) {
+	public void setSqNumber(Integer sqNumber) {
 		this.sqNumber = sqNumber;
 	}
 

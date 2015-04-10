@@ -78,4 +78,8 @@
 	<definition name="cm/configurations" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/configurations.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/newsCatalog/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/news/addNewsCatalog.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
