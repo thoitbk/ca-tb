@@ -37,7 +37,7 @@
 					<shiro:hasPermission name="newsCatalog:manage">
 						<li id="info_4" class="${f:getMenuClass(menuItemId, 'info_4', 'selected_subitem')}">
 							<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị danh mục tin</a>
+							<a href="${ct}/cm/newsCatalog/add">Quản trị danh mục tin</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>

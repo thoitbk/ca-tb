@@ -2,7 +2,7 @@ package com.catb.common.web;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +113,7 @@ public class ResReader {
 			Element rootNode = document.getRootElement();
 			
 			List locations = rootNode.getChildren("location");
-			Map<String, String> displayLocations = new HashMap<String, String>();
+			Map<String, String> displayLocations = new LinkedHashMap<String, String>();
 			for (int i = 0; i < locations.size(); i++) {
 				Element location = (Element) locations.get(i);
 				String code = location.getChildText("code");

@@ -11,6 +11,11 @@
 			<link>/cm/ok2/update</link>
 			<link>/cm/ok3/delete</link>
 		</menuItem>
+		<menuItem id="info_4">
+			<link>/cm/newsCatalog/add</link>
+			<link>/cm/newsCatalog/update</link>
+			<link>/cm/newsCatalog/delete</link>
+		</menuItem>
 	</menu>
 	<menu id="catalog">
 		<menuItem id="catalog_1">
