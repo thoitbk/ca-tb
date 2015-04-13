@@ -48,4 +48,9 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		Session session = sessionFactory.getCurrentSession();
 		return (NewsCatalog) session.get(NewsCatalog.class, newsCatalogId);
 	}
+
+	public void updateNewsCatalog(NewsCatalog newsCatalog) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(newsCatalog);
+	}
 }

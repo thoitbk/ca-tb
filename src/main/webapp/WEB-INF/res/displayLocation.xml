@@ -2,15 +2,15 @@
 <locations>
 	<location>
 		<code>top</code>
-		<name>Trên đỉnh</name>
+		<name>Đỉnh</name>
 	</location>
 	<location>
 		<code>bottom</code>
-		<name>Dưới đáy</name>
+		<name>Đáy</name>
 	</location>
 	<location>
 		<code>left</code>
-		<name>Bên trái</name>
+		<name>Trái</name>
 	</location>
 	<location>
 		<code>rightTop</code>
