@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -117,6 +118,58 @@ public class NewsCatalogController {
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.created.successfully"));
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/newsCatalog/add"));
+		}
+	}
+	
+	@RequiresPermissions(value = {"newsCatalog:manage"})
+	@RequestMapping(value = "/cm/newsCatalog/update/{id}", method = RequestMethod.GET)
+	public ModelAndView showUpdateNewsCatalog(@PathVariable("id") Integer id, ModelMap model) {
+		NewsCatalog newsCatalog = newsCatalogBO.getNewsCatalogById(id);
+		NewsCatalogViewModel newsCatalogViewModel = null;
+		if (newsCatalog != null) {
+			newsCatalogViewModel = new NewsCatalogViewModel(
+											newsCatalog.getDisplayLocation(), 
+											newsCatalog.getParentId(), 
+											newsCatalog.getName(), 
+											newsCatalog.getUrl(), 
+											String.valueOf(newsCatalog.getSqNumber()), 
+											newsCatalog.getDisplay(), 
+											newsCatalog.getSpecialSite());
+		} else {
+			newsCatalogViewModel = new NewsCatalogViewModel();
+		}
+		model.addAttribute("newsCatalogViewModel", newsCatalogViewModel);
+		
+		List<NewsCatalog> newsCatalogs = newsCatalogBO.getNewsCatalog(newsCatalog.getDisplayLocation(), newsCatalog.getParentId());
+		model.addAttribute("newsCatalogs", newsCatalogs);
+		
+		return new ModelAndView("cm/newsCatalog/update");
+	}
+	
+	@RequiresPermissions(value = {"newsCatalog:manage"})
+	@RequestMapping(value = "/cm/newsCatalog/update/{id}", method = RequestMethod.POST)
+	public ModelAndView processUpdateNewsCatalog(
+								@PathVariable("id") Integer id, 
+								@Valid NewsCatalogViewModel newsCatalogViewModel, 
+								BindingResult bindingResult, 
+								ModelMap model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			List<NewsCatalog> newsCatalogs = newsCatalogBO.getNewsCatalog(newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
+			model.addAttribute("newsCatalogs", newsCatalogs);
+			
+			return new ModelAndView("cm/newsCatalog/update");
+		} else {
+			NewsCatalog newsCatalog = new NewsCatalog(id, 
+									newsCatalogViewModel.getName(), newsCatalogViewModel.getUrl(), 
+									Integer.parseInt(newsCatalogViewModel.getSqNumber()), 
+									newsCatalogViewModel.getDisplay(), newsCatalogViewModel.getSpecialSite(), 
+									newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId(), null);
+			newsCatalogBO.updateNewsCatalog(newsCatalog);
+			
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.updated.successfully"));
+			
+			String queryString = String.format("?location=%s&parent=%d", newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/newsCatalog/add" + queryString));
 		}
 	}
 }

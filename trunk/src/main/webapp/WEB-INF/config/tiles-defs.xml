@@ -82,4 +82,8 @@
 	<definition name="cm/newsCatalog/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/news/addNewsCatalog.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/newsCatalog/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/news/updateNewsCatalog.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

@@ -9,4 +9,5 @@ public interface NewsCatalogDAO {
 	public List<NewsCatalog> getNewsCatalog(String displayLocation, Integer parent);
 	public void addNewsCatalog(NewsCatalog newsCatalog);
 	public NewsCatalog getNewsCatalogById(Integer newsCatalogId);
+	public void updateNewsCatalog(NewsCatalog newsCatalog);
 }

@@ -1,5 +1,6 @@
 package com.catb.web.viewmodel;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -18,6 +19,7 @@ public class NewsCatalogViewModel {
 	@Size(min = 0, max = 200)
 	private String url;
 	
+	@Pattern(regexp = "(^$|[0-9]{0,4})")
 	private String sqNumber;
 	
 	private Boolean display;

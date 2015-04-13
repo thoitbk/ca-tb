@@ -30,4 +30,28 @@ public class NewsCatalogBOImpl implements NewsCatalogBO {
 	public NewsCatalog getNewsCatalogById(Integer newsCatalogId) {
 		return newsCatalogDAO.getNewsCatalogById(newsCatalogId);
 	}
+	
+	@Transactional
+	public void updateNewsCatalog(NewsCatalog newsCatalog) {
+		if (newsCatalog.getId() != null) {
+			NewsCatalog c = newsCatalogDAO.getNewsCatalogById(newsCatalog.getId());
+			if (c != null) {
+				c.setName(newsCatalog.getName());
+				c.setUrl(newsCatalog.getUrl());
+				c.setSqNumber(newsCatalog.getSqNumber());
+				c.setDisplay(newsCatalog.getDisplay());
+				c.setSpecialSite(newsCatalog.getSpecialSite());
+				c.setDisplayLocation(newsCatalog.getDisplayLocation());
+				c.setParentId(newsCatalog.getParentId());
+				
+				NewsCatalog t = newsCatalogDAO.getNewsCatalogById(newsCatalog.getParentId());
+				if (t != null && t.getChildLevel() != null) {
+					Integer newLevel = t.getChildLevel() + 1;
+					c.setChildLevel(newLevel);
+				}
+				
+				newsCatalogDAO.updateNewsCatalog(c);
+			}
+		}
+	}
 }
