@@ -54,4 +54,13 @@ public class NewsCatalogBOImpl implements NewsCatalogBO {
 			}
 		}
 	}
+	
+	@Transactional
+	public void deleteNewsCatalogs(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				newsCatalogDAO.deleteNewsCatalog(id);
+			}
+		}
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,6 +26,7 @@ import com.catb.bo.NewsCatalogBO;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.NewsCatalog;
 import com.catb.web.viewmodel.NewsCatalogViewModel;
+import com.catb.web.viewmodel.Status;
 
 @Controller
 public class NewsCatalogController {
@@ -184,5 +186,15 @@ public class NewsCatalogController {
 			String queryString = String.format("?location=%s&parent=%d", newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/newsCatalog/add" + queryString));
 		}
+	}
+	
+	@RequiresPermissions(value = {"newsCatalog:manage"})
+	@RequestMapping(value = "/cm/newsCatalog/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Status deleteNewsCatalog(@RequestParam("ids") Integer[] ids, HttpSession session) {
+		newsCatalogBO.deleteNewsCatalogs(ids);
+		session.setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.deleted.successfully"));
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 }

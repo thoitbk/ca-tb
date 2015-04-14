@@ -10,4 +10,5 @@ public interface NewsCatalogDAO {
 	public void addNewsCatalog(NewsCatalog newsCatalog);
 	public NewsCatalog getNewsCatalogById(Integer newsCatalogId);
 	public void updateNewsCatalog(NewsCatalog newsCatalog);
+	public void deleteNewsCatalog(Integer id);
 }
