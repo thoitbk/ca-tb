@@ -149,13 +149,13 @@ $(document).ready(function() {
             success : function(response) {
             	reload(response.code, reloadUrl);
             },
-            error : function(e) {
+            error : function(response) {
             	reload(response.code, reloadUrl);
             }
         });
     });
     
-    // Manage news catalog
+    // Manage adding news catalog
     $("#displayLocation").change(function () {
     	var location = $(this).find('option:selected').val();
     	if (location == null || location == '') {
@@ -185,6 +185,36 @@ $(document).ready(function() {
 		window.location.href = _url;
     });
     
+    // Update news catalog
+    $("#updateDisplayLocation").change(function () {
+    	var location = $(this).find('option:selected').val();
+    	var postUrl = cp + '/cm/newsCatalogsByLocation';
+    	reloadUrl = '/cm/newsCatalog/add';
+    	if (location != null && location != '') {
+    		postUrl = postUrl + "?location=" + location;
+    	}
+    	
+    	$.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            success : function(response) {
+            	if (response.code == null) {
+            		$("#updateParentId").empty().append('<option value="-1">------ Chọn danh mục cha ------</option>');
+            		jQuery.each(response, function(key, val) {
+                		$("#updateParentId").append('<option value="' + key + '">' + val + '</option>');
+            		});
+            	} else {
+            		reload(response.code, reloadUrl);
+            	}
+            },
+            error : function(response) {
+            	reload(response.code, reloadUrl);
+            }
+        });
+    });
+    
+    // ------------------------------- For delete functionalities ----------------------------------
     // select all checkboxs
     $('#selectAll').click(function(event) {
         if(this.checked) {
@@ -267,7 +297,7 @@ $(document).ready(function() {
             success : function(response) {
             	reload(response.code, reloadUrl);
             },
-            error : function(e) {
+            error : function(response) {
             	reload(response.code, reloadUrl);
             }
         });

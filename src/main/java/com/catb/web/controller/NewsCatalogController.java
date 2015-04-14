@@ -1,6 +1,6 @@
 package com.catb.web.controller;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -41,8 +42,12 @@ public class NewsCatalogController {
 	@ModelAttribute("newsCatalogsMap")
 	public Map<Integer, String> getNewsCatalogMap(
 			@RequestParam(value = "location", required = false, defaultValue = "") String displayLocation) {
+		return getNewsCatalogsMapByLocation(displayLocation);
+	}
+	
+	private Map<Integer, String> getNewsCatalogsMapByLocation(String displayLocation) {
 		List<NewsCatalog> bindingNewsCatalogs = newsCatalogBO.getNewsCatalog(displayLocation, null);
-		Map<Integer, String> newsCatalogsMap = new HashMap<Integer, String>();
+		Map<Integer, String> newsCatalogsMap = new LinkedHashMap<Integer, String>();
 		if (bindingNewsCatalogs != null && bindingNewsCatalogs.size() > 0) {
 			for (NewsCatalog newsCatalog : bindingNewsCatalogs) {
 				newsCatalogsMap.put(newsCatalog.getId(), String.format("%s (Level %d)", newsCatalog.getName(), newsCatalog.getChildLevel()));
@@ -50,6 +55,14 @@ public class NewsCatalogController {
 		}
 		
 		return newsCatalogsMap;
+	}
+	
+	@RequiresPermissions(value = {"newsCatalog:manage"})
+	@RequestMapping(value = "/cm/newsCatalogsByLocation", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<Integer, String> showNewsCatalogsByLocation(
+			@RequestParam(value = "location", required = false, defaultValue = "") String location) {
+		return getNewsCatalogsMapByLocation(location);
 	}
 	
 	@RequiresPermissions(value = {"newsCatalog:manage"})
