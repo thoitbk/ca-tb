@@ -23,7 +23,7 @@
 					<span class="lblBlack">Vị trí hiển thị</span>
 				</td>
 				<td width="30%">
-					<form:select path="displayLocation" id="displayLocation_update" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="displayLocation" id="updateDisplayLocation" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn vị trí hiển thị ------"></form:option>
 						<form:options items="${displayLocations}"/>
 					</form:select>
@@ -32,7 +32,7 @@
 					<span class="lblBlack">Danh mục cha</span>
 				</td>
 				<td>
-					<form:select path="parentId" id="parentId_update" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="parentId" id="updateParentId" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="-1" label="------ Chọn danh mục cha ------"></form:option>
 						<form:options items="${newsCatalogsMap}"/>
 					</form:select>

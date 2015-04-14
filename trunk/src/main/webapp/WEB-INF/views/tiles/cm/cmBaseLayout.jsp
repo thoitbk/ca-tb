@@ -15,7 +15,6 @@
 	<link href="${ct}/resources/css/anim.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
 	<script src="${ct}/resources/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-	<script src="${ct}/resources/js/box.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/accordion.js" type="text/javascript"></script>
 	<script src="${ct}/resources/js/cm/cm.js" type="text/javascript"></script>
 	<!-- icon -->
