@@ -272,6 +272,14 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete newsCatalog
+    $("#delNewsCatalog").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delNewsCatalog').attr('href');
+        reloadUrl = cp + '/cm/newsCatalog/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

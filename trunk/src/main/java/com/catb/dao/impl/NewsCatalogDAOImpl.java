@@ -3,6 +3,7 @@ package com.catb.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -52,5 +53,15 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 	public void updateNewsCatalog(NewsCatalog newsCatalog) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(newsCatalog);
+	}
+
+	public void deleteNewsCatalog(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		String delete = "DELETE FROM NewsCatalog " + 
+						"WHERE id = :id";
+		Query query = session.createQuery(delete);
+		query.setParameter("id", id);
+		
+		query.executeUpdate();
 	}
 }
