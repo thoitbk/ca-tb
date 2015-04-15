@@ -92,6 +92,9 @@
 	<bean id="newsCatalogDAO" class="com.catb.dao.impl.NewsCatalogDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="newsDAO" class="com.catb.dao.impl.NewsDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -101,14 +104,15 @@
 		<property name="unauthorizedUrl" value="/cm/unauthorized"/><!-- this url is applied only for web filter, not for annotation -->
 		<property name="filterChainDefinitions">
 			<value>
-				# some example chain definitions:
-				/ckfinder/** = authc
-				/ckeditor/** = authc
+				# secure content management
 				/cm/login = anon
 				/cm/** = authc
+				# secure static resources
 				/resources/js/cm/** = authc
+				/ckfinder/** = authc
+				/ckeditor/** = authc
+				
 				/** = anon
-				# more URL-to-FilterChain definitions here
 			</value>
 		</property>
 	</bean>

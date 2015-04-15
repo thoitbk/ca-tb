@@ -2,9 +2,7 @@
 <menus>
 	<menu id="info">
 		<menuItem id="info_1">
-			<link>/cm/news/add</link>
-			<link>/cm/news/update</link>
-			<link>/cm/news/delete</link>
+			<link>/cm/news/create</link>
 		</menuItem>
 		<menuItem id="info_2">
 			<link>/cm/ok1/add</link>
