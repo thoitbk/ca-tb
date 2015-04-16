@@ -72,14 +72,15 @@ public class NewsController {
 	@RequiresPermissions(value = {"news:create"})
 	@RequestMapping(value = "/cm/news/uploadNewsImage", method = RequestMethod.POST)
 	@ResponseBody
-	public List<FileMeta> uploadNewsImage(HttpServletRequest request, HttpServletResponse response) {
+	public FileMeta uploadNewsImage(HttpServletRequest request, HttpServletResponse response) {
 		List<FileMeta> files = getUploadFiles(request);
 		
 		if (files != null && files.size() > 0) {
-			request.getSession().setAttribute("newsImage", files);
+			request.getSession().setAttribute("newsImage", files.get(0));
+			return files.get(0);
 		}
 		
-		return files;
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -102,15 +103,14 @@ public class NewsController {
 						String fileName = item.getName();
 						String randomString = Util.getRandomString();
 						String newFileName = randomString + "." + FilenameUtils.getExtension(fileName);
-						String relativePath = File.separator + Constants.NEWS_IMAGE_LOCATION + 
-												File.separator + dirName + File.separator + fileName;
+						String imageUrl = String.format("%s/%s/%s", Constants.NEWS_IMAGE_LOCATION, dirName, newFileName);
 						
 						File file = createFile(dirName, newFileName, request);
 						if (!file.exists()) {
 							item.write(file);
 							temp = new FileMeta(
 									randomString, fileName, String.valueOf(item.getSize() / 1024), 
-									item.getContentType(), relativePath);
+									item.getContentType(), imageUrl);
 						}
 						files.add(temp);
 					}
@@ -124,7 +124,6 @@ public class NewsController {
 	}
 	
 	private File createFile(String dirName, String fileName, HttpServletRequest request) {
-		// sevletcontext.getRealPath
 		String directory = request.getServletContext().getRealPath(Constants.NEWS_IMAGE_LOCATION + File.separator + dirName);
 		File dir = new File(directory);
 		if (!dir.exists()) {
