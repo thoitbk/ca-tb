@@ -17,7 +17,12 @@
 <script src="${ct}/resources/js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${ct}/resources/js/uploader.js" type="text/javascript"></script>
+<script src="${ct}/resources/js/cm/uploader.js" type="text/javascript"></script>
+<!-- image viewer -->
+<link href="${ct}/resources/css/gallerie.css" rel="stylesheet" type="text/css" />
+<link href="${ct}/resources/css/gallerie-effects.css" rel="stylesheet" type="text/css" />
+<script src="${ct}/resources/js/jquery.gallerie.js" type="text/javascript"></script>
+
 
 <script>
 	jQuery(function ($) {
@@ -25,6 +30,7 @@
 		$("#clear").click(function() {
 			$("#postedDate").val('');
 		})
+		$('#ok').gallerie();
 	});
 </script>
 
@@ -84,13 +90,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="left">
+				<td align="left" width="15%">
 					<span class="lblBlack">Ảnh đại diện</span>
 				</td>
-				<td>
+				<td align="left" width="30%">
 					<div id="container" style="float: left;">
 						<div id="upload-file-container" class="fade well">
-							<input id="fileupload" type="file" name="files[]" data-url="/cm/news/uploadNewsImage" />
+							<input id="newsImageUpload" type="file" name="files[]" data-url="${ct}/cm/news/uploadNewsImage" />
 						</div>
 						<div id="dropzone" class="fade well">
 							<span class="lblBlack">Chọn file</span>
@@ -98,13 +104,23 @@
 					</div>
 					<div style="margin-left: 20px; margin-top: 17px;" id="progress" class="lblBlack"></div>
 				</td>
-				<td>
+				<td colspan="2">
+					<div id="imageBox">
+						<c:if test="${newsImage != null}">
+							<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left;">
+								<a href="${ct}/${newsImage.path}" id="ok">
+									<img src="${ct}/${newsImage.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" />
+								</a>
+							</div>
+						</c:if>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="4">
 					<span class="lblBlack">Nội dung bài viết</span><br />
 					<form:textarea path="content" id="content" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error"/>
+					<%-- in order to support context path, have to add context path mannually to basePath property --%>
 					<ckfinder:setupCKEditor basePath="/ckfinder" />
 					<ckeditor:replace replace="content" basePath="/ckeditor" />
 				</td>
