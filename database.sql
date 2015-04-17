@@ -349,7 +349,7 @@ DROP TABLE IF EXISTS `news_content`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `news_content` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

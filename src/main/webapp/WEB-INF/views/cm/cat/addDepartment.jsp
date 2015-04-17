@@ -100,9 +100,7 @@
 		</c:forEach>
 	    <tr>
 	    	<td colspan="7" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/department/delete" id="delDepartment">
-	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
-	    		</a>&#8592; Click vào đây để xóa
+	    		<a href="${ct}/cm/department/delete" id="delDepartment"><img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" /></a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>
 	</table>

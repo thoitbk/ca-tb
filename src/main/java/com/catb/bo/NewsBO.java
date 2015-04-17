@@ -5,5 +5,5 @@ import com.catb.model.NewsContent;
 
 public interface NewsBO {
 	
-	public void addNews(News news, NewsContent newsContent);
+	public void addNews(News news, NewsContent newsContent, Integer newsCatalogId);
 }

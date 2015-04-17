@@ -75,9 +75,7 @@
 		</c:forEach>
 		<tr>
 	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/position/delete" id="delPosition">
-	    			<img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" />
-	    		</a>&#8592; Click vào đây để xóa
+	    		<a href="${ct}/cm/position/delete" id="delPosition"><img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" /></a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>
 	</table>

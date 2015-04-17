@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,20 +29,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.catb.bo.NewsBO;
 import com.catb.bo.NewsCatalogBO;
 import com.catb.common.Constants;
+import com.catb.common.PropertiesUtil;
 import com.catb.common.exception.AppException;
 import com.catb.common.web.Util;
+import com.catb.model.News;
 import com.catb.model.NewsCatalog;
+import com.catb.model.NewsContent;
+import com.catb.model.NewsStatus;
 import com.catb.web.viewmodel.FileMeta;
 import com.catb.web.viewmodel.NewsViewModel;
+import com.catb.web.viewmodel.Status;
 
 @Controller
 public class NewsController {
 	
 	@Autowired
 	private NewsCatalogBO newsCatalogBO;
+	
+	@Autowired
+	private NewsBO newsBO;
 	
 	@ModelAttribute("newsCatalogs")
 	public Map<Integer, String> populateNewsCatalogs() {
@@ -70,6 +82,42 @@ public class NewsController {
 	}
 	
 	@RequiresPermissions(value = {"news:create"})
+	@RequestMapping(value = "/cm/news/create", method = RequestMethod.POST)
+	public ModelAndView processCreateNews(
+			@Valid NewsViewModel newsViewModel, 
+			BindingResult bindingResult, 
+			ModelMap model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView("cm/news/create");
+		} else {
+			News news = new News();
+			if (newsViewModel.getSqNumber() != null && !"".equals(newsViewModel.getSqNumber().trim())) {
+				news.setSqNumber(Integer.parseInt(newsViewModel.getSqNumber()));
+			}
+			news.setTitle(newsViewModel.getTitle());
+			news.setSummary(newsViewModel.getSummary());
+			news.setAuthor(newsViewModel.getAuthor());
+			news.setPostedDate(newsViewModel.getPostedDate());
+			news.setHotNews(newsViewModel.getHotNews());
+			news.setStatus(NewsStatus.PENDING.getStatus());
+			FileMeta fileMeta = (FileMeta) request.getSession().getAttribute("newsImage");
+			if (fileMeta != null) {
+				news.setImage(fileMeta.getPath());
+				request.getSession().removeAttribute("newsImage");
+			}
+			
+			NewsContent newsContent = new NewsContent();
+			newsContent.setContent(newsViewModel.getContent());
+			
+			newsBO.addNews(news, newsContent, Integer.parseInt(newsViewModel.getNewsCatalogId()));
+			
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("news.created.successfully"));
+			
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/news/create"));
+		}
+	}
+	
+	@RequiresPermissions(value = {"news:create"})
 	@RequestMapping(value = "/cm/news/uploadNewsImage", method = RequestMethod.POST)
 	@ResponseBody
 	public FileMeta uploadNewsImage(HttpServletRequest request, HttpServletResponse response) {
@@ -81,6 +129,26 @@ public class NewsController {
 		}
 		
 		return null;
+	}
+	
+	@RequiresPermissions(value = {"news:create"})
+	@RequestMapping(value = "/cm/news/removeNewsImage", method = RequestMethod.POST)
+	@ResponseBody
+	public Status removeNewsImage(HttpServletRequest request) {
+		FileMeta fileMeta = (FileMeta) request.getSession().getAttribute("newsImage");
+		if (fileMeta != null) {
+			String relativePath = fileMeta.getPath();
+			String absolutePath = request.getServletContext().getRealPath(relativePath);
+			File file = new File(absolutePath);
+			if (file.exists()) {
+				file.delete();
+			}
+			
+			request.getSession().removeAttribute("newsImage");
+		}
+		
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 	
 	@SuppressWarnings("unchecked")

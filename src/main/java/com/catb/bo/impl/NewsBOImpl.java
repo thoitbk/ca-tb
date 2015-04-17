@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.catb.bo.NewsBO;
+import com.catb.dao.NewsCatalogDAO;
 import com.catb.dao.NewsDAO;
 import com.catb.model.News;
+import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
 
 @Service
@@ -15,10 +17,19 @@ public class NewsBOImpl implements NewsBO {
 	@Autowired
 	private NewsDAO newsDAO;
 	
+	@Autowired
+	private NewsCatalogDAO newsCatalogDAO;
+	
 	@Transactional
-	public void addNews(News news, NewsContent newsContent) {
-		newsDAO.addNewsContent(newsContent);
-		news.setNewsContent(newsContent);
-		newsDAO.addNews(news);
+	public void addNews(News news, NewsContent newsContent, Integer newsCatalogId) {
+		NewsCatalog newsCatalog = newsCatalogDAO.getNewsCatalogById(newsCatalogId);
+		if (newsCatalog != null) {
+			newsCatalog.getNewses().add(news);
+			news.setNewsCatalog(newsCatalog);
+			
+			newsDAO.addNewsContent(newsContent);
+			news.setNewsContent(newsContent);
+			newsDAO.addNews(news);
+		}
 	}
 }

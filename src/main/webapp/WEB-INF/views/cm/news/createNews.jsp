@@ -18,11 +18,10 @@
 <script src="${ct}/resources/js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/cm/uploader.js" type="text/javascript"></script>
-<!-- image viewer -->
-<link href="${ct}/resources/css/gallerie.css" rel="stylesheet" type="text/css" />
-<link href="${ct}/resources/css/gallerie-effects.css" rel="stylesheet" type="text/css" />
-<script src="${ct}/resources/js/jquery.gallerie.js" type="text/javascript"></script>
-
+<!-- image viewer fancy box -->
+<link href="${ct}/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="${ct}/fancybox/jquery.mousewheel-3.0.4.pack.js" type="text/javascript"></script>
+<script src="${ct}/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
 
 <script>
 	jQuery(function ($) {
@@ -30,7 +29,11 @@
 		$("#clear").click(function() {
 			$("#postedDate").val('');
 		})
-		$('#ok').gallerie();
+		$("a#thumbImage").fancybox({
+			'overlayShow'	: false,
+			'transitionIn'	: 'elastic',
+			'transitionOut'	: 'elastic'
+		});
 	});
 </script>
 
@@ -82,11 +85,27 @@
 			</tr>
 			<tr>
 				<td align="left">
+					<span id="" class="lblBlack">Tác giả</span>
+				</td>
+				<td colspan="3">
+					<form:input path="author" id="author" maxlength="200" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
 					<span class="lblBlack">Ngày đăng tin</span>
 				</td>
 				<td colspan="3">
 					<form:input path="postedDate" id="postedDate" maxlength="20" cssClass="textbox" cssStyle="width: 50%" cssErrorClass="textbox_error" />
 					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<span class="lblBlack">Tin nóng</span>
+				</td>
+				<td colspan="3">
+					<form:checkbox path="hotNews" id="hotNews" />
 				</td>
 			</tr>
 			<tr>
@@ -106,13 +125,16 @@
 				</td>
 				<td colspan="2">
 					<div id="imageBox">
-						<c:if test="${newsImage != null}">
-							<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left;">
-								<a href="${ct}/${newsImage.path}" id="ok">
-									<img src="${ct}/${newsImage.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" />
-								</a>
-							</div>
-						</c:if>
+						<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left; float: left;">
+							<c:if test="${newsImage != null}">
+								<a href="${ct}/${newsImage.path}" id="thumbImage"><img src="${ct}/${newsImage.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
+							</c:if>
+						</div>
+						<div id="removeIcon">
+							<c:if test="${newsImage != null}">
+								<a href="javascript:void(0);" id="removeNewsImage"><img src="${ct}/resources/images/remove.png" alt="Xóa ảnh" style="width: 20px; height: 20px" /></a>
+							</c:if>
+						</div>
 					</div>
 				</td>
 			</tr>
