@@ -30,24 +30,28 @@ public class NewsViewModel {
 	@Past
 	private Date postedDate;
 	
+	private Boolean hotNews;
+	
 	@NotBlank
 	private String content;
 
 	public NewsViewModel() {
 		
 	}
-
+	
 	public NewsViewModel(String newsCatalogId, String title, String sqNumber,
-			String summary, String author, Date postedDate, String content) {
+			String summary, String author, Date postedDate, Boolean hotNews,
+			String content) {
 		this.newsCatalogId = newsCatalogId;
 		this.title = title;
 		this.sqNumber = sqNumber;
 		this.summary = summary;
 		this.author = author;
 		this.postedDate = postedDate;
+		this.hotNews = hotNews;
 		this.content = content;
 	}
-
+	
 	public String getNewsCatalogId() {
 		return newsCatalogId;
 	}
@@ -94,6 +98,14 @@ public class NewsViewModel {
 
 	public void setPostedDate(Date postedDate) {
 		this.postedDate = postedDate;
+	}
+
+	public Boolean getHotNews() {
+		return hotNews;
+	}
+
+	public void setHotNews(Boolean hotNews) {
+		this.hotNews = hotNews;
 	}
 
 	public String getContent() {

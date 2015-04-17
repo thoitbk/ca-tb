@@ -1,7 +1,12 @@
 $(function () {
 	
-	var ct = '';
+	var cp = '';
 	
+	var errorUrl = cp + '/cm/internalError';
+    var unauthenticatedUrl = cp + '/cm/login';
+    var unauthorizedUrl = cp + '/cm/unauthorized';
+    var notOkUrl = cp + '/cm/requestError';
+    
     $('#newsImageUpload').fileupload({
     	add: function(e, data) {
             var uploadErrors = [];
@@ -22,15 +27,19 @@ $(function () {
         dataType: 'json',
         
         done: function (e, data) {
-        	$("#imageBox").empty();
-        	var imageUrl = ct + '/' + data.result.path;
-        	var appendString = '<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left;">' +
-        							'<a href="' + imageUrl + '">' + 
-							   			'<img src="' + imageUrl + '" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" />' +
-							   		'</a>' + 
-							   '</div>';
-        	$("#imageBox").append(appendString);
-        	$('#uploadedImage').gallerie();
+        	$("#uploadedImage").empty();
+        	$("#removeIcon").empty();
+        	var imageUrl = cp + '/' + data.result.path;
+        	var removeIcon = cp + '/resources/images/remove.png';
+        	var append1 = '<a href="' + imageUrl + '" id="thumbImage"><img src="' + imageUrl + '" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>';
+        	var append2 = '<a href="javascript:void(0);" id="removeNewsImage"><img src="' + removeIcon + '" alt="Xóa ảnh" style="width: 20px; height: 20px" /></a>';
+        	$("#uploadedImage").append(append1);
+        	$("#removeIcon").append(append2);
+        	$("a#thumbImage").fancybox({
+        		'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+        	});
         },
         
         progressall: function (e, data) {
@@ -40,11 +49,44 @@ $(function () {
 	        if (progress == 100) {
 	        	percent.empty();
 	        	percent.append("<span id='uploadsuccess'>Upload thành công</span>");
-	        	$("#uploadsuccess").delay(2000).fadeOut();
+	        	$("#uploadsuccess").delay(5000).fadeOut();
 	        }
    		},
    		
 		dropZone: $('#dropzone')
     }).bind('fileuploadsubmit', function (e, data) {
+    });
+    
+    $("#removeIcon").on('click', $("#removeNewsImage"), function() {
+    	if (!confirm('Bạn có chắc chắn muốn xóa ảnh ?')) {
+			return;
+		}
+		url = cp + '/cm/news/removeNewsImage';
+		$.ajax({
+	        type : "POST",
+	        url : url,
+	        dataType: "json",
+	        success : function(response) {
+	        	var statusCode = response.code;
+	        	switch (statusCode) {
+	        	case 1:
+	        		$("#uploadedImage").empty();
+	        		$("#removeIcon").empty();
+	        		break;
+	        	case 2:
+	        		window.location.href = errorUrl;
+	        		break;
+	        	case 3:
+	        		window.location.href = unauthenticatedUrl;
+	        		break;
+	        	case 4:
+	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	default:
+	        		window.location.href = notOkUrl;
+	        		break;
+	        	}
+	        }
+	    });
     });
 });
