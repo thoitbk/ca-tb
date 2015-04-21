@@ -129,4 +129,32 @@ public class ResReader {
 			throw new AppException(ex);
 		}
 	}
+	
+
+	@SuppressWarnings("rawtypes")
+	public static Map<Integer, String> readNewsStatuses(String fileName) {
+		SAXBuilder builder = new SAXBuilder();
+		File file = new File(fileName);
+		
+		try {
+			Document document = (Document) builder.build(file);
+			Element rootNode = document.getRootElement();
+			
+			List newsStatuses = rootNode.getChildren("newsStatus");
+			Map<Integer, String> newsStatusesMap = new LinkedHashMap<Integer, String>();
+			for (int i = 0; i < newsStatuses.size(); i++) {
+				Element newsStatus = (Element) newsStatuses.get(i);
+				Integer code = Integer.parseInt(newsStatus.getChildTextTrim("code"));
+				String name = newsStatus.getChildText("name");
+				if (code != null && name != null && !"".equals(name.trim())) {
+					newsStatusesMap.put(code, name);
+				}
+			}
+			
+			return newsStatusesMap;
+		} catch (Exception ex) {
+			logger.error("Reading news statuses failed: ", ex);
+			throw new AppException(ex);
+		}
+	}
 }

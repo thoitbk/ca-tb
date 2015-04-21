@@ -1,5 +1,7 @@
 package com.catb.bo.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import com.catb.dao.NewsDAO;
 import com.catb.model.News;
 import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
+import com.catb.vo.SearchNewsVO;
 
 @Service
 public class NewsBOImpl implements NewsBO {
@@ -31,5 +34,10 @@ public class NewsBOImpl implements NewsBO {
 			news.setNewsContent(newsContent);
 			newsDAO.addNews(news);
 		}
+	}
+	
+	@Transactional
+	public List<News> getNews(SearchNewsVO searchNewsVO, Integer page, Integer pageSize) {
+		return newsDAO.getNews(searchNewsVO, page, pageSize);
 	}
 }

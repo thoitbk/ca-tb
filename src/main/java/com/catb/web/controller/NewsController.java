@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -41,8 +42,10 @@ import com.catb.model.News;
 import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
+import com.catb.vo.SearchNewsVO;
 import com.catb.web.viewmodel.FileMeta;
 import com.catb.web.viewmodel.NewsViewModel;
+import com.catb.web.viewmodel.SearchNewsViewModel;
 import com.catb.web.viewmodel.Status;
 
 @Controller
@@ -63,6 +66,13 @@ public class NewsController {
 		}
 		
 		return newsCatalogsMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ModelAttribute("newsStatuses")
+	public Map<Integer, String> populateNewsStatus(HttpServletRequest request) {
+		Map<Integer, String> newsStatuses = (Map<Integer, String>) request.getServletContext().getAttribute("NEWS_STATUSES");
+		return newsStatuses;
 	}
 	
 	@InitBinder
@@ -202,5 +212,52 @@ public class NewsController {
 		File file = new File(absolutePath);
 		
 		return file;
+	}
+	
+	@RequiresPermissions(value = {"news:manage"})
+	@RequestMapping(value = "/cm/news/manage", method = RequestMethod.GET)
+	public ModelAndView manageNews(
+						@ModelAttribute("searchNewsViewModel") SearchNewsViewModel searchNewsViewModel,
+						@RequestParam(value = "p", defaultValue = "1", required = false) Integer page,
+						ModelMap model, HttpServletRequest request) {
+		SearchNewsVO searchNewsVO = new SearchNewsVO();
+		if (searchNewsViewModel.getNewsCatalogId() != null && searchNewsViewModel.getNewsCatalogId() >= 0) {
+			searchNewsVO.setNewsCatalogId(searchNewsViewModel.getNewsCatalogId());
+		}
+		if (searchNewsViewModel.getNewsStatus() != null) {
+			searchNewsVO.setNewsStatus(searchNewsViewModel.getNewsStatus());
+		}
+		if (searchNewsViewModel.getHotNews() != null) {
+			searchNewsVO.setHotNews(searchNewsViewModel.getHotNews());
+		}
+		if (searchNewsViewModel.getAuthor() != null && !"".equals(searchNewsViewModel.getAuthor().trim())) {
+			searchNewsVO.setAuthor(searchNewsViewModel.getAuthor().trim());
+		}
+		if (searchNewsViewModel.getTitle() != null && !"".equals(searchNewsViewModel.getTitle().trim())) {
+			searchNewsVO.setTitle(searchNewsViewModel.getTitle().trim());
+		}
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		if (searchNewsViewModel.getFrom() != null && !"".equals(searchNewsViewModel.getFrom().trim())) {
+			try {
+				Date from = dateFormat.parse(searchNewsViewModel.getFrom().trim());
+				searchNewsVO.setFrom(from);
+			} catch (Exception ex) {
+				// Ignore this exception
+			}
+		}
+		if (searchNewsViewModel.getTo() != null && !"".equals(searchNewsViewModel.getTo().trim())) {
+			try {
+				Date to = dateFormat.parse(searchNewsViewModel.getTo().trim());
+				searchNewsVO.setTo(to);
+			} catch (Exception ex) {
+			}
+		}
+		
+		Integer pageSize = Util.getPageSize(request);
+		List<News> newses = newsBO.getNews(searchNewsVO, page, pageSize);
+		
+		model.addAttribute("newses", newses);
+		
+		return new ModelAndView("cm/news/manage");
 	}
 }
