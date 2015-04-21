@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.catb.common.CommonInfo;
+
 public class Util {
 
 	public static String getIpAddress(HttpServletRequest request) {
@@ -27,5 +29,10 @@ public class Util {
 	
 	public static String getRandomString() {
 		return String.valueOf(new Date().getTime());
+	}
+	
+	public static Integer getPageSize(HttpServletRequest request) {
+		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
+		return commonInfo != null && commonInfo.getPageSize() != null ? commonInfo.getPageSize() : 20;
 	}
 }
