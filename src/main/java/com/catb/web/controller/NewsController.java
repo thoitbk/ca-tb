@@ -171,9 +171,9 @@ public class NewsController {
 						String fileName = item.getName();
 						String randomString = Util.getRandomString();
 						String newFileName = randomString + "." + FilenameUtils.getExtension(fileName);
-						String imageUrl = String.format("%s/%s/%s", Constants.NEWS_IMAGE_LOCATION, dirName, newFileName);
+						String imageUrl = String.format("%s/%s/%s", Constants.NEWS_IMAGE_PATH, dirName, newFileName);
 						
-						File file = createFile(dirName, newFileName, request);
+						File file = createFile(dirName, newFileName);
 						if (!file.exists()) {
 							item.write(file);
 							temp = new FileMeta(
@@ -191,15 +191,14 @@ public class NewsController {
 		return files;
 	}
 	
-	private File createFile(String dirName, String fileName, HttpServletRequest request) {
-		String directory = request.getServletContext().getRealPath(Constants.NEWS_IMAGE_LOCATION + File.separator + dirName);
+	private File createFile(String dirName, String fileName) {
+		String directory = Constants.NEWS_IMAGE_LOCATION + File.separator + dirName;
 		File dir = new File(directory);
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
 		
-		String relativePath = Constants.NEWS_IMAGE_LOCATION + File.separator + dirName + File.separator + fileName;
-		String absolutePath = request.getServletContext().getRealPath(relativePath);
+		String absolutePath = directory + File.separator + fileName;
 		File file = new File(absolutePath);
 		
 		return file;
