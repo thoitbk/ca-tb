@@ -13,6 +13,7 @@ public class Constants {
 	public static String COMMONINFO_CONFIG_FILE;
 	public static String DISPLAY_LOCATION_CONFIG_FILE;
 	public static String NEWS_IMAGE_LOCATION;
+	public static String NEWS_IMAGE_PATH;
 	
 	public static void load() {
 		try {
@@ -21,6 +22,7 @@ public class Constants {
 			COMMONINFO_CONFIG_FILE = config.getString("COMMONINFO_CONFIG_FILE");
 			DISPLAY_LOCATION_CONFIG_FILE = config.getString("DISPLAY_LOCATION_CONFIG_FILE");
 			NEWS_IMAGE_LOCATION = config.getString("NEWS_IMAGE_LOCATION");
+			NEWS_IMAGE_PATH = config.getString("NEWS_IMAGE_PATH");
 		} catch (ConfigurationException ex) {
 			logger.error("Loading configuration failed: ", ex);
 		}
