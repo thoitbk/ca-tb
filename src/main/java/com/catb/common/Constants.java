@@ -9,12 +9,17 @@ public class Constants {
 	
 	static Logger logger = Logger.getLogger(Constants.class);
 	
+	// Location of resources config files
 	public static String CM_MENU_CONFIG_FILE;
 	public static String COMMONINFO_CONFIG_FILE;
 	public static String DISPLAY_LOCATION_CONFIG_FILE;
-	public static String NEWS_IMAGE_LOCATION;
-	public static String NEWS_IMAGE_PATH;
 	public static String NEWS_STATUSES_CONFIG_FILE;
+	// Logical path of directory storing uploaded images
+	public static String NEWS_IMAGE_LOCATION;
+	// Relative path of uploaded images
+	public static String NEWS_IMAGE_PATH;
+	// Number of page links generated
+	public static Integer NUMBER_OF_PAGE_LINK;
 	
 	public static void load() {
 		try {
@@ -25,6 +30,7 @@ public class Constants {
 			NEWS_STATUSES_CONFIG_FILE = config.getString("NEWS_STATUSES_CONFIG_FILE");
 			NEWS_IMAGE_LOCATION = config.getString("NEWS_IMAGE_LOCATION");
 			NEWS_IMAGE_PATH = config.getString("NEWS_IMAGE_PATH");
+			NUMBER_OF_PAGE_LINK = config.getInt("NUMBER_OF_PAGE_LINK");
 		} catch (ConfigurationException ex) {
 			logger.error("Loading configuration failed: ", ex);
 		}

@@ -962,3 +962,8 @@ span.star
 	height: 30px;
 	vertical-align:middle;
 }
+
+.news_title {
+	text-decoration:none;
+	color: blue;
+}

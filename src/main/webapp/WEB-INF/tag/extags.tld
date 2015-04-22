@@ -17,4 +17,67 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	
+	<tag>
+    	<name>paging</name>
+    	<tag-class>com.catb.web.tag.PagingTag</tag-class>
+    	<body-content>empty</body-content>
+    	<attribute>
+    		<name>pageInfo</name>
+    		<required>true</required>
+    		<rtexprvalue>true</rtexprvalue>
+    		<type>com.catb.web.tag.PageInfo</type>
+    	</attribute>
+    	<attribute>
+    		<name>link</name>
+    		<required>true</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>cssClass</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>paramName</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>pageSize</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>numPageLink</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>selectedLinkCssClass</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>params</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    </tag>
+    
+    <tag>
+    	<name>link</name>
+    	<tag-class>com.catb.web.tag.LinkTag</tag-class>
+    	<body-content>empty</body-content>
+    	<attribute>
+    		<name>link</name>
+    		<required>true</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>params</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    </tag>
 </taglib>

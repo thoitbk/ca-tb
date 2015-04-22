@@ -43,6 +43,7 @@ import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
+import com.catb.web.tag.PageInfo;
 import com.catb.web.viewmodel.FileMeta;
 import com.catb.web.viewmodel.NewsViewModel;
 import com.catb.web.viewmodel.SearchNewsViewModel;
@@ -217,30 +218,44 @@ public class NewsController {
 	@RequiresPermissions(value = {"news:manage"})
 	@RequestMapping(value = "/cm/news/manage", method = RequestMethod.GET)
 	public ModelAndView manageNews(
-						@ModelAttribute("searchNewsViewModel") SearchNewsViewModel searchNewsViewModel,
+						SearchNewsViewModel searchNewsViewModel,
 						@RequestParam(value = "p", defaultValue = "1", required = false) Integer page,
 						ModelMap model, HttpServletRequest request) {
+		SearchNewsViewModel viewModel = new SearchNewsViewModel();
 		SearchNewsVO searchNewsVO = new SearchNewsVO();
+		Map<String, String> params = new LinkedHashMap<String, String>();
 		if (searchNewsViewModel.getNewsCatalogId() != null && searchNewsViewModel.getNewsCatalogId() >= 0) {
 			searchNewsVO.setNewsCatalogId(searchNewsViewModel.getNewsCatalogId());
+			viewModel.setNewsCatalogId(searchNewsViewModel.getNewsCatalogId());
+			params.put("newsCatalogId", String.valueOf(searchNewsViewModel.getNewsCatalogId()));
 		}
-		if (searchNewsViewModel.getNewsStatus() != null) {
+		if (searchNewsViewModel.getNewsStatus() != null && searchNewsViewModel.getNewsStatus() >= 0) {
 			searchNewsVO.setNewsStatus(searchNewsViewModel.getNewsStatus());
+			viewModel.setNewsStatus(searchNewsViewModel.getNewsStatus());
+			params.put("newsStatus", String.valueOf(searchNewsViewModel.getNewsStatus()));
 		}
 		if (searchNewsViewModel.getHotNews() != null) {
 			searchNewsVO.setHotNews(searchNewsViewModel.getHotNews());
+			viewModel.setHotNews(searchNewsViewModel.getHotNews());
+			params.put("hotNews", String.valueOf(searchNewsViewModel.getHotNews()));
 		}
 		if (searchNewsViewModel.getAuthor() != null && !"".equals(searchNewsViewModel.getAuthor().trim())) {
 			searchNewsVO.setAuthor(searchNewsViewModel.getAuthor().trim());
+			viewModel.setAuthor(searchNewsViewModel.getAuthor());
+			params.put("author", searchNewsViewModel.getAuthor());
 		}
 		if (searchNewsViewModel.getTitle() != null && !"".equals(searchNewsViewModel.getTitle().trim())) {
 			searchNewsVO.setTitle(searchNewsViewModel.getTitle().trim());
+			viewModel.setTitle(searchNewsViewModel.getTitle());
+			params.put("title", searchNewsViewModel.getTitle());
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		if (searchNewsViewModel.getFrom() != null && !"".equals(searchNewsViewModel.getFrom().trim())) {
 			try {
 				Date from = dateFormat.parse(searchNewsViewModel.getFrom().trim());
 				searchNewsVO.setFrom(from);
+				viewModel.setFrom(searchNewsViewModel.getFrom());
+				params.put("from", searchNewsViewModel.getFrom());
 			} catch (Exception ex) {
 				// Ignore this exception
 			}
@@ -249,14 +264,20 @@ public class NewsController {
 			try {
 				Date to = dateFormat.parse(searchNewsViewModel.getTo().trim());
 				searchNewsVO.setTo(to);
+				viewModel.setTo(searchNewsViewModel.getTo());
+				params.put("to", searchNewsViewModel.getTo());
 			} catch (Exception ex) {
 			}
 		}
 		
 		Integer pageSize = Util.getPageSize(request);
 		List<News> newses = newsBO.getNews(searchNewsVO, page, pageSize);
+		PageInfo pageInfo = new PageInfo(newsBO.countNews(searchNewsVO), page, pageSize);
 		
+		model.addAttribute("searchNewsViewModel", viewModel);
 		model.addAttribute("newses", newses);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("params", params);
 		
 		return new ModelAndView("cm/news/manage");
 	}

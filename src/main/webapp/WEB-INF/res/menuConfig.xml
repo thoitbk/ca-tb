@@ -5,9 +5,7 @@
 			<link>/cm/news/create</link>
 		</menuItem>
 		<menuItem id="info_2">
-			<link>/cm/ok1/add</link>
-			<link>/cm/ok2/update</link>
-			<link>/cm/ok3/delete</link>
+			<link>/cm/news/manage</link>
 		</menuItem>
 		<menuItem id="info_4">
 			<link>/cm/newsCatalog/add</link>

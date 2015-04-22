@@ -104,3 +104,29 @@
 .responstable tr:hover {
 	background-color: #ffff99;
 }
+
+.page_link {
+	color:#A60500;
+    font-size:12px;
+    text-decoration:none;
+    font-weight:bold;
+    padding:5px 5px;
+}
+
+.selected {
+	color:#000000;
+	pointer-events: none;
+    cursor: default;
+    font-size:12px;
+    text-decoration:none;
+    font-weight:bold;
+    padding:5px 5px;
+}
+
+.page_link:hover {
+	color:#A605FF;
+    font-size:12px;
+    text-decoration:none;
+    font-weight:bold;
+    padding:5px 5px;
+}

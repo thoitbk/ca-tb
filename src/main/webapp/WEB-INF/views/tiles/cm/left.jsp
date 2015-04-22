@@ -25,7 +25,7 @@
 					<shiro:hasPermission name="news:manage">
 						<li id="info_2" class="${f:getMenuClass(menuItemId, 'info_2', 'selected_subitem')}">
 							<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị tin</a>
+							<a href="${ct}/cm/news/manage">Quản trị tin</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="news:approve">

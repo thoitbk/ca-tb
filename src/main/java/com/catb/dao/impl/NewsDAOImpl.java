@@ -7,6 +7,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -37,10 +38,31 @@ public class NewsDAOImpl implements NewsDAO {
 	@SuppressWarnings("unchecked")
 	public List<News> getNews(SearchNewsVO searchNewsVO, Integer page, Integer pageSize) {
 		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = buildCriteria(session, searchNewsVO);
+		
+		criteria.setFirstResult((page - 1) * pageSize);
+		criteria.setMaxResults(pageSize);
+		
+		criteria.addOrder(Order.desc("sqNumber"));
+		criteria.addOrder(Order.desc("id"));
+		
+		return (List<News>) criteria.list();
+	}
+
+	public Long countNews(SearchNewsVO searchNewsVO) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = buildCriteria(session, searchNewsVO);
+		criteria.setProjection(Projections.rowCount());
+		
+		return (Long) criteria.uniqueResult();
+	}
+	
+	private Criteria buildCriteria(Session session, SearchNewsVO searchNewsVO) {
 		Criteria criteria = session.createCriteria(News.class, "news");
+		criteria.createAlias("news.newsCatalog", "newsCatalog");
+		criteria.setFetchMode("newsCatalog", FetchMode.JOIN);
+		
 		if (searchNewsVO.getNewsCatalogId() != null) {
-			criteria.createAlias("news.newsCatalog", "newsCatalog");
-			criteria.setFetchMode("newsCatalog", FetchMode.JOIN);
 			criteria.add(Restrictions.eq("newsCatalog.id", searchNewsVO.getNewsCatalogId()));
 		}
 		if (searchNewsVO.getNewsStatus() != null) {
@@ -50,10 +72,10 @@ public class NewsDAOImpl implements NewsDAO {
 			criteria.add(Restrictions.eq("hotNews", searchNewsVO.getHotNews()));
 		}
 		if (searchNewsVO.getAuthor() != null) {
-			criteria.add(Restrictions.eq("author", searchNewsVO.getAuthor()));
+			criteria.add(Restrictions.like("author", "%" + searchNewsVO.getAuthor() + "%"));
 		}
 		if (searchNewsVO.getTitle() != null) {
-			criteria.add(Restrictions.eq("title", searchNewsVO.getTitle()));
+			criteria.add(Restrictions.like("title", "%" + searchNewsVO.getTitle() + "%"));
 		}
 		if (searchNewsVO.getFrom() != null) {
 			criteria.add(Restrictions.ge("postedDate", searchNewsVO.getFrom()));
@@ -62,12 +84,6 @@ public class NewsDAOImpl implements NewsDAO {
 			criteria.add(Restrictions.le("postedDate", searchNewsVO.getTo()));
 		}
 		
-		criteria.setFirstResult((page - 1) * pageSize);
-		criteria.setMaxResults(pageSize);
-		
-		criteria.addOrder(Order.desc("sqNumber"));
-		criteria.addOrder(Order.desc("id"));
-		
-		return (List<News>) criteria.list();
+		return criteria;
 	}
 }
