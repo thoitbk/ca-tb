@@ -40,4 +40,9 @@ public class NewsBOImpl implements NewsBO {
 	public List<News> getNews(SearchNewsVO searchNewsVO, Integer page, Integer pageSize) {
 		return newsDAO.getNews(searchNewsVO, page, pageSize);
 	}
+	
+	@Transactional
+	public Long countNews(SearchNewsVO searchNewsVO) {
+		return newsDAO.countNews(searchNewsVO);
+	}
 }
