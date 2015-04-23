@@ -14,4 +14,5 @@ public interface NewsBO {
 	public News getNewsById(Integer id);
 	public News fetchNewsById(Integer id);
 	public void updateNews(News news, String content, Integer newsCatalogId);
+	public void deleteNewses(Integer[] ids);
 }

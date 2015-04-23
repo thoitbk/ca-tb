@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.fileupload.FileItem;
@@ -339,8 +340,6 @@ public class NewsController {
 			}
 			news.setSqNumber(sqNumber);
 			
-			System.out.println(newsViewModel.getNewsCatalogId());
-			
 			newsBO.updateNews(news, newsViewModel.getContent(), Integer.parseInt(newsViewModel.getNewsCatalogId()));
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("news.updated.successfully"));
 			
@@ -348,5 +347,15 @@ public class NewsController {
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/news/manage" + queryString));
 		}
+	}
+	
+	@RequiresPermissions(value = {"news:manage"})
+	@RequestMapping(value = "/cm/news/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Status deleteNews(@RequestParam("ids") Integer[] ids, HttpSession session) {
+		newsBO.deleteNewses(ids);
+		session.setAttribute("msg", PropertiesUtil.getProperty("news.deleted.successfully"));
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 }

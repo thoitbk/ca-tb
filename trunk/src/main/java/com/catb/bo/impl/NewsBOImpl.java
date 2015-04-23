@@ -81,4 +81,13 @@ public class NewsBOImpl implements NewsBO {
 			}
 		}
 	}
+	
+	@Transactional
+	public void deleteNewses(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				newsDAO.deleteNews(id);
+			}
+		}
+	}
 }

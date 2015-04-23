@@ -115,4 +115,12 @@ public class NewsDAOImpl implements NewsDAO {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(newsContent);
 	}
+
+	public void deleteNews(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		News news = getNewsById(id);
+		if (news != null) {
+			session.delete(news);
+		}
+	}
 }

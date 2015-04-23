@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,7 +59,7 @@ public class AdministrativeProcedure implements Serializable {
 	@JoinColumn(name = "field_id")
 	private Field field;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "administrativeProcedure")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "administrativeProcedure", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	private Set<AdministrativeProcedureFile> administrativeProcedureFiles = new HashSet<AdministrativeProcedureFile>();
 
 	public AdministrativeProcedure() {

@@ -3,6 +3,7 @@ package com.catb.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,7 +56,7 @@ public class News implements Serializable {
 	@JoinColumn(name = "news_catalog_id")
 	private NewsCatalog newsCatalog;
 	
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "news_content_id")
 	private NewsContent newsContent;
 
