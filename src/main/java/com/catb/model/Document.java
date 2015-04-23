@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,7 +59,7 @@ public class Document implements Serializable {
 	@JoinColumn(name = "document_type_catalog_id")
 	private DocumentTypeCatalog documentTypeCatalog;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "document")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "document", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	private Set<DocumentFile> documentFiles = new HashSet<DocumentFile>();
 	
 	public Document() {

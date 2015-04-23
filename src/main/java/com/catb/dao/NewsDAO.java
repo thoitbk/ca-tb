@@ -16,4 +16,5 @@ public interface NewsDAO {
 	public News fetchNewsById(Integer id);
 	public void updateNews(News news);
 	public void updateNewsContent(NewsContent newsContent);
+	public void deleteNews(Integer id);
 }
