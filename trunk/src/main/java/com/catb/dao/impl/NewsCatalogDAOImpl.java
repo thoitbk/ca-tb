@@ -35,7 +35,7 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		}
 		
 		criteria.addOrder(Order.asc("sqNumber"));
-		criteria.addOrder(Order.asc("id"));
+		criteria.addOrder(Order.desc("id"));
 		
 		return (List<NewsCatalog>) criteria.list();
 	}

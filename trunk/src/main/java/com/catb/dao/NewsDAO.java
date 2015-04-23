@@ -12,4 +12,8 @@ public interface NewsDAO {
 	public void addNewsContent(NewsContent newsContent);
 	public List<News> getNews(SearchNewsVO searchNewsVO, Integer page, Integer pageSize);
 	public Long countNews(SearchNewsVO searchNewsVO);
+	public News getNewsById(Integer id);
+	public News fetchNewsById(Integer id);
+	public void updateNews(News news);
+	public void updateNewsContent(NewsContent newsContent);
 }

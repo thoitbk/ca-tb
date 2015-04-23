@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -43,7 +44,7 @@ public class NewsDAOImpl implements NewsDAO {
 		criteria.setFirstResult((page - 1) * pageSize);
 		criteria.setMaxResults(pageSize);
 		
-		criteria.addOrder(Order.desc("sqNumber"));
+		criteria.addOrder(Order.asc("sqNumber"));
 		criteria.addOrder(Order.desc("id"));
 		
 		return (List<News>) criteria.list();
@@ -85,5 +86,33 @@ public class NewsDAOImpl implements NewsDAO {
 		}
 		
 		return criteria;
+	}
+
+	public News getNewsById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (News) session.get(News.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public News fetchNewsById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT n " + 
+						"FROM News n INNER JOIN FETCH n.newsCatalog INNER JOIN FETCH n.newsContent " + 
+						"WHERE n.id = :id";
+		Query query = session.createQuery(select);
+		query.setParameter("id", id);
+		
+		List<News> newses = (List<News>) query.list();
+		return newses != null && newses.size() > 0 ? newses.get(0) : null;
+	}
+
+	public void updateNews(News news) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(news);
+	}
+
+	public void updateNewsContent(NewsContent newsContent) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(newsContent);
 	}
 }

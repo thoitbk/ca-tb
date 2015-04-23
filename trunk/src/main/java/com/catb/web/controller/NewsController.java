@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -25,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,10 +86,11 @@ public class NewsController {
 	
 	@RequiresPermissions(value = {"news:create"})
 	@RequestMapping(value = "/cm/news/create", method = RequestMethod.GET)
-	public ModelAndView showCreateNews(ModelMap model) {
+	public ModelAndView showCreateNews(ModelMap model, HttpServletRequest request) {
 		NewsViewModel newsViewModel = new NewsViewModel();
 		newsViewModel.setPostedDate(new Date());
 		model.addAttribute("newsViewModel", newsViewModel);
+		request.getSession().removeAttribute("newsImage");
 		
 		return new ModelAndView("cm/news/create");
 	}
@@ -103,7 +106,9 @@ public class NewsController {
 		} else {
 			News news = new News();
 			if (newsViewModel.getSqNumber() != null && !"".equals(newsViewModel.getSqNumber().trim())) {
-				news.setSqNumber(Integer.parseInt(newsViewModel.getSqNumber()));
+				news.setSqNumber(Integer.parseInt(newsViewModel.getSqNumber().trim()));
+			} else {
+				news.setSqNumber(Constants.MAX_SQ_NUMBER);
 			}
 			news.setTitle(newsViewModel.getTitle());
 			news.setSummary(newsViewModel.getSummary());
@@ -224,48 +229,48 @@ public class NewsController {
 		SearchNewsViewModel viewModel = new SearchNewsViewModel();
 		SearchNewsVO searchNewsVO = new SearchNewsVO();
 		Map<String, String> params = new LinkedHashMap<String, String>();
-		if (searchNewsViewModel.getNewsCatalogId() != null && searchNewsViewModel.getNewsCatalogId() >= 0) {
-			searchNewsVO.setNewsCatalogId(searchNewsViewModel.getNewsCatalogId());
-			viewModel.setNewsCatalogId(searchNewsViewModel.getNewsCatalogId());
-			params.put("newsCatalogId", String.valueOf(searchNewsViewModel.getNewsCatalogId()));
+		if (searchNewsViewModel.getsNewsCatalogId() != null && searchNewsViewModel.getsNewsCatalogId() >= 0) {
+			searchNewsVO.setNewsCatalogId(searchNewsViewModel.getsNewsCatalogId());
+			viewModel.setsNewsCatalogId(searchNewsViewModel.getsNewsCatalogId());
+			params.put("sNewsCatalogId", String.valueOf(searchNewsViewModel.getsNewsCatalogId()));
 		}
-		if (searchNewsViewModel.getNewsStatus() != null && searchNewsViewModel.getNewsStatus() >= 0) {
-			searchNewsVO.setNewsStatus(searchNewsViewModel.getNewsStatus());
-			viewModel.setNewsStatus(searchNewsViewModel.getNewsStatus());
-			params.put("newsStatus", String.valueOf(searchNewsViewModel.getNewsStatus()));
+		if (searchNewsViewModel.getsNewsStatus() != null && searchNewsViewModel.getsNewsStatus() >= 0) {
+			searchNewsVO.setNewsStatus(searchNewsViewModel.getsNewsStatus());
+			viewModel.setsNewsStatus(searchNewsViewModel.getsNewsStatus());
+			params.put("sNewsStatus", String.valueOf(searchNewsViewModel.getsNewsStatus()));
 		}
-		if (searchNewsViewModel.getHotNews() != null) {
-			searchNewsVO.setHotNews(searchNewsViewModel.getHotNews());
-			viewModel.setHotNews(searchNewsViewModel.getHotNews());
-			params.put("hotNews", String.valueOf(searchNewsViewModel.getHotNews()));
+		if (searchNewsViewModel.getsHotNews() != null) {
+			searchNewsVO.setHotNews(searchNewsViewModel.getsHotNews());
+			viewModel.setsHotNews(searchNewsViewModel.getsHotNews());
+			params.put("sHotNews", String.valueOf(searchNewsViewModel.getsHotNews()));
 		}
-		if (searchNewsViewModel.getAuthor() != null && !"".equals(searchNewsViewModel.getAuthor().trim())) {
-			searchNewsVO.setAuthor(searchNewsViewModel.getAuthor().trim());
-			viewModel.setAuthor(searchNewsViewModel.getAuthor());
-			params.put("author", searchNewsViewModel.getAuthor());
+		if (searchNewsViewModel.getsAuthor() != null && !"".equals(searchNewsViewModel.getsAuthor().trim())) {
+			searchNewsVO.setAuthor(searchNewsViewModel.getsAuthor().trim());
+			viewModel.setsAuthor(searchNewsViewModel.getsAuthor());
+			params.put("sAuthor", searchNewsViewModel.getsAuthor());
 		}
-		if (searchNewsViewModel.getTitle() != null && !"".equals(searchNewsViewModel.getTitle().trim())) {
-			searchNewsVO.setTitle(searchNewsViewModel.getTitle().trim());
-			viewModel.setTitle(searchNewsViewModel.getTitle());
-			params.put("title", searchNewsViewModel.getTitle());
+		if (searchNewsViewModel.getsTitle() != null && !"".equals(searchNewsViewModel.getsTitle().trim())) {
+			searchNewsVO.setTitle(searchNewsViewModel.getsTitle().trim());
+			viewModel.setsTitle(searchNewsViewModel.getsTitle());
+			params.put("sTitle", searchNewsViewModel.getsTitle());
 		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		if (searchNewsViewModel.getFrom() != null && !"".equals(searchNewsViewModel.getFrom().trim())) {
+		if (searchNewsViewModel.getsFrom() != null && !"".equals(searchNewsViewModel.getsFrom().trim())) {
 			try {
-				Date from = dateFormat.parse(searchNewsViewModel.getFrom().trim());
+				Date from = dateFormat.parse(searchNewsViewModel.getsFrom().trim());
 				searchNewsVO.setFrom(from);
-				viewModel.setFrom(searchNewsViewModel.getFrom());
-				params.put("from", searchNewsViewModel.getFrom());
+				viewModel.setsFrom(searchNewsViewModel.getsFrom());
+				params.put("sFrom", searchNewsViewModel.getsFrom());
 			} catch (Exception ex) {
 				// Ignore this exception
 			}
 		}
-		if (searchNewsViewModel.getTo() != null && !"".equals(searchNewsViewModel.getTo().trim())) {
+		if (searchNewsViewModel.getsTo() != null && !"".equals(searchNewsViewModel.getsTo().trim())) {
 			try {
-				Date to = dateFormat.parse(searchNewsViewModel.getTo().trim());
+				Date to = dateFormat.parse(searchNewsViewModel.getsTo().trim());
 				searchNewsVO.setTo(to);
-				viewModel.setTo(searchNewsViewModel.getTo());
-				params.put("to", searchNewsViewModel.getTo());
+				viewModel.setsTo(searchNewsViewModel.getsTo());
+				params.put("sTo", searchNewsViewModel.getsTo());
 			} catch (Exception ex) {
 			}
 		}
@@ -280,5 +285,68 @@ public class NewsController {
 		model.addAttribute("params", params);
 		
 		return new ModelAndView("cm/news/manage");
+	}
+	
+	@RequiresPermissions(value = {"news:manage", "news:approve"}, logical = Logical.OR)
+	@RequestMapping(value = "/cm/news/update/{id}", method = RequestMethod.GET)
+	public ModelAndView showUpdateNews(@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request) {
+		NewsViewModel newsViewModel = new NewsViewModel();
+		News news = newsBO.fetchNewsById(id);
+		
+		request.getSession().removeAttribute("newsImage");
+		
+		if (news != null) {
+			newsViewModel.setNewsCatalogId(String.valueOf(news.getNewsCatalog().getId()));
+			if (news.getSqNumber() != null && !Constants.MAX_SQ_NUMBER.equals(news.getSqNumber())) {
+				newsViewModel.setSqNumber(String.valueOf(news.getSqNumber()));
+			}
+			newsViewModel.setTitle(news.getTitle());
+			newsViewModel.setSummary(news.getSummary());
+			newsViewModel.setAuthor(news.getAuthor());
+			newsViewModel.setHotNews(news.getHotNews());
+			newsViewModel.setPostedDate(news.getPostedDate());
+			newsViewModel.setContent(news.getNewsContent().getContent());
+			if (news.getImage() != null) {
+				request.getSession().setAttribute("newsImage", new FileMeta(null, null, null, null, news.getImage()));
+			}
+		}
+		model.addAttribute("newsViewModel", newsViewModel);
+		
+		return new ModelAndView("cm/news/update");
+	}
+	
+	@RequiresPermissions(value = {"news:manage", "news:approve"}, logical = Logical.OR)
+	@RequestMapping(value = "/cm/news/update/{id}", method = RequestMethod.POST)
+	public ModelAndView processUpdateNews(@PathVariable("id") Integer id, @Valid NewsViewModel newsViewModel, 
+										BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView("cm/news/update");
+		} else {
+			News news = new News();
+			news.setId(id);
+			news.setTitle(newsViewModel.getTitle());
+			news.setSummary(newsViewModel.getSummary());
+			news.setAuthor(newsViewModel.getAuthor());
+			news.setPostedDate(newsViewModel.getPostedDate());
+			news.setHotNews(newsViewModel.getHotNews());
+			FileMeta fileMeta = (FileMeta) request.getSession().getAttribute("newsImage");
+			if (fileMeta != null) {
+				news.setImage(fileMeta.getPath());
+			}
+			Integer sqNumber = Constants.MAX_SQ_NUMBER;
+			if (newsViewModel.getSqNumber() != null && !"".equals(newsViewModel.getSqNumber().trim())) {
+				sqNumber = Integer.parseInt(newsViewModel.getSqNumber().trim());
+			}
+			news.setSqNumber(sqNumber);
+			
+			System.out.println(newsViewModel.getNewsCatalogId());
+			
+			newsBO.updateNews(news, newsViewModel.getContent(), Integer.parseInt(newsViewModel.getNewsCatalogId()));
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("news.updated.successfully"));
+			
+			String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
+			
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/news/manage" + queryString));
+		}
 	}
 }

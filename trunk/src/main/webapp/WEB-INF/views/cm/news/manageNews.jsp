@@ -31,6 +31,10 @@
 	</div>
 </div>
 <div>
+	<c:if test="${not empty msg}">
+		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
+		<c:remove var="msg" scope="session" />
+	</c:if>
 	<form:form commandName="searchNewsViewModel" method="get" id="searchNewsViewModel">
 		<table class="center" style="width: 90%">
 			<tr>
@@ -38,7 +42,7 @@
 					<span class="lblBlack">Danh mục tin tức</span>
 				</td>
 				<td colspan="3">
-					<form:select path="newsCatalogId" id="newsCatalogId" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="sNewsCatalogId" id="sNewsCatalogId" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn danh mục tin tức ------"></form:option>
 						<form:options items="${newsCatalogs}"/>
 					</form:select>
@@ -49,7 +53,7 @@
 					<span class="lblBlack">Trạng thái tin</span>
 				</td>
 				<td colspan="3">
-					<form:select path="newsStatus" id="newsStatus" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="sNewsStatus" id="sNewsStatus" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn trạng thái tin ------"></form:option>
 						<form:options items="${newsStatuses}"/>
 					</form:select>
@@ -60,7 +64,7 @@
 					<span class="lblBlack">Tin nóng</span>
 				</td>
 				<td colspan="3">
-					<form:checkbox path="hotNews" id="hotNews" />
+					<form:checkbox path="sHotNews" id="sHotNews" />
 				</td>
 			</tr>
 			<tr>
@@ -68,7 +72,7 @@
 					<span class="lblBlack">Tác giả</span>
 				</td>
 				<td colspan="3">
-					<form:input path="author" id="author" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="sAuthor" id="sAuthor" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -76,7 +80,7 @@
 					<span class="lblBlack">Tiêu đề tin</span>
 				</td>
 				<td colspan="3">
-					<form:input path="title" id="title" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="sTitle" id="sTitle" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -89,14 +93,14 @@
 					<span class="lblBlack">Từ ngày </span>
 				</td>
 				<td width="30%">
-					<form:input path="from" id="from" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
+					<form:input path="sFrom" id="sFrom" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
 					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear_1" />
 				</td>
 				<td align="right" width="15%">
 					<span class="lblBlack">Đến ngày </span>
 				</td>
 				<td width="30%">
-					<form:input path="to" id="to" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
+					<form:input path="sTo" id="sTo" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
 					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear_2" />
 				</td>
 			</tr>
