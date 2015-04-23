@@ -2,82 +2,83 @@ package com.catb.web.viewmodel;
 
 public class SearchNewsViewModel {
 	
-	private Integer newsCatalogId;
-	private Integer newsStatus;
-	private Boolean hotNews;
-	private String author;
-	private String title;
-	private String from;
-	private String to;
+	private Integer sNewsCatalogId;
+	private Integer sNewsStatus;
+	private Boolean sHotNews;
+	private String sAuthor;
+	private String sTitle;
+	private String sFrom;
+	private String sTo;
 	
 	public SearchNewsViewModel() {
 		
 	}
 
-	public SearchNewsViewModel(Integer newsCatalogId, Integer newsStatus,
-			Boolean hotNews, String author, String title, String from, String to) {
-		this.newsCatalogId = newsCatalogId;
-		this.newsStatus = newsStatus;
-		this.hotNews = hotNews;
-		this.author = author;
-		this.title = title;
-		this.from = from;
-		this.to = to;
+	public SearchNewsViewModel(Integer sNewsCatalogId, Integer sNewsStatus,
+			Boolean sHotNews, String sAuthor, String sTitle, String sFrom,
+			String sTo) {
+		this.sNewsCatalogId = sNewsCatalogId;
+		this.sNewsStatus = sNewsStatus;
+		this.sHotNews = sHotNews;
+		this.sAuthor = sAuthor;
+		this.sTitle = sTitle;
+		this.sFrom = sFrom;
+		this.sTo = sTo;
 	}
 
-	public Integer getNewsCatalogId() {
-		return newsCatalogId;
+	public Integer getsNewsCatalogId() {
+		return sNewsCatalogId;
 	}
 
-	public void setNewsCatalogId(Integer newsCatalogId) {
-		this.newsCatalogId = newsCatalogId;
+	public void setsNewsCatalogId(Integer sNewsCatalogId) {
+		this.sNewsCatalogId = sNewsCatalogId;
 	}
 
-	public Integer getNewsStatus() {
-		return newsStatus;
+	public Integer getsNewsStatus() {
+		return sNewsStatus;
 	}
 
-	public void setNewsStatus(Integer newsStatus) {
-		this.newsStatus = newsStatus;
+	public void setsNewsStatus(Integer sNewsStatus) {
+		this.sNewsStatus = sNewsStatus;
 	}
 
-	public Boolean getHotNews() {
-		return hotNews;
+	public Boolean getsHotNews() {
+		return sHotNews;
 	}
 
-	public void setHotNews(Boolean hotNews) {
-		this.hotNews = hotNews;
+	public void setsHotNews(Boolean sHotNews) {
+		this.sHotNews = sHotNews;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getsAuthor() {
+		return sAuthor;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setsAuthor(String sAuthor) {
+		this.sAuthor = sAuthor;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getsTitle() {
+		return sTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setsTitle(String sTitle) {
+		this.sTitle = sTitle;
 	}
 
-	public String getFrom() {
-		return from;
+	public String getsFrom() {
+		return sFrom;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setsFrom(String sFrom) {
+		this.sFrom = sFrom;
 	}
 
-	public String getTo() {
-		return to;
+	public String getsTo() {
+		return sTo;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setsTo(String sTo) {
+		this.sTo = sTo;
 	}
 }

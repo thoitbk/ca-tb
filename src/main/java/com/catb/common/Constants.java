@@ -20,6 +20,7 @@ public class Constants {
 	public static String NEWS_IMAGE_PATH;
 	// Number of page links generated
 	public static Integer NUMBER_OF_PAGE_LINK;
+	public static final Integer MAX_SQ_NUMBER = 2000000000;
 	
 	public static void load() {
 		try {

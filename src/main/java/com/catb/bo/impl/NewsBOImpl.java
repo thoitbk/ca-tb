@@ -45,4 +45,40 @@ public class NewsBOImpl implements NewsBO {
 	public Long countNews(SearchNewsVO searchNewsVO) {
 		return newsDAO.countNews(searchNewsVO);
 	}
+	
+	@Transactional
+	public News getNewsById(Integer id) {
+		return newsDAO.getNewsById(id);
+	}
+	
+	@Transactional
+	public News fetchNewsById(Integer id) {
+		return newsDAO.fetchNewsById(id);
+	}
+	
+	@Transactional
+	public void updateNews(News news, String content, Integer newsCatalogId) {
+		News n = newsDAO.getNewsById(news.getId());
+		if (n != null) {
+			n.setAuthor(news.getAuthor());
+			n.setHotNews(news.getHotNews());
+			n.setImage(news.getImage());
+			n.setPostedDate(news.getPostedDate());
+			n.setSqNumber(news.getSqNumber());
+			n.setSummary(news.getSummary());
+			n.setTitle(news.getTitle());
+			
+			NewsCatalog newsCatalog = newsCatalogDAO.getNewsCatalogById(newsCatalogId);
+			n.setNewsCatalog(newsCatalog);
+			
+			newsDAO.updateNews(n);
+			
+			NewsContent newsContent = n.getNewsContent();
+			if (newsContent != null) {
+				newsContent.setContent(content);
+				
+				newsDAO.updateNewsContent(newsContent);
+			}
+		}
+	}
 }

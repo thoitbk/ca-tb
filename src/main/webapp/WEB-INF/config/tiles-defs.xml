@@ -94,4 +94,8 @@
 	<definition name="cm/news/manage" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/news/manageNews.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/news/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/news/updateNews.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

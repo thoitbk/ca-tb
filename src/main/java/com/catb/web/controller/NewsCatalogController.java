@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.catb.bo.NewsCatalogBO;
+import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.NewsCatalog;
 import com.catb.web.viewmodel.NewsCatalogViewModel;
@@ -124,7 +125,11 @@ public class NewsCatalogController {
 			
 			newsCatalog.setName(newsCatalogViewModel.getName());
 			newsCatalog.setUrl(newsCatalogViewModel.getUrl());
-			newsCatalog.setSqNumber(Integer.parseInt(newsCatalogViewModel.getSqNumber()));
+			if (newsCatalogViewModel.getSqNumber() != null && !"".equals(newsCatalogViewModel.getSqNumber().trim())) {
+				newsCatalog.setSqNumber(Integer.parseInt(newsCatalogViewModel.getSqNumber().trim()));
+			} else {
+				newsCatalog.setSqNumber(Constants.MAX_SQ_NUMBER);
+			}
 			newsCatalog.setDisplay(newsCatalogViewModel.getDisplay());
 			newsCatalog.setSpecialSite(newsCatalogViewModel.getSpecialSite());
 			
@@ -142,12 +147,13 @@ public class NewsCatalogController {
 		NewsCatalog newsCatalog = newsCatalogBO.getNewsCatalogById(id);
 		NewsCatalogViewModel newsCatalogViewModel = null;
 		if (newsCatalog != null) {
+			String sqNumber = newsCatalog.getSqNumber() != null && !Constants.MAX_SQ_NUMBER.equals(newsCatalog.getSqNumber()) ? String.valueOf(newsCatalog.getSqNumber()) : "";
 			newsCatalogViewModel = new NewsCatalogViewModel(
 											newsCatalog.getDisplayLocation(), 
 											newsCatalog.getParentId(), 
 											newsCatalog.getName(), 
 											newsCatalog.getUrl(), 
-											String.valueOf(newsCatalog.getSqNumber()), 
+											sqNumber, 
 											newsCatalog.getDisplay(), 
 											newsCatalog.getSpecialSite());
 		} else {
@@ -174,10 +180,14 @@ public class NewsCatalogController {
 			
 			return new ModelAndView("cm/newsCatalog/update");
 		} else {
+			Integer sqNumber = Constants.MAX_SQ_NUMBER;
+			if (newsCatalogViewModel.getSqNumber() != null && !"".equals(newsCatalogViewModel.getSqNumber().trim())) {
+				sqNumber = Integer.parseInt(newsCatalogViewModel.getSqNumber().trim());
+			}
+			
 			NewsCatalog newsCatalog = new NewsCatalog(id, 
 									newsCatalogViewModel.getName(), newsCatalogViewModel.getUrl(), 
-									Integer.parseInt(newsCatalogViewModel.getSqNumber()), 
-									newsCatalogViewModel.getDisplay(), newsCatalogViewModel.getSpecialSite(), 
+									sqNumber, newsCatalogViewModel.getDisplay(), newsCatalogViewModel.getSpecialSite(), 
 									newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId(), null);
 			newsCatalogBO.updateNewsCatalog(newsCatalog);
 			
