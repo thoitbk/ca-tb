@@ -358,4 +358,13 @@ public class NewsController {
 		Status status = new Status(Status.OK, "ok");
 		return status;
 	}
+	
+	@RequiresPermissions(value = {"news:manage", "news:approve"}, logical = Logical.OR)
+	@RequestMapping(value = "/cm/news/view/{id}", method = RequestMethod.GET)
+	public ModelAndView viewNews(@PathVariable("id") Integer id, ModelMap model) {
+		News news = newsBO.fetchNewsById(id);
+		model.addAttribute("news", news);
+		
+		return new ModelAndView("cm/news/view");
+	}
 }

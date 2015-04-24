@@ -214,6 +214,13 @@ $(document).ready(function() {
         });
     });
     
+    // View news
+    $('.news_title').click(function(event) {
+    	event.preventDefault();
+    	url = $(this).attr('href');
+    	window.open(url, "_blank", "scrollbars=yes, resizable=yes, top=100, left=100, width=1100, height=600");
+    });
+    
     // ------------------------------- For delete functionalities ----------------------------------
     // select all checkboxs
     $('#selectAll').click(function(event) {

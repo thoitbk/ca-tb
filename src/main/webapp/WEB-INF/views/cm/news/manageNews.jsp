@@ -14,8 +14,8 @@
 
 <script>
 	jQuery(function ($) {
-		$( "#from" ).datepicker();
-		$( "#to" ).datepicker();
+		$( "#sFrom" ).datepicker();
+		$( "#sTo" ).datepicker();
 		$("#clear_1").click(function() {
 			$("#from").val('');
 		})
@@ -130,7 +130,7 @@
 					<input type="checkbox" name="newsId" id="newsId" value="${news.id}" class="checkbox" />
 				</td>
 				<td width="15%"><c:out value="${news.newsCatalog.name}"></c:out></td>
-				<td width="50%"><a href="" class="news_title"><c:out value="${news.title}"></c:out></a></td>
+				<td width="50%"><a href="${ct}/cm/news/view/${news.id}" class="news_title"><c:out value="${news.title}"></c:out></a></td>
 				<td width="10%">
 					<fmt:formatDate var="postedDate" value="${news.postedDate}" pattern="dd/MM/yyyy" />
 					<c:out value="${postedDate}"></c:out>
