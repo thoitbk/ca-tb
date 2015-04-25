@@ -102,4 +102,12 @@
 	<definition name="cm/news/approve" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/news/approveNews.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/linkCatalog/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/other/addLinkCatalog.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/linkCatalog/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/other/updateLinkCatalog.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
