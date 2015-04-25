@@ -27,10 +27,11 @@
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
-		QUẢN TRỊ TIN TỨC
+		DUYỆT TIN
 	</div>
 </div>
 <div>
+	<div id="msg"></div>
 	<c:if test="${not empty msg}">
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
@@ -117,11 +118,13 @@
 			<th width="5%">
 				<input type="checkbox" name="selectAll" id="selectAll">
 			</th>
-			<th width="15%">Tên danh mục</th>
+			<th width="10%">Tên danh mục</th>
 			<th width="60%">Tiêu đề tin</th>
-			<th width="10%">Ngày đăng tin</th>
-			<th width="5%">Tin nóng</th>
+			<th width="7%">Ngày đăng tin</th>
 			<th width="10%">Trạng thái</th>
+			<th width="5%">Tin nóng</th>
+			<th width="5%">Duyệt tin</th>
+			<th width="5%">Từ chối</th>
 			<th>Cập nhật</th>
 		</tr>
 		<c:forEach items="${newses}" var="news">
@@ -129,24 +132,35 @@
 				<td width="5%">
 					<input type="checkbox" name="newsId" id="newsId" value="${news.id}" class="checkbox" />
 				</td>
-				<td width="15%"><c:out value="${news.newsCatalog.name}"></c:out></td>
-				<td width="50%"><a href="${ct}/cm/news/view/${news.id}" class="news_title"><c:out value="${news.title}"></c:out></a></td>
-				<td width="10%">
+				<td width="10%"><c:out value="${news.newsCatalog.name}"></c:out></td>
+				<td width="60%"><a href="${ct}/cm/news/view/${news.id}" class="news_title"><c:out value="${news.title}"></c:out></a></td>
+				<td width="7%">
 					<fmt:formatDate var="postedDate" value="${news.postedDate}" pattern="dd/MM/yyyy" />
 					<c:out value="${postedDate}"></c:out>
 				</td>
-				<td width="5%" style="text-align: center;">
-					<c:if test="${news.hotNews}">
-						<input type="checkbox" checked="checked" disabled="disabled" />
-					</c:if>
-					<c:if test="${!news.hotNews}">
-						<input type="checkbox" disabled="disabled" />
-					</c:if>
-				</td>
-				<td width="10%">
+				<td width="10%" class="statusCol">
 					<c:out value="${newsStatuses[news.status]}"></c:out>
 				</td>
+				<td width="5%" style="text-align: center;">
+					<c:if test="${news.hotNews}">
+						<input type="checkbox" checked="checked" value="${news.id}" class="hotNewsCheckbox" />
+					</c:if>
+					<c:if test="${!news.hotNews}">
+						<input type="checkbox" value="${news.id}" class="hotNewsCheckbox" />
+					</c:if>
+				</td>
+				<td width="5%" style="text-align: center;">
+					<a href="${ct}/cm/news/approve/${news.id}" class="approveNews">
+						<img src="${ct}/resources/images/approve.png" alt="Duyệt tin" title="Duyệt tin" class="approve" />
+					</a>
+				</td>
+				<td width="5%" style="text-align: center;">
+					<a href="${ct}/cm/news/deny/${news.id}" class="denyNews">
+						<img src="${ct}/resources/images/deny.png" alt="Từ chối" title="Từ chối" class="deny" />
+					</a>
+				</td>
 				<td>
+					<c:set target="${params}" property="ap" value="1"></c:set>
 					<a href='<exTag:link link="${ct}/cm/news/update/${news.id}" params="${params}" />'>
 						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
@@ -154,13 +168,14 @@
 			</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="7" style="text-align: right; background-color: #FFF; padding: 0.7em;">
+			<td colspan="9" style="text-align: right; background-color: #FFF; padding: 0.7em;">
 				<exTag:paging pageInfo="${pageInfo}" link="${ct}/cm/news/manage" cssClass="page_link" params="${params}" />
 			</td>
 		</tr>
 	    <tr>
-	    	<td colspan="7" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/news/delete" id="delNews"><img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" /></a>&#8592; Click vào đây để xóa
+	    	<td colspan="9" style="text-align: left; background-color: #FFF; padding: 0.7em;">
+	    		<a href="${ct}/cm/news/approveSelected" id="approveSelectedNews"><img alt="Duyệt tin" src="${ct}/resources/images/approve.png" class="delete" title="Duyệt tin" /></a>&#8592; Click vào đây để duyệt tin đã chọn &nbsp;&nbsp;
+	    		<a href="${ct}/cm/news/denySelected" id="denySelectedNews"><img alt="Từ chối" src="${ct}/resources/images/deny.png" class="delete" title="Từ chối" /></a>&#8592; Click vào đây để từ chối tin đã chọn
 	    	</td>
 	    </tr>
 	</table>

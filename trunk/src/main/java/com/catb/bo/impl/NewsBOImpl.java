@@ -12,6 +12,7 @@ import com.catb.dao.NewsDAO;
 import com.catb.model.News;
 import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
+import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
 
 @Service
@@ -88,6 +89,33 @@ public class NewsBOImpl implements NewsBO {
 			for (Integer id : ids) {
 				newsDAO.deleteNews(id);
 			}
+		}
+	}
+	
+	@Transactional
+	public void updateNewsStatus(NewsStatus newsStatus, Integer newsId) {
+		News news = newsDAO.getNewsById(newsId);
+		if (news != null) {
+			news.setStatus(newsStatus.getStatus());
+			newsDAO.updateNews(news);
+		}
+	}
+	
+	@Transactional
+	public void updateNewsesStatus(NewsStatus newsStatus, Integer[] newsIds) {
+		if (newsIds != null && newsIds.length > 0) {
+			for (Integer newsId : newsIds) {
+				updateNewsStatus(newsStatus, newsId);
+			}
+		}
+	}
+	
+	@Transactional
+	public void updateHotNews(Boolean hotNews, Integer newsId) {
+		News news = newsDAO.getNewsById(newsId);
+		if (news != null) {
+			news.setHotNews(hotNews);
+			newsDAO.updateNews(news);
 		}
 	}
 }

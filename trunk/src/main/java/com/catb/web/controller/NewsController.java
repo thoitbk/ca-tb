@@ -227,6 +227,23 @@ public class NewsController {
 						SearchNewsViewModel searchNewsViewModel,
 						@RequestParam(value = "p", defaultValue = "1", required = false) Integer page,
 						ModelMap model, HttpServletRequest request) {
+		handleSearchNews(searchNewsViewModel, model, request, page);
+		
+		return new ModelAndView("cm/news/manage");
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/approve", method = RequestMethod.GET)
+	public ModelAndView showApproveNews(
+			SearchNewsViewModel searchNewsViewModel,
+			@RequestParam(value = "p", defaultValue = "1", required = false) Integer page,
+			ModelMap model, HttpServletRequest request) {
+		handleSearchNews(searchNewsViewModel, model, request, page);
+		
+		return new ModelAndView("cm/news/approve");
+	}
+	
+	private void handleSearchNews(SearchNewsViewModel searchNewsViewModel, ModelMap model, HttpServletRequest request, Integer page) {
 		SearchNewsViewModel viewModel = new SearchNewsViewModel();
 		SearchNewsVO searchNewsVO = new SearchNewsVO();
 		Map<String, String> params = new LinkedHashMap<String, String>();
@@ -284,8 +301,6 @@ public class NewsController {
 		model.addAttribute("newses", newses);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("params", params);
-		
-		return new ModelAndView("cm/news/manage");
 	}
 	
 	@RequiresPermissions(value = {"news:manage", "news:approve"}, logical = Logical.OR)
@@ -345,7 +360,10 @@ public class NewsController {
 			
 			String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
 			
-			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/news/manage" + queryString));
+			String ap = request.getParameter("ap");
+			String redirectUrl = ap != null && "1".equals(ap) ? "/cm/news/approve" : "/cm/news/manage";
+			
+			return new ModelAndView(new RedirectView(request.getContextPath() + redirectUrl + queryString));
 		}
 	}
 	
@@ -366,5 +384,63 @@ public class NewsController {
 		model.addAttribute("news", news);
 		
 		return new ModelAndView("cm/news/view");
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/approve/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Status approveNews(@PathVariable("id") Integer id) {
+		newsBO.updateNewsStatus(NewsStatus.APPROVED, id);
+		
+		Status status = new Status(Status.OK, PropertiesUtil.getProperty("news.approved.successfully"));
+		return status;
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/deny/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Status denyNews(@PathVariable("id") Integer id) {
+		newsBO.updateNewsStatus(NewsStatus.DENIED, id);
+		
+		Status status = new Status(Status.OK, PropertiesUtil.getProperty("news.denied.successfully"));
+		return status;
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/approveSelected", method = RequestMethod.POST)
+	@ResponseBody
+	public Status approveNewses(@RequestParam("ids") Integer[] ids, HttpServletRequest request) {
+		newsBO.updateNewsesStatus(NewsStatus.APPROVED, ids);
+		
+		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newses.approved.successfully"));
+		
+		Status status = new Status(Status.OK, "ok");
+		return status;
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/denySelected", method = RequestMethod.POST)
+	@ResponseBody
+	public Status denyNewses(@RequestParam("ids") Integer[] ids, HttpServletRequest request) {
+		newsBO.updateNewsesStatus(NewsStatus.DENIED, ids);
+		
+		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newses.denied.successfully"));
+		
+		Status status = new Status(Status.OK, "ok");
+		return status;
+	}
+	
+	@RequiresPermissions(value = {"news:approve"})
+	@RequestMapping(value = "/cm/news/updateHotNews", method = RequestMethod.POST)
+	@ResponseBody
+	public Status updateHotNews(
+			@RequestParam(value = "hot", required = false, defaultValue = "false") Boolean isHotNews, 
+			@RequestParam(value = "id", required = true) Integer newsId, HttpServletRequest request) {
+		newsBO.updateHotNews(isHotNews, newsId);
+		
+		request.getSession().setAttribute("msg", PropertiesUtil.getProperty("hotNews.updated.successfully"));
+		
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 }
