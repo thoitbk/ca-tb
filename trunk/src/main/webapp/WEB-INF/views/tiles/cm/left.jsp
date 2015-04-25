@@ -155,7 +155,7 @@
 					<shiro:hasPermission name="link:manage">
 						<li id="other_1" class="${f:getMenuClass(menuItemId, 'other_1', 'selected_subitem')}">
 							<img src="${ct}/resources/images/add_news.gif" class="bullet_menu" />
-							<a href="${ct}/cm/link/add">Quản trị liên kết</a>
+							<a href="${ct}/cm/linkCatalog/add">Quản trị liên kết</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="ad:manage">
