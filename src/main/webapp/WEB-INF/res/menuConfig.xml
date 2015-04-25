@@ -6,6 +6,11 @@
 		</menuItem>
 		<menuItem id="info_2">
 			<link>/cm/news/manage</link>
+			<link>/cm/news/update</link>
+		</menuItem>
+		<menuItem id="info_3">
+			<link>/cm/news/approve</link>
+			<link>/cm/news/update</link>
 		</menuItem>
 		<menuItem id="info_4">
 			<link>/cm/newsCatalog/add</link>

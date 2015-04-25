@@ -214,6 +214,187 @@ $(document).ready(function() {
         });
     });
     
+    // Update single news status
+    var timer = null;
+    $('.approveNews').click(function(event) {
+    	event.preventDefault();
+    	url = $(this).attr('href');
+    	if (!confirm('Bạn có chắc chắn muốn duyệt tin này ?')) {
+    		return;
+    	}
+    	clearTimer();
+        var statusCol = $(this).parent().parent().find('td.statusCol');
+        var successMsg = 'Tin đã duyệt';
+        
+    	postForApproveOrDeny(url, statusCol, successMsg);
+    });
+    
+    $('.denyNews').click(function(event) {
+    	event.preventDefault();
+    	url = $(this).attr('href');
+    	if (!confirm('Bạn có chắc chắn muốn từ chối tin này ?')) {
+    		return;
+    	}
+    	clearTimer();
+        var statusCol = $(this).parent().parent().find('td.statusCol');
+        var successMsg = 'Tin bị từ chối';
+        
+    	postForApproveOrDeny(url, statusCol, successMsg);
+    });
+    
+    function clearTimer() {
+    	clearTimeout(timer);
+        timer = null;
+    }
+    
+    function postForApproveOrDeny(url, statusCol, successMsg) {
+    	$('body').addClass("loading");
+    	$.ajax({
+            type : "POST",
+            url : url,
+            dataType: "json",
+            success : function(response) {
+            	$('body').removeClass("loading");
+            	var statusCode = response.code;
+	        	switch (statusCode) {
+	        	case 1:
+	        		handleApproveOrDenySuccess(statusCol, response.msg, successMsg);
+	        		break;
+	        	case 2:
+	        		window.location.href = errorUrl;
+	        		break;
+	        	case 3:
+	        		window.location.href = unauthenticatedUrl;
+	        		break;
+	        	case 4:
+	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	default:
+	        		window.location.href = notOkUrl;
+	        		break;
+	        	}
+            },
+            error : function(response) {
+            	var errorString = 'Đã có lỗi xảy ra';
+            	handlApproveOrDenyError(errorString);
+            }
+        });
+    }
+    
+    function handleApproveOrDenySuccess(statusCol, responseString, statusString) {
+    	if (statusCol != null) {
+			statusCol.text(statusString);
+		}
+		$('#msg').empty();
+		var append = '<div id="alert" class="alert-box success">' + responseString + '</div>';
+		$('#msg').append(append).hide().fadeIn();
+		timer = setTimeout(function() {
+			$('#msg').fadeOut(300, function() { $(this).empty(); });
+		}, 5000);
+    }
+    
+    function handlApproveOrDenyError(errorString) {
+    	$('#msg').empty();
+    	$('body').removeClass("loading");
+    	var append = '<div id="alert" class="alert-box success">' + errorString + '</div>';
+    	$('#msg').append(append);
+    	timer = setTimeout(function() {
+			$('#msg').fadeOut(300, function() { $(this).empty(); });
+		}, 5000);
+    }
+    
+    // Update multiple news statuses
+    $('#approveSelectedNews').click(function(event) {
+    	event.preventDefault();
+    	url = $(this).attr('href');
+    	reloadUrl = window.location.href;
+    	var warnMsg = 'Bạn có chắc chắn muốn duyệt các tin này ?';
+    	
+    	postForApproveOrDenySelected(url, reloadUrl, warnMsg);
+    });
+    
+    $('#denySelectedNews').click(function(event) {
+    	event.preventDefault();
+    	url = $(this).attr('href');
+    	reloadUrl = window.location.href;
+    	var warnMsg = 'Bạn có chắc chắn muốn từ chối các tin này ?';
+    	
+    	postForApproveOrDenySelected(url, reloadUrl, warnMsg);
+    });
+    
+    function postForApproveOrDenySelected(postUrl, reloadUrl, warnMsg) {
+        var _ids = $(".checkbox:checked").map(function(){
+            return $(this).val();
+        }).get();
+        if (_ids.length == 0) {
+            alert('Chưa chọn mục nào');
+            return;
+        }
+        if (!confirm(warnMsg)) {
+            return;
+        }
+        
+        $('body').addClass("loading");
+        
+        $.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+                ids: _ids.toString()
+            },
+            success : function(response) {
+            	reload(response.code, reloadUrl);
+            },
+            error : function(response) {
+            	reload(response.code, reloadUrl);
+            }
+        });
+    }
+    
+    $('.hotNewsCheckbox').change(function() {
+    	var _hotNews = false;
+    	var confirmStr = '';
+    	if ($(this).is(':checked')) {
+    		_hotNews = true;
+    		confirmStr = 'Bạn có chắc chắn muốn cập nhật thành tin nóng ?';
+    	} else {
+    		_hotNews = false;
+    		confirmStr = 'Bạn có chắc chắn muốn bỏ tin nóng ?';
+    	}
+    	
+    	if (!confirm(confirmStr)) {
+    		if (!_hotNews) {
+    			$(this).attr('checked', 'checked');
+    		} else {
+    			$(this).removeAttr('checked');
+    		}
+    		return;
+    	}
+    	
+    	var _id = $(this).val();
+    	var postUrl = cp + '/cm/news/updateHotNews';
+    	var reloadUrl = window.location.href;
+    	
+    	$('body').addClass("loading");
+    	
+    	$.ajax({
+            type : "POST",
+            url : postUrl,
+            dataType: "json",
+            data : {
+                id: _id,
+                hot: _hotNews
+            },
+            success : function(response) {
+            	reload(response.code, reloadUrl);
+            },
+            error : function(response) {
+            	reload(response.code, reloadUrl);
+            }
+        });
+    });
+    
     // View news
     $('.news_title').click(function(event) {
     	event.preventDefault();
@@ -291,7 +472,7 @@ $(document).ready(function() {
     $("#delNews").click(function(event){
         event.preventDefault();
         postUrl = $('#delNews').attr('href');
-        reloadUrl = cp + '/cm/news/manage';
+        reloadUrl = window.location.href;
         post(postUrl, reloadUrl);
     });
     
