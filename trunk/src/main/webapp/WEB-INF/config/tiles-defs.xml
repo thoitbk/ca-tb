@@ -110,4 +110,8 @@
 	<definition name="cm/linkCatalog/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/other/updateLinkCatalog.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/notExistedResource" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/share/notExistedResource.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

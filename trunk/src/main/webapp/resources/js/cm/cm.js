@@ -11,6 +11,7 @@ $(document).ready(function() {
     var errorUrl = cp + '/cm/internalError';
     var unauthenticatedUrl = cp + '/cm/login';
     var unauthorizedUrl = cp + '/cm/unauthorized';
+    var notExistedUrl = cp + '/cm/notExistedResource';
     var notOkUrl = cp + '/cm/requestError';
     
     $('#ngay').text(getDate());
@@ -268,6 +269,9 @@ $(document).ready(function() {
 	        		break;
 	        	case 4:
 	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	case 5:
+	        		window.location.href = notExistedUrl;
 	        		break;
 	        	default:
 	        		window.location.href = notOkUrl;
@@ -529,6 +533,9 @@ $(document).ready(function() {
     		break;
     	case 4:
     		_reload = unauthorizedUrl;
+    		break;
+    	case 5:
+    		_reload = notExistedUrl;
     		break;
     	default:
     		_reload = notOkUrl;
