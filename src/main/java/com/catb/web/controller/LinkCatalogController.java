@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,5 +81,55 @@ public class LinkCatalogController {
 		session.setAttribute("msg", PropertiesUtil.getProperty("link.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
 		return status;
+	}
+	
+	@RequiresPermissions(value = {"link:manage"})
+	@RequestMapping(value = "/cm/linkCatalog/update/{id:[\\d]{1,5}}", method = RequestMethod.GET)
+	public ModelAndView showUpdateLinkCatalog(@PathVariable("id") Integer id, ModelMap model) {
+		LinkCatalogViewModel linkCatalogViewModel = new LinkCatalogViewModel();
+		LinkCatalog linkCatalog = linkCatalogBO.getLinkCatalogById(id);
+		if (linkCatalog != null) {
+			linkCatalogViewModel.setTitle(linkCatalog.getTitle());
+			linkCatalogViewModel.setLinkSite(linkCatalog.getLinkSite());
+			if (linkCatalog.getSqNumber() != null && !Constants.MAX_SQ_NUMBER.equals(linkCatalog.getSqNumber())) {
+				linkCatalogViewModel.setSqNumber(String.valueOf(linkCatalog.getSqNumber()));
+			}
+			linkCatalogViewModel.setOpenBlank(linkCatalog.getOpenBlank());
+		}
+		model.addAttribute("linkCatalogViewModel", linkCatalogViewModel);
+		
+		List<LinkCatalog> linkCatalogs = linkCatalogBO.getLinkCatalogs();
+		model.addAttribute("linkCatalogs", linkCatalogs);
+		
+		return new ModelAndView("cm/linkCatalog/update");
+	}
+	
+	@RequiresPermissions(value = {"link:manage"})
+	@RequestMapping(value = "/cm/linkCatalog/update/{id}", method = RequestMethod.POST)
+	public ModelAndView processUpdateLinkCatalog(@PathVariable("id") Integer id, 
+			@Valid LinkCatalogViewModel linkCatalogViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			List<LinkCatalog> linkCatalogs = linkCatalogBO.getLinkCatalogs();
+			model.addAttribute("linkCatalogs", linkCatalogs);
+			
+			return new ModelAndView("cm/linkCatalog/update");
+		} else {
+			LinkCatalog linkCatalog = new LinkCatalog();
+			linkCatalog.setId(id);
+			linkCatalog.setTitle(linkCatalogViewModel.getTitle());
+			linkCatalog.setLinkSite(linkCatalogViewModel.getLinkSite());
+			linkCatalog.setOpenBlank(linkCatalogViewModel.getOpenBlank());
+			Integer sqNumber = Constants.MAX_SQ_NUMBER;
+			if (linkCatalogViewModel.getSqNumber() != null && !"".equals(linkCatalogViewModel.getSqNumber().trim())) {
+				sqNumber = Integer.parseInt(linkCatalogViewModel.getSqNumber().trim());
+			}
+			linkCatalog.setSqNumber(sqNumber);
+			
+			linkCatalogBO.updateLinkCatalog(linkCatalog);
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("link.updated.successfully"));
+			
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/linkCatalog/add"));
+		}
 	}
 }

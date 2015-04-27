@@ -6,7 +6,8 @@ public class Status {
 	public static final Integer INTERNAL_ERROR = 2;
 	public static final Integer UNAUTHENTICATED = 3;
 	public static final Integer UNAUTHORIZED = 4;
-	public static final Integer NOT_OK = 5;
+	public static final Integer NOTEXISTED_RESOURCE = 5;
+	public static final Integer NOT_OK = 6;
 	
 	private Integer code;
 	private String msg;

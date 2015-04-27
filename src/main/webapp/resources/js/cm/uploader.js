@@ -5,6 +5,7 @@ $(function () {
 	var errorUrl = cp + '/cm/internalError';
     var unauthenticatedUrl = cp + '/cm/login';
     var unauthorizedUrl = cp + '/cm/unauthorized';
+    var notExistedUrl = cp + '/cm/notExistedResource';
     var notOkUrl = cp + '/cm/requestError';
     
     $('#newsImageUpload').fileupload({
@@ -81,6 +82,9 @@ $(function () {
 	        		break;
 	        	case 4:
 	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	case 5:
+	        		window.location.href = notExistedUrl;
 	        		break;
 	        	default:
 	        		window.location.href = notOkUrl;
