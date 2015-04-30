@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.catb.common.Constants;
-import com.catb.common.web.ResReader;
+import com.catb.dao.statics.ResReader;
 import com.catb.web.component.MenuLoader;
 
 public class InitListener implements ServletContextListener {

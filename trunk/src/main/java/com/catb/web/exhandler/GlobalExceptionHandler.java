@@ -16,8 +16,8 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.catb.common.web.Util;
 import com.catb.vo.UserInfo;
+import com.catb.web.util.Util;
 import com.catb.web.viewmodel.Status;
 
 @ControllerAdvice

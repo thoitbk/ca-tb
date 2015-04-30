@@ -25,9 +25,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.catb.bo.UserBO;
 import com.catb.common.PropertiesUtil;
-import com.catb.common.web.Util;
 import com.catb.model.User;
 import com.catb.vo.UserInfo;
+import com.catb.web.util.Util;
 
 @Controller
 public class AuthenticationController {
