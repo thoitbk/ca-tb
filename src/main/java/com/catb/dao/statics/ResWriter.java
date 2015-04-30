@@ -10,8 +10,8 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import com.catb.common.CommonInfo;
 import com.catb.common.exception.AppException;
-import com.catb.model.CommonInfo;
 
 public class ResWriter {
 	
