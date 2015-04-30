@@ -1,4 +1,4 @@
-package com.catb.vo;
+package com.catb.web.component;
 
 import java.util.LinkedList;
 import java.util.List;
