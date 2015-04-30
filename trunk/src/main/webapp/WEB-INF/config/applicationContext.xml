@@ -98,6 +98,10 @@
 	<bean id="linkCatalogDAO" class="com.catb.dao.impl.LinkCatalogDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="menuLoader" class="com.catb.common.web.MenuLoader" />
+	<bean id="initListener" class="com.catb.web.listener.InitListener">
+		<property name="menuLoader" ref="menuLoader"></property>
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
