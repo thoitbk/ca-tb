@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.catb.common.CommonInfo;
 import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
-import com.catb.common.web.ResWriter;
+import com.catb.dao.statics.ResWriter;
+import com.catb.model.CommonInfo;
 import com.catb.web.viewmodel.CommonInfoViewModel;
 
 @Controller
