@@ -11,8 +11,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-import com.catb.common.CommonInfo;
 import com.catb.common.exception.AppException;
+import com.catb.model.CommonInfo;
 
 public class ResReader {
 	
