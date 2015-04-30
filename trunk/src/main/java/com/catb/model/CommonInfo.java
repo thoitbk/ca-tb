@@ -1,4 +1,4 @@
-package com.catb.common;
+package com.catb.model;
 
 
 public class CommonInfo {

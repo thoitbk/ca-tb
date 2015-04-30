@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.catb.common.CommonInfo;
+import com.catb.model.CommonInfo;
 
 public class Util {
 
