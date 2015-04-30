@@ -64,4 +64,29 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		
 		query.executeUpdate();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<NewsCatalog> getNewsCatalogs(String displayLocation,
+			Integer parentId, Integer childLevel, Boolean display) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(NewsCatalog.class, "newsCatalog");
+		
+		if (displayLocation != null && !"".equals(displayLocation.trim())) {
+			criteria.add(Restrictions.eq("displayLocation", displayLocation.trim()));
+		}
+		if (parentId != null && parentId >= 0) {
+			criteria.add(Restrictions.eq("parentId", parentId));
+		}
+		if (childLevel != null && childLevel >= 0) {
+			criteria.add(Restrictions.eq("childLevel", childLevel));
+		}
+		if (display != null) {
+			criteria.add(Restrictions.eq("display", display));
+		}
+		
+		criteria.addOrder(Order.asc("sqNumber"));
+		criteria.addOrder(Order.desc("id"));
+		
+		return (List<NewsCatalog>) criteria.list();
+	}
 }
