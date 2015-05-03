@@ -7,12 +7,10 @@
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
-	<title><!-- insert title --></title>
+	<title>${COMMONINFO.webTitle}</title>
 	<!-- css -->
-	<!-- <link href="resources/css/menu.css" rel="stylesheet" type="text/css" /> -->
 	<link href="${ct}/resources/css/news.css" rel="stylesheet" type="text/css" />
 	<link href="${ct}/resources/css/nav.css" rel="stylesheet" type="text/css" />
-	<link href="${ct}/resources/css/default.css" rel="stylesheet" type="text/css" />
 	<!-- javascript -->
 	<script type="text/javascript" src="${ct}/resources/js/menus.js" ></script>
 	<script type="text/javascript" src="${ct}/resources/js/box.js"></script>

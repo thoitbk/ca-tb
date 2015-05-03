@@ -26,6 +26,7 @@ import com.catb.bo.NewsCatalogBO;
 import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.NewsCatalog;
+import com.catb.web.component.MenuLoader;
 import com.catb.web.viewmodel.NewsCatalogViewModel;
 import com.catb.web.viewmodel.Status;
 
@@ -34,6 +35,9 @@ public class NewsCatalogController {
 	
 	@Autowired
 	private NewsCatalogBO newsCatalogBO;
+	
+	@Autowired
+	private MenuLoader menuLoader;
 	
 	@SuppressWarnings("unchecked")
 	@ModelAttribute("displayLocations")
@@ -134,7 +138,7 @@ public class NewsCatalogController {
 			newsCatalog.setSpecialSite(newsCatalogViewModel.getSpecialSite());
 			
 			newsCatalogBO.addNewsCatalog(newsCatalog);
-			
+			request.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.created.successfully"));
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/newsCatalog/add"));
@@ -191,6 +195,7 @@ public class NewsCatalogController {
 									newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId(), null);
 			newsCatalogBO.updateNewsCatalog(newsCatalog);
 			
+			request.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.updated.successfully"));
 			
 			String queryString = String.format("?location=%s&parent=%d", newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
@@ -203,6 +208,7 @@ public class NewsCatalogController {
 	@ResponseBody
 	public Status deleteNewsCatalog(@RequestParam("ids") Integer[] ids, HttpSession session) {
 		newsCatalogBO.deleteNewsCatalogs(ids);
+		session.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
 		session.setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
 		return status;

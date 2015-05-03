@@ -45,9 +45,7 @@
 	</div>
 </div>
 <div id="Media">
-	<script type="text/javascript" src="resources/js/jquery.hoveraccordion.js"></script>
-	<link type="text/css" href="resources/css/jquery.ui.base.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="resources/css/jquery.ad-gallery.css">
+	
 	<script>
 		$(function() {
 			$("#tabs").tabs({
