@@ -1,53 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="exTag" uri="/WEB-INF/tag/extags.tld" %>
 <div ID="Banner">
 	<embed width="100%" height="114" align="middle" src="images/banner.swf" wmode="transparent">
 </div>
-<!-- jsp:include to build menu by referring to @menu controller -->
-<div id="nav" class="menu">
-	<ul class="menuParent">
-		<li class="home">  
-			<a href="home">
-				<span> <img src="resources/images/TopMenu_home.png" border="0px" width="15" height="15" /></span>
-			</a>  
-		</li>
-		<li>  <a href="/Gioi-Thieu/Chung">  
-			<span> Giới thiệu  </span>
-			</a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Tin_Hoat_Dong">
-			<span class="">   Tin hoạt động </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Tin_ANTT">
-			<span class="">   ANTT trong tỉnh </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Huong_Ve_CS">
-			<span class="">   Hướng về CS </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Cai_Cach_HC">
-			<span class="">   Cải cách HC </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Nguoi_Tot">
-			<span class="">   Người tốt việc tốt </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/CD_CM">
-			<span class="">   Chuyên đề-chuyên mục </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Tin_Trong_Nganh">
-			<span class="">   Tin trong ngành </span></a>
-		</li>
-		<li>
-			<a class="" href="/Tin-Tuc/Tin_Trong_Tinh">
-			<span class="">   Tin trong tỉnh </span></a>
-		</li>
-	</ul>
+<div>
+	<exTag:menu menuHierarchy="${MENU_HIERARCHY}" request="${pageContext.request}" menuId="menu-bar" selectedClass="active"/>
 </div>
 <div id="TopInfo">
 	<div id="InfoLeft">

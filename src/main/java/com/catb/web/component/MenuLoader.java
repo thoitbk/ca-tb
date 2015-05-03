@@ -16,7 +16,8 @@ public class MenuLoader {
 	private NewsCatalogBO newsCatalogBO;
 	
 	public List<Menu> loadMenuTree() {
-		List<NewsCatalog> rootNewsCatalogs = newsCatalogBO.getNewsCatalogs(DisplayLocation.TOP.getPosition(), null, 0, true);
+		List<NewsCatalog> rootNewsCatalogs = newsCatalogBO.getNewsCatalogs(
+				DisplayLocation.TOP.getPosition(), null, 0, true);
 		List<Menu> rootMenus = convertNewsCatalogsToMenus(rootNewsCatalogs);
 		if (rootMenus != null && rootMenus.size() > 0) {
 			for (Menu menu : rootMenus) {
@@ -28,8 +29,8 @@ public class MenuLoader {
 	}
 	
 	private void buildMenuTree(Menu menu) {
-		List<NewsCatalog> childNewsCatalogs = newsCatalogBO.getNewsCatalogs(DisplayLocation.TOP.getPosition(), 
-																			menu.getId(), menu.getLevel() + 1, true);
+		List<NewsCatalog> childNewsCatalogs = newsCatalogBO.getNewsCatalogs(
+				DisplayLocation.TOP.getPosition(), menu.getId(), menu.getLevel() + 1, true);
 		List<Menu> childMenus = convertNewsCatalogsToMenus(childNewsCatalogs);
 		if (childMenus == null || childMenus.size() == 0) {
 			return;

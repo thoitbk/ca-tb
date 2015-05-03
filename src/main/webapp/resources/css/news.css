@@ -16,8 +16,7 @@ body
 {
 	background: none repeat scroll 0 0 #d8ecf5;
 	font-family: Arial; 
-	font-size:12pt;
-	width: 1004px;
+	width: 1000px;
 	margin: 0 auto;
 	padding: 0 auto;
 	text-align: left;
@@ -34,7 +33,6 @@ body
 #top
 {
 	margin: auto;
-	overflow:hidden;
 	width: 100%;
 	height:auto;
 	top: 0;
@@ -48,13 +46,14 @@ body
 	overflow:hidden;
 	width: 100%;
 	border-right: 1px solid #dfdfdf;
+	font-size: 12px;
 }
 #mainfooter
 {
 	background: #FFFFFF ;
 	clear: both;
 	color: Black;
-	font-size: 13px;
+	font-size: 12px;
 	line-height:20px;
 	margin: auto;
 	padding-bottom: 20px;
@@ -844,6 +843,7 @@ body
 
 #TopInfo
 {
+	font-size: 12px;
 	background: #9EDCF2;
 	width:100%;
 	height:28px;
@@ -971,6 +971,7 @@ body
 	margin: 0px;
 	padding: 0px;
 	width: 26%;
+	font-size: 12px;
 	float: right;
 	overflow: hidden;
 	

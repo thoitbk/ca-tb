@@ -80,4 +80,30 @@
     		<rtexprvalue>true</rtexprvalue>
     	</attribute>
     </tag>
+    
+    <tag>
+    	<name>menu</name>
+    	<tag-class>com.catb.web.tag.MenuTag</tag-class>
+    	<body-content>empty</body-content>
+    	<attribute>
+    		<name>menuHierarchy</name>
+    		<required>true</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>request</name>
+    		<required>false</required>
+    		<rtexprvalue>true</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>menuId</name>
+    		<required>false</required>
+    		<rtexprvalue>false</rtexprvalue>
+    	</attribute>
+    	<attribute>
+    		<name>selectedClass</name>
+    		<required>false</required>
+    		<rtexprvalue>false</rtexprvalue>
+    	</attribute>
+    </tag>
 </taglib>
