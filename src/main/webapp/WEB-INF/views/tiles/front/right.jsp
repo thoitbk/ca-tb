@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="Dien_thoai_LienHe">
 	<div class="TieuDe">
 		ĐIỆN THOẠI CẦN BIẾT
@@ -60,11 +61,11 @@
 	</script>
 	<div id="tabs">
 		<ul>
-			<li><a href="http://congan.thaibinh.gov.vn/VideoImage/TabVideo.aspx">
+			<li><a href="">
 				Videos
 				</a>
 			</li>
-			<li><a href="http://congan.thaibinh.gov.vn/VideoImage/Tab/TabGaleryImage.aspx">
+			<li><a href="">
 				Ảnh
 				</a>
 			</li>
@@ -72,12 +73,11 @@
 	</div>
 </div>
 <div id="Lien_Ket_Web">
-	<script type='text/javascript'>
-		function customviewRedirect(obj){if(obj.selectedIndex > -1){var url = obj.options[obj.selectedIndex].value;if(url != '')window.open(url);}}
-	</script>
-	<select class='ddl'  onchange='customviewRedirect(this);'>
-		<option value=''>--- Liên kết Website ---</option>
-		<option value='http://google.com.vn/'>Google</option>
+	<select name="linkSites" id="linkSites" class="ddl">
+		<option value="">------ Liên kết website ------</option>
+		<c:forEach items="${LINK_LIST}" var="link">
+			<option value="${link.linkSite}" class="${link.openBlank ? 'blank' : ''}">${link.title}</option>
+		</c:forEach>
 	</select>
 </div>
 <div id="Quang_Cao">

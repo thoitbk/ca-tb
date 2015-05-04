@@ -26,6 +26,7 @@ public class ResWriter {
 			Element rootNode = document.getRootElement();
 			
 			rootNode.getChild("webTitle").setText(commonInfo.getWebTitle());
+			rootNode.getChild("marqueeTitle").setText(commonInfo.getMarqueeTitle());
 			rootNode.getChild("recentNews").setText(commonInfo.getRecentNews().toString());
 			rootNode.getChild("questionAnswer").setText(commonInfo.getQuestionAnswer().toString());
 			rootNode.getChild("tcCatalogs").setText(commonInfo.getTcCatalogs().toString());

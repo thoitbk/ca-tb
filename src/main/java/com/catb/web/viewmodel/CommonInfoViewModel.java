@@ -5,7 +5,9 @@ import org.hibernate.validator.constraints.Range;
 
 public class CommonInfoViewModel {
 	
-private String webTitle;
+	private String webTitle;
+	
+	private String marqueeTitle;
 	
 	@NotBlank
 	@Range(min = 1, max = 100)
@@ -93,7 +95,7 @@ private String webTitle;
 		
 	}
 
-	public CommonInfoViewModel(String webTitle, String recentNews,
+	public CommonInfoViewModel(String webTitle, String marqueeTitle, String recentNews,
 			String questionAnswer, String tcCatalogs, String sameSubjects,
 			String headlines, String headlineCaption, String imageCaption,
 			String videoCaption, String audioCaption, String detailsCaption,
@@ -106,6 +108,7 @@ private String webTitle;
 			String document, String legalDocument, String goTop, String duty,
 			String achievement, String pageSize) {
 		this.webTitle = webTitle;
+		this.marqueeTitle = marqueeTitle;
 		this.recentNews = recentNews;
 		this.questionAnswer = questionAnswer;
 		this.tcCatalogs = tcCatalogs;
@@ -145,6 +148,14 @@ private String webTitle;
 
 	public void setWebTitle(String webTitle) {
 		this.webTitle = webTitle;
+	}
+
+	public String getMarqueeTitle() {
+		return marqueeTitle;
+	}
+
+	public void setMarqueeTitle(String marqueeTitle) {
+		this.marqueeTitle = marqueeTitle;
 	}
 
 	public String getRecentNews() {

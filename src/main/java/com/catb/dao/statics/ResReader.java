@@ -64,6 +64,7 @@ public class ResReader {
 			Element rootNode = document.getRootElement();
 			
 			commonInfo.setWebTitle(rootNode.getChildText("webTitle"));
+			commonInfo.setMarqueeTitle(rootNode.getChildText("marqueeTitle"));
 			commonInfo.setRecentNews(Integer.parseInt(rootNode.getChildText("recentNews")));
 			commonInfo.setQuestionAnswer(Integer.parseInt(rootNode.getChildText("questionAnswer")));
 			commonInfo.setTcCatalogs(Integer.parseInt(rootNode.getChildText("tcCatalogs")));

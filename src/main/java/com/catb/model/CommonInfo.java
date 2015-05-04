@@ -4,6 +4,7 @@ package com.catb.model;
 public class CommonInfo {
 	
 	private String webTitle;
+	private String marqueeTitle;
 	private Integer recentNews;
 	private Integer questionAnswer;
 	private Integer tcCatalogs;
@@ -46,6 +47,14 @@ public class CommonInfo {
 
 	public void setWebTitle(String webTitle) {
 		this.webTitle = webTitle;
+	}
+
+	public String getMarqueeTitle() {
+		return marqueeTitle;
+	}
+
+	public void setMarqueeTitle(String marqueeTitle) {
+		this.marqueeTitle = marqueeTitle;
 	}
 
 	public Integer getRecentNews() {
