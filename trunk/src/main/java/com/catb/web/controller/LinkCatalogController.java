@@ -67,6 +67,7 @@ public class LinkCatalogController {
 			linkCatalog.setOpenBlank(linkCatalogViewModel.getOpenBlank());
 			
 			linkCatalogBO.addLinkCatalog(linkCatalog);
+			request.getServletContext().setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("link.created.successfully"));
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/linkCatalog/add"));
@@ -78,13 +79,14 @@ public class LinkCatalogController {
 	@ResponseBody
 	public Status deleteLinkCatalog(@RequestParam("ids") Integer[] ids, HttpSession session) {
 		linkCatalogBO.deleteLinkCatalogs(ids);
+		session.getServletContext().setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());
 		session.setAttribute("msg", PropertiesUtil.getProperty("link.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
 		return status;
 	}
 	
 	@RequiresPermissions(value = {"link:manage"})
-	@RequestMapping(value = "/cm/linkCatalog/update/{id:[\\d]{1,5}}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cm/linkCatalog/update/{id}", method = RequestMethod.GET)
 	public ModelAndView showUpdateLinkCatalog(@PathVariable("id") Integer id, ModelMap model) {
 		LinkCatalogViewModel linkCatalogViewModel = new LinkCatalogViewModel();
 		LinkCatalog linkCatalog = linkCatalogBO.getLinkCatalogById(id);
@@ -127,6 +129,7 @@ public class LinkCatalogController {
 			linkCatalog.setSqNumber(sqNumber);
 			
 			linkCatalogBO.updateLinkCatalog(linkCatalog);
+			request.getServletContext().setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("link.updated.successfully"));
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/linkCatalog/add"));

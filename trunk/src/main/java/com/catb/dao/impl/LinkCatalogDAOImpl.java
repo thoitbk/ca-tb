@@ -46,7 +46,7 @@ public class LinkCatalogDAOImpl implements LinkCatalogDAO {
 	@SuppressWarnings("unchecked")
 	public List<LinkCatalog> getLinkCatalogs() {
 		Session session = sessionFactory.getCurrentSession();
-		String select = "FROM LinkCatalog";
+		String select = "FROM LinkCatalog ORDER BY sqNumber ASC, id DESC";
 		Query query = session.createQuery(select);
 		
 		return (List<LinkCatalog>) query.list();

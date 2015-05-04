@@ -26,6 +26,14 @@
 			</tr>
 			<tr>
 				<td align="left" width="15%">
+					<span class="lblBlack">Tiêu đề chạy</span>
+				</td>
+				<td colspan="3">
+					<form:input path="marqueeTitle" id="marqueeTitle" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left" width="15%">
 					<span class="lblBlack">Tin mới cập nhật</span>
 				</td>
 				<td width="30%">

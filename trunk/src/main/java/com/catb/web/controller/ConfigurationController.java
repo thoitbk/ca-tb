@@ -28,6 +28,7 @@ public class ConfigurationController {
 		CommonInfoViewModel commonInfoViewModel = new CommonInfoViewModel();
 		
 		commonInfoViewModel.setWebTitle(commonInfo.getWebTitle());
+		commonInfoViewModel.setMarqueeTitle(commonInfo.getMarqueeTitle());
 		commonInfoViewModel.setRecentNews(commonInfo.getRecentNews().toString());
 		commonInfoViewModel.setQuestionAnswer(commonInfo.getQuestionAnswer().toString());
 		commonInfoViewModel.setTcCatalogs(commonInfo.getTcCatalogs().toString());
@@ -77,6 +78,7 @@ public class ConfigurationController {
 			CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
 			
 			commonInfo.setWebTitle(commonInfoViewModel.getWebTitle());
+			commonInfo.setMarqueeTitle(commonInfoViewModel.getMarqueeTitle());
 			commonInfo.setRecentNews(Integer.parseInt(commonInfoViewModel.getRecentNews()));
 			commonInfo.setQuestionAnswer(Integer.parseInt(commonInfoViewModel.getQuestionAnswer()));
 			commonInfo.setTcCatalogs(Integer.parseInt(commonInfoViewModel.getTcCatalogs()));
