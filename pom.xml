@@ -16,6 +16,12 @@
 			<id>JBoss repository</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
+		<repository>
+		   <id>terracotta-releases</id>
+		   <url>http://www.terracotta.org/download/reflector/releases</url>
+		   <releases><enabled>true</enabled></releases>
+		   <snapshots><enabled>false</enabled></snapshots>
+		</repository>
 	</repositories>
 
 	<properties>
@@ -36,6 +42,7 @@
 		<jackson.version>1.9.13</jackson.version>
 		<jdom.version>1.1</jdom.version>
 		<commons.configuration.version>1.6</commons.configuration.version>
+		<ehcache.version>2.6.9</ehcache.version>
 	</properties>
 
 	<dependencies>
@@ -241,6 +248,18 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
+		</dependency>
+		
+		<!-- ehcache & ehcache-hibernate -->
+		<dependency>
+		   <groupId>net.sf.ehcache</groupId>
+		   <artifactId>ehcache-core</artifactId>
+		   <version>${ehcache.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-ehcache</artifactId>
+		  <version>${hibernate.version}</version>
 		</dependency>
 	</dependencies>
 </project>

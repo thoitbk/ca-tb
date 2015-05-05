@@ -1,4 +1,5 @@
-<ehcache>
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="shiroCache">
     <diskStore path="D://shiroCache"/>
     <cache name="authRealmCache.authorizationCache"
           maxElementsInMemory="1000"

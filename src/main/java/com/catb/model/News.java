@@ -17,9 +17,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "news")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class News implements Serializable {
 	
 	@Id

@@ -443,4 +443,14 @@ public class NewsController {
 		Status status = new Status(Status.OK, "ok");
 		return status;
 	}
+	
+	@RequestMapping(value = "/cm/news/{id}", method = RequestMethod.GET)
+	public ModelAndView getNewsById(@PathVariable("id") Integer id) {
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < 50000; i++) {
+			newsBO.getNewsById(id);
+		}
+		System.out.println(System.currentTimeMillis() - start);
+		return null;
+	}
 }
