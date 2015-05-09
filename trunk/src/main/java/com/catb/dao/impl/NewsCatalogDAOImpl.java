@@ -89,4 +89,20 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		
 		return (List<NewsCatalog>) criteria.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<NewsCatalog> getNewsCatalogs(Boolean display, Boolean specialSite) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT c FROM NewsCatalog c " + 
+						"WHERE c.display = :display AND c.specialSite = :specialSite";
+		
+		Query query = session.createQuery(select);
+		query.setParameter("display", display);
+		query.setParameter("specialSite", specialSite);
+		
+		query.setCacheable(true);
+		query.setCacheRegion("query.specialSites");
+		
+		return (List<NewsCatalog>) query.list();
+	}
 }

@@ -97,7 +97,7 @@
 				</td>
 				<td colspan="3">
 					<form:input path="postedDate" id="postedDate" maxlength="20" cssClass="textbox" cssStyle="width: 50%" cssErrorClass="textbox_error" />
-					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear" />
+					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear" />
 				</td>
 			</tr>
 			<tr>

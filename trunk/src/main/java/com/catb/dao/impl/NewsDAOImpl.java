@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.catb.dao.NewsDAO;
 import com.catb.model.News;
 import com.catb.model.NewsContent;
+import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
 
 @Repository
@@ -136,5 +137,23 @@ public class NewsDAOImpl implements NewsDAO {
 		if (news != null) {
 			session.delete(news);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<News> getNewsesByNewsCatalogId(Integer newsCatalogId, Integer size) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT n " + 
+					    "FROM News n INNER JOIN n.newsCatalog c " + 
+					    "WHERE n.status = :status AND c.id = :newsCatalogId " + 
+					    "ORDER BY n.sqNumber ASC, n.id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("status", NewsStatus.APPROVED.getStatus());
+		query.setParameter("newsCatalogId", newsCatalogId);
+		query.setMaxResults(size);
+		
+		query.setCacheable(true);
+		query.setCacheRegion("query.NewsesBySpecialSite");
+		
+		return (List<News>) query.list();
 	}
 }

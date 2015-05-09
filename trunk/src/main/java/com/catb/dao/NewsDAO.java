@@ -17,4 +17,5 @@ public interface NewsDAO {
 	public void updateNews(News news);
 	public void updateNewsContent(NewsContent newsContent);
 	public void deleteNews(Integer id);
+	public List<News> getNewsesByNewsCatalogId(Integer newsCatalogId, Integer size);
 }
