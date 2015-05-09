@@ -1,5 +1,6 @@
 package com.catb.bo.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.catb.model.NewsCatalog;
 import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
+import com.catb.vo.SpecialSiteInfo;
 
 @Service
 public class NewsBOImpl implements NewsBO {
@@ -117,5 +119,21 @@ public class NewsBOImpl implements NewsBO {
 			news.setHotNews(hotNews);
 			newsDAO.updateNews(news);
 		}
+	}
+	
+	@Transactional
+	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size) {
+		List<SpecialSiteInfo> specialSiteInfos = new LinkedList<SpecialSiteInfo>();
+		List<NewsCatalog> newsCatalogs = newsCatalogDAO.getNewsCatalogs(true, true);
+		if (newsCatalogs != null && newsCatalogs.size() > 0) {
+			for (NewsCatalog newsCatalog : newsCatalogs) {
+				List<News> newses = newsDAO.getNewsesByNewsCatalogId(newsCatalog.getId(), size);
+				if (newses != null) {
+					specialSiteInfos.add(new SpecialSiteInfo(newsCatalog, newses));
+				}
+			}
+		}
+		
+		return specialSiteInfos;
 	}
 }

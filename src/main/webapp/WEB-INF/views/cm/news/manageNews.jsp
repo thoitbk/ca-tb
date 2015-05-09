@@ -94,14 +94,14 @@
 				</td>
 				<td width="30%">
 					<form:input path="sFrom" id="sFrom" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
-					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear_1" />
+					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear_1" />
 				</td>
 				<td align="right" width="15%">
 					<span class="lblBlack">Đến ngày </span>
 				</td>
 				<td width="30%">
 					<form:input path="sTo" id="sTo" cssClass="textbox" cssStyle="width: 80%;" cssErrorClass="textbox_error" />
-					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle;" alt="Xóa" id="clear_2" />
+					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear_2" />
 				</td>
 			</tr>
 			<tr>

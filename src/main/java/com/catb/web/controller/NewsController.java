@@ -448,7 +448,9 @@ public class NewsController {
 	public ModelAndView getNewsById(@PathVariable("id") Integer id) {
 		long start = System.currentTimeMillis();
 //		for (int i = 0; i < 50000; i++) {
-			newsBO.getNewsById(id);
+			News news = newsBO.getNewsById(id);
+			//NewsContent content = news.getNewsContent();
+			//content.getContent();
 //		}
 		System.out.println(System.currentTimeMillis() - start);
 		return null;
@@ -456,7 +458,7 @@ public class NewsController {
 	
 	@RequestMapping(value = "/cm/news/init", method = RequestMethod.GET)
 	public ModelAndView initCache() {
-		newsBO.getNews(new SearchNewsVO(7, null, true, null, null, null, null), 1, 10);
+		newsBO.getNews(new SearchNewsVO(null, null, null, null, null, null, null), 1, 10);
 		return null;
 	}
 }

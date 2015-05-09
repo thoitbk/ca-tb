@@ -6,6 +6,7 @@ import com.catb.model.News;
 import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
+import com.catb.vo.SpecialSiteInfo;
 
 public interface NewsBO {
 	
@@ -19,4 +20,5 @@ public interface NewsBO {
 	public void updateNewsStatus(NewsStatus newsStatus, Integer newsId);
 	public void updateNewsesStatus(NewsStatus newsStatus, Integer[] newsIds);
 	public void updateHotNews(Boolean hotNews, Integer newsId);
+	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size);
 }
