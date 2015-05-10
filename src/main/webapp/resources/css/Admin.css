@@ -408,7 +408,7 @@
     height: 25px; 
     width: 275px; 
     font-size: 13px; 
-    padding: 4px 4px 4px 4px; 
+    padding-left: 4px;
     border-radius: 4px; 
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px; 
@@ -430,7 +430,7 @@
     height: 25px; 
     width: 275px; 
     font-size: 13px; 
-    padding: 4px 4px 4px 4px; 
+    padding-left: 4px;
     border-radius: 4px; 
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px; 
@@ -473,7 +473,7 @@
     height: 25px; 
     width: 275px; 
     font-size: 13px; 
-    padding: 4px 4px 4px 4px; 
+    padding-left: 4px;
     border-radius: 4px; 
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px; 
@@ -516,7 +516,7 @@
     height: 120px; 
     width: 275px; 
     font-size: 13px; 
-    padding: 4px 4px 4px 4px; 
+    padding-left: 4px;
     border-radius: 4px; 
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px; 

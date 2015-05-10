@@ -62,7 +62,7 @@
 			</tr>
 			<tr>
 				<td align="left" width="15%">
-					<span class="lblBlack">Tin danh mục TC</span>
+					<span class="lblBlack">Số tin từng chuyên trang</span>
 				</td>
 				<td width="30%">
 					<form:input path="tcCatalogs" id="tcCatalogs" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
@@ -156,6 +156,20 @@
 				</td>
 				<td>
 					<form:input path="print" id="print" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left" width="15%">
+					<span class="lblBlack">Tiêu đề xem chi tiết</span>
+				</td>
+				<td width="30%">
+					<form:input path="detailsCaption" id="detailsCaption" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+				<td align="left" width="15%" style="padding-left: 2%;">
+					<span class="lblBlack">Trang chủ</span>
+				</td>
+				<td>
+					<form:input path="homePage" id="homePage" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
