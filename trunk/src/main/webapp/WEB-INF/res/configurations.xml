@@ -11,7 +11,7 @@
 	<imageCaption>Ảnh</imageCaption>
 	<videoCaption>Videos</videoCaption>
 	<audioCaption>Audios</audioCaption>
-	<detailsCaption>Xem chi tiết >></detailsCaption>
+	<detailsCaption>Xem chi tiết</detailsCaption>
 	<administrativeProcedures>Thủ tục hành chính</administrativeProcedures>
 	<administrativeProceduresInstruction>Hướng dẫn thủ tục hành chính</administrativeProceduresInstruction>
 	<views>Số lượt truy cập:</views>
@@ -26,7 +26,7 @@
 	<postedDate>Ngày đăng:</postedDate>
 	<author></author>
 	<print>In bài này</print>
-	<homePage>Trang chủ >></homePage>
+	<homePage>Trang chủ</homePage>
 	<document>Văn bản</document>
 	<legalDocument>Văn bản pháp quy pháp luật</legalDocument>
 	<goTop>Về đầu trang</goTop>

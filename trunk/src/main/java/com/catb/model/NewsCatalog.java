@@ -13,9 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "news_catalog")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class NewsCatalog implements Serializable {
 	
 	@Id
