@@ -136,4 +136,9 @@ public class NewsBOImpl implements NewsBO {
 		
 		return specialSiteInfos;
 	}
+	
+	@Transactional
+	public List<News> getHotNewses(Integer size) {
+		return newsDAO.getHotNewses(size);
+	}
 }

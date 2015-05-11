@@ -7,8 +7,8 @@
 	  										FRONT
          ============================================================================== -->
 	<definition name="home" template="/WEB-INF/views/tiles/front/frontBaseLayout.jsp">
-		<put-attribute name="left_high" value="/WEB-INF/views/front/hightlights.jsp"></put-attribute>
-		<put-attribute name="left_low" value="/WEB-INF/views/front/newsList.jsp"></put-attribute>
+		<put-attribute name="left_high" value="/WEB-INF/views/front/home/hightlights.jsp"></put-attribute>
+		<put-attribute name="left_low" value="/WEB-INF/views/front/home/newsList.jsp"></put-attribute>
 	</definition>
 	
 	

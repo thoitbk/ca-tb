@@ -21,4 +21,5 @@ public interface NewsBO {
 	public void updateNewsesStatus(NewsStatus newsStatus, Integer[] newsIds);
 	public void updateHotNews(Boolean hotNews, Integer newsId);
 	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size);
+	public List<News> getHotNewses(Integer size);
 }

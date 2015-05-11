@@ -25,21 +25,15 @@ public class NewsDAOImpl implements NewsDAO {
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-		System.out.println("init");
-		System.out.println(sessionFactory.getStatistics());
 	}
 	
 	public void addNews(News news) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("add");
-		System.out.println(sessionFactory.getStatistics());
 		session.save(news);
 	}
 
 	public void addNewsContent(NewsContent newsContent) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("add content");
-		System.out.println(sessionFactory.getStatistics());
 		session.save(newsContent);
 	}
 
@@ -97,16 +91,12 @@ public class NewsDAOImpl implements NewsDAO {
 
 	public News getNewsById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("get");
-		System.out.println(sessionFactory.getStatistics());
 		return (News) session.get(News.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public News fetchNewsById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("fetchNewsById");
-		System.out.println(sessionFactory.getStatistics());
 		String select = "SELECT n " + 
 						"FROM News n INNER JOIN FETCH n.newsCatalog INNER JOIN FETCH n.newsContent " + 
 						"WHERE n.id = :id";
@@ -119,8 +109,6 @@ public class NewsDAOImpl implements NewsDAO {
 
 	public void updateNews(News news) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("update");
-		System.out.println(sessionFactory.getStatistics());
 		session.update(news);
 	}
 
@@ -131,8 +119,6 @@ public class NewsDAOImpl implements NewsDAO {
 
 	public void deleteNews(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		System.out.println("delete");
-		System.out.println(sessionFactory.getStatistics());
 		News news = getNewsById(id);
 		if (news != null) {
 			session.delete(news);
@@ -152,7 +138,24 @@ public class NewsDAOImpl implements NewsDAO {
 		query.setMaxResults(size);
 		
 		query.setCacheable(true);
-		query.setCacheRegion("query.NewsesBySpecialSite");
+		query.setCacheRegion("query.newsesBySpecialSite");
+		
+		return (List<News>) query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<News> getHotNewses(Integer size) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT n " + 
+						"FROM News n INNER JOIN FETCH n.newsCatalog " + 
+						"WHERE n.hotNews = :hotNews " + 
+						"ORDER BY n.sqNumber ASC, n.id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("hotNews", true);
+		query.setMaxResults(size);
+		
+//		query.setCacheable(true);
+//		query.setCacheRegion("query.hotNewses");
 		
 		return (List<News>) query.list();
 	}
