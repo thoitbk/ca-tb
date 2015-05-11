@@ -62,8 +62,17 @@
 	
 	<!-- region: query.NewsesBySpecialSite -->
 	<cache 
-		name="query.NewsesBySpecialSite"
+		name="query.newsesBySpecialSite"
 		maxEntriesLocalHeap="5"
+		eternal="false"
+		timeToLiveSeconds="86400">
+		<persistence strategy="localTempSwap"/>
+	</cache>
+	
+	<!-- region: query.hotNewses -->
+	<cache 
+		name="query.hotNewses"
+		maxEntriesLocalHeap="20"
 		eternal="false"
 		timeToLiveSeconds="86400">
 		<persistence strategy="localTempSwap"/>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.catb.bo.NewsBO;
 import com.catb.bo.UserBO;
 import com.catb.model.CommonInfo;
+import com.catb.model.News;
 import com.catb.vo.SpecialSiteInfo;
 
 @Controller
@@ -33,13 +34,19 @@ public class HomeController {
 	public String home(ModelMap model, HttpServletRequest request) {
 		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
 		Integer specialSiteSize = 3;
+		Integer hotNewsSize = 10;
 		if (commonInfo != null && commonInfo.getTcCatalogs() != null) {
 			specialSiteSize = commonInfo.getTcCatalogs();
 		}
+		if (commonInfo != null && commonInfo.getHeadlines() != null) {
+			hotNewsSize = commonInfo.getHeadlines();
+		}
 		
 		List<SpecialSiteInfo> specialSiteInfos = newsBO.getSpecialSiteInfos(specialSiteSize);
-		System.out.println(specialSiteInfos.size());
 		model.addAttribute("specialSiteInfos", specialSiteInfos);
+		
+		List<News> hotNewses = newsBO.getHotNewses(hotNewsSize);
+		model.addAttribute("hotNewses", hotNewses);
 		
 		return "home";
 	}
