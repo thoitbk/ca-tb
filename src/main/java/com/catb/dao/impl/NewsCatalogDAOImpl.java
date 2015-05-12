@@ -68,6 +68,25 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 	@SuppressWarnings("unchecked")
 	public List<NewsCatalog> getNewsCatalogs(String displayLocation,
 			Integer parentId, Integer childLevel, Boolean display) {
+		Criteria criteria = buildCriteria(displayLocation, parentId, childLevel, display);
+		
+		return (List<NewsCatalog>) criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<NewsCatalog> getNewsCatalogs(String displayLocation,
+			Integer parentId, Integer childLevel, Boolean display, Integer size) {
+		Criteria criteria = buildCriteria(displayLocation, parentId, childLevel, display);
+		criteria.setMaxResults(size);
+		
+		criteria.setCacheable(true);
+		criteria.setCacheRegion("query.newsCatalogByLocation");
+		
+		return (List<NewsCatalog>) criteria.list();
+	}
+	
+	private Criteria buildCriteria(String displayLocation,
+			Integer parentId, Integer childLevel, Boolean display) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(NewsCatalog.class, "newsCatalog");
 		
@@ -87,7 +106,7 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		criteria.addOrder(Order.asc("sqNumber"));
 		criteria.addOrder(Order.asc("id"));
 		
-		return (List<NewsCatalog>) criteria.list();
+		return criteria;
 	}
 
 	@SuppressWarnings("unchecked")

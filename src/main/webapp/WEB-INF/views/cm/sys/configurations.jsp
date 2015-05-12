@@ -244,6 +244,20 @@
 			</tr>
 			<tr>
 				<td align="left" width="15%">
+					<span class="lblBlack">Số danh mục trong menu phải trên</span>
+				</td>
+				<td width="30%">
+					<form:input path="rightTopSize" id="rightTopSize" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+				<td align="left" width="15%" style="padding-left: 2%;">
+					<span class="lblBlack">Số tin trong menu phải giữa</span>
+				</td>
+				<td>
+					<form:input path="rightCenterSize" id="rightCenterSize" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left" width="15%">
 					<span class="lblBlack">Phân trang quản trị</span>
 				</td>
 				<td width="30%">

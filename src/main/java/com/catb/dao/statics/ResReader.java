@@ -96,6 +96,8 @@ public class ResReader {
 			commonInfo.setDuty(rootNode.getChildText("duty"));
 			commonInfo.setAchievement(rootNode.getChildText("achievement"));
 			commonInfo.setPageSize(Integer.parseInt(rootNode.getChildText("pageSize")));
+			commonInfo.setRightTopSize(Integer.parseInt(rootNode.getChildText("rightTopSize")));
+			commonInfo.setRightCenterSize(Integer.parseInt(rootNode.getChildText("rightCenterSize")));
 		} catch (Exception ex) {
 			logger.error("Reading commonInfo failed: ", ex);
 			throw new AppException(ex);

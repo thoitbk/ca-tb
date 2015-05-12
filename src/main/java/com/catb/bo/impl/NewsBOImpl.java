@@ -141,4 +141,11 @@ public class NewsBOImpl implements NewsBO {
 	public List<News> getHotNewses(Integer size) {
 		return newsDAO.getHotNewses(size);
 	}
+	
+	@Transactional
+	public List<News> getRightCenterNews(Integer size) {
+		// Lay phan tu dau tien trong co position la rightcenter
+		// Goi getNewsesByNewsCatalogId(phan tu dau tien, size)
+		return null;
+	}
 }

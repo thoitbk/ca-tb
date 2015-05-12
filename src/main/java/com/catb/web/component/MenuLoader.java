@@ -54,7 +54,7 @@ public class MenuLoader {
 		return menus;
 	}
 	
-	enum DisplayLocation {
+	public enum DisplayLocation {
 		TOP("top"), BOTTOM("bottom"), LEFT("left"), RIGHT_TOP("rightTop"), RIGHT_CENTER("rightCenter");
 		
 		private String position;

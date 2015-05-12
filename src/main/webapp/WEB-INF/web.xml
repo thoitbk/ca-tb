@@ -88,6 +88,10 @@
 			<param-name>XMLConfig</param-name>
 			<param-value>/WEB-INF/config/config.xml</param-value>
 		</init-param>
+		<init-param>
+			<param-name>configuration</param-name>
+			<param-value>com.catb.web.config.CKFinderConfiguration</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>

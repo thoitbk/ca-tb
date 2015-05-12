@@ -36,6 +36,8 @@ public class CommonInfo {
 	private String duty;
 	private String achievement;
 	private Integer pageSize;
+	private Integer rightTopSize;
+	private Integer rightCenterSize;
 	
 	public CommonInfo() {
 		
@@ -304,5 +306,21 @@ public class CommonInfo {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public Integer getRightTopSize() {
+		return rightTopSize;
+	}
+
+	public void setRightTopSize(Integer rightTopSize) {
+		this.rightTopSize = rightTopSize;
+	}
+
+	public Integer getRightCenterSize() {
+		return rightCenterSize;
+	}
+
+	public void setRightCenterSize(Integer rightCenterSize) {
+		this.rightCenterSize = rightCenterSize;
 	}
 }

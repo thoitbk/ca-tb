@@ -33,4 +33,6 @@
 	<duty>Chức năng nhiệm vụ</duty>
 	<achievement>Thành tích đã đạt được</achievement>
 	<pageSize>10</pageSize>
+	<rightTopSize>10</rightTopSize>
+	<rightCenterSize>5</rightCenterSize>
 </configurations>
