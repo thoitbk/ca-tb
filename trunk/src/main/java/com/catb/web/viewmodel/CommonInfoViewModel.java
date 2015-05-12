@@ -90,6 +90,14 @@ public class CommonInfoViewModel {
 	@NotBlank
 	@Range(min = 1, max = 100)
 	private String pageSize;
+	
+	@NotBlank
+	@Range(min = 1, max = 100)
+	private String rightTopSize;
+	
+	@NotBlank
+	@Range(min = 1, max = 100)
+	private String rightCenterSize;
 
 	public CommonInfoViewModel() {
 		
@@ -106,7 +114,7 @@ public class CommonInfoViewModel {
 			String newsInSearchResult, String sameSubjectTitle, String today,
 			String postedDate, String author, String print, String homePage,
 			String document, String legalDocument, String goTop, String duty,
-			String achievement, String pageSize) {
+			String achievement, String pageSize, String rightTopSize, String rightCenterSize) {
 		this.webTitle = webTitle;
 		this.marqueeTitle = marqueeTitle;
 		this.recentNews = recentNews;
@@ -140,6 +148,8 @@ public class CommonInfoViewModel {
 		this.duty = duty;
 		this.achievement = achievement;
 		this.pageSize = pageSize;
+		this.rightTopSize = rightCenterSize;
+		this.rightCenterSize = rightCenterSize;
 	}
 
 	public String getWebTitle() {
@@ -405,5 +415,21 @@ public class CommonInfoViewModel {
 
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getRightTopSize() {
+		return rightTopSize;
+	}
+
+	public void setRightTopSize(String rightTopSize) {
+		this.rightTopSize = rightTopSize;
+	}
+
+	public String getRightCenterSize() {
+		return rightCenterSize;
+	}
+
+	public void setRightCenterSize(String rightCenterSize) {
+		this.rightCenterSize = rightCenterSize;
 	}
 }

@@ -117,8 +117,8 @@
 				/cm/** = authc
 				# secure static resources
 				/resources/js/cm/** = authc
-				/ckfinder/** = authc
-				/ckeditor/** = authc
+				# /ckfinder/** = authc
+				# /ckeditor/** = authc
 				
 				/** = anon
 			</value>

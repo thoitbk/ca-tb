@@ -138,7 +138,7 @@ public class NewsDAOImpl implements NewsDAO {
 		query.setMaxResults(size);
 		
 		query.setCacheable(true);
-		query.setCacheRegion("query.newsesBySpecialSite");
+		query.setCacheRegion("query.newsesByNewsCatalogId");
 		
 		return (List<News>) query.list();
 	}

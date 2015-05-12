@@ -22,4 +22,5 @@ public interface NewsBO {
 	public void updateHotNews(Boolean hotNews, Integer newsId);
 	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size);
 	public List<News> getHotNewses(Integer size);
+	public List<News> getRightCenterNews(Integer size);
 }

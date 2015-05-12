@@ -12,4 +12,5 @@ public interface NewsCatalogBO {
 	public void updateNewsCatalog(NewsCatalog newsCatalog);
 	public void deleteNewsCatalogs(Integer[] ids);
 	public List<NewsCatalog> getNewsCatalogs(String displayLocation, Integer parentId, Integer childLevel, Boolean display);
+	public List<NewsCatalog> getNewsCatalogs(String displayLocation, Integer parentId, Integer childLevel, Boolean display, Integer size);
 }

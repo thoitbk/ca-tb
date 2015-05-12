@@ -60,6 +60,8 @@ public class ConfigurationController {
 		commonInfoViewModel.setDuty(commonInfo.getDuty());
 		commonInfoViewModel.setAchievement(commonInfo.getAchievement());
 		commonInfoViewModel.setPageSize(commonInfo.getPageSize().toString());
+		commonInfoViewModel.setRightTopSize(commonInfo.getRightTopSize().toString());
+		commonInfoViewModel.setRightCenterSize(commonInfo.getRightCenterSize().toString());
 		
 		model.addAttribute("commonInfoViewModel", commonInfoViewModel);
 		
@@ -110,6 +112,8 @@ public class ConfigurationController {
 			commonInfo.setDuty(commonInfoViewModel.getDuty());
 			commonInfo.setAchievement(commonInfoViewModel.getAchievement());
 			commonInfo.setPageSize(Integer.parseInt(commonInfoViewModel.getPageSize()));
+			commonInfo.setRightTopSize(Integer.parseInt(commonInfoViewModel.getRightTopSize()));
+			commonInfo.setRightCenterSize(Integer.parseInt(commonInfoViewModel.getRightCenterSize()));
 			
 			ResWriter.writeCommonInfo(commonInfo, request.getServletContext().getRealPath(Constants.COMMONINFO_CONFIG_FILE));
 			

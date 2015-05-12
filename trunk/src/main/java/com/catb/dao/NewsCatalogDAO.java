@@ -13,4 +13,5 @@ public interface NewsCatalogDAO {
 	public void deleteNewsCatalog(Integer id);
 	public List<NewsCatalog> getNewsCatalogs(String displayLocation, Integer parentId, Integer childLevel, Boolean display);
 	public List<NewsCatalog> getNewsCatalogs(Boolean display, Boolean specialSite);
+	public List<NewsCatalog> getNewsCatalogs(String displayLocation, Integer parentId, Integer childLevel, Boolean display, Integer size);
 }

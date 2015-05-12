@@ -58,6 +58,8 @@ public class ResWriter {
 			rootNode.getChild("duty").setText(commonInfo.getDuty());
 			rootNode.getChild("achievement").setText(commonInfo.getAchievement());
 			rootNode.getChild("pageSize").setText(commonInfo.getPageSize().toString());
+			rootNode.getChild("rightTopSize").setText(commonInfo.getRightTopSize().toString());
+			rootNode.getChild("rightCenterSize").setText(commonInfo.getRightCenterSize().toString());
 			
 			XMLOutputter xmlOutput = new XMLOutputter();
 			 
