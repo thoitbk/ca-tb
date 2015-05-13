@@ -17,9 +17,11 @@
 	<div class="TieuDe">Chuyên Mục</div>
 	<div id="menuRight" class="menu">
 		<ul class="main">
-			<li>
-				
-			</li>
+			<c:forEach items="${rightTopNewsCatalogs}" var="rightTopNewsCatalog">
+				<li>
+					<a href="${ct}/${rightTopNewsCatalog.url}"><span>${rightTopNewsCatalog.name}</span></a>
+				</li>
+			</c:forEach>
 		</ul>
 	</div>
 </div>

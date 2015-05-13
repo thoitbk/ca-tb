@@ -1,5 +1,6 @@
 package com.catb.bo.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
 import com.catb.vo.SearchNewsVO;
 import com.catb.vo.SpecialSiteInfo;
+import com.catb.web.component.MenuLoader.DisplayLocation;
 
 @Service
 public class NewsBOImpl implements NewsBO {
@@ -144,8 +146,13 @@ public class NewsBOImpl implements NewsBO {
 	
 	@Transactional
 	public List<News> getRightCenterNews(Integer size) {
-		// Lay phan tu dau tien trong co position la rightcenter
-		// Goi getNewsesByNewsCatalogId(phan tu dau tien, size)
-		return null;
+		List<NewsCatalog> newsCatalogs = newsCatalogDAO.getNewsCatalogs(DisplayLocation.RIGHT_CENTER.getPosition(), null, 0, true, 1);
+		if (newsCatalogs != null && newsCatalogs.size() == 1) {
+			NewsCatalog newsCatalog = newsCatalogs.get(0);
+			List<News> newses = newsDAO.getNewsesByNewsCatalogId(newsCatalog.getId(), size);
+			return newses;
+		}
+		
+		return new ArrayList<News>();
 	}
 }

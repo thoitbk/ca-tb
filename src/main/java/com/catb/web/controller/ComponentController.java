@@ -1,5 +1,6 @@
 package com.catb.web.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.catb.bo.NewsBO;
 import com.catb.bo.NewsCatalogBO;
+import com.catb.common.PropertiesUtil;
 import com.catb.model.CommonInfo;
 import com.catb.model.News;
 import com.catb.model.NewsCatalog;
@@ -39,10 +41,19 @@ public class ComponentController {
 			rightCenterSize = commonInfo.getRightCenterSize();
 		}
 		
-		List<NewsCatalog> rightTopNewsCatalogs = newsCatalogBO.getNewsCatalogs(MenuLoader.DisplayLocation.RIGHT_TOP.getPosition(), null, 0, true, rightTopSize);
+		List<NewsCatalog> rightTopNewsCatalogs = newsCatalogBO.getNewsCatalogs(
+				MenuLoader.DisplayLocation.RIGHT_TOP.getPosition(), null, 0, true, rightTopSize);
+		
+		NewsCatalog comment = new NewsCatalog(PropertiesUtil.getProperty("comment.name"), PropertiesUtil.getProperty("comment.url"));
+		NewsCatalog administrativeProcedures = new NewsCatalog(PropertiesUtil.getProperty("administrativeProcedures.name"), PropertiesUtil.getProperty("administrativeProcedures.url"));
+		NewsCatalog criminalDenouncement = new NewsCatalog(PropertiesUtil.getProperty("criminalDenouncement.name"), PropertiesUtil.getProperty("criminalDenouncement.url"));
+		NewsCatalog document = new NewsCatalog(PropertiesUtil.getProperty("document.name"), PropertiesUtil.getProperty("document.url"));
+		rightTopNewsCatalogs.addAll(Arrays.asList(comment, administrativeProcedures, criminalDenouncement, document));
+		
 		model.addAttribute("rightTopNewsCatalogs", rightTopNewsCatalogs);
 		
-		//List<News> rightCenterNews = newsBO.getNewsByNewsesCatalogId(newsCatalogId, size)
+		List<News> rightCenterNewses = newsBO.getRightCenterNews(rightCenterSize);
+		model.addAttribute("rightCenterNewses", rightCenterNewses);
 		
 		return new ModelAndView("rightBar");
 	}
