@@ -58,6 +58,11 @@ public class NewsCatalog implements Serializable {
 		
 	}
 
+	public NewsCatalog(String name, String url) {
+		this.name = name;
+		this.url = url;
+	}
+
 	public NewsCatalog(Integer id, String name, String url, Integer sqNumber,
 			Boolean display, Boolean specialSite, String displayLocation,
 			Integer parentId, Integer childLevel) {
