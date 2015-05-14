@@ -5,6 +5,7 @@ import java.util.List;
 import com.catb.model.News;
 import com.catb.model.NewsContent;
 import com.catb.model.NewsStatus;
+import com.catb.vo.RightCenterNews;
 import com.catb.vo.SearchNewsVO;
 import com.catb.vo.SpecialSiteInfo;
 
@@ -22,5 +23,5 @@ public interface NewsBO {
 	public void updateHotNews(Boolean hotNews, Integer newsId);
 	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size);
 	public List<News> getHotNewses(Integer size);
-	public List<News> getRightCenterNews(Integer size);
+	public RightCenterNews getRightCenterNews(Integer size);
 }

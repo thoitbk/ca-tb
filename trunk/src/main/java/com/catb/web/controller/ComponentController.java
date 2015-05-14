@@ -16,8 +16,8 @@ import com.catb.bo.NewsBO;
 import com.catb.bo.NewsCatalogBO;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.CommonInfo;
-import com.catb.model.News;
 import com.catb.model.NewsCatalog;
+import com.catb.vo.RightCenterNews;
 import com.catb.web.component.MenuLoader;
 
 @Controller
@@ -52,8 +52,8 @@ public class ComponentController {
 		
 		model.addAttribute("rightTopNewsCatalogs", rightTopNewsCatalogs);
 		
-		List<News> rightCenterNewses = newsBO.getRightCenterNews(rightCenterSize);
-		model.addAttribute("rightCenterNewses", rightCenterNewses);
+		RightCenterNews rightCenterNews = newsBO.getRightCenterNews(rightCenterSize);
+		model.addAttribute("rightCenterNews", rightCenterNews);
 		
 		return new ModelAndView("rightBar");
 	}
