@@ -15,7 +15,10 @@
 		</div>
 	</div>
 	<div id="Tin_Noi_Bat_C_Khac" class="main">
-		<div class='TieuDe'> Các tin nổi bật! </div>
+		<div class='TieuDe'>
+			<img alt="" src="${ct}/resources/images/hot_news.png" style="width: 20px; height: 20px; vertical-align: middle;" />
+			<span style="">Các tin nổi bật!</span>
+		</div>
 		<marquee behavior="scroll" direction="Up" scrolldelay="60" scrollamount="1" onmouseout="this.start()" onmouseover="this.stop()">
 			<ul>
 				<c:forEach items="${hotNewses}" var="hotNews">

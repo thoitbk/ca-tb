@@ -1,46 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div id="Dien_thoai_LienHe">
-	<div class="TieuDe">
-		ĐIỆN THOẠI CẦN BIẾT
-	</div>
-	<div class="main">
-		<ul>
-			<li>
-				Trực ban CA tỉnh: <span>036.3870123</span>
-			</li>
-		</ul>
-	</div>
-</div>
 
+<%@ include file="contact.jsp" %>
 <div id="Chuyen_Muc">
-	<div class="TieuDe">Chuyên Mục</div>
+	<div class="TieuDe">
+		<img alt="" src="${ct}/resources/images/communication.png" style="width: 20px; height: 20px; vertical-align: middle;" />
+		Chuyên Mục
+	</div>
 	<div id="menuRight" class="menu">
 		<ul class="main">
 			<c:forEach items="${rightTopNewsCatalogs}" var="rightTopNewsCatalog">
 				<li>
-					<a href="${ct}/${rightTopNewsCatalog.url}"><span>${rightTopNewsCatalog.name}</span></a>
+					<a href="${ct}/${rightTopNewsCatalog.url}" class="rightTopLink">${rightTopNewsCatalog.name}</a>
 				</li>
 			</c:forEach>
 		</ul>
 	</div>
 </div>
-<div id="Thong_Bao">
-	<div class="TieuDe">
-		THÔNG BÁO CÔNG AN TỈNH
-	</div>
-	<div class="main">
-		<ul>
-			<li>
-				<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[inform]  body=[content]'>
-					<a href=''>inform</a>
-				</span>
-			</li>
-		</ul>
-		<div class="XemChiTiet">
+<c:if test="${rightCenterNews != null}">
+	<div id="Thong_Bao">
+		<div class="TieuDe">
+			<img alt="" src="${ct}/resources/images/common_infor.png" style="width: 20px; height: 20px; vertical-align: middle;" />
+			<c:out value="${rightCenterNews.newsCatalog.name}"></c:out>
+		</div>
+		<div class="main">
+			<ul>
+				<c:forEach items="${rightCenterNews.newses}" var="news">
+					<li>
+						<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${news.title}]  body=[${news.summary}]'>
+							<a href='${ct}/${rightCenterNews.newsCatalog.url}/${news.id}'>${news.title}</a>
+						</span>
+					</li>
+				</c:forEach>
+			</ul>
+			<div class="XemChiTiet">
+			</div>
 		</div>
 	</div>
-</div>
+</c:if>
 <div id="Media">
 	<div id="tabs">
 		<ul>
