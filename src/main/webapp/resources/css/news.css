@@ -1746,22 +1746,6 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	overflow:hidden;
 }
 
-.Tin_Theo_DM_Left
-{
-	padding: auto;
-	margin: auto;
-	float:left;
-	width:49%;
-	overflow:hidden;
-}
-.Tin_Theo_DM_Right
-{
-	padding: auto;
-	margin: auto;
-	float:right;
-	width:49%;
-	overflow:hidden;
-}
 #Tin_Theo_DM .Khung
 {
 	border-top: 1px solid #dfdfdf;
@@ -1805,7 +1789,7 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	width:10px;
 	height:10px;
 	}
-#Tin_Theo_DM .TinTC
+/* #Tin_Theo_DM .TinTC
 {
 	display: block;
 	overflow: hidden;
@@ -1826,16 +1810,16 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 {
 	width: 100px;
 	height:60px;
-}
-#Tin_Theo_DM   p .title, p a:link, p a:visited
+} */
+/* #Tin_Theo_DM   p .title, p a:link, p a:visited
 {
 	color: #000;
 	font-weight:600;
-	padding-left: 10px;
+	padding-left: 5px;
 	text-decoration: none;
 	text-align: justify;
 	margin: 1px 1px 1px 1px;
-}
+} */
 
 #Tin_Theo_DM .XemChiTiet
 {
@@ -2360,18 +2344,6 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	font-size: 13px;
 }
 
-/*
-#tabs {
-	font-size: 12px;
-	font-family: "Verdana", "sans-serif";
-	padding-bottom:16px;
-	margin-bottom:3px;
-}
-#tabs .a
-{
-	text-decoration:none;
-}*/
-
 /*------------------gridView------------------------*/
 .gridView {width:100%; background:#D5D5D5; border-collapse: separate;}
 .gridView th {padding:3px 3px; text-align:center;font-weight:bold;background:url("../images/gridview/grid-bg.png") repeat-x scroll 0 -1071px transparent; color:#021AFD;}
@@ -2762,4 +2734,133 @@ span.star
 	text-decoration: none;
 	color: black;
 	padding-left: 10px;
+}
+/* *************** Hien thi chuyen trang ***************** */
+.news_thumb {
+	width: 150px;
+	height: 90px;
+	border: 1px solid #D0D0D0;
+	float: left;
+	margin-right: 5px;
+	margin-top: 0px;
+	margin-left: 3px;
+	padding: 1px;
+	clear: left;
+}
+
+.main_news_title {
+	line-height: 14px;
+	margin-bottom: 5px;
+	text-align: justify;
+}
+
+#special_sites p .main_news_title, p a:link, p a:visited {
+	color: #333;
+	font-size: 13px;
+	font-weight: 700;
+	margin-bottom: 5px;
+	text-decoration: none;
+	margin: 1px 1px 1px 1px;
+	text-align: justify;
+}
+
+#special_sites .main_news_title a:hover {
+	color: #555;
+}
+
+p.lead {
+	line-height: 14px;
+	font-weight: 400;
+	font-size: 12px;
+	color: #222;
+	text-align: justify;
+}
+
+#special_sites .Khung
+{
+	border-top: 1px solid #dfdfdf;
+	border-left:1px solid #dfdfdf;
+	border-right:1px solid #dfdfdf;
+	font-size: 12px;
+	text-align: left;
+	background: #FFFFFF;
+	padding: 0;
+}
+
+#special_sites .TieuDe
+{
+	background: linear-gradient(180deg, #63B8EE 5%, #167F92 100%) repeat scroll 0% 0% transparent;
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #63B8EE 5%, #167F92 100%);
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto auto;
+}
+#special_sites .TieuDe a
+{
+	list-style:none;
+	text-decoration: none;
+	color:#E7E167;
+}
+#special_sites .TieuDeRight
+{
+	float:right;
+	width:80px;
+	height: 27px;
+	margin-left:-5px;
+}
+
+#special_sites .TieuDe img
+{
+	width:10px;
+	height:10px;
+}
+
+#special_sites
+{
+	padding: auto;
+	margin: auto;
+}
+
+.special_sites
+{
+	padding:0 auto;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+#special_sites .XemChiTiet
+{
+	height: 20px;
+	border-bottom: none;
+	border-top: none;
+}
+#special_sites .XemChiTiet a
+{
+	font-size: 11px;
+	font-style: italic;
+	color: Red;
+	float: right;
+	padding-right: 10px;
+	margin: 1px 1px 1px 1px;
+}
+
+.special_site_left
+{
+	padding: auto;
+	margin: auto;
+	float:left;
+	width:49%;
+	overflow:hidden;
+}
+.special_site_right
+{
+	padding: auto;
+	margin: auto;
+	float:right;
+	width:49%;
+	overflow:hidden;
 }
