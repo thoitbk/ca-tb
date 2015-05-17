@@ -1,62 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<script type="text/javascript" src="${ct}/resources/js/jquery.ellipsis.min.js" ></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.lead').ellipsis({
+			row: 8,
+		    onlyFullWords: true
+		});
+	});
+</script>
+
 <div id="MainDMTin">
 	<div id="Khau_HieuKH">
 		<img src="${ct}/Upload/Galery/Image/14218445_Anh-giao-dien.JPG" />
 	</div>
 	
 	<div id="special_sites">
-		<div class="special_sites">
-			<c:forEach items="${specialSiteInfos}" var="specialSiteInfo" varStatus="s">
-				<c:if test="${s.index % 2 == 0}">
-					<c:set var="leftOrRight" value="special_site_left" scope="request" />
-				</c:if>
-				<c:if test="${s.index % 2 == 1}">
-					<c:set var="leftOrRight" value="special_site_right" scope="request" />
-				</c:if>
-				<div class="${leftOrRight}">
-					<div class="TieuDe">
-						<div class="TieuDe_dau"></div>
-						<div class="TieuDe_ND">
-							<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
+		<c:forEach begin="0" end="${fn:length(specialSiteInfos) - 1}" step="2" var="index">
+			<div class="special_sites">
+				<c:if test="${index < fn:length(specialSiteInfos)}">
+					<c:set var="specialSiteInfo" value="${specialSiteInfos[index]}" scope="request"></c:set>
+					<div class="special_site_left">
+						<div class="TieuDe">
+							<div class="TieuDe_dau"></div>
+							<div class="TieuDe_ND">
+								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
+							</div>
+							<div class="TieuDe_Cuoi"></div>
 						</div>
-						<div class="TieuDe_Cuoi"></div>
-					</div>
-					<div class="Khung">
-						<c:forEach items="${specialSiteInfo.newses}" var="news" varStatus="status">
-							<c:if test="${status.index == 0}">
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
-									<img class='news_thumb' src='${news.image}' alt="Ảnh" />
-								</a>
-								<p class="main_news_title">
-									<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
-								</p>
-								<p class="lead">
-									<c:out value="${news.summary}"></c:out>
-								</p>
+						<div class="Khung">
+							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
+								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
+								<div class="main_news">
+									<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
+									</a>
+									<p class="main_news_title">
+										<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+									</p>
+									<p class="lead">
+										<c:out value="${news.summary}"></c:out>
+									</p>
+								</div>
 							</c:if>
-							<c:if test="${status.index != 0}">
-								
+							<c:if test="${specialSiteInfo.newses != null and fn:length(specialSiteInfo.newses) gt 1}">
+								<ul class="other_newses">
+									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
+										<li>
+											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
+												<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+											</span>
+										</li>
+									</c:forEach>
+								</ul>
 							</c:if>
-							<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${news.title}]  body=[${news.summary}]'>
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
-									<img class='fl' src='${news.image}' />
-								</a>
-								<p class=''>
-									<fmt:formatDate var="postedDate" value="${news.postedDate}" pattern="dd/MM/yyyy" />
-									<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>${news.title}<br/><span class='ngaythang'><c:out value="${postedDate}"></c:out></span></a>
-								</p>
-							</span>
-							<p> 
-							<p class='desc'> </p>
-						</c:forEach>
-						<div class="XemChiTiet">
-							<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+							<div class="XemChiTiet">
+								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+							</div>	
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:if>
+				<c:if test="${index + 1 < fn:length(specialSiteInfos)}">
+					<c:set var="specialSiteInfo" value="${specialSiteInfos[index + 1]}" scope="request"></c:set>
+					<div class="special_site_right">
+						<div class="TieuDe">
+							<div class="TieuDe_dau"></div>
+							<div class="TieuDe_ND">
+								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
+							</div>
+							<div class="TieuDe_Cuoi"></div>
+						</div>
+						<div class="Khung">
+							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
+								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
+								<div class="main_news">
+									<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
+									</a>
+									<p class="main_news_title">
+										<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+									</p>
+									<p class="lead">
+										<c:out value="${news.summary}"></c:out>
+									</p>
+								</div>
+							</c:if>
+							<c:if test="${specialSiteInfo.newses != null and fn:length(specialSiteInfo.newses) gt 1}">
+								<ul class="other_newses">
+									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
+										<li>
+											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
+												<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+											</span>
+										</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+							<div class="XemChiTiet">
+								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+							</div>	
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</c:forEach>
 	</div>
 </div>
