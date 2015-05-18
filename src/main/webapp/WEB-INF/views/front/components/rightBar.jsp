@@ -34,6 +34,7 @@
 				</c:forEach>
 			</ul>
 			<div class="XemChiTiet">
+				<a href='${ct}/${rightCenterNews.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
 			</div>
 		</div>
 	</div>
