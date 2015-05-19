@@ -63,8 +63,8 @@
 </div>
 <div id="Quang_Cao">
 	<span>
-	<a href=http://thaibinh.xnc.vn/ target='_blank'> <img src="1" width='204'/> </a>
-	<a href=http://thaibinh.gov.vn/ target='_blank'> <img src="1" border='0' width='204'/> </a>
+	<a href=http://thaibinh.xnc.vn/ target='_blank'> <img src="/quangcao1.jpg" width='204'/> </a>
+	<a href=http://thaibinh.gov.vn/ target='_blank'> <img src="/quangcao2.jpg" border='0' width='204'/> </a>
 	</span>
 </div>
 <div id="Luot_Truy_Cap">

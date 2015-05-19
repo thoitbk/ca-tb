@@ -444,21 +444,23 @@ public class NewsController {
 		return status;
 	}
 	
-	@RequestMapping(value = "/cm/news/{id}", method = RequestMethod.GET)
-	public ModelAndView getNewsById(@PathVariable("id") Integer id) {
-		long start = System.currentTimeMillis();
-//		for (int i = 0; i < 50000; i++) {
-			News news = newsBO.getNewsById(id);
-			//NewsContent content = news.getNewsContent();
-			//content.getContent();
-//		}
-		System.out.println(System.currentTimeMillis() - start);
-		return null;
-	}
-	
-	@RequestMapping(value = "/cm/news/init", method = RequestMethod.GET)
-	public ModelAndView initCache() {
-		newsBO.getNews(new SearchNewsVO(null, null, null, null, null, null, null), 1, 10);
-		return null;
+	@RequestMapping(value = "/tin-tuc/{url}", method = RequestMethod.GET)
+	public ModelAndView showNewsesByNewsCatalogUrl(
+			@PathVariable("url") String url, ModelMap model, HttpServletRequest request, 
+			@RequestParam(value = "p", defaultValue = "1", required = false) Integer page) {
+		Integer pageSize = Util.getPageSize(request);
+		List<News> newses = newsBO.getNewsesByNewsCatalogUrl(url, page, pageSize);
+		if (newses == null || newses.size() == 0) {
+			NewsCatalog newsCatalog = newsCatalogBO.getNewsCatalogByUrl(url);
+			if (newsCatalog == null) {
+				return new ModelAndView(new RedirectView(request.getContextPath() + "/notFound"));
+			}
+		}
+		PageInfo pageInfo = new PageInfo(newsBO.countNewsesByNewsCatalogUrl(url), page, pageSize);
+		
+		model.addAttribute("newses", newses);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return new ModelAndView("showNewsesByNewsCatalog");
 	}
 }

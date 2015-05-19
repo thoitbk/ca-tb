@@ -24,4 +24,6 @@ public interface NewsBO {
 	public List<SpecialSiteInfo> getSpecialSiteInfos(Integer size);
 	public List<News> getHotNewses(Integer size);
 	public RightCenterNews getRightCenterNews(Integer size);
+	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize);
+	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl);
 }

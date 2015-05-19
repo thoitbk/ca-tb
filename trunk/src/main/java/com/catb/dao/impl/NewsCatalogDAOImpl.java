@@ -124,4 +124,15 @@ public class NewsCatalogDAOImpl implements NewsCatalogDAO {
 		
 		return (List<NewsCatalog>) query.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public NewsCatalog getNewsCatalogByUrl(String newsCatalogUrl) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT c FROM NewsCatalog c WHERE c.url = :url";
+		Query query = session.createQuery(select);
+		query.setParameter("url", newsCatalogUrl);
+		
+		List<NewsCatalog> newsCatalogs = (List<NewsCatalog>) query.list();
+		return newsCatalogs != null && newsCatalogs.size() > 0 ? newsCatalogs.get(0) : null;
+	}
 }
