@@ -19,4 +19,6 @@ public interface NewsDAO {
 	public void deleteNews(Integer id);
 	public List<News> getNewsesByNewsCatalogId(Integer newsCatalogId, Integer size);
 	public List<News> getHotNewses(Integer size);
+	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize);
+	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl);
 }

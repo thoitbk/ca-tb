@@ -155,4 +155,15 @@ public class NewsBOImpl implements NewsBO {
 		
 		return null;
 	}
+	
+	@Transactional
+	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl,
+			Integer page, Integer pageSize) {
+		return newsDAO.getNewsesByNewsCatalogUrl(newsCatalogUrl, page, pageSize);
+	}
+	
+	@Transactional
+	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl) {
+		return newsDAO.countNewsesByNewsCatalogUrl(newsCatalogUrl);
+	}
 }

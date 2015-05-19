@@ -75,4 +75,9 @@ public class NewsCatalogBOImpl implements NewsCatalogBO {
 			Integer parentId, Integer childLevel, Boolean display, Integer size) {
 		return newsCatalogDAO.getNewsCatalogs(displayLocation, parentId, childLevel, display, size);
 	}
+	
+	@Transactional
+	public NewsCatalog getNewsCatalogByUrl(String newsCatalogUrl) {
+		return newsCatalogDAO.getNewsCatalogByUrl(newsCatalogUrl);
+	}
 }

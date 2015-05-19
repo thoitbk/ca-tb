@@ -148,9 +148,10 @@ public class NewsDAOImpl implements NewsDAO {
 		Session session = sessionFactory.getCurrentSession();
 		String select = "SELECT n " + 
 						"FROM News n INNER JOIN FETCH n.newsCatalog " + 
-						"WHERE n.hotNews = :hotNews " + 
+						"WHERE n.status = :status AND n.hotNews = :hotNews " + 
 						"ORDER BY n.sqNumber ASC, n.id DESC";
 		Query query = session.createQuery(select);
+		query.setParameter("status", NewsStatus.APPROVED.getStatus());
 		query.setParameter("hotNews", true);
 		query.setMaxResults(size);
 		
@@ -158,5 +159,34 @@ public class NewsDAOImpl implements NewsDAO {
 //		query.setCacheRegion("query.hotNewses");
 		
 		return (List<News>) query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT n " + 
+						"FROM News n INNER JOIN FETCH n.newsCatalog c " + 
+						"WHERE n.status = :status AND c.url = :url " + 
+						"ORDER BY n.sqNumber ASC, n.id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("status", NewsStatus.APPROVED.getStatus());
+		query.setParameter("url", newsCatalogUrl);
+		
+		query.setFirstResult((page - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		
+		return (List<News>) query.list();
+	}
+
+	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT COUNT(n) " + 
+						"FROM News n INNER JOIN n.newsCatalog c " + 
+						"WHERE n.status = :status AND c.url = :url";
+		Query query = session.createQuery(select);
+		query.setParameter("status", NewsStatus.APPROVED.getStatus());
+		query.setParameter("url", newsCatalogUrl);
+		
+		return (Long) query.uniqueResult();
 	}
 }
