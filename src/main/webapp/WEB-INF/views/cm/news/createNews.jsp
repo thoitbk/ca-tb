@@ -127,7 +127,7 @@
 					<div id="imageBox">
 						<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left; float: left;">
 							<c:if test="${newsImage != null}">
-								<a href="${ct}/${newsImage.path}" id="thumbImage"><img src="${ct}/${newsImage.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
+								<a href="${newsImage.path}" id="thumbImage"><img src="${newsImage.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
 							</c:if>
 						</div>
 						<div id="removeIcon">

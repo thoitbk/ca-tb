@@ -30,7 +30,7 @@ $(function () {
         done: function (e, data) {
         	$("#uploadedImage").empty();
         	$("#removeIcon").empty();
-        	var imageUrl = cp + '/' + data.result.path;
+        	var imageUrl = cp + data.result.path;
         	var removeIcon = cp + '/resources/images/remove.png';
         	var append1 = '<a href="' + imageUrl + '" id="thumbImage"><img src="' + imageUrl + '" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>';
         	var append2 = '<a href="javascript:void(0);" id="removeNewsImage"><img src="' + removeIcon + '" alt="Xóa ảnh" style="width: 20px; height: 20px" /></a>';

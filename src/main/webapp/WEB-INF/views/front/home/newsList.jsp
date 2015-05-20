@@ -27,7 +27,7 @@
 						<div class="TieuDe">
 							<div class="TieuDe_dau"></div>
 							<div class="TieuDe_ND">
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
+								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
 							</div>
 							<div class="TieuDe_Cuoi"></div>
 						</div>
@@ -35,11 +35,11 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
-									<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
 										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
 									</a>
 									<p class="main_news_title">
-										<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
 									</p>
 									<p class="lead">
 										<c:out value="${news.summary}"></c:out>
@@ -51,14 +51,14 @@
 									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
 										<li>
 											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
-												<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
 											</span>
 										</li>
 									</c:forEach>
 								</ul>
 							</c:if>
 							<div class="XemChiTiet">
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
 							</div>	
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 						<div class="TieuDe">
 							<div class="TieuDe_dau"></div>
 							<div class="TieuDe_ND">
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
+								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${specialSiteInfo.newsCatalog.name}</a>
 							</div>
 							<div class="TieuDe_Cuoi"></div>
 						</div>
@@ -77,11 +77,11 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
-									<a href='${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
 										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
 									</a>
 									<p class="main_news_title">
-										<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
 									</p>
 									<p class="lead">
 										<c:out value="${news.summary}"></c:out>
@@ -93,14 +93,14 @@
 									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
 										<li>
 											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
-												<a href="${ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
 											</span>
 										</li>
 									</c:forEach>
 								</ul>
 							</c:if>
 							<div class="XemChiTiet">
-								<a href='${ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
 							</div>	
 						</div>
 					</div>
