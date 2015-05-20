@@ -448,16 +448,15 @@ public class NewsController {
 	public ModelAndView showNewsesByNewsCatalogUrl(
 			@PathVariable("url") String url, ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "p", defaultValue = "1", required = false) Integer page) {
-		Integer pageSize = Util.getPageSize(request);
-		List<News> newses = newsBO.getNewsesByNewsCatalogUrl(url, page, pageSize);
-		if (newses == null || newses.size() == 0) {
-			NewsCatalog newsCatalog = newsCatalogBO.getNewsCatalogByUrl(url);
-			if (newsCatalog == null) {
-				return new ModelAndView(new RedirectView(request.getContextPath() + "/notFound"));
-			}
+		NewsCatalog newsCatalog = newsCatalogBO.getNewsCatalogByUrl(url);
+		if (newsCatalog == null) {
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/notFound"));
 		}
+		Integer pageSize = Util.getNewsListSize(request);
+		List<News> newses = newsBO.getNewsesByNewsCatalogUrl(url, page, pageSize);
 		PageInfo pageInfo = new PageInfo(newsBO.countNewsesByNewsCatalogUrl(url), page, pageSize);
 		
+		model.addAttribute("newsCatalog", newsCatalog);
 		model.addAttribute("newses", newses);
 		model.addAttribute("pageInfo", pageInfo);
 		

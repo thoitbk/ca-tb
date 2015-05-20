@@ -25,7 +25,7 @@
 		<ul class="bxslider">
 			<c:forEach items="${hotNewses}" var="hotNews">
 				<li>
-					<a href='${ct}/${hotNews.newsCatalog.url}/${hotNews.id}'><img alt="" src="${hotNews.image}" title="${hotNews.title}"></a>
+					<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}'><img alt="" src="${hotNews.image}" title="${hotNews.title}"></a>
 				</li>
 			</c:forEach>
 		</ul>
@@ -39,7 +39,7 @@
 			<ul class="marquee">
 				<c:forEach items="${hotNewses}" var="hotNews">
 					<li>
-						<a href='${ct}/${hotNews.newsCatalog.url}/${hotNews.id}' >
+						<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}' >
 							<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${hotNews.title}]  body=[${hotNews.summary}]'>
 								<c:out value="${hotNews.title}"></c:out> <br/>
 								<fmt:formatDate var="postedDate" value="${hotNews.postedDate}" pattern="dd/MM/yyyy" />
@@ -50,21 +50,6 @@
 				</c:forEach>
 			</ul>
 		</div>
-		<%-- <marquee behavior="scroll" direction="Up" scrolldelay="60" scrollamount="1" onmouseout="this.start()" onmouseover="this.stop()">
-			<ul>
-				<c:forEach items="${hotNewses}" var="hotNews">
-					<li>
-						<a href='${ct}/${hotNews.newsCatalog.url}/${hotNews.id}' >
-							<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${hotNews.title}]  body=[${hotNews.summary}]'>
-								<c:out value="${hotNews.title}"></c:out> <br/>
-								<fmt:formatDate var="postedDate" value="${hotNews.postedDate}" pattern="dd/MM/yyyy" />
-								<span class='ngaythang'>${postedDate}</span>
-							</span>
-						</a>
-					</li>
-				</c:forEach>
-			</ul>
-		</marquee> --%>
 	</div>
 	<div class="space5">
 		&nbsp;

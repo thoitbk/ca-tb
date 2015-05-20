@@ -15,6 +15,12 @@ public class MenuLoader {
 	@Autowired
 	private NewsCatalogBO newsCatalogBO;
 	
+	private String prefix = "";
+	
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
 	public List<Menu> loadMenuTree() {
 		List<NewsCatalog> rootNewsCatalogs = newsCatalogBO.getNewsCatalogs(
 				DisplayLocation.TOP.getPosition(), null, 0, true);
@@ -46,7 +52,7 @@ public class MenuLoader {
 		List<Menu> menus = new LinkedList<Menu>();
 		if (newsCatalogs != null && newsCatalogs.size() > 0) {
 			for (NewsCatalog newsCatalog : newsCatalogs) {
-				menus.add(new Menu(newsCatalog.getId(), newsCatalog.getName(), newsCatalog.getUrl(), 
+				menus.add(new Menu(newsCatalog.getId(), newsCatalog.getName(), prefix + newsCatalog.getUrl(), 
 									newsCatalog.getChildLevel(), newsCatalog.getParentId()));
 			}
 		}

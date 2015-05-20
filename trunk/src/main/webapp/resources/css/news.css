@@ -1457,26 +1457,26 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 }
 #Tin_Trong_DM .DanhMuc
 {
-	text-transform: uppercase;
 	height: 27px;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 30px;
-	color: #f75e34;
-	width: 99%;
-	border-bottom: 1px dashed #ACACAC;
+	color: #931717;
+	width: 100	%;
+	border-bottom: 1px solid #DFDFDF;
 	padding-left: 4px;
+	background: transparent linear-gradient(180deg, #63B8EE 5%, #B9F9F0 100%) repeat scroll 0% 0%;
 }
 #Tin_Trong_DM .DanhMuc a
 {
-	text-transform: uppercase;
 	height: 27px;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 30px;
-	color: #f75e34;
+	color: #931717;
 	width: 90%;
 	padding-left: 0px;
+	text-decoration: none;
 }
 #Tin_Trong_DM .TieuDe
 {
@@ -1487,13 +1487,13 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	text-decoration: none;
 	padding-top: 9px;
 }
-#Tin_Trong_DM .TinCT img
+/* #Tin_Trong_DM .TinCT img
 {
 	width: 110px;
 	float: left;
 	margin-right: 10px;
 	margin-top: 2px;
-}
+} */
 #Tin_Trong_DM .TinCT
 {
 	display: block;
@@ -1502,7 +1502,7 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	width: 98%;
 	text-align: justify;
 	font-weight: normal;
-	border-bottom:1px dashed #A9DA92;
+	border-bottom:1px solid #DFDFDF;
 }
 
 #Tin_Trong_DM .NgayCapNhat
@@ -1876,14 +1876,16 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 {
 	color: #000;
 	font: 12px;
-	border-top: 1px solid #A9DA92;
 	width: 500px;
 	padding: 3px 0px 3px 0px;
 }
+.phantrang_repeater a:hover
+{
+	color:#A605FF;
+}
 .phantrang_repeater sotrang, .phantrang_repeater a
 {
-	font: 12px Verdana;
-	color: Blue;
+	font: 12px Arial;
 	font-weight: bold;
 }
 .tbao-kqua
@@ -2918,4 +2920,47 @@ p.lead {
 .other_newses {
 	position: absolute;
 	top: 200px;
+}
+
+.list_thumb {
+	width: 120px;
+	height: 90px;
+	border: 1px solid #D0D0D0;
+	float: left;
+	margin-left: 3px;
+	padding: 1px;
+	clear: left;
+	margin-right: 10px;
+	margin-top: 2px;
+}
+
+.TinCT .title a {
+	color: #333;
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none;
+	text-align: justify;
+	margin: 0px;
+}
+
+.TinCT .title a:hover {
+	color: #999;
+}
+
+.page_link {
+    color: #A60500;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.selected {
+    color: #000;
+    pointer-events: none;
+    cursor: default;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
 }

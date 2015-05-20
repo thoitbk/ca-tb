@@ -35,4 +35,9 @@ public class Util {
 		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
 		return commonInfo != null && commonInfo.getPageSize() != null ? commonInfo.getPageSize() : 20;
 	}
+	
+	public static Integer getNewsListSize(HttpServletRequest request) {
+		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
+		return commonInfo != null && commonInfo.getNewsInSameCatalog() != null ? commonInfo.getNewsInSameCatalog() : 20;
+	}
 }

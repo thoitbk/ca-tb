@@ -46,8 +46,11 @@ public class ComponentsLoader {
 			
 			logger.info("Save context path to context variable...");
 			context.setAttribute("ct", context.getContextPath());
+			context.setAttribute("news_ct", context.getContextPath() + Constants.NEWS_PREFIX);
 			
 			logger.info("Loading menu hierarchy...");
+			String prefix = context.getContextPath() + Constants.NEWS_PREFIX + "/";
+			menuLoader.setPrefix(prefix);
 			context.setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
 			
 			logger.info("Loading link list");
