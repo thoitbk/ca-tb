@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.catb.web.util.DiacriticsRemover;
+
 public class TagFunction {
 	
 	@SuppressWarnings("unchecked")
@@ -31,5 +33,9 @@ public class TagFunction {
 		}
 		
 		return "";
+	}
+	
+	public static String toFriendlyUrl(String s) {
+		return DiacriticsRemover.toFriendlyUrl(s);
 	}
 }

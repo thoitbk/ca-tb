@@ -3,6 +3,7 @@ package com.catb.bo.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -165,5 +166,16 @@ public class NewsBOImpl implements NewsBO {
 	@Transactional
 	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl) {
 		return newsDAO.countNewsesByNewsCatalogUrl(newsCatalogUrl);
+	}
+	
+	@Transactional
+	public News fetchNewsByNewsId(Integer id) {
+		News news = newsDAO.getNewsById(id);
+		if (news != null) {
+			Hibernate.initialize(news.getNewsContent());
+			Hibernate.initialize(news.getNewsCatalog());
+		}
+		
+		return news;
 	}
 }

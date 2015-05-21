@@ -1554,10 +1554,10 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	background-color: #FFFFFF;
 	float:left;
 	width: 99%;
+	color: #333333;
 }
 #Tin_Chi_Tiet .DanhMuc
 {
-	text-transform: uppercase;
 	height: 27px;
 	font-size: 14px;
 	font-weight: bold;
@@ -1570,13 +1570,14 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 
 #Tin_Chi_Tiet .TieuDeTin
 {
-	font-size: 14px;
-	color: #2175CF;
+	font-size: 20px;
+	color: #333333;
 	display: block;
 	height:auto;
 	font-weight: bold;
 	text-decoration: none;
 	margin-left:5px;
+	text-align: justify;
 }
 #Tin_Chi_Tiet .NgayCapNhat
 {
@@ -1589,9 +1590,8 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 #Tin_Chi_Tiet .MoTa
 {
 	font-size: 13px;
-	font-style: italic;
 	font-weight:bold;
-	color: Gray;
+	color: #333333;
 	display: block;
 	text-decoration: none;
 	text-align:justify;
@@ -2919,7 +2919,7 @@ p.lead {
 
 .other_newses {
 	position: absolute;
-	top: 200px;
+	top: 160px;
 }
 
 .list_thumb {
@@ -2963,4 +2963,28 @@ p.lead {
     text-decoration: none;
     font-weight: bold;
     padding: 5px;
+}
+
+#Tin_Chi_Tiet .DanhMuc
+{
+	height: 27px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 30px;
+	color: #931717;
+	width: 100	%;
+	border-bottom: 1px solid #DFDFDF;
+	padding-left: 4px;
+	background: transparent linear-gradient(180deg, #63B8EE 5%, #B9F9F0 100%) repeat scroll 0% 0%;
+}
+
+#Tin_Chi_Tiet .DanhMuc a {
+    height: 27px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #931717;
+    width: 90%;
+    padding-left: 0px;
+    text-decoration: none;
 }
