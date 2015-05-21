@@ -444,7 +444,7 @@ public class NewsController {
 		return status;
 	}
 	
-	@RequestMapping(value = "/tin-tuc/{url}", method = RequestMethod.GET)
+	@RequestMapping(value = Constants.NEWS_PREFIX + "/{url}", method = RequestMethod.GET)
 	public ModelAndView showNewsesByNewsCatalogUrl(
 			@PathVariable("url") String url, ModelMap model, HttpServletRequest request, 
 			@RequestParam(value = "p", defaultValue = "1", required = false) Integer page) {
@@ -461,5 +461,22 @@ public class NewsController {
 		model.addAttribute("pageInfo", pageInfo);
 		
 		return new ModelAndView("showNewsesByNewsCatalog");
+	}
+	
+	@RequestMapping(value = {Constants.NEWS_PREFIX + "/{url}/{id}/{s}", Constants.NEWS_PREFIX + "/{url}/{id}"}, method = RequestMethod.GET)
+	public ModelAndView showNewsDetails(@PathVariable("url") String url, 
+			@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request) {
+		News news = newsBO.fetchNewsByNewsId(id);
+		if (news == null) {
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/notFound"));
+		}
+		NewsContent content = news.getNewsContent();
+		NewsCatalog newsCatalog = news.getNewsCatalog();
+		
+		model.addAttribute("news", news);
+		model.addAttribute("newsCatalog", newsCatalog);
+		model.addAttribute("content", content);
+		
+		return new ModelAndView("showNewsDetails");
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="/WEB-INF/tag/functions.tld"%>
 
 <%@ include file="contact.jsp" %>
 <div id="Chuyen_Muc">
@@ -11,7 +12,12 @@
 		<ul class="main">
 			<c:forEach items="${rightTopNewsCatalogs}" var="rightTopNewsCatalog">
 				<li>
-					<a href="${ct}/${rightTopNewsCatalog.url}" class="rightTopLink">${rightTopNewsCatalog.name}</a>
+					<a href="${news_ct}/${rightTopNewsCatalog.url}" class="rightTopLink">${rightTopNewsCatalog.name}</a>
+				</li>
+			</c:forEach>
+			<c:forEach items="${columns}" var="column">
+				<li>
+					<a href="${ct}/${column.url}" class="rightTopLink">${column.name}</a>
 				</li>
 			</c:forEach>
 		</ul>
@@ -28,13 +34,13 @@
 				<c:forEach items="${rightCenterNews.newses}" var="news">
 					<li>
 						<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${news.title}]  body=[${news.summary}]'>
-							<a href='${ct}/${rightCenterNews.newsCatalog.url}/${news.id}'>${news.title}</a>
+							<a href='${news_ct}/${rightCenterNews.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}'>${news.title}</a>
 						</span>
 					</li>
 				</c:forEach>
 			</ul>
 			<div class="XemChiTiet">
-				<a href='${ct}/${rightCenterNews.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
+				<a href='${news_ct}/${rightCenterNews.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
 			</div>
 		</div>
 	</div>

@@ -26,4 +26,5 @@ public interface NewsBO {
 	public RightCenterNews getRightCenterNews(Integer size);
 	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize);
 	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl);
+	public News fetchNewsByNewsId(Integer id);
 }

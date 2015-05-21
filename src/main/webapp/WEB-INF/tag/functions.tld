@@ -17,4 +17,11 @@
 		<function-class>com.catb.web.tag.TagFunction</function-class>
 		<function-signature>java.lang.String getMenuClass(java.lang.String, java.lang.String, java.lang.String)</function-signature>
 	</function>
+	
+	<!-- get rid of diacritics and hyphenate string -->
+	<function>
+		<name>toFriendlyUrl</name>
+		<function-class>com.catb.web.tag.TagFunction</function-class>
+		<function-signature>java.lang.String toFriendlyUrl(java.lang.String)</function-signature>
+	</function>
 </taglib>

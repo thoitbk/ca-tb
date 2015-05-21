@@ -1,6 +1,7 @@
 package com.catb.web.controller;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,10 +49,10 @@ public class ComponentController {
 		NewsCatalog administrativeProcedures = new NewsCatalog(PropertiesUtil.getProperty("administrativeProcedures.name"), PropertiesUtil.getProperty("administrativeProcedures.url"));
 		NewsCatalog criminalDenouncement = new NewsCatalog(PropertiesUtil.getProperty("criminalDenouncement.name"), PropertiesUtil.getProperty("criminalDenouncement.url"));
 		NewsCatalog document = new NewsCatalog(PropertiesUtil.getProperty("document.name"), PropertiesUtil.getProperty("document.url"));
-		rightTopNewsCatalogs.addAll(Arrays.asList(comment, administrativeProcedures, criminalDenouncement, document));
+		List<NewsCatalog> columns = new LinkedList<NewsCatalog>(Arrays.asList(comment, administrativeProcedures, criminalDenouncement, document));
 		
 		model.addAttribute("rightTopNewsCatalogs", rightTopNewsCatalogs);
-		
+		model.addAttribute("columns", columns);
 		RightCenterNews rightCenterNews = newsBO.getRightCenterNews(rightCenterSize);
 		model.addAttribute("rightCenterNews", rightCenterNews);
 		

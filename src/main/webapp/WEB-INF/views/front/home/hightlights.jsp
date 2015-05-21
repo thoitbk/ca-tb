@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="f" uri="/WEB-INF/tag/functions.tld"%>
 
 <link href="${ct}/resources/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ct}/resources/js/jquery.bxslider.min.js" ></script>
@@ -25,7 +26,7 @@
 		<ul class="bxslider">
 			<c:forEach items="${hotNewses}" var="hotNews">
 				<li>
-					<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}'><img alt="" src="${hotNews.image}" title="${hotNews.title}"></a>
+					<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}/${f:toFriendlyUrl(hotNews.title)}'><img alt="" src="${hotNews.image}" title="${hotNews.title}"></a>
 				</li>
 			</c:forEach>
 		</ul>
@@ -39,7 +40,7 @@
 			<ul class="marquee">
 				<c:forEach items="${hotNewses}" var="hotNews">
 					<li>
-						<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}' >
+						<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}/${f:toFriendlyUrl(hotNews.title)}' >
 							<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${hotNews.title}]  body=[${hotNews.summary}]'>
 								<c:out value="${hotNews.title}"></c:out> <br/>
 								<fmt:formatDate var="postedDate" value="${hotNews.postedDate}" pattern="dd/MM/yyyy" />

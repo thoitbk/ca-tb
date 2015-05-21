@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="f" uri="/WEB-INF/tag/functions.tld"%>
 
 <script type="text/javascript" src="${ct}/resources/js/jquery.ellipsis.min.js" ></script>
 <script type="text/javascript">
@@ -35,11 +36,11 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
-									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}'>
 										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
 									</a>
 									<p class="main_news_title">
-										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}">${news.title}</a>
 									</p>
 									<p class="lead">
 										<c:out value="${news.summary}"></c:out>
@@ -51,7 +52,7 @@
 									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
 										<li>
 											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
-												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}/${f:toFriendlyUrl(specialSiteInfo.newses[i].title)}">${specialSiteInfo.newses[i].title}</a>
 											</span>
 										</li>
 									</c:forEach>
@@ -77,11 +78,11 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
-									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}'>
+									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}'>
 										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
 									</a>
 									<p class="main_news_title">
-										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}">${news.title}</a>
+										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}">${news.title}</a>
 									</p>
 									<p class="lead">
 										<c:out value="${news.summary}"></c:out>
@@ -93,7 +94,7 @@
 									<c:forEach begin="1" end="${fn:length(specialSiteInfo.newses) - 1}" step="1" var="i">
 										<li>
 											<span title='cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${specialSiteInfo.newses[i].title}]  body=[${specialSiteInfo.newses[i].summary}]'>
-												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}">${specialSiteInfo.newses[i].title}</a>
+												<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${specialSiteInfo.newses[i].id}/${f:toFriendlyUrl(specialSiteInfo.newses[i].title)}">${specialSiteInfo.newses[i].title}</a>
 											</span>
 										</li>
 									</c:forEach>
