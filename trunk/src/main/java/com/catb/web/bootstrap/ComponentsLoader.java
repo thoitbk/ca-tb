@@ -1,5 +1,8 @@
 package com.catb.web.bootstrap;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.catb.bo.LinkCatalogBO;
 import com.catb.common.Constants;
 import com.catb.dao.statics.ResReader;
+import com.catb.web.component.Menu;
 import com.catb.web.component.MenuLoader;
 
 @Component
@@ -51,7 +55,10 @@ public class ComponentsLoader {
 			logger.info("Loading menu hierarchy...");
 			String prefix = context.getContextPath() + Constants.NEWS_PREFIX + "/";
 			menuLoader.setPrefix(prefix);
-			context.setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
+			List<Menu> menuTree = new LinkedList<Menu>();
+			menuTree.add(new Menu(Constants.HOMEPAGE, "/home", 0, null));
+			menuTree.addAll(menuLoader.loadMenuTree());
+			context.setAttribute("MENU_HIERARCHY", menuTree);
 			
 			logger.info("Loading link list");
 			context.setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());

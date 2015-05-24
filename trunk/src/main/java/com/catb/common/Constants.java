@@ -22,6 +22,7 @@ public class Constants {
 	public static Integer NUMBER_OF_PAGE_LINK;
 	public static final Integer MAX_SQ_NUMBER = 2000000000;
 	public static final String NEWS_PREFIX = "/tin-tuc";
+	public static final String HOMEPAGE = "Trang chủ";
 	
 	public static void load() {
 		try {

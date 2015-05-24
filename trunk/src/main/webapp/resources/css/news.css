@@ -1547,13 +1547,12 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 /*******************	Tin chi tiết	===Tin_Chi_Tiet**********************/
 #Tin_Chi_Tiet
 {
-	margin: 3px;
 	overflow: hidden;
 	display: block;
 	font-size: 12px;
 	background-color: #FFFFFF;
 	float:left;
-	width: 99%;
+	width: 100%;
 	color: #333333;
 }
 #Tin_Chi_Tiet .DanhMuc
@@ -1570,13 +1569,12 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 
 #Tin_Chi_Tiet .TieuDeTin
 {
-	font-size: 20px;
+	font-size: 18px;
 	color: #333333;
 	display: block;
 	height:auto;
 	font-weight: bold;
 	text-decoration: none;
-	margin-left:5px;
 	text-align: justify;
 }
 #Tin_Chi_Tiet .NgayCapNhat
@@ -1665,8 +1663,8 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 }
 #Tin_Chi_Tiet_Khac .TinCungChuDe
 {
-	font-size: 14px;
-	color: #a24848;
+	font-size: 13px;
+	color: #414B96;
 	display: block;
 	font-weight: bold;
 	text-decoration: none;
@@ -1684,13 +1682,12 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	margin: 0;
 	padding: 0px 0px 3px 0px;
 	height: auto;
-	color: Gray;
-	border-bottom-color:Silver;
-	border-bottom-style:dotted;
+	color: #EDD4D4;
+	border-bottom: 1px solid;
 }
 #Tin_Chi_Tiet_Khac ul li a, #Tin_Chi_Tiet_Khac ul li a:link, #Tin_Chi_Tiet_Khac ul li a:visited
 {
-	color: #0F6D39;
+	color: #0E316E;
 	padding-left: 25px;
 	display: block;
 	text-decoration: none;
@@ -1713,11 +1710,12 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	text-align: right;
 	margin:0 auto;
 	padding:0 auto;
-	position: absolute;
-	bottom: 1px;
+	/* position: absolute;
+	bottom: 1px; */
 	right: 2px;
 	color: #FF0000;
 	font-size: 11px;
+	margin-right: 10px;
 }
 .XemChiTiet a
 {
@@ -2036,8 +2034,8 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 }
 .TinCungChuDe
 {
-	font-size: 14px;
-	color: #a24848;
+	font-size: 13px;
+	color: #414B96;
 	display: block;
 	font-weight: bold;
 	text-decoration: none;
@@ -2811,7 +2809,7 @@ p.lead {
 	background: #FFFFFF;
 	padding: 3px;
 	min-height: 300px;
-	position: relative;
+	/* position: relative; */
 }
 
 #special_sites .TieuDe
@@ -2864,6 +2862,8 @@ p.lead {
 	height: 20px;
 	border-bottom: none;
 	border-top: none;
+	/* position: absolute;
+	bottom: 1px; */
 }
 #special_sites .XemChiTiet a
 {
@@ -2917,11 +2917,11 @@ p.lead {
 	color: #999;
 }
 
-.other_newses {
+/* .other_newses {
 	position: absolute;
 	top: 160px;
 }
-
+ */
 .list_thumb {
 	width: 120px;
 	height: 90px;
@@ -2987,4 +2987,12 @@ p.lead {
     width: 90%;
     padding-left: 0px;
     text-decoration: none;
+}
+
+.main_news {
+	height: 200px;
+}
+
+.TieuDeTin {
+	margin-right: 10px;
 }

@@ -27,4 +27,5 @@ public interface NewsBO {
 	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize);
 	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl);
 	public News fetchNewsByNewsId(Integer id);
+	public List<News> getNewsesByUrlButId(String newsCatalogUrl, Integer id, Integer pageSize);
 }

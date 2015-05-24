@@ -16,6 +16,13 @@ public class Menu {
 		
 	}
 
+	public Menu(String title, String url, Integer level, Integer parentId) {
+		this.title = title;
+		this.url = url;
+		this.level = level;
+		this.parentId = parentId;
+	}
+
 	public Menu(Integer id, String title, String url, Integer level,
 			Integer parentId) {
 		this.id = id;
