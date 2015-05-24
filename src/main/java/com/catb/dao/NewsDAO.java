@@ -20,5 +20,6 @@ public interface NewsDAO {
 	public List<News> getNewsesByNewsCatalogId(Integer newsCatalogId, Integer size);
 	public List<News> getHotNewses(Integer size);
 	public List<News> getNewsesByNewsCatalogUrl(String newsCatalogUrl, Integer page, Integer pageSize);
+	public List<News> getNewsesByUrlButId(String newsCatalogUrl, Integer id, Integer pageSize);
 	public Long countNewsesByNewsCatalogUrl(String newsCatalogUrl);
 }

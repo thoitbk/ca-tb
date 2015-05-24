@@ -60,7 +60,7 @@
 							</c:if>
 							<div class="XemChiTiet">
 								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
-							</div>	
+							</div>
 						</div>
 					</div>
 				</c:if>
@@ -102,7 +102,7 @@
 							</c:if>
 							<div class="XemChiTiet">
 								<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}'>${COMMONINFO.detailsCaption}</a>
-							</div>	
+							</div>
 						</div>
 					</div>
 				</c:if>

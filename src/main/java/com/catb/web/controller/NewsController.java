@@ -472,10 +472,12 @@ public class NewsController {
 		}
 		NewsContent content = news.getNewsContent();
 		NewsCatalog newsCatalog = news.getNewsCatalog();
+		List<News> newses = newsBO.getNewsesByUrlButId(newsCatalog.getUrl(), id, Util.getNewsAmountInSameSubject(request));
 		
 		model.addAttribute("news", news);
 		model.addAttribute("newsCatalog", newsCatalog);
 		model.addAttribute("content", content);
+		model.addAttribute("newses", newses);
 		
 		return new ModelAndView("showNewsDetails");
 	}

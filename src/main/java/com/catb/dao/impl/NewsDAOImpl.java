@@ -189,4 +189,21 @@ public class NewsDAOImpl implements NewsDAO {
 		
 		return (Long) query.uniqueResult();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<News> getNewsesByUrlButId(String newsCatalogUrl, Integer id, Integer pageSize) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT n " + 
+						"FROM News n INNER JOIN FETCH n.newsCatalog c " + 
+						"WHERE n.id != :id AND n.status = :status AND c.url = :url " + 
+						"ORDER BY n.sqNumber ASC, n.id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("id", id);
+		query.setParameter("status", NewsStatus.APPROVED.getStatus());
+		query.setParameter("url", newsCatalogUrl);
+		
+		query.setMaxResults(pageSize);
+		
+		return (List<News>) query.list();
+	}
 }

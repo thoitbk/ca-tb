@@ -178,4 +178,9 @@ public class NewsBOImpl implements NewsBO {
 		
 		return news;
 	}
+	
+	@Transactional
+	public List<News> getNewsesByUrlButId(String newsCatalogUrl, Integer id, Integer pageSize) {
+		return newsDAO.getNewsesByUrlButId(newsCatalogUrl, id, pageSize);
+	}
 }

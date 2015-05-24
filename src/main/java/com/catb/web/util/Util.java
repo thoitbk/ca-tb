@@ -40,4 +40,9 @@ public class Util {
 		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
 		return commonInfo != null && commonInfo.getNewsInSameCatalog() != null ? commonInfo.getNewsInSameCatalog() : 20;
 	}
+	
+	public static Integer getNewsAmountInSameSubject(HttpServletRequest request) {
+		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
+		return commonInfo != null && commonInfo.getSameSubjects() != null ? commonInfo.getSameSubjects() : 10;
+	}
 }

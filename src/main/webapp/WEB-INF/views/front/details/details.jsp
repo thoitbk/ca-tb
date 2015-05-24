@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="/WEB-INF/tag/functions.tld" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div id="Tin_Chi_Tiet">
 	<div class="DanhMuc">
 		<strong><a href="${ct}/home">${COMMONINFO.homePage}</a> > ${newsCatalog.name}</strong>
 	</div>
-	<div id="ctl05_pnlDetailNews">
+	<div class="news_content">
 		<div class="TieuDeTin">
 			${news.title}
 		</div>
@@ -24,11 +27,6 @@
 		<div class="Tacgia">
 			${COMMONINFO.author} ${news.author}
 		</div>
-		<div class="action-print-mail">
-			<span>
-				<a href="javascript:window.print()"><img src="/Images/printer.gif">${COMMONINFO.print}</a>
-			</span>
-		</div>
 		<div class="space">
 		</div>
 		<div id="Tin_Chi_Tiet_Khac">
@@ -36,16 +34,19 @@
 				${COMMONINFO.sameSubjectTitle}
 			</div>
 			<div>
-				<div id="ctl05_otherNews">
+				<div id="">
 					<ul>
-						<li>
-							<a href="/Tin-Tuc/Tin_Hoat_Dong/104_Cong-an-tinh-So-ket-5-thang-hoat-dong-cua-Cong-Thong-tin-dien-tu-va-tap-huan-nghiep-vu-bao-chi"><span title="cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[Công an tỉnh Sơ kết 5 tháng hoạt động của Cổng Thông tin điện tử và tập huấn nghiệp vụ báo chí] img=[<img src=&quot;/Upload/13114249_5-thang.JPG&quot; align=&quot;LEFT&quot;/>]  body=[]"> Công an tỉnh Sơ kết 5 tháng hoạt động của Cổng Thông tin điện tử và tập huấn nghiệp vụ báo chí<i>(04/11/2013)</i></span></a>
-						</li>
+						<c:forEach items="${newses}" var="news">
+							<li>
+								<fmt:formatDate var="postedDate" value="${news.postedDate}" pattern="dd/MM/yyyy" />
+								<a href="${news_ct}/${url}/${news.id}/${f:toFriendlyUrl(news.title)}"><span title="cssbody=[boxbody] singleclickstop=[on] cssheader=[boxheader] header=[${news.title}] body=[${news.summary}]">${news.title}<i>(${postedDate})</i></span></a>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
 			<div class="XemChiTiet">
-				<a href="/Tin-Tuc/Tin_Hoat_Dong">  Xem chi tiết &gt;&gt;  </a>
+				<a href="${news_ct}/${url}">${COMMONINFO.detailsCaption}</a>
 			</div>
 		</div>
 	</div>
