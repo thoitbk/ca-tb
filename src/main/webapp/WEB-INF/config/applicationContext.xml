@@ -103,6 +103,9 @@
 	<bean id="linkCatalogDAO" class="com.catb.dao.impl.LinkCatalogDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="documentTypeCatalogDAO" class="com.catb.dao.impl.DocumentTypeCatalogDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
