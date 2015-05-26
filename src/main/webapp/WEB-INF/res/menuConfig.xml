@@ -38,6 +38,16 @@
 			<link>/cm/department/update</link>
 			<link>/cm/department/delete</link>
 		</menuItem>
+		<menuItem id="catalog_3">
+			<link>/cm/documentType/add</link>
+			<link>/cm/documentType/update</link>
+			<link>/cm/documentType/delete</link>
+		</menuItem>
+		<menuItem id="catalog_4">
+			<link>/cm/field/add</link>
+			<link>/cm/field/update</link>
+			<link>/cm/field/delete</link>
+		</menuItem>
 	</menu>
 	<menu id="system">
 		<menuItem id="system_1">

@@ -44,6 +44,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updateDepartment.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="cm/documentType/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/addDocumentType.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/documentType/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updateDocumentType.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="cm/user/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/addUser.jsp"></put-attribute>
 	</definition>

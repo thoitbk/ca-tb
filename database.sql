@@ -199,7 +199,6 @@ CREATE TABLE `document_type_catalog` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `code` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `group` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sq_number` int(10) DEFAULT NULL,
   `display` tinyint(1) DEFAULT NULL,
   `description` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
