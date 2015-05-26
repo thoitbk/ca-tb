@@ -29,9 +29,6 @@ public class DocumentTypeCatalog implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "group")
-	private String group;
-	
 	@Column(name = "sq_number")
 	private Integer sqNumber;
 	
@@ -47,13 +44,21 @@ public class DocumentTypeCatalog implements Serializable {
 	public DocumentTypeCatalog() {
 		
 	}
-
+	
 	public DocumentTypeCatalog(Integer id, String code, String name,
-			String group, Integer sqNumber, Boolean display, String description) {
+			Integer sqNumber, Boolean display, String description) {
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		this.group = group;
+		this.sqNumber = sqNumber;
+		this.display = display;
+		this.description = description;
+	}
+
+	public DocumentTypeCatalog(String code, String name, Integer sqNumber,
+			Boolean display, String description) {
+		this.code = code;
+		this.name = name;
 		this.sqNumber = sqNumber;
 		this.display = display;
 		this.description = description;
@@ -81,14 +86,6 @@ public class DocumentTypeCatalog implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
 	}
 
 	public Integer getSqNumber() {

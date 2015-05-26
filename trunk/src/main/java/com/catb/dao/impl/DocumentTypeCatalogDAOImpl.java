@@ -41,12 +41,11 @@ public class DocumentTypeCatalogDAOImpl implements DocumentTypeCatalogDAO {
 	public void updateDocumentTypeCatalog(DocumentTypeCatalog documentTypeCatalog) {
 		Session session = sessionFactory.getCurrentSession();
 		String update = "UPDATE DocumentTypeCatalog " + 
-			    		"SET code = :code, name = :name, group = :group, sqNumber = :sqNumber, display = :display, description = :description " + 
+			    		"SET code = :code, name = :name, sqNumber = :sqNumber, display = :display, description = :description " + 
 			    		"WHERE id = :id";
 		Query query = session.createQuery(update);
 		query.setParameter("code", documentTypeCatalog.getCode());
 		query.setParameter("name", documentTypeCatalog.getName());
-		query.setParameter("group", documentTypeCatalog.getGroup());
 		query.setParameter("sqNumber", documentTypeCatalog.getSqNumber());
 		query.setParameter("display", documentTypeCatalog.getDisplay());
 		query.setParameter("description", documentTypeCatalog.getDescription());
