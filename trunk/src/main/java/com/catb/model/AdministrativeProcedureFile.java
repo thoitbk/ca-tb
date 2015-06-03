@@ -48,6 +48,12 @@ public class AdministrativeProcedureFile implements Serializable {
 		this.administrativeProcedure = administrativeProcedure;
 	}
 
+	public AdministrativeProcedureFile(String name, String path, String mime) {
+		this.name = name;
+		this.path = path;
+		this.mime = mime;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -8,6 +8,7 @@ $(function () {
     var notExistedUrl = cp + '/cm/notExistedResource';
     var notOkUrl = cp + '/cm/requestError';
     
+    // Upload news image
     $('#newsImageUpload').fileupload({
     	add: function(e, data) {
             var uploadErrors = [];
@@ -46,7 +47,7 @@ $(function () {
         progressall: function (e, data) {
 	        var progress = parseInt(data.loaded / data.total * 100, 10);
 	        var percent = $('#progress');
-	        percent.text("Đang upload " + progress + " %");
+	        percent.text("Đang upload " + progress + "%");
 	        if (progress == 100) {
 	        	percent.empty();
 	        	percent.append("<span id='uploadsuccess'>Upload thành công</span>");
@@ -73,6 +74,91 @@ $(function () {
 	        	case 1:
 	        		$("#uploadedImage").empty();
 	        		$("#removeIcon").empty();
+	        		break;
+	        	case 2:
+	        		window.location.href = errorUrl;
+	        		break;
+	        	case 3:
+	        		window.location.href = unauthenticatedUrl;
+	        		break;
+	        	case 4:
+	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	case 5:
+	        		window.location.href = notExistedUrl;
+	        		break;
+	        	default:
+	        		window.location.href = notOkUrl;
+	        		break;
+	        	}
+	        }
+	    });
+    });
+    
+    // Upload administrative procedure files
+    $('#administrativeProcedureFileUpload').fileupload({
+    	add: function(e, data) {
+            var uploadErrors = [];
+            if(data.originalFiles[0]['size'].length && data.originalFiles[0]['size'] > 50000000) {
+                uploadErrors.push('Kích thước file quá lớn (<= 50MB)');
+            }
+            if(uploadErrors.length > 0) {
+                alert(uploadErrors.join("\n"));
+            } else {
+                data.submit();
+            }
+    	},
+        dataType: 'json',
+        
+        done: function (e, data) {
+        	var result = data.result;
+        	for (var j = 0; j < result.length; j++) {
+        		var fileId = result[j].id;
+            	var fileName = result[j].fileName;
+            	$('#uploadedAdministrativeProcedureFiles').append('<option value="' + fileId + '">' + fileName + '</option>');
+        	}
+        },
+        
+        progressall: function (e, data) {
+	        var progress = parseInt(data.loaded / data.total * 100, 10);
+	        var percent = $('#progress');
+	        percent.text("Đang upload " + progress + "%");
+	        if (progress == 100) {
+	        	percent.empty();
+	        	percent.append("<span id='uploadsuccess'>Upload thành công</span>");
+	        	$("#uploadsuccess").delay(5000).fadeOut();
+	        }
+   		},
+   		
+		dropZone: $('#dropzone')
+    }).bind('fileuploadsubmit', function (e, data) {
+    });
+    
+    $('#removeAdministrativeProcedureFile').click(function(event) {
+    	event.preventDefault();
+    	var _fileIds = $("#uploadedAdministrativeProcedureFiles option:selected").map(function(){
+            return $(this).val();
+        }).get();
+    	if (_fileIds == null || _fileIds.length == 0) {
+    		alert('Chưa chọn file cần xóa');
+    		return;
+    	}
+    	if (!confirm('Bạn có chắc chắn muốn xóa file ?')) {
+    		return;
+    	}
+    	url = cp + '/cm/administrativeProcedure/removeFiles';
+    	$.ajax({
+	        type : "POST",
+	        url : url,
+	        data : {
+                fileIds: _fileIds.toString()
+            },
+	        dataType: "json",
+	        success : function(response) {
+	        	var statusCode = response.code;
+	        	switch (statusCode) {
+	        	case 1:
+	        		$("#uploadedAdministrativeProcedureFiles option:selected").remove();
 	        		break;
 	        	case 2:
 	        		window.location.href = errorUrl;

@@ -3,6 +3,7 @@ package com.catb.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -21,6 +24,7 @@ import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.DocumentTypeCatalog;
 import com.catb.web.viewmodel.DocumentTypeCatalogViewModel;
+import com.catb.web.viewmodel.Status;
 
 @Controller
 public class DocumentTypeCatalogController {
@@ -117,5 +121,15 @@ public class DocumentTypeCatalogController {
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/documentType/add"));
 		}
+	}
+	
+	@RequiresPermissions(value = {"documentType:manage"})
+	@RequestMapping(value = "/cm/documentType/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Status deleteDocumentTypeCatalogs(@RequestParam("ids") Integer[] ids, HttpSession session) {
+		documentTypeCatalogBO.deleteDocumentTypeCatalogs(ids);
+		session.setAttribute("msg", PropertiesUtil.getProperty("documentType.deleted.success"));
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 }

@@ -18,6 +18,16 @@
 			<link>/cm/newsCatalog/delete</link>
 		</menuItem>
 	</menu>
+	<menu id="doc">
+		<menuItem id="doc_1">
+			<link>/cm/administrativeProcedure/add</link>
+			<link>/cm/administrativeProcedure/update</link>
+		</menuItem>
+		<menuItem id="doc_2">
+			<link>/cm/document/add</link>
+			<link>/cm/document/update</link>
+		</menuItem>
+	</menu>
 	<menu id="other">
 		<menuItem id="other_1">
 			<link>/cm/linkCatalog/add</link>
