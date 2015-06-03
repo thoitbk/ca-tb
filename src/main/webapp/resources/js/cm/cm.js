@@ -488,6 +488,30 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete document type catalog
+    $("#delDocumentType").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delDocumentType').attr('href');
+        reloadUrl = cp + '/cm/documentType/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    // Delete field
+    $("#delField").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delField').attr('href');
+        reloadUrl = cp + '/cm/field/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    // Delete administrative procedure
+    $("#delAdministrativeProcedure").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delAdministrativeProcedure').attr('href');
+        reloadUrl = cp + '/cm/administrativeProcedure/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

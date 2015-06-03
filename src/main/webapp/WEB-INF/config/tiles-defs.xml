@@ -52,6 +52,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updateDocumentType.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="cm/field/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/addField.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/field/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/cat/updateField.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="cm/user/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/sys/addUser.jsp"></put-attribute>
 	</definition>
@@ -130,5 +138,13 @@
 	
 	<definition name="cm/notExistedResource" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/share/notExistedResource.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/administrativeProcedure/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/doc/addAdministrativeProcedure.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/administrativeProcedure/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/doc/updateAdministrativeProcedure.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

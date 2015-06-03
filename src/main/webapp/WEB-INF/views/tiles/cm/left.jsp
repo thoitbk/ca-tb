@@ -51,7 +51,7 @@
 					<shiro:hasPermission name="administrativeProcedure:manage">
 						<li id="doc_1" class="${f:getMenuClass(menuItemId, 'doc_1', 'selected_subitem')}">
 							<img src="${ct}/resources/images/add_news.gif" class="bullet_menu" />
-							<a href="#">Quản trị TTHC</a>
+							<a href="${ct}/cm/administrativeProcedure/add">Quản trị TTHC</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="document:manage">
