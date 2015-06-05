@@ -22,7 +22,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -90,7 +89,7 @@ public class AdministrativeProcedureController {
 	
 	@RequiresPermissions(value = {"administrativeProcedure:manage"})
 	@RequestMapping(value = "/cm/administrativeProcedure/add", method = RequestMethod.GET)
-	public ModelAndView showCreateAdministrativeProcedure(Model model, HttpServletRequest request) {
+	public ModelAndView showCreateAdministrativeProcedure(ModelMap model, HttpServletRequest request) {
 		AdministrativeProcedureViewModel administrativeProcedureViewModel = new AdministrativeProcedureViewModel();
 		administrativeProcedureViewModel.setPublishedDate(new Date());
 		model.addAttribute("administrativeProcedureViewModel", administrativeProcedureViewModel);

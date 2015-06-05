@@ -57,7 +57,7 @@
 					<shiro:hasPermission name="document:manage">
 						<li id="doc_2" class="${f:getMenuClass(menuItemId, 'doc_2', 'selected_subitem')}">
 							<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị văn bản</a>
+							<a href="${ct}/cm/document/add">Quản trị văn bản</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>

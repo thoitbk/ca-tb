@@ -100,7 +100,7 @@
 			</tr>
 			<tr>
 				<td align="left">
-					<span class="lblBlack">Trích yếu</span>
+					<span class="lblBlack">Ghi chú</span>
 				</td>
 				<td colspan="3">
 					<form:textarea path="description" id="description" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error"/>
@@ -164,7 +164,7 @@
 		<c:forEach items="${administrativeProcedures}" var="administrativeProcedure">
 			<tr>
 				<td width="5%">
-					<input type="checkbox" name="newsId" id="newsId" value="${administrativeProcedure.id}" class="checkbox" />
+					<input type="checkbox" name="administrativeProcedureId" id="administrativeProcedureId" value="${administrativeProcedure.id}" class="checkbox" />
 				</td>
 				<td width="20%"><c:out value="${administrativeProcedure.code}"></c:out></td>
 				<td width="50%"><c:out value="${administrativeProcedure.name}"></c:out></td>
