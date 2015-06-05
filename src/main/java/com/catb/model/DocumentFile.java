@@ -48,6 +48,12 @@ public class DocumentFile implements Serializable {
 		this.document = document;
 	}
 
+	public DocumentFile(String name, String path, String mime) {
+		this.name = name;
+		this.path = path;
+		this.mime = mime;
+	}
+
 	public Integer getId() {
 		return id;
 	}

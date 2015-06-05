@@ -1,5 +1,6 @@
 package com.catb.web.util;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,5 +45,12 @@ public class Util {
 	public static Integer getNewsAmountInSameSubject(HttpServletRequest request) {
 		CommonInfo commonInfo = (CommonInfo) request.getServletContext().getAttribute("COMMONINFO");
 		return commonInfo != null && commonInfo.getSameSubjects() != null ? commonInfo.getSameSubjects() : 10;
+	}
+	
+	public static void createFolder(String folder) {
+		File file = new File(folder);
+		if (!file.exists()) {
+			file.mkdir();
+		}
 	}
 }

@@ -23,16 +23,20 @@
 
 <script>
 	jQuery(function ($) {
-		$( "#publishedDate" ).datepicker();
-		$("#clear").click(function() {
-			$("#publishedDate").val('');
+		$( "#publishDate" ).datepicker();
+		$( "#validDate" ).datepicker();
+		$("#clear_1").click(function() {
+			$("#publishDate").val('');
+		})
+		$("#clear_2").click(function() {
+			$("#validDate").val('');
 		})
 	});
 </script>
 
 <div class="TieuDe">     
 	<div class="TieuDe_ND">
-		QUẢN TRỊ THỦ TỤC HÀNH CHÍNH
+		QUẢN TRỊ VĂN BẢN QUY PHẠM PHÁP LUẬT
 	</div>
 </div>
 <div>
@@ -40,14 +44,14 @@
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
 	</c:if>
-	<form:form method="post" commandName="administrativeProcedureViewModel">
+	<form:form method="post" commandName="documentViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="" style="width: 100%">
 			<tr>
-				<td align="left" width="15%">
+				<td align="left" width="10%">
 					<span class="lblBlack">Cơ quan ban hành</span>
 				</td>
-				<td width="60%">
+				<td width="40%">
 					<form:select path="departmentId" id="departmentId" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn cơ quan ban hành ------"></form:option>
 						<form:options items="${departmentMap}"/>
@@ -61,52 +65,57 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="left" width="15%">
-					<span class="lblBlack">Lĩnh vực</span>
+				<td align="left" width="10%">
+					<span class="lblBlack">Loại văn bản</span>
 				</td>
-				<td width="60%">
-					<form:select path="fieldId" id="fieldId" cssStyle="width: 100%;" cssClass="combobox">
-						<form:option value="" label="------ Chọn lĩnh vực ------"></form:option>
-						<form:options items="${fieldMap}"/>
+				<td width="40%">
+					<form:select path="documentTypeCatalogId" id="documentTypeCatalogId" cssStyle="width: 100%;" cssClass="combobox">
+						<form:option value="" label="------ Chọn loại văn bản ------"></form:option>
+						<form:options items="${documentTypeCatalogMap}"/>
 					</form:select>
-				</td>
-				<td align="left" width="10%" style="padding-left: 2%;">
-					<span class="lblBlack">Thời hạn</span>
-				</td>
-				<td>
-					<form:input path="validDuration" id="validDuration" maxlength="100" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
-				</td>
-			</tr>
-			<tr>
-				<td align="left">
-					<span id="" class="lblBlack">Mã TTHC</span>
-				</td>
-				<td colspan="3">
-					<form:input path="code" id="code" maxlength="100" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
-				</td>
-			</tr>
-			<tr>
-				<td align="left">
-					<span id="" class="lblBlack">Tên TTHC</span>
-				</td>
-				<td colspan="3">
-					<form:input path="name" id="name" maxlength="1000" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
 				<td align="left">
 					<span class="lblBlack">Ngày ban hành</span>
 				</td>
-				<td colspan="3">
-					<form:input path="publishedDate" id="publishedDate" maxlength="20" cssClass="textbox" cssStyle="width: 50%" cssErrorClass="textbox_error" />
-					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear" />
+				<td>
+					<form:input path="publishDate" id="publishDate" maxlength="20" cssClass="textbox" cssStyle="width: 90%" cssErrorClass="textbox_error" />
+					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear_1" />
+				</td>
+				<td align="left">
+					<span class="lblBlack">Ngày có hiệu lực</span>
+				</td>
+				<td>
+					<form:input path="validDate" id="validDate" maxlength="20" cssClass="textbox" cssStyle="width: 90%" cssErrorClass="textbox_error" />
+					<img src="${ct}/resources/images/clear.png" style="width: 1.2em; height: 1.2em; vertical-align: middle; cursor: pointer;" alt="Xóa" id="clear_2" />
 				</td>
 			</tr>
 			<tr>
 				<td align="left">
+					<span class="lblBlack">Số ký hiệu</span>
+				</td>
+				<td>
+					<form:input path="code" id="code" maxlength="100" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
+				</td>
+				<td align="left">
+					<span class="lblBlack">Lãnh đạo ký</span>
+				</td>
+				<td>
+					<form:input path="leader" id="leader" maxlength="200" cssClass="textbox" cssStyle="width: 100%" cssErrorClass="textbox_error" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<span class="lblBlack">Trích yếu</span>
+				</td>
+				<td>
+					<form:textarea path="summary" id="summary" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error"/>
+				</td>
+				<td align="left">
 					<span class="lblBlack">Ghi chú</span>
 				</td>
-				<td colspan="3">
+				<td>
 					<form:textarea path="description" id="description" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error"/>
 				</td>
 			</tr>
@@ -117,7 +126,7 @@
 				<td align="left" width="30%">
 					<div id="container" style="float: left;">
 						<div id="upload-file-container" class="fade well">
-							<input id="administrativeProcedureFileUpload" type="file" name="files[]" data-url="${ct}/cm/administrativeProcedure/uploadFiles" multiple="multiple" />
+							<input id="documentFileUpload" type="file" name="files[]" data-url="${ct}/cm/document/uploadFiles" multiple="multiple" />
 						</div>
 						<div id="dropzone" class="fade well">
 							<span class="lblBlack">Chọn file</span>
@@ -125,15 +134,16 @@
 					</div>
 					<div style="margin-left: 20px; margin-top: 17px;" id="progress" class="lblBlack"></div>
 				</td>
-				<td colspan="2">
+				<td></td>
+				<td align="left">
 					<div>
-						<select id="uploadedAdministrativeProcedureFiles" name="uploadedAdministrativeProcedureFiles" multiple="multiple" style="width: 200px; height: 100px; float: left;">
-							<c:forEach items="${administrativeProcedureFiles}" var="file">
+						<select id="uploadedDocumentFiles" name="uploadedDocumentFiles" multiple="multiple" style="width: 200px; height: 100px; float: left;">
+							<c:forEach items="${documentFiles}" var="file">
 								<option value="${file.id}">${file.fileName}</option>
 							</c:forEach>
 						</select>
 						<div>
-							<a href="javascript:void(0);" id="removeAdministrativeProcedureFile"><img src="${ct}/resources/images/remove.png" alt="Xóa file" style="width: 20px; height: 20px" /></a>
+							<a href="javascript:void(0);" id="removeDocumentFile"><img src="${ct}/resources/images/remove.png" alt="Xóa file" style="width: 20px; height: 20px" /></a>
 						</div>
 					</div>
 				</td>
@@ -160,24 +170,24 @@
 			<th width="5%">
 				<input type="checkbox" name="selectAll" id="selectAll">
 			</th>
-			<th width="20%">Mã TTHC</th>
-			<th width="50%">Tên TTHC</th>
+			<th width="20%">Số ký hiệu</th>
+			<th width="50%">Trích yếu</th>
 			<th width="20%">Ngày ban hành</th>
 			<th>Cập nhật</th>
 		</tr>
-		<c:forEach items="${administrativeProcedures}" var="administrativeProcedure">
+		<c:forEach items="${documents}" var="document">
 			<tr>
 				<td width="5%">
-					<input type="checkbox" name="administrativeProcedureId" id="administrativeProcedureId" value="${administrativeProcedure.id}" class="checkbox" />
+					<input type="checkbox" name="documentId" id="documentId" value="${document.id}" class="checkbox" />
 				</td>
-				<td width="20%"><c:out value="${administrativeProcedure.code}"></c:out></td>
-				<td width="50%"><c:out value="${administrativeProcedure.name}"></c:out></td>
+				<td width="20%"><c:out value="${document.code}"></c:out></td>
+				<td width="50%"><c:out value="${document.summary}"></c:out></td>
 				<td width="20%">
-					<fmt:formatDate var="publishedDate" value="${administrativeProcedure.publishedDate}" pattern="dd/MM/yyyy" />
-					<c:out value="${publishedDate}"></c:out>
+					<fmt:formatDate var="publishDate" value="${document.publishedDate}" pattern="dd/MM/yyyy" />
+					<c:out value="${publishDate}"></c:out>
 				</td>
 				<td>
-					<a href='${ct}/cm/administrativeProcedure/update/${administrativeProcedure.id}'>
+					<a href='${ct}/cm/document/update/${document.id}'>
 						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>
@@ -185,7 +195,7 @@
 		</c:forEach>
 	    <tr>
 	    	<td colspan="5" style="text-align: left; background-color: #FFF; padding: 0.7em;">
-	    		<a href="${ct}/cm/administrativeProcedure/delete" id="delAdministrativeProcedure"><img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" /></a>&#8592; Click vào đây để xóa
+	    		<a href="${ct}/cm/document/delete" id="delDocument"><img alt="Xóa" src="${ct}/resources/images/delete.png" class="delete" title="Xóa" /></a>&#8592; Click vào đây để xóa
 	    	</td>
 	    </tr>
 	</table>

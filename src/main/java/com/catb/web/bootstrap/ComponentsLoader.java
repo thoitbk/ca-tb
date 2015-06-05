@@ -14,6 +14,7 @@ import com.catb.common.Constants;
 import com.catb.dao.statics.ResReader;
 import com.catb.web.component.Menu;
 import com.catb.web.component.MenuLoader;
+import com.catb.web.util.Util;
 
 @Component
 public class ComponentsLoader {
@@ -62,6 +63,11 @@ public class ComponentsLoader {
 			
 			logger.info("Loading link list");
 			context.setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());
+			
+			logger.info("Creating required directories...");
+			Util.createFolder(Constants.ADMINISTRATIVE_PROCEDURE_LOCATION);
+			Util.createFolder(Constants.DOCUMENT_LOCATION);
+			Util.createFolder(Constants.NEWS_IMAGE_LOCATION);
 		}
 	}
 }
