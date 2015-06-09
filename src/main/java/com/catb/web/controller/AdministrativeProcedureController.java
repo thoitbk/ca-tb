@@ -1,6 +1,9 @@
 package com.catb.web.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -44,6 +47,7 @@ import com.catb.model.AdministrativeProcedure;
 import com.catb.model.AdministrativeProcedureFile;
 import com.catb.model.Department;
 import com.catb.model.Field;
+import com.catb.web.util.DiacriticsRemover;
 import com.catb.web.util.Util;
 import com.catb.web.viewmodel.AdministrativeProcedureViewModel;
 import com.catb.web.viewmodel.FileMeta;
@@ -342,5 +346,57 @@ public class AdministrativeProcedureController {
 		
 		Status status = new Status(Status.OK, "ok");
 		return status;
+	}
+	
+	@RequestMapping(value = Constants.ADMINISTRATIVE_PROCEDURE_URL, method = RequestMethod.GET)
+	public ModelAndView listAdministrativeProcedures(ModelMap model) {
+		List<AdministrativeProcedure> administrativeProcedures = administrativeProcedureBO.listAdministrativeProcedures();
+		model.addAttribute("administrativeProcedures", administrativeProcedures);
+		return new ModelAndView("administrativeProcedure/list");
+	}
+	
+	@RequestMapping(value = {Constants.ADMINISTRATIVE_PROCEDURE_URL + "/{id}/{s}", 
+			Constants.ADMINISTRATIVE_PROCEDURE_URL + "/{id}"}, method = RequestMethod.GET)
+	public ModelAndView viewAdministrativeProcedure(
+			@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request) {
+		AdministrativeProcedure administrativeProcedure = administrativeProcedureBO.fetchAdministrativeProcedureById(id);
+		if (administrativeProcedure != null) {
+			model.addAttribute("administrativeProcedure", administrativeProcedure);
+			return new ModelAndView("administrativeProcedure/view");
+		} else {
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/notFound"));
+		}
+	}
+	
+	@RequestMapping(value = {Constants.ADMINISTRATIVE_PROCEDURE_URL + "/download/{id}/{s}", 
+			Constants.ADMINISTRATIVE_PROCEDURE_URL + "/download/{id}"}, method = RequestMethod.GET)
+	public void downloadAdministrativeProcedureFile(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
+		AdministrativeProcedureFile administrativeProcedureFile = administrativeProcedureBO.getAdministrativeProcedureFile(id);
+		if (administrativeProcedureFile != null) {
+			response.setContentType(administrativeProcedureFile.getMime() + "; charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			String fileName = administrativeProcedureFile.getName();
+			String extension = FilenameUtils.getExtension(fileName);
+			String baseName = FilenameUtils.getBaseName(fileName);
+			String friendlyFileName = DiacriticsRemover.toFriendlyUrl(baseName);
+			String newFileName = friendlyFileName + "." + extension;
+			
+			response.setHeader("Content-Disposition", "attachment;filename=\"" + newFileName + "\"");
+			File f = new File(Constants.ADMINISTRATIVE_PROCEDURE_LOCATION + File.separator + administrativeProcedureFile.getPath());
+			if (f.exists()) {
+				FileInputStream fis = new FileInputStream(f);
+				OutputStream os = response.getOutputStream();
+				byte[] buffer = new byte[1024 * 1024];
+				int readByte = -1;
+				
+				while ((readByte = fis.read(buffer)) != -1) {
+					os.write(buffer, 0, readByte);
+				}
+				
+				os.close();
+				fis.close();
+			}
+		}
 	}
 }

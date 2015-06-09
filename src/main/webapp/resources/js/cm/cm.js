@@ -512,6 +512,14 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete document
+    $("#delDocument").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delDocument').attr('href');
+        reloadUrl = cp + '/cm/document/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

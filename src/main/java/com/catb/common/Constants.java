@@ -25,6 +25,10 @@ public class Constants {
 	public static final Integer MAX_SQ_NUMBER = 2000000000;
 	public static final String NEWS_PREFIX = "/tin-tuc";
 	public static final String HOMEPAGE = "Trang chủ";
+	public static final String COMMENT_URL = "hoi-dap";
+	public static final String ADMINISTRATIVE_PROCEDURE_URL = "thu-tuc-hanh-chinh";
+	public static final String DOCUMENT_URL = "van-ban-phap-quy";
+	public static final String CRIMINAL_DENOUNCEMENT_URL = "to-giac-toi-pham";
 	
 	public static void load() {
 		try {

@@ -8,6 +8,7 @@ import com.catb.model.AdministrativeProcedureFile;
 public interface AdministrativeProcedureBO {
 
 	public List<AdministrativeProcedure> getAdministrativeProcedures();
+	public List<AdministrativeProcedure> listAdministrativeProcedures();
 	public void addAdministrativeProcedure(
 			AdministrativeProcedure administrativeProcedure,
 			Integer departmentId, Integer fieldId,
@@ -18,4 +19,5 @@ public interface AdministrativeProcedureBO {
 			Integer departmentId, Integer fieldId,
 			List<AdministrativeProcedureFile> files);
 	public void deleteAdministrativeProcedures(Integer[] ids);
+	public AdministrativeProcedureFile getAdministrativeProcedureFile(Integer fileId);
 }

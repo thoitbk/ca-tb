@@ -18,4 +18,6 @@ public interface DocumentBO {
 			Integer departmentId, Integer documentTypeId,
 			List<DocumentFile> files);
 	public void deleteDocuments(Integer[] ids);
+	public DocumentFile getDocumentFileById(Integer id);
+	public List<Document> listDocuments();
 }

@@ -14,4 +14,6 @@ public interface DocumentDAO {
 	public void updateDocumentFile(DocumentFile documentFile);
 	public Document getDocumentById(Integer id);
 	public void deleteDocument(Integer id);
+	public DocumentFile getDocumentFileById(Integer id);
+	public List<Document> listDocuments();
 }
