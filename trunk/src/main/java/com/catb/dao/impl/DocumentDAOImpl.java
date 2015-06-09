@@ -61,4 +61,18 @@ public class DocumentDAOImpl implements DocumentDAO {
 			session.delete(document);
 		}
 	}
+
+	public DocumentFile getDocumentFileById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (DocumentFile) session.get(DocumentFile.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Document> listDocuments() {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT d FROM Document d LEFT JOIN FETCH d.department ORDER BY d.sqNumber ASC, d.id DESC";
+		Query query = session.createQuery(select);
+		
+		return (List<Document>) query.list();
+	}
 }

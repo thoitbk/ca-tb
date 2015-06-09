@@ -61,4 +61,18 @@ public class AdministrativeProcedureDAOImpl implements AdministrativeProcedureDA
 			session.delete(administrativeProcedure);
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<AdministrativeProcedure> listAdministrativeProcedures() {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT a FROM AdministrativeProcedure a LEFT JOIN FETCH a.department ORDER BY a.sqNumber ASC, a.id DESC";
+		Query query = session.createQuery(select);
+		
+		return (List<AdministrativeProcedure>) query.list();
+	}
+
+	public AdministrativeProcedureFile getAdministrativeProcedureFile(Integer fileId) {
+		Session session = sessionFactory.getCurrentSession();
+		return (AdministrativeProcedureFile) session.get(AdministrativeProcedureFile.class, fileId);
+	}
 }

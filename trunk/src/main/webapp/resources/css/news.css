@@ -2996,3 +2996,23 @@ p.lead {
 .TieuDeTin {
 	margin-right: 10px;
 }
+
+.titleAdministrative {
+	color: #555;
+	padding-left: 4px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	font-size: 13px;
+	background: transparent linear-gradient(180deg, #63B8EE 5%, #B9F9F0 100%) repeat scroll 0% 0%;
+}
+
+.procedure_link {
+	text-decoration: none;
+	color: #333;
+}
+
+.procedure_link:hover {
+	text-decoration: underline;
+	color: #777;
+}

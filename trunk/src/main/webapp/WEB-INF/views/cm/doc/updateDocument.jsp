@@ -40,10 +40,6 @@
 	</div>
 </div>
 <div>
-	<c:if test="${not empty msg}">
-		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
-		<c:remove var="msg" scope="session" />
-	</c:if>
 	<form:form method="post" commandName="documentViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="" style="width: 100%">
@@ -159,7 +155,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<input type="submit" value="Thêm mới" class="button" />
+					<input type="submit" value="Cập nhật" class="update_button" />
 				</td>
 			</tr>
 		</table>

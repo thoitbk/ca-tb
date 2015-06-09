@@ -117,4 +117,14 @@ public class AdministrativeProcedureBOImpl implements AdministrativeProcedureBO 
 			}
 		}
 	}
+	
+	@Transactional
+	public List<AdministrativeProcedure> listAdministrativeProcedures() {
+		return administrativeProcedureDAO.listAdministrativeProcedures();
+	}
+	
+	@Transactional
+	public AdministrativeProcedureFile getAdministrativeProcedureFile(Integer fileId) {
+		return administrativeProcedureDAO.getAdministrativeProcedureFile(fileId);
+	}
 }

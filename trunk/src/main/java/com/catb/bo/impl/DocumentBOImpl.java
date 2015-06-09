@@ -114,4 +114,14 @@ public class DocumentBOImpl implements DocumentBO {
 			}
 		}
 	}
+	
+	@Transactional
+	public DocumentFile getDocumentFileById(Integer id) {
+		return documentDAO.getDocumentFileById(id);
+	}
+	
+	@Transactional
+	public List<Document> listDocuments() {
+		return documentDAO.listDocuments();
+	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="exTag" uri="/WEB-INF/tag/extags.tld" %>
 <div ID="Banner">
-	<embed width="100%" height="114" align="middle" src="images/banner.swf" wmode="transparent">
+	<embed width="100%" height="114" align="middle" src="${ct}/images/banner.swf" wmode="transparent">
 </div>
 <div>
 	<exTag:menu menuHierarchy="${MENU_HIERARCHY}" request="${pageContext.request}" menuId="menu-bar" selectedClass="active"/>

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.catb.bo.NewsBO;
 import com.catb.bo.NewsCatalogBO;
+import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.CommonInfo;
 import com.catb.model.NewsCatalog;
@@ -45,11 +46,11 @@ public class ComponentController {
 		List<NewsCatalog> rightTopNewsCatalogs = newsCatalogBO.getNewsCatalogs(
 				MenuLoader.DisplayLocation.RIGHT_TOP.getPosition(), null, 0, true, rightTopSize);
 		
-		NewsCatalog comment = new NewsCatalog(PropertiesUtil.getProperty("comment.name"), PropertiesUtil.getProperty("comment.url"));
-		NewsCatalog administrativeProcedures = new NewsCatalog(PropertiesUtil.getProperty("administrativeProcedures.name"), PropertiesUtil.getProperty("administrativeProcedures.url"));
-		NewsCatalog criminalDenouncement = new NewsCatalog(PropertiesUtil.getProperty("criminalDenouncement.name"), PropertiesUtil.getProperty("criminalDenouncement.url"));
-		NewsCatalog document = new NewsCatalog(PropertiesUtil.getProperty("document.name"), PropertiesUtil.getProperty("document.url"));
-		List<NewsCatalog> columns = new LinkedList<NewsCatalog>(Arrays.asList(comment, administrativeProcedures, criminalDenouncement, document));
+		NewsCatalog comment = new NewsCatalog(PropertiesUtil.getProperty("comment.name"), Constants.COMMENT_URL);
+		NewsCatalog criminalDenouncement = new NewsCatalog(PropertiesUtil.getProperty("criminalDenouncement.name"), Constants.CRIMINAL_DENOUNCEMENT_URL);
+		NewsCatalog administrativeProcedures = new NewsCatalog(PropertiesUtil.getProperty("administrativeProcedures.name"), Constants.ADMINISTRATIVE_PROCEDURE_URL);
+		NewsCatalog document = new NewsCatalog(PropertiesUtil.getProperty("document.name"), Constants.DOCUMENT_URL);
+		List<NewsCatalog> columns = new LinkedList<NewsCatalog>(Arrays.asList(comment, criminalDenouncement, administrativeProcedures, document));
 		
 		model.addAttribute("rightTopNewsCatalogs", rightTopNewsCatalogs);
 		model.addAttribute("columns", columns);
