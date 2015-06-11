@@ -37,6 +37,11 @@ public class ImageCatalog implements Serializable {
 		
 	}
 
+	public ImageCatalog(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
 	public ImageCatalog(Integer id, String name, String description,
 			Set<Image> images) {
 		this.id = id;
