@@ -520,6 +520,22 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete image catalog
+    $("#delImageCatalog").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delImageCatalog').attr('href');
+        reloadUrl = cp + '/cm/imageCatalog/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    // Delete video catalog
+    $("#delVideoCatalog").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delVideoCatalog').attr('href');
+        reloadUrl = cp + '/cm/videoCatalog/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

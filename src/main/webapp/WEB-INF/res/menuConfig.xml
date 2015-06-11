@@ -28,6 +28,16 @@
 			<link>/cm/document/update</link>
 		</menuItem>
 	</menu>
+	<menu id="media">
+		<menuItem id="media_1">
+			<link>/cm/imageCatalog/add</link>
+			<link>/cm/imageCatalog/update</link>
+		</menuItem>
+		<menuItem id="media_2">
+			<link>/cm/videoCatalog/add</link>
+			<link>/cm/videoCatalog/update</link>
+		</menuItem>
+	</menu>
 	<menu id="other">
 		<menuItem id="other_1">
 			<link>/cm/linkCatalog/add</link>

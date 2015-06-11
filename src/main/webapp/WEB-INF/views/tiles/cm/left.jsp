@@ -91,25 +91,25 @@
 					<shiro:hasPermission name="imageCatalog:manage">
 						<li id="media_1" class="${f:getMenuClass(menuItemId, 'media_1', 'selected_subitem')}">
 							<img src="${ct}/resources/images/add_news.gif" class="bullet_menu" />
-							<a href="#">Danh mục Ảnh</a>
+							<a href="${ct}/cm/imageCatalog/add">Danh mục Ảnh</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="videoCatalog:manage">
 						<li id="media_2" class="${f:getMenuClass(menuItemId, 'media_2', 'selected_subitem')}">
 							<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-							<a href="#">Danh mục Video</a>
+							<a href="${ct}/cm/videoCatalog/add">Danh mục Video</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="image:manage">
 						<li id="media_3" class="${f:getMenuClass(menuItemId, 'media_3', 'selected_subitem')}">
 							<img src="${ct}/resources/images/template_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị Ảnh</a>
+							<a href="${ct}/cm/image/add">Quản trị Ảnh</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="video:manage">
 						<li id="media_4" class="${f:getMenuClass(menuItemId, 'media_4', 'selected_subitem')}">
 							<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị Video</a>
+							<a href="${ct}/cm/video/add">Quản trị Video</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>
