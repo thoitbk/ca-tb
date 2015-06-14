@@ -236,7 +236,7 @@ CREATE TABLE `image` (
   `caption` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `file` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `display` tinyint(1) DEFAULT NULL,
-  `image_catalog_id` int(10) NOT NULL,
+  `image_catalog_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `image_image_catalog_FK` (`image_catalog_id`),
   CONSTRAINT `image_image_catalog_FK` FOREIGN KEY (`image_catalog_id`) REFERENCES `image_catalog` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

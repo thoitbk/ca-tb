@@ -72,19 +72,24 @@
 							<span class="lblBlack">Chọn file</span>
 						</div>
 					</div>
-					<div style="margin-left: 20px; margin-top: 17px;" id="progress" class="lblBlack"></div>
 					<div id="imageBox">
-						<%-- <div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left; float: left;">
-							<c:if test="${images != null}">
-								<a href="${images.path}" id="thumbImage"><img src="${images.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
+						<div id="uploadedImage" style="height: 50px; vertical-align: middle; text-align: left; float: left;">
+							<c:if test="${imageFile != null}">
+								<a href="${imageFile.path}" id="thumbImage"><img src="${imageFile.path}" alt="Ảnh đại diện" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
 							</c:if>
 						</div>
-						<div id="removeIcon">
-							<c:if test="${images != null}">
-								<a href="javascript:void(0);" id="removeNewsImage"><img src="${ct}/resources/images/remove.png" alt="Xóa ảnh" style="width: 20px; height: 20px" /></a>
+						<div id="removeImageIcon">
+							<c:if test="${imageFile != null}">
+								<a href="javascript:void(0);" id="removeImage"><img src="${ct}/resources/images/remove.png" alt="Xóa ảnh" style="width: 20px; height: 20px" /></a>
 							</c:if>
-						</div> --%>
+						</div>
 					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div style="margin-top: 5px; vertical-align: middle;" id="progress" class="lblBlack"></div>
 				</td>
 			</tr>
 			<tr>
@@ -126,7 +131,7 @@
 		</c:forEach>
 		<tr>
 			<td colspan="6" style="text-align: right; background-color: #FFF; padding: 0.7em;">
-				<exTag:paging pageInfo="${pageInfo}" link="${ct}/cm/news/manage" cssClass="page_link" params="${params}" />
+				<exTag:paging pageInfo="${pageInfo}" link="${ct}/cm/image/add" cssClass="page_link" params="${params}" />
 			</td>
 		</tr>
 	    <tr>
