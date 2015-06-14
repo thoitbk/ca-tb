@@ -55,4 +55,9 @@ public class ImageDAOImpl implements ImageDAO {
 		
 		return (Long) criteria.uniqueResult();
 	}
+
+	public void addImage(Image image) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(image);
+	}
 }

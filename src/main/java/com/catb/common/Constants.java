@@ -22,6 +22,10 @@ public class Constants {
 	public static Integer NUMBER_OF_PAGE_LINK;
 	public static String ADMINISTRATIVE_PROCEDURE_LOCATION;
 	public static String DOCUMENT_LOCATION;
+	public static String IMAGE_LOCATION;
+	public static String IMAGE_URL;
+	public static String VIDEO_LOCATION;
+	public static String VIDEO_URL;
 	public static final Integer MAX_SQ_NUMBER = 2000000000;
 	public static final String NEWS_PREFIX = "/tin-tuc";
 	public static final String HOMEPAGE = "Trang chủ";
@@ -42,6 +46,10 @@ public class Constants {
 			NUMBER_OF_PAGE_LINK = config.getInt("NUMBER_OF_PAGE_LINK");
 			ADMINISTRATIVE_PROCEDURE_LOCATION = config.getString("ADMINISTRATIVE_PROCEDURE_LOCATION");
 			DOCUMENT_LOCATION = config.getString("DOCUMENT_LOCATION");
+			IMAGE_LOCATION = config.getString("IMAGE_LOCATION");
+			IMAGE_URL = config.getString("IMAGE_URL");
+			VIDEO_LOCATION = config.getString("VIDEO_LOCATION");
+			VIDEO_URL = config.getString("VIDEO_URL");
 		} catch (ConfigurationException ex) {
 			logger.error("Loading configuration failed: ", ex);
 		}

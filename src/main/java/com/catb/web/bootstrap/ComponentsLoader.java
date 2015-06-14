@@ -68,6 +68,8 @@ public class ComponentsLoader {
 			Util.createFolder(Constants.ADMINISTRATIVE_PROCEDURE_LOCATION);
 			Util.createFolder(Constants.DOCUMENT_LOCATION);
 			Util.createFolder(Constants.NEWS_IMAGE_LOCATION);
+			Util.createFolder(Constants.IMAGE_LOCATION);
+			Util.createFolder(Constants.VIDEO_LOCATION);
 		}
 	}
 }
