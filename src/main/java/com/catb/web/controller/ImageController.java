@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,14 +65,21 @@ public class ImageController {
 			@RequestParam(value = "cId", required = false) Integer imageCatalogId, 
 			@RequestParam(value = "p", required = false, defaultValue = "1") Integer page, 
 			ModelMap model, HttpServletRequest request) {
+		model.addAttribute("imageCatalogMap", populateImageCatalogs());
+		
+		Map<String, String> params = new LinkedHashMap<String, String>();
 		ImageViewModel imageViewModel = new ImageViewModel();
+		if (imageCatalogId != null && imageCatalogId >= 0) {
+			imageViewModel.setImageCatalogId(imageCatalogId);
+			params.put("cId", String.valueOf(imageCatalogId));
+		}
 		model.addAttribute("imageViewModel", imageViewModel);
+		model.addAttribute("params", params);
 		
 		Integer pageSize = Util.getPageSize(request);
-		model.addAttribute("images", imageBO.getImages(imageCatalogId, page, pageSize));
+		List<Image> images = imageBO.getImages(imageCatalogId, page, pageSize);
+		model.addAttribute("images", images);
 		model.addAttribute("pageInfo", new PageInfo(imageBO.countImages(imageCatalogId), page, pageSize));
-		
-		model.addAttribute("imageCatalogMap", populateImageCatalogs());
 		
 		request.getSession().removeAttribute("imageFile");
 		
@@ -86,6 +94,14 @@ public class ImageController {
 								@Valid ImageViewModel imageViewModel, BindingResult bindingResult, 
 								HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("imageCatalogMap", populateImageCatalogs());
+			
+			Map<String, String> params = new LinkedHashMap<String, String>();
+			if (imageCatalogId != null && imageCatalogId >= 0) {
+				imageViewModel.setImageCatalogId(imageCatalogId);
+				params.put("cId", String.valueOf(imageCatalogId));
+			}
+			model.addAttribute("params", params);
 			Integer pageSize = Util.getPageSize(request);
 			model.addAttribute("images", imageBO.getImages(imageCatalogId, page, pageSize));
 			model.addAttribute("pageInfo", new PageInfo(imageBO.countImages(imageCatalogId), page, pageSize));
@@ -105,6 +121,67 @@ public class ImageController {
 			imageBO.addImage(image, imageCatalogId);
 			
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("image.created.successfully"));
+			
+			String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
+			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/image/add" + queryString));
+		}
+	}
+	
+	@RequiresPermissions(value = {"image:manage"})
+	@RequestMapping(value = "/cm/image/update/{id}", method = RequestMethod.GET)
+	public ModelAndView showUpdateImage(
+			@RequestParam(value = "cId", required = false) Integer catalogId,
+			@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request) {
+		ImageViewModel imageViewModel = new ImageViewModel();
+		Image image = imageBO.fetchImageById(id);
+		request.getSession().removeAttribute("imageFile");
+		if (image != null) {
+			Integer imageCatalogId = image.getImageCatalog() != null ? image.getImageCatalog().getId() : null;
+			imageViewModel.setImageCatalogId(imageCatalogId);
+			imageViewModel.setCaption(image.getCaption());
+			imageViewModel.setDisplay(image.getDisplay());
+			
+			if (image.getFile() != null) {
+				request.getSession().setAttribute("imageFile", new FileMeta(String.valueOf(image.getId()), null, null, null, image.getFile()));
+			}
+		}
+		
+		model.addAttribute("imageCatalogMap", populateImageCatalogs());
+		model.addAttribute("imageViewModel", imageViewModel);
+		Integer pageSize = Util.getPageSize(request);
+		model.addAttribute("images", imageBO.getImages(catalogId, 1, pageSize));
+		model.addAttribute("pageInfo", new PageInfo(imageBO.countImages(catalogId), 1, pageSize));
+		
+		return new ModelAndView("cm/image/update");
+	}
+	
+	@RequiresPermissions(value = {"image:manage"})
+	@RequestMapping(value = "/cm/image/update/{id}", method = RequestMethod.POST)
+	public ModelAndView processUpdateImage(
+			@RequestParam(value = "cId", required = false) Integer catalogId,
+			@PathVariable("id") Integer id, @Valid ImageViewModel imageViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("imageCatalogMap", populateImageCatalogs());
+			Integer pageSize = Util.getPageSize(request);
+			model.addAttribute("images", imageBO.getImages(catalogId, 1, pageSize));
+			model.addAttribute("pageInfo", new PageInfo(imageBO.countImages(catalogId), 1, pageSize));
+			
+			return new ModelAndView("cm/image/update");
+		} else {
+			Image image = new Image();
+			image.setId(id);
+			image.setCaption(imageViewModel.getCaption());
+			image.setDisplay(imageViewModel.getDisplay());
+			
+			FileMeta fileMeta = (FileMeta) request.getSession().getAttribute("imageFile");
+			if (fileMeta != null) {
+				image.setFile(fileMeta.getPath());
+			}
+			
+			imageBO.updateImage(image, imageViewModel.getImageCatalogId());
+			
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("image.updated.successfully"));
 			
 			String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/image/add" + queryString));

@@ -37,6 +37,14 @@
 			<link>/cm/videoCatalog/add</link>
 			<link>/cm/videoCatalog/update</link>
 		</menuItem>
+		<menuItem id="media_3">
+			<link>/cm/image/add</link>
+			<link>/cm/image/update</link>
+		</menuItem>
+		<menuItem id="media_4">
+			<link>/cm/video/add</link>
+			<link>/cm/video/update</link>
+		</menuItem>
 	</menu>
 	<menu id="other">
 		<menuItem id="other_1">

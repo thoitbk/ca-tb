@@ -35,10 +35,6 @@ jQuery(function ($) {
 	</div>
 </div>
 <div>
-	<c:if test="${not empty msg}">
-		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
-		<c:remove var="msg" scope="session" />
-	</c:if>
 	<form:form method="post" commandName="imageViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table class="center">
@@ -47,7 +43,7 @@ jQuery(function ($) {
 					<span class="lblBlack">Chọn danh mục</span>
 				</td>
 				<td width="80%">
-					<form:select path="imageCatalogId" id="imageCatalogId" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="imageCatalogId" id="_imageCatalogId" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn danh mục ảnh ------"></form:option>
 						<form:options items="${imageCatalogMap}"/>
 					</form:select>
@@ -107,7 +103,7 @@ jQuery(function ($) {
 					&nbsp;
 				</td>
 				<td>
-					<input type="submit" value="Thêm mới" class="button" />
+					<input type="submit" value="Cập nhật" class="update_button" />
 				</td>
 			</tr>
 		</table>
