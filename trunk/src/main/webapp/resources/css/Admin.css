@@ -985,3 +985,10 @@ span.star
 	text-decoration:none;
 	color: blue;
 }
+
+.thumb_list {
+	border: 1px solid #BBB;
+	padding: 2px;
+	vertical-align: middle;
+	max-height: 70px;
+}

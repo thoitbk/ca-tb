@@ -2,6 +2,7 @@ package com.catb.bo.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,9 +38,42 @@ public class ImageBOImpl implements ImageBO {
 			ImageCatalog imageCatalog = imageCatalogDAO.getImageCatalogById(imageCatalogId);
 			if (imageCatalog != null) {
 				image.setImageCatalog(imageCatalog);
+				imageCatalog.getImages().add(image);
 			}
 		}
 		
 		imageDAO.addImage(image);
 	}
+	
+	@Transactional
+	public Image fetchImageById(Integer id) {
+		Image image = null;
+		if (id != null && id >= 0) {
+			image = imageDAO.getImageById(id);
+			if (image != null) {
+				Hibernate.initialize(image.getImageCatalog());
+			}
+		}
+		
+		return image;
+	}
+	
+	@Transactional
+	public void updateImage(Image image, Integer imageCatalogId) {
+		Image img = imageDAO.getImageById(image.getId());
+		if (img != null) {
+			img.setCaption(image.getCaption());
+			img.setDisplay(image.getDisplay());
+			img.setFile(image.getFile());
+			if (imageCatalogId != null) {
+				ImageCatalog imageCatalog = imageCatalogDAO.getImageCatalogById(imageCatalogId);
+				if (imageCatalog != null) {
+					img.setImageCatalog(imageCatalog);
+					imageCatalog.getImages().add(img);
+				}
+			}
+			
+			imageDAO.updateImage(img);
+		}
+	} 
 }

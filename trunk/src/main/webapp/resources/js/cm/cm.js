@@ -406,6 +406,16 @@ $(document).ready(function() {
     	window.open(url, "_blank", "scrollbars=yes, resizable=yes, top=100, left=100, width=1100, height=600");
     });
     
+    // Image management
+    $("#imageCatalogId").change(function () {
+    	var id = $(this).find('option:selected').val();
+    	if (id == null || id == '' || id < 0) {
+    		window.location.href = cp + '/cm/image/add';
+    	} else {
+    		window.location.href = cp + '/cm/image/add?cId=' + id;
+    	}
+    });
+    
     // ------------------------------- For delete functionalities ----------------------------------
     // select all checkboxs
     $('#selectAll').click(function(event) {

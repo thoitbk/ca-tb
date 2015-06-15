@@ -195,4 +195,8 @@
 	<definition name="cm/image/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/media/addImage.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/image/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/media/updateImage.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

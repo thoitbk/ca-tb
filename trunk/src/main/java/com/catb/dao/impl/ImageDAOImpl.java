@@ -38,10 +38,10 @@ public class ImageDAOImpl implements ImageDAO {
 	
 	private Criteria buildCriteria(Session session, Integer imageCatalogId) {
 		Criteria criteria = session.createCriteria(Image.class, "image");
-		criteria.createAlias("image.imageCatalog", "imageCatalog");
-		criteria.setFetchMode("imageCatalog", FetchMode.JOIN);
 		
 		if (imageCatalogId != null && imageCatalogId >= 0) {
+			criteria.createAlias("image.imageCatalog", "imageCatalog");
+			criteria.setFetchMode("imageCatalog", FetchMode.JOIN);
 			criteria.add(Restrictions.eq("imageCatalog.id", imageCatalogId));
 		}
 		
@@ -59,5 +59,15 @@ public class ImageDAOImpl implements ImageDAO {
 	public void addImage(Image image) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(image);
+	}
+
+	public Image getImageById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Image) session.get(Image.class, id);
+	}
+
+	public void updateImage(Image image) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(image);
 	}
 }

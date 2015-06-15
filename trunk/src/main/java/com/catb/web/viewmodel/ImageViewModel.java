@@ -2,8 +2,11 @@ package com.catb.web.viewmodel;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ImageViewModel {
 	
+	@NotBlank
 	@Size(min = 0, max = 300)
 	private String caption;
 	
