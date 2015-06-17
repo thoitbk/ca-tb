@@ -351,4 +351,89 @@ $(function () {
 	        }
 	    });
     });
+    
+    // Upload video
+    $('#videoUpload').fileupload({
+    	add: function(e, data) {
+            var uploadErrors = [];
+            var acceptFileTypes = /.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4|mpeg|MPEG|mp3|MP3|wav|WAV|wma|WMA)$/i;
+            ///\.(webm|mkv|flv|vob|ogv|ogg|drc|mng|avi|mov|qt|wmv|yuv|rm|rmvb|asf|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|m2v|svi|3gp|3g2|mxf|roq|nsv|swf|aif|iff|m3u|m4a|mid|mp3|mpa|ra|wav|wma)$/i;
+            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                uploadErrors.push('Chỉ cho phép upload file định dạng video hoặc audio');
+            }
+            if(uploadErrors.length > 0) {
+                alert(uploadErrors.join("\n"));
+            } else {
+                data.submit();
+            }
+    	},
+    	sequentialUploads: true,
+        dataType: 'json',
+        
+        done: function (e, data) {
+        	$("#uploadedVideo").empty();
+        	$("#removeVideoIcon").empty();
+        	var videoUrl = cp + data.result.path;
+        	var removeIcon = cp + '/resources/images/remove.png';
+        	var append1 = buildEmbedScript(videoUrl);
+        	var append2 = '<a href="javascript:void(0);" id="removeVideo"><img src="' + removeIcon + '" alt="Xóa video" style="width: 20px; height: 20px" /></a>';
+        	$("#uploadedVideo").append(append1);
+        	$("#removeVideoIcon").append(append2);
+        },
+        
+        progressall: function (e, data) {
+	        var progress = parseInt(data.loaded / data.total * 100, 10);
+	        var percent = $('#progress');
+	        percent.text("Đang upload " + progress + "%");
+	        if (progress == 100) {
+	        	percent.empty();
+	        	percent.append("<span id='uploadsuccess'>Upload thành công</span>");
+	        	$("#uploadsuccess").delay(5000).fadeOut();
+	        }
+   		},
+   		
+		dropZone: $('#dropzone')
+    }).bind('fileuploadsubmit', function (e, data) {
+    });
+    
+    function buildEmbedScript(videoUrl) {
+    	var s = '<script type="text/javascript"> jwplayer("uploadedVideo").setup({file: "' + videoUrl + '"});</script>';
+    	return s;
+    }
+    
+    $("#removeVideoIcon").on('click', $("#removeVideo"), function() {
+    	if (!confirm('Bạn có chắc chắn muốn xóa video ?')) {
+			return;
+		}
+		url = cp + '/cm/video/remove';
+		$.ajax({
+	        type : "POST",
+	        url : url,
+	        dataType: "json",
+	        success : function(response) {
+	        	var statusCode = response.code;
+	        	switch (statusCode) {
+	        	case 1:
+	        		$("#uploadedVideo").empty();
+	        		$("#removeVideoIcon").empty();
+	        		break;
+	        	case 2:
+	        		window.location.href = errorUrl;
+	        		break;
+	        	case 3:
+	        		window.location.href = unauthenticatedUrl;
+	        		break;
+	        	case 4:
+	        		window.location.href = unauthorizedUrl;
+	        		break;
+	        	case 5:
+	        		window.location.href = notExistedUrl;
+	        		break;
+	        	default:
+	        		window.location.href = notOkUrl;
+	        		break;
+	        	}
+	        }
+	    });
+    });
 });

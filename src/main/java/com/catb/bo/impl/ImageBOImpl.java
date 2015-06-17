@@ -75,5 +75,14 @@ public class ImageBOImpl implements ImageBO {
 			
 			imageDAO.updateImage(img);
 		}
+	}
+	
+	@Transactional
+	public void deleteImages(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				imageDAO.deleteImage(id);
+			}
+		}
 	} 
 }

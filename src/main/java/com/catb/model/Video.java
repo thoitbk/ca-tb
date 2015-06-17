@@ -34,9 +34,6 @@ public class Video implements Serializable {
 	@Column(name = "sq_number")
 	private Integer sqNumber;
 	
-	@Column(name = "type")
-	private Integer type;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "video_catalog_id")
 	private VideoCatalog videoCatalog;
@@ -44,15 +41,14 @@ public class Video implements Serializable {
 	public Video() {
 		
 	}
-
+	
 	public Video(Integer id, String caption, String file, Boolean display,
-			Integer sqNumber, Integer type, VideoCatalog videoCatalog) {
+			Integer sqNumber, VideoCatalog videoCatalog) {
 		this.id = id;
 		this.caption = caption;
 		this.file = file;
 		this.display = display;
 		this.sqNumber = sqNumber;
-		this.type = type;
 		this.videoCatalog = videoCatalog;
 	}
 
@@ -94,14 +90,6 @@ public class Video implements Serializable {
 
 	public void setSqNumber(Integer sqNumber) {
 		this.sqNumber = sqNumber;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
 	}
 
 	public VideoCatalog getVideoCatalog() {

@@ -11,4 +11,5 @@ public interface ImageDAO {
 	public void addImage(Image image);
 	public Image getImageById(Integer id);
 	public void updateImage(Image image);
+	public void deleteImage(Integer id);
 }

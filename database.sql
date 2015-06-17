@@ -233,7 +233,7 @@ DROP TABLE IF EXISTS `image`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `image` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `caption` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `caption` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `file` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `display` tinyint(1) DEFAULT NULL,
   `image_catalog_id` int(10) DEFAULT NULL,
@@ -485,12 +485,11 @@ DROP TABLE IF EXISTS `video`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `video` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `caption` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `caption` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `file` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `display` tinyint(1) DEFAULT NULL,
   `sq_number` int(10) DEFAULT NULL,
-  `type` int(2) DEFAULT NULL,
-  `video_catalog_id` int(10) NOT NULL,
+  `video_catalog_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `video_video_catalog_FK` (`video_catalog_id`),
   CONSTRAINT `video_video_catalog_FK` FOREIGN KEY (`video_catalog_id`) REFERENCES `video_catalog` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
