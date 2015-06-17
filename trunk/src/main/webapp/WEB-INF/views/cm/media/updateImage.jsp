@@ -54,7 +54,7 @@ jQuery(function ($) {
 					<span class="lblBlack">Tiêu đề ảnh</span>
 				</td>
 				<td width="80%">
-					<form:input path="caption" id="caption" maxlength="300" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="caption" id="caption" maxlength="1000" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -137,7 +137,7 @@ jQuery(function ($) {
 					</c:if>
 				</td>
 				<td>
-					<a href="${ct}/cm/image/update/${image.id}">
+					<a href='<exTag:link link="${ct}/cm/image/update/${image.id}" params="${params}" />'>
 						<img src="${ct}/resources/images/update.png" alt="Cập nhật" class="update" />
 					</a>
 				</td>

@@ -199,4 +199,12 @@
 	<definition name="cm/image/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/media/updateImage.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/video/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/media/addVideo.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/video/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/media/updateVideo.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

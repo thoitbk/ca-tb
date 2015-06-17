@@ -11,71 +11,72 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.catb.dao.ImageDAO;
-import com.catb.model.Image;
+import com.catb.dao.VideoDAO;
+import com.catb.model.Video;
 
 @Repository
-public class ImageDAOImpl implements ImageDAO {
+public class VideoDAOImpl implements VideoDAO {
 	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Image> getImages(Integer imageCatalogId, Integer page, Integer pageSize) {
+	public List<Video> getVideos(Integer videoCatalogId, Integer page, Integer pageSize) {
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = buildCriteria(session, imageCatalogId);
+		Criteria criteria = buildCriteria(session, videoCatalogId);
 		
 		criteria.setFirstResult((page - 1) * pageSize);
 		criteria.setMaxResults(pageSize);
 		
+		criteria.addOrder(Order.asc("sqNumber"));
 		criteria.addOrder(Order.desc("id"));
 		
-		return (List<Image>) criteria.list();
+		return (List<Video>) criteria.list();
 	}
 	
-	private Criteria buildCriteria(Session session, Integer imageCatalogId) {
-		Criteria criteria = session.createCriteria(Image.class, "image");
+	private Criteria buildCriteria(Session session, Integer videoCatalogId) {
+		Criteria criteria = session.createCriteria(Video.class, "video");
 		
-		if (imageCatalogId != null && imageCatalogId >= 0) {
-			criteria.createAlias("image.imageCatalog", "imageCatalog");
-			criteria.setFetchMode("imageCatalog", FetchMode.JOIN);
-			criteria.add(Restrictions.eq("imageCatalog.id", imageCatalogId));
+		if (videoCatalogId != null && videoCatalogId >= 0) {
+			criteria.createAlias("video.videoCatalog", "videoCatalog");
+			criteria.setFetchMode("videoCatalog", FetchMode.JOIN);
+			criteria.add(Restrictions.eq("videoCatalog.id", videoCatalogId));
 		}
 		
 		return criteria;
 	}
 
-	public Long countImages(Integer imageCatalogId) {
+	public Long countVideos(Integer videoCatalogId) {
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = buildCriteria(session, imageCatalogId);
+		Criteria criteria = buildCriteria(session, videoCatalogId);
 		criteria.setProjection(Projections.rowCount());
 		
 		return (Long) criteria.uniqueResult();
 	}
 
-	public void addImage(Image image) {
+	public void addVideo(Video video) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(image);
+		session.save(video);
 	}
 
-	public Image getImageById(Integer id) {
+	public Video getVideoById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Image) session.get(Image.class, id);
+		return (Video) session.get(Video.class, id);
 	}
 
-	public void updateImage(Image image) {
+	public void updateVideo(Video video) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(image);
+		session.update(video);
 	}
 
-	public void deleteImage(Integer id) {
+	public void deleteVideo(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		Image image = (Image) session.get(Image.class, id);
-		if (image != null) {
-			session.delete(image);
+		Video video = (Video) session.get(Video.class, id);
+		if (video != null) {
+			session.delete(video);
 		}
 	}
 }

@@ -546,6 +546,14 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete image
+    $("#delImage").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delImage').attr('href');
+        reloadUrl = cp + '/cm/image/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

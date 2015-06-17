@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.fileupload.FileItem;
@@ -132,6 +133,11 @@ public class ImageController {
 	public ModelAndView showUpdateImage(
 			@RequestParam(value = "cId", required = false) Integer catalogId,
 			@PathVariable("id") Integer id, ModelMap model, HttpServletRequest request) {
+		Map<String, String> params = new LinkedHashMap<String, String>();
+		if (catalogId != null && catalogId >= 0) {
+			params.put("cId", String.valueOf(catalogId));
+		}
+		model.addAttribute("params", params);
 		ImageViewModel imageViewModel = new ImageViewModel();
 		Image image = imageBO.fetchImageById(id);
 		request.getSession().removeAttribute("imageFile");
@@ -162,6 +168,11 @@ public class ImageController {
 			@PathVariable("id") Integer id, @Valid ImageViewModel imageViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
+			Map<String, String> params = new LinkedHashMap<String, String>();
+			if (catalogId != null && catalogId >= 0) {
+				params.put("cId", String.valueOf(catalogId));
+			}
+			model.addAttribute("params", params);
 			model.addAttribute("imageCatalogMap", populateImageCatalogs());
 			Integer pageSize = Util.getPageSize(request);
 			model.addAttribute("images", imageBO.getImages(catalogId, 1, pageSize));
@@ -186,6 +197,16 @@ public class ImageController {
 			String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/image/add" + queryString));
 		}
+	}
+	
+	@RequiresPermissions(value = {"image:manage"})
+	@RequestMapping(value = "/cm/image/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Status deleteImage(@RequestParam("ids") Integer[] ids, HttpSession session) {
+		imageBO.deleteImages(ids);
+		session.setAttribute("msg", PropertiesUtil.getProperty("image.deleted.successfully"));
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 	
 	@RequiresPermissions(value = {"image:manage"})
