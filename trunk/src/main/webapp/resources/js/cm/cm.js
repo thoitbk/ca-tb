@@ -416,6 +416,16 @@ $(document).ready(function() {
     	}
     });
     
+    // Video management
+    $("#videoCatalogId").change(function () {
+    	var id = $(this).find('option:selected').val();
+    	if (id == null || id == '' || id < 0) {
+    		window.location.href = cp + '/cm/video/add';
+    	} else {
+    		window.location.href = cp + '/cm/video/add?cId=' + id;
+    	}
+    });
+    
     // ------------------------------- For delete functionalities ----------------------------------
     // select all checkboxs
     $('#selectAll').click(function(event) {
@@ -551,6 +561,14 @@ $(document).ready(function() {
         event.preventDefault();
         postUrl = $('#delImage').attr('href');
         reloadUrl = cp + '/cm/image/add';
+        post(postUrl, reloadUrl);
+    });
+    
+    // Delete video
+    $("#delVideo").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delVideo').attr('href');
+        reloadUrl = cp + '/cm/video/add';
         post(postUrl, reloadUrl);
     });
     

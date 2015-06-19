@@ -992,3 +992,12 @@ span.star
 	vertical-align: middle;
 	max-height: 70px;
 }
+
+#uploadedVideo {
+	float: left;
+}
+
+.video_thumb {
+	width: 60px;
+	height: 60px;
+}

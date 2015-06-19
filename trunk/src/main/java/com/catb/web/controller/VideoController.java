@@ -116,9 +116,11 @@ public class VideoController {
 			Video video = new Video();
 			video.setCaption(videoViewModel.getCaption());
 			video.setDisplay(videoViewModel.getDisplay());
+			Integer sqNumber = Constants.MAX_SQ_NUMBER;
 			if (videoViewModel.getSqNumber() != null && !"".equals(videoViewModel.getSqNumber().trim())) {
-				video.setSqNumber(Integer.parseInt(videoViewModel.getSqNumber().trim()));
+				sqNumber = Integer.parseInt(videoViewModel.getSqNumber().trim());
 			}
+			video.setSqNumber(sqNumber);
 			FileMeta fileMeta = (FileMeta) request.getSession().getAttribute("videoFile");
 			if (fileMeta != null) {
 				video.setFile(fileMeta.getPath());
@@ -196,9 +198,12 @@ public class VideoController {
 			if (fileMeta != null) {
 				video.setFile(fileMeta.getPath());
 			}
+			Integer sqNumber = Constants.MAX_SQ_NUMBER;
 			if (videoViewModel.getSqNumber() != null && !"".equals(videoViewModel.getSqNumber().trim())) {
-				video.setSqNumber(Integer.parseInt(videoViewModel.getSqNumber().trim()));
+				sqNumber = Integer.parseInt(videoViewModel.getSqNumber().trim());
 			}
+			video.setSqNumber(sqNumber);
+			
 			videoBO.updateVideo(video, videoViewModel.getVideoCatalogId());
 			
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("video.updated.successfully"));
@@ -223,7 +228,7 @@ public class VideoController {
 	@ResponseBody
 	public FileMeta uploadVideo(HttpServletRequest request, HttpServletResponse response) {
 		List<FileMeta> files = getUploadFiles(request);
-		
+		request.getSession().removeAttribute("videoFile");
 		if (files != null && files.size() > 0) {
 			request.getSession().setAttribute("videoFile", files.get(0));
 			return files.get(0);
