@@ -15,7 +15,8 @@
 	<script type="text/javascript" src="${ct}/resources/js/menus.js" ></script>
 	<script type="text/javascript" src="${ct}/resources/js/box.js"></script>
 	<script type="text/javascript" src="${ct}/resources/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="${ct}/resources/js/jquery-ui-1.8.18.custom.min.js"></script>
+	<%-- <script type="text/javascript" src="${ct}/resources/js/jquery-ui-1.8.18.custom.min.js"></script> --%>
+	<script src="${ct}/resources/js/jquery-ui-tab.js" type="text/javascript"></script>
 	<script type="text/javascript" src="${ct}/resources/js/news.js"></script>
 	
 	<link href="${ct}/resources/images/ca_logo.png" rel="shortcut icon" />
