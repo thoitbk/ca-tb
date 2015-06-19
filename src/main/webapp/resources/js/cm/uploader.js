@@ -355,17 +355,23 @@ $(function () {
     // Upload video
     $('#videoUpload').fileupload({
     	add: function(e, data) {
-            var uploadErrors = [];
-            var acceptFileTypes = /.(avi|AVI|wmv|WMV|flv|FLV|mpg|MPG|mp4|MP4|mpeg|MPEG|mp3|MP3|wav|WAV|wma|WMA)$/i;
-            ///\.(webm|mkv|flv|vob|ogv|ogg|drc|mng|avi|mov|qt|wmv|yuv|rm|rmvb|asf|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|m2v|svi|3gp|3g2|mxf|roq|nsv|swf|aif|iff|m3u|m4a|mid|mp3|mpa|ra|wav|wma)$/i;
-            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
-                uploadErrors.push('Chỉ cho phép upload file định dạng video hoặc audio');
+//            var uploadErrors = [];
+            var fileType = data.files[0].name.split('.').pop();
+            var allowdtypes = 'mp4,MP4,mp3,MP3,Mp3,WebM,WEBM,flv,FLV,aac,AAC,Vorbis';
+            if (allowdtypes.indexOf(fileType) < 0) {
+                alert('Chỉ cho phép upload file định dạng video hoặc audio');
+                return false;
             }
-            if(uploadErrors.length > 0) {
-                alert(uploadErrors.join("\n"));
-            } else {
-                data.submit();
-            }
+            data.submit();
+//            var acceptFileTypes = /(\.|\/)(mp4|MP4|mp3|MP3|Mp3|WebM|WEBM|flv|FLV|aac|AAC|Vorbis)$/i;
+//            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+//                uploadErrors.push('Chỉ cho phép upload file định dạng video hoặc audio');
+//            }
+//            if(uploadErrors.length > 0) {
+//                alert(uploadErrors.join("\n"));
+//            } else {
+//                data.submit();
+//            }
     	},
     	sequentialUploads: true,
         dataType: 'json',
@@ -374,8 +380,9 @@ $(function () {
         	$("#uploadedVideo").empty();
         	$("#removeVideoIcon").empty();
         	var videoUrl = cp + data.result.path;
+        	var videoIcon = cp + '/resources/images/video.png';
         	var removeIcon = cp + '/resources/images/remove.png';
-        	var append1 = buildEmbedScript(videoUrl);
+        	var append1 = '<a href="javascript:void(0);" class="preview_video" rel="' + videoUrl + '"><img alt="Video" src="' + videoIcon + '" class="video_thumb"></a>';
         	var append2 = '<a href="javascript:void(0);" id="removeVideo"><img src="' + removeIcon + '" alt="Xóa video" style="width: 20px; height: 20px" /></a>';
         	$("#uploadedVideo").append(append1);
         	$("#removeVideoIcon").append(append2);
@@ -395,11 +402,6 @@ $(function () {
 		dropZone: $('#dropzone')
     }).bind('fileuploadsubmit', function (e, data) {
     });
-    
-    function buildEmbedScript(videoUrl) {
-    	var s = '<script type="text/javascript"> jwplayer("uploadedVideo").setup({file: "' + videoUrl + '"});</script>';
-    	return s;
-    }
     
     $("#removeVideoIcon").on('click', $("#removeVideo"), function() {
     	if (!confirm('Bạn có chắc chắn muốn xóa video ?')) {

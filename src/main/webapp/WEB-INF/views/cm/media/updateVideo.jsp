@@ -14,17 +14,61 @@
 <script src="${ct}/resources/js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/cm/uploader.js" type="text/javascript"></script>
+<!-- jwplayer -->
+<script type="text/javascript" src="${ct}/jwplayer/jwplayer.js"></script>
+<script type="text/javascript">jwplayer.key="L+vphptqtQHGd4F4yQP0ujFMkZL+3WfIXul0HQ==";</script>
+<!-- fancybox -->
+<script type="text/javascript" src="${ct}/fancybox-2/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+<script type="text/javascript" src="${ct}/fancybox-2/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="${ct}/fancybox-2/source/jquery.fancybox.css?v=2.1.5" media="screen" />
 
-<div class="TieuDe">     
+<script type="text/javascript">
+$(function() {
+	$("#uploadedVideo").on('click', $(".preview_video"), function() {
+		var videoUrl = $(".preview_video").attr("rel");
+		playVideo(videoUrl);
+	});
+	$(".play_video").click(function() {
+		var videoUrl = $(this).attr("rel");
+		playVideo(videoUrl);
+	});
+	
+	function playVideo(videoUrl) {
+		$.fancybox({
+	        content: '<div id="video_container" style="width:640px;height:380px;">Đang tải video... </div> ',
+	        scrolling: 'no',
+	        autoScale: false,
+	        fitToView: false,
+	        openEffect : 'elastic',
+	        closeEffect : 'elastic',
+	        minWidth : 640,
+	        minHeight: 380,
+	        width: 640,
+	        height: 380,
+	        modal: true,
+	        showCloseButton: true,
+	        afterShow: function()
+	            {
+	                jwplayer("video_container").setup({
+	                    file: videoUrl,
+	                    width: 640,
+	                    height: 380,
+	                    aspectratio: '16:9',
+	                    autostart: true
+	                });
+	                $('.fancybox-skin').append('<a title="Close" class="fancybox-item fancybox-close" href="javascript:jQuery.fancybox.close();"></a>');
+	            }
+	    });
+	}
+});
+</script>
+
+<div class="TieuDe">
 	<div class="TieuDe_ND">
 		QUẢN TRỊ VIDEO
 	</div>
 </div>
 <div>
-	<c:if test="${not empty msg}">
-		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
-		<c:remove var="msg" scope="session" />
-	</c:if>
 	<form:form method="post" commandName="videoViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table>
@@ -33,7 +77,7 @@
 					<span class="lblBlack">Chọn danh mục</span>
 				</td>
 				<td width="60%">
-					<form:select path="videoCatalogId" id="videoCatalogId" cssStyle="width: 100%;" cssClass="combobox">
+					<form:select path="videoCatalogId" id="_videoCatalogId" cssStyle="width: 100%;" cssClass="combobox">
 						<form:option value="" label="------ Chọn danh mục video ------"></form:option>
 						<form:options items="${videoCatalogMap}"/>
 					</form:select>
@@ -63,7 +107,7 @@
 				<td>
 					<span class="lblBlack">Video</span>
 				</td>
-				<td align="left" colspan="3">
+				<td align="left">
 					<div id="container" style="float: left;">
 						<div id="upload-file-container" class="fade well">
 							<input id="videoUpload" type="file" name="files[]" data-url="${ct}/cm/video/upload" />
@@ -72,10 +116,12 @@
 							<span class="lblBlack">Chọn file</span>
 						</div>
 					</div>
+				</td>
+				<td colspan="2">
 					<div id="videoBox">
 						<div id="uploadedVideo" style="height: 50px; vertical-align: middle; text-align: left; float: left;">
 							<c:if test="${videoFile != null}">
-								<a href="${videoFile.path}" id="thumbVideo"><img src="${videoFile.path}" alt="Ảnh" style="max-height: 100%; max-width: 100%;" class="thumb" /></a>
+								<a href="javascript:void(0);" class="preview_video" rel="${videoFile.path}"><img alt="Video" src="${ct}/resources/images/video.png" class="video_thumb"></a>
 							</c:if>
 						</div>
 						<div id="removeVideoIcon">
@@ -94,7 +140,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<input type="submit" value="Thêm mới" class="button" />
+					<input type="submit" value="Cập nhật" class="update_button" />
 				</td>
 			</tr>
 		</table>
@@ -105,8 +151,8 @@
 			<th width="5%">
 				<input type="checkbox" name="selectAll" id="selectAll">
 			</th>
-			<th width="20%">Video</th>
-			<th width="65%">Tiêu đề</th>
+			<th width="10%">Video</th>
+			<th width="75%">Tiêu đề</th>
 			<th width="5%">Hiển thị</th>
 			<th>Cập nhật</th>
 		</tr>
@@ -115,8 +161,8 @@
 				<td>
 					<input type="checkbox" name="videoId" id="videoId" value="${video.id}" class="checkbox" />
 				</td>
-				<td>
-					<a href="${video.file}" class="thumb_image"><img src="${video.file}" alt="Ảnh" class="thumb_list" /></a>
+				<td style="text-align: center" class="video_list">
+					<a href="javascript:void(0);" class="play_video" rel="${video.file}"><img alt="Video" src="${ct}/resources/images/video-1.png" class="video_thumb"></a>
 				</td>
 				<td><c:out value="${video.caption}"></c:out></td>
 				<td style="text-align: center;">
