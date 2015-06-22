@@ -84,5 +84,10 @@ public class ImageBOImpl implements ImageBO {
 				imageDAO.deleteImage(id);
 			}
 		}
+	}
+	
+	@Transactional
+	public List<Image> getImages(Integer amount) {
+		return imageDAO.getImages(amount);
 	} 
 }

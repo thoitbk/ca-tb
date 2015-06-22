@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -77,5 +78,18 @@ public class ImageDAOImpl implements ImageDAO {
 		if (image != null) {
 			session.delete(image);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Image> getImages(Integer amount) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "FROM Image ORDER BY id DESC";
+		Query query = session.createQuery(select);
+		query.setMaxResults(amount);
+		
+		query.setCacheable(true);
+		query.setCacheRegion("query.images");
+		
+		return (List<Image>) query.list();
 	}
 }

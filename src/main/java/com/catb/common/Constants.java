@@ -33,6 +33,7 @@ public class Constants {
 	public static final String ADMINISTRATIVE_PROCEDURE_URL = "thu-tuc-hanh-chinh";
 	public static final String DOCUMENT_URL = "van-ban-phap-quy";
 	public static final String CRIMINAL_DENOUNCEMENT_URL = "to-giac-toi-pham";
+	public static final Integer IMAGE_AMOUNT = 10;
 	
 	public static void load() {
 		try {
