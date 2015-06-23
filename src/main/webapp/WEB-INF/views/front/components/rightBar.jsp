@@ -50,30 +50,41 @@
 
 <div id="tabs">
 	<ul>
-		<li><a href="image_gallery">Ảnh</a></li>
-		<li><a href="video_gallery">Video</a></li>
+		<li><a href="#image_gallery">Ảnh</a></li>
+		<li><a href="#video_gallery">Video</a></li>
 	</ul>
-	<div id="image_gallery">
-		<div class="image_container">
-			<div id="image_slider" style="display: none; position: relative; margin: 0 auto; width: 1140px; height: 442px; overflow: hidden;">
-				<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1140px; height: 442px; overflow: hidden;">
+	<div id="image_gallery" style="padding-top: 5px;">
+		<div class="image_container" style="border: 1px solid #D0D0D0;">
+			<div id="image_slider" style="display: none; position: relative; margin: 0 auto; width: 120px; height: 90px; overflow: hidden;">
+		        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+		            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+		                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+		            </div>
+		            <div style="position: absolute; display: block; background: url(${ct}/jssor/img/loading.gif) no-repeat center center;
+		                top: 0px; left: 0px;width: 100%;height:100%;">
+		            </div>
+		        </div>
+				<div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 120px; height: 90px; overflow: hidden;">
 					<c:forEach items="${images}" var="image">
 						<div>
-		                    <img u="image" src="${image.file}" />
+		                    <img u="image" src="${image.file}" alt="" />
 		                </div>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
+		<div class="XemChiTiet">
+			<a href='${ct}/thu-vien-anh' style="color: #FF0000">${COMMONINFO.detailsCaption}</a>
+		</div>
 	</div>
-	<div id="video_gallery"></div>
+	<div id="video_gallery">zxczxc</div>
 </div>
 
 <script>
 	$("#tabs").tabs();
 </script>
 
-<%-- <div id="Lien_Ket_Web">
+<div id="Lien_Ket_Web">
 	<select name="linkSites" id="linkSites" class="ddl">
 		<option value="">------ Liên kết website ------</option>
 		<c:forEach items="${LINK_LIST}" var="link">
@@ -92,7 +103,7 @@
 	<div class="space5">
 		&nbsp;
 	</div>
-</div> --%>
+</div>
 
 <script src="${ct}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/docs.min.js" type="text/javascript"></script>
@@ -151,10 +162,10 @@
         function ScaleSlider() {
             var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
             if (parentWidth) {
-                jssor_slider1.$ScaleWidth(parentWidth - 30);
+                jssor_slider1.$ScaleWidth(parentWidth - 0);
             }
             else
-                window.setTimeout(ScaleSlider, 30);
+                window.setTimeout(ScaleSlider, 0);
         }
         ScaleSlider();
 

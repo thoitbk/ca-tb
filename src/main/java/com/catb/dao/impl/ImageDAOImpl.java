@@ -83,12 +83,24 @@ public class ImageDAOImpl implements ImageDAO {
 	@SuppressWarnings("unchecked")
 	public List<Image> getImages(Integer amount) {
 		Session session = sessionFactory.getCurrentSession();
-		String select = "FROM Image ORDER BY id DESC";
+		String select = "FROM Image WHERE display = :display ORDER BY id DESC";
 		Query query = session.createQuery(select);
+		query.setParameter("display", true);
 		query.setMaxResults(amount);
 		
 		query.setCacheable(true);
 		query.setCacheRegion("query.images");
+		
+		return (List<Image>) query.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Image> getImagesByCatalogId(Integer catalogId) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT i FROM Image i INNER JOIN i.imageCatalog c WHERE c.id = :id AND i.display = :display";
+		Query query = session.createQuery(select);
+		query.setParameter("id", catalogId);
+		query.setParameter("display", true);
 		
 		return (List<Image>) query.list();
 	}

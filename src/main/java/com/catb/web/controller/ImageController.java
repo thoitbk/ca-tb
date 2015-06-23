@@ -38,6 +38,8 @@ import com.catb.model.ImageCatalog;
 import com.catb.web.tag.PageInfo;
 import com.catb.web.util.Util;
 import com.catb.web.viewmodel.FileMeta;
+import com.catb.web.viewmodel.ImageGallery;
+import com.catb.web.viewmodel.ImageInfo;
 import com.catb.web.viewmodel.ImageViewModel;
 import com.catb.web.viewmodel.Status;
 
@@ -293,5 +295,28 @@ public class ImageController {
 		File file = new File(absolutePath);
 		
 		return file;
+	}
+	
+	@RequestMapping(value = "/thu-vien-anh", method = RequestMethod.GET)
+	public ModelAndView showImageGalleries(ModelMap model) {
+		List<ImageGallery> imageGalleries = imageCatalogBO.fetchImageCatalogsHavingImage();
+		model.addAttribute("imageGalleries", imageGalleries);
+		
+		return new ModelAndView("imageGalleries");
+	}
+	
+	@RequestMapping(value = {"/thu-vien-anh/{id}/{s}", "/thu-vien-anh/{id}"}, method = RequestMethod.GET)
+	@ResponseBody
+	public List<ImageInfo> showImageGallery(@PathVariable("id") Integer id) {
+		List<Image> images = imageBO.getImagesByCatalogId(id);
+		List<ImageInfo> imageInfos = new LinkedList<ImageInfo>();
+		
+		if (images != null && images.size() > 0) {
+			for (Image image : images) {
+				imageInfos.add(new ImageInfo(image.getCaption(), image.getFile()));
+			}
+		}
+		
+		return imageInfos;
 	}
 }

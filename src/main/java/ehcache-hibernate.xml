@@ -33,6 +33,16 @@
 	   	<persistence strategy="localTempSwap"/>
    	</cache>
    	
+   	<cache
+	   	name="com.catb.model.Image"
+	   	maxEntriesLocalHeap="100"
+	   	eternal="false"
+	   	timeToIdleSeconds="18000"
+	   	timeToLiveSeconds="36000"
+	   	memoryStoreEvictionPolicy="LRU">
+	   	<persistence strategy="localTempSwap"/>
+   	</cache>
+   	
    	<!-- Query cache -->
    	<!-- Used for query cache not named -->
 	<cache 
@@ -81,6 +91,15 @@
 	<!-- region: query.newsCatalogByLocation -->
 	<cache 
 		name="query.newsCatalogByLocation"
+		maxEntriesLocalHeap="50"
+		eternal="false"
+		timeToLiveSeconds="86400">
+		<persistence strategy="localTempSwap"/>
+	</cache>
+	
+	<!-- region: query.images -->
+	<cache 
+		name="query.images"
 		maxEntriesLocalHeap="50"
 		eternal="false"
 		timeToLiveSeconds="86400">
