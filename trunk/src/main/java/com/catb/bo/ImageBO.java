@@ -13,4 +13,5 @@ public interface ImageBO {
 	public void updateImage(Image image, Integer imageCatalogId);
 	public void deleteImages(Integer[] ids);
 	public List<Image> getImages(Integer amount);
+	public List<Image> getImagesByCatalogId(Integer catalogId);
 }

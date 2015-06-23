@@ -13,4 +13,5 @@ public interface ImageDAO {
 	public void updateImage(Image image);
 	public void deleteImage(Integer id);
 	public List<Image> getImages(Integer amount);
+	public List<Image> getImagesByCatalogId(Integer catalogId);
 }

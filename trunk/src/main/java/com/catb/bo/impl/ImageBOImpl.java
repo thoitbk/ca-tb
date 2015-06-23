@@ -89,5 +89,10 @@ public class ImageBOImpl implements ImageBO {
 	@Transactional
 	public List<Image> getImages(Integer amount) {
 		return imageDAO.getImages(amount);
-	} 
+	}
+	
+	@Transactional
+	public List<Image> getImagesByCatalogId(Integer catalogId) {
+		return imageDAO.getImagesByCatalogId(catalogId);
+	}
 }
