@@ -3032,3 +3032,26 @@ p.lead {
 	font: bold 10pt arial;
 	text-decoration: none;
 }
+
+.video_ul {
+	display: block;
+	padding-left: 0px;
+}
+
+.video_ul li {
+	background-color: transparent;
+	background-image: url("/resources/images/li_dt.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-origin: padding-box;
+	background-size: auto auto;
+	margin: 10px 0px 0px;
+	padding: 0px 0px 0px 15px;
+	min-height: 5px;
+	line-height: 2px;
+}
+
+.video_ul li a {
+	text-decoration: none;
+}

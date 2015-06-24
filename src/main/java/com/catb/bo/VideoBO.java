@@ -12,4 +12,5 @@ public interface VideoBO {
 	public Video fetchVideoById(Integer id);
 	public void updateVideo(Video video, Integer videoCatalogId);
 	public void deleteVideos(Integer[] ids);
+	public List<Video> getVideos(Integer amount);
 }
