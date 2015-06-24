@@ -34,6 +34,7 @@ public class Constants {
 	public static final String DOCUMENT_URL = "van-ban-phap-quy";
 	public static final String CRIMINAL_DENOUNCEMENT_URL = "to-giac-toi-pham";
 	public static final Integer IMAGE_AMOUNT = 10;
+	public static final Integer VIDEO_AMOUNT = 5;
 	
 	public static void load() {
 		try {

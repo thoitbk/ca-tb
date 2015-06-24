@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -78,5 +79,16 @@ public class VideoDAOImpl implements VideoDAO {
 		if (video != null) {
 			session.delete(video);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Video> getVideos(Integer amount) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT v FROM Video v WHERE v.display = :display ORDER BY sqNumber ASC, id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("display", true);
+		query.setMaxResults(amount);
+		
+		return (List<Video>) query.list();
 	}
 }

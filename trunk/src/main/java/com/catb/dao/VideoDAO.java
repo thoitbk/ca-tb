@@ -12,4 +12,5 @@ public interface VideoDAO {
 	public Video getVideoById(Integer id);
 	public void updateVideo(Video video);
 	public void deleteVideo(Integer id);
+	public List<Video> getVideos(Integer amount);
 }

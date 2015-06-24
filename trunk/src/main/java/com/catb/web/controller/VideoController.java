@@ -42,6 +42,7 @@ import com.catb.web.tag.PageInfo;
 import com.catb.web.util.Util;
 import com.catb.web.viewmodel.FileMeta;
 import com.catb.web.viewmodel.Status;
+import com.catb.web.viewmodel.VideoInfo;
 import com.catb.web.viewmodel.VideoViewModel;
 
 @Controller
@@ -329,5 +330,20 @@ public class VideoController {
 		File file = new File(absolutePath);
 		
 		return file;
+	}
+	
+	@RequestMapping(value = "/videos", method = RequestMethod.GET)
+	@ResponseBody
+	public List<VideoInfo> getVideos() {
+		List<Video> videos = videoBO.getVideos(Constants.VIDEO_AMOUNT);
+		List<VideoInfo> videoInfos = new LinkedList<VideoInfo>();
+		
+		if (videos != null && videos.size() > 0) {
+			for (Video video : videos) {
+				videoInfos.add(new VideoInfo(video.getId(), video.getCaption(), video.getFile()));
+			}
+		}
+		
+		return videoInfos;
 	}
 }
