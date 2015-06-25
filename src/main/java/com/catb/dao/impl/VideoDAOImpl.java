@@ -91,4 +91,15 @@ public class VideoDAOImpl implements VideoDAO {
 		
 		return (List<Video>) query.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Video> getVideosByCatalogId(Integer catalogId) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT v FROM Video v INNER JOIN v.videoCatalog c WHERE c.id = :id AND v.display = :display";
+		Query query = session.createQuery(select);
+		query.setParameter("id", catalogId);
+		query.setParameter("display", true);
+		
+		return (List<Video>) query.list();
+	}
 }

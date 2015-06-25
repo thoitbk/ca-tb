@@ -2993,7 +2993,7 @@ p.lead {
 }
 
 .main_news {
-	height: 200px;
+	height: 150px;
 }
 
 .TieuDeTin {
@@ -3040,18 +3040,22 @@ p.lead {
 
 .video_ul li {
 	background-color: transparent;
-	background-image: url("/resources/images/li_dt.png");
+	background-image: url("/resources/images/v_bullet.png");
 	background-repeat: no-repeat;
 	background-attachment: scroll;
 	background-clip: border-box;
 	background-origin: padding-box;
 	background-size: auto auto;
-	margin: 10px 0px 0px;
-	padding: 0px 0px 0px 15px;
+	margin: 10px 0px 0px;  
+	padding: 0px 0px 0px 25px;
 	min-height: 5px;
-	line-height: 2px;
+	background-position: 0px center; 
 }
 
 .video_ul li a {
 	text-decoration: none;
+}
+
+.selected_video {
+	font-weight: bold;
 }
