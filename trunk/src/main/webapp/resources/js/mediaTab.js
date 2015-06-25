@@ -19,14 +19,19 @@ jQuery(document).ready(function ($) {
 			                    file: firstUrl,
 			                    width: '100%',
 			                    height: '100%',
-			                    aspectratio: '16:9',
+			                    aspectratio: '16:12',
 			                    autostart: true
 			                });
 		            		var list = videoList.append('<ul class="video_ul"></ul>').find('ul');
 		            		for (var i = 0; i < response.length; i++) {
 		            			var caption = response[i].caption;
 		            			var url = response[i].file;
-		            			var s = '<li><a href="javascript:void(0);" rel="' + url + '">' + caption + '</a></li>';
+		            			var s;
+		            			if (i == 0) {
+		            				s = '<li><a href="javascript:void(0);" rel="' + url + '" class="other_video selected_video">' + caption + '</a></li>';
+		            			} else {
+		            				s = '<li><a href="javascript:void(0);" rel="' + url + '" class="other_video">' + caption + '</a></li>';
+		            			}
 		            			list.append(s);
 		            		}
 		            	}
@@ -95,4 +100,17 @@ jQuery(document).ready(function ($) {
     $(window).bind("load", ScaleSlider);
     $(window).bind("resize", ScaleSlider);
     $(window).bind("orientationchange", ScaleSlider);
+    
+	$("#video_list").on('click', ".other_video", function() {
+		var url = $(this).attr("rel");
+		$(".selected_video").removeClass('selected_video');
+		$(this).addClass("selected_video");
+		jwplayer("video_container").setup({
+            file: url,
+            width: '100%',
+            height: '100%',
+            aspectratio: '16:12',
+            autostart: true
+        });
+	});
 });

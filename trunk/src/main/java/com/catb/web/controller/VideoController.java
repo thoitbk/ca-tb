@@ -42,6 +42,7 @@ import com.catb.web.tag.PageInfo;
 import com.catb.web.util.Util;
 import com.catb.web.viewmodel.FileMeta;
 import com.catb.web.viewmodel.Status;
+import com.catb.web.viewmodel.VideoGallery;
 import com.catb.web.viewmodel.VideoInfo;
 import com.catb.web.viewmodel.VideoViewModel;
 
@@ -345,5 +346,13 @@ public class VideoController {
 		}
 		
 		return videoInfos;
+	}
+	
+	@RequestMapping(value = "/thu-vien-video", method = RequestMethod.GET)
+	public ModelAndView showVideoGalleries(ModelMap model) {
+		List<VideoGallery> videoGalleries = videoCatalogBO.fetchVideoCatalogsHavingVideo();
+		model.addAttribute("videoGalleries", videoGalleries);
+		
+		return new ModelAndView("videoGalleries");
 	}
 }

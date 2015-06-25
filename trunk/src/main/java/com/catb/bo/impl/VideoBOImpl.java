@@ -91,4 +91,9 @@ public class VideoBOImpl implements VideoBO {
 	public List<Video> getVideos(Integer amount) {
 		return videoDAO.getVideos(amount);
 	}
+	
+	@Transactional
+	public List<Video> getVideosByCatalogId(Integer catalogId) {
+		return videoDAO.getVideosByCatalogId(catalogId);
+	}
 }
