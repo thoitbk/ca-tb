@@ -52,7 +52,8 @@ public class VideoCatalogBOImpl implements VideoCatalogBO {
 			}
 		}
 	}
-
+	
+	@Transactional
 	public List<VideoCatalog> fetchVideoCatalogs() {
 		List<VideoCatalog> videoCatalogs = videoCatalogDAO.getVideoCatalogs();
 		if (videoCatalogs != null && videoCatalogs.size() > 0) {
@@ -63,7 +64,8 @@ public class VideoCatalogBOImpl implements VideoCatalogBO {
 		
 		return videoCatalogs;
 	}
-
+	
+	@Transactional
 	public List<VideoGallery> fetchVideoCatalogsHavingVideo() {
 		List<VideoCatalog> videoCatalogs = videoCatalogDAO.getVideoCatalogs();
 		List<VideoGallery> videoGalleries = new LinkedList<VideoGallery>();

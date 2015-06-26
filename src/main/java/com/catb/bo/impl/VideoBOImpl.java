@@ -96,4 +96,14 @@ public class VideoBOImpl implements VideoBO {
 	public List<Video> getVideosByCatalogId(Integer catalogId) {
 		return videoDAO.getVideosByCatalogId(catalogId);
 	}
+	
+	@Transactional
+	public List<Video> getVideos(Integer page, Integer pageSize) {
+		return videoDAO.getVideos(page, pageSize);
+	}
+	
+	@Transactional
+	public Long countVideos() {
+		return videoDAO.countVideos();
+	}
 }

@@ -102,4 +102,25 @@ public class VideoDAOImpl implements VideoDAO {
 		
 		return (List<Video>) query.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Video> getVideos(Integer page, Integer pageSize) {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT v FROM Video v WHERE display = :display ORDER BY sqNumber ASC, id DESC";
+		Query query = session.createQuery(select);
+		query.setParameter("display", true);
+		query.setFirstResult((page - 1) * pageSize);
+		query.setMaxResults(pageSize);
+		
+		return (List<Video>) query.list();
+	}
+
+	public Long countVideos() {
+		Session session = sessionFactory.getCurrentSession();
+		String select = "SELECT COUNT(v) FROM Video v WHERE display = :display";
+		Query query = session.createQuery(select);
+		query.setParameter("display", true);
+		
+		return (Long) query.uniqueResult();
+	}
 }

@@ -3059,3 +3059,41 @@ p.lead {
 .selected_video {
 	font-weight: bold;
 }
+
+.showing_video {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.video_title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+	margin-top: 10px;
+}
+
+.other_video_list {
+	font-size: 15px;
+	font-weight: bold;
+	color: #484573;
+	margin-top: 20px;
+	margin-left: 5px;
+}
+
+.related_video_list {
+	display: block;
+	padding-left: 0px;
+}
+
+.related_video_list li {
+	background: transparent url("/resources/images/v_bullet.png") no-repeat scroll 0px center;
+	margin: 10px 0px 0px;
+	padding: 0px 0px 0px 25px;
+	min-height: 5px;
+}
+
+.related_video_list li a {
+	text-decoration: none;
+	color: #333;
+}

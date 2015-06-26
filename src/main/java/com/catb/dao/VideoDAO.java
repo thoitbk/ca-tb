@@ -14,4 +14,6 @@ public interface VideoDAO {
 	public void deleteVideo(Integer id);
 	public List<Video> getVideos(Integer amount);
 	public List<Video> getVideosByCatalogId(Integer catalogId);
+	public List<Video> getVideos(Integer page, Integer pageSize);
+	public Long countVideos();
 }
