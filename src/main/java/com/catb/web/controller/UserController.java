@@ -94,9 +94,8 @@ public class UserController {
 	@RequiresPermissions(value = {"user:manage"})
 	@RequestMapping(value = "/cm/user/add", method = RequestMethod.POST)
 	public ModelAndView processCreateUser(
-			@Valid UserViewModel userViewModel,
-			BindingResult bindingResult, 
-			HttpServletRequest request, ModelMap model) {
+			@Valid @ModelAttribute("userViewModel") UserViewModel userViewModel,
+			BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		createUserValidator.validate(userViewModel, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
@@ -176,7 +175,7 @@ public class UserController {
 	@RequestMapping(value = "/cm/user/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateUser(
 			@PathVariable("id") Integer id, 
-			@Valid UpdateUserViewModel updateUserViewModel,
+			@Valid @ModelAttribute("updateUserViewModel") UpdateUserViewModel updateUserViewModel,
 			BindingResult bindingResult, 
 			ModelMap model, HttpServletRequest request) {
 		

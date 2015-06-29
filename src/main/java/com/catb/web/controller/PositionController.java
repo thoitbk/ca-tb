@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,8 @@ public class PositionController {
 	@RequiresPermissions(value = {"position:manage"})
 	@RequestMapping(value = "/cm/position/add", method = RequestMethod.POST)
 	public ModelAndView processCreatePosition(
-								@Valid PositionViewModel positionViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("positionViewModel") PositionViewModel positionViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<Position> positions = positionBO.getPositions();
 			model.addAttribute("positions", positions);
@@ -88,7 +88,7 @@ public class PositionController {
 	@RequestMapping(value = "/cm/position/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdatePosition(
 			@PathVariable("id") Integer id, 
-			@Valid PositionViewModel positionViewModel,
+			@Valid @ModelAttribute("positionViewModel") PositionViewModel positionViewModel,
 			BindingResult bindingResult, 
 			ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {

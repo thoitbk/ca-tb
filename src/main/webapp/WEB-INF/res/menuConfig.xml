@@ -28,6 +28,14 @@
 			<link>/cm/document/update</link>
 		</menuItem>
 	</menu>
+	<menu id="question">
+		<menuItem id="question_1">
+			<link>/cm/qaCatalog/add</link>
+			<link>/cm/qaCatalog/update</link>
+		</menuItem>
+		<menuItem id="question_2">
+		</menuItem>
+	</menu>
 	<menu id="media">
 		<menuItem id="media_1">
 			<link>/cm/imageCatalog/add</link>

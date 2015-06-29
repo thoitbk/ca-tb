@@ -66,12 +66,12 @@
 		<s:hasAnyPermission name="qaCatalog:manage, comment:manage">
 			<li class="item ${f:getMenuClass(menuId, 'question', 'selected_item')}" id="question">
 				<img src="${ct}/resources/images/question.png" class="icon_menu" />
-				<h3>Quản trị hỏi đáp</h3>
+				<h3>Quản trị hỏi đáp & tố cáo</h3>
 				<ul class="child">
 					<shiro:hasPermission name="qaCatalog:manage">
 						<li id="question_1" class="${f:getMenuClass(menuItemId, 'question_1', 'selected_subitem')}">
 							<img src="${ct}/resources/images/add_news.gif" class="bullet_menu" />
-							<a href="#">Quản trị DM hỏi đáp</a>
+							<a href="${ct}/cm/qaCatalog/add">Quản trị DM hỏi đáp</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="comment:manage">

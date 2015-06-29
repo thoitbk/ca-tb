@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,8 @@ public class ImageCatalogController {
 	@RequiresPermissions(value = {"imageCatalog:manage"})
 	@RequestMapping(value = "/cm/imageCatalog/add", method = RequestMethod.POST)
 	public ModelAndView processCreateImageCatalog(
-								@Valid ImageCatalogViewModel imageCatalogViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("imageCatalogViewModel") ImageCatalogViewModel imageCatalogViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("imageCatalogs", imageCatalogBO.getImageCatalogs());
 			return new ModelAndView("cm/imageCatalog/add");
@@ -81,8 +81,8 @@ public class ImageCatalogController {
 	@RequiresPermissions(value = {"imageCatalog:manage"})
 	@RequestMapping(value = "/cm/imageCatalog/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateImageCatalog(@PathVariable("id") Integer id, 
-			@Valid ImageCatalogViewModel imageCatalogViewModel, BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("imageCatalogViewModel") ImageCatalogViewModel imageCatalogViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("imageCatalogs", imageCatalogBO.getImageCatalogs());
 			

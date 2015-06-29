@@ -217,4 +217,12 @@
 	<definition name="cm/video/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/media/updateVideo.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/qaCatalog/add" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/qa/addQACatalog.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/qaCatalog/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/qa/updateQACatalog.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

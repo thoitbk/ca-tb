@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,9 +58,8 @@ public class RoleController {
 	@RequiresPermissions(value = {"role:manage"})
 	@RequestMapping(value = "/cm/role/add", method = RequestMethod.POST)
 	public ModelAndView processCreateRole(
-								@Valid RoleViewModel roleViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("roleViewModel") RoleViewModel roleViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		createRoleValidator.validate(roleViewModel, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
@@ -98,9 +98,8 @@ public class RoleController {
 	@RequestMapping(value = "/cm/role/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateRole(
 			@PathVariable("id") Integer id, 
-			@Valid RoleViewModel roleViewModel,
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("roleViewModel") RoleViewModel roleViewModel,
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		updateRoleValidator.setRoleId(id);
 		updateRoleValidator.validate(roleViewModel, bindingResult);
 		

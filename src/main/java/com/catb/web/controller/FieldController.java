@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,9 +48,8 @@ public class FieldController {
 	@RequiresPermissions(value = {"field:manage"})
 	@RequestMapping(value = "/cm/field/add", method = RequestMethod.POST)
 	public ModelAndView processCreateField(
-								@Valid FieldViewModel fieldViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("fieldViewModel") FieldViewModel fieldViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<Field> fields = fieldBO.getFields();
 			model.addAttribute("fields", fields);
@@ -96,7 +96,7 @@ public class FieldController {
 	@RequestMapping(value = "/cm/field/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateField(
 			@PathVariable("id") Integer id, 
-			@Valid FieldViewModel fieldViewModel,
+			@Valid @ModelAttribute("fieldViewModel") FieldViewModel fieldViewModel,
 			BindingResult bindingResult, 
 			ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {

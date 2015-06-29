@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,9 +55,8 @@ public class PermissionController {
 	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/add", method = RequestMethod.POST)
 	public ModelAndView processCreatePermission(
-								@Valid PermissionViewModel permissionViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("permissionViewModel") PermissionViewModel permissionViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		createPermissionValidator.validate(permissionViewModel, bindingResult);
 		
 		if (bindingResult.hasErrors()) {
@@ -79,7 +79,7 @@ public class PermissionController {
 	
 	@RequiresPermissions(value = {"permission:manage"})
 	@RequestMapping(value = "/cm/permission/update/{id}", method = RequestMethod.GET)
-	public ModelAndView showUpdatepPermission(@PathVariable("id") Integer id, ModelMap model) {
+	public ModelAndView showUpdatePermission(@PathVariable("id") Integer id, ModelMap model) {
 		PermissionViewModel permissionViewModel = new PermissionViewModel();
 		Permission permission = permissionBO.getPermissionById(id);
 		if (permission != null) {
@@ -99,9 +99,8 @@ public class PermissionController {
 	@RequestMapping(value = "/cm/permission/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdatePermission(
 			@PathVariable("id") Integer id, 
-			@Valid PermissionViewModel permissionViewModel,
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("permissionViewModel") PermissionViewModel permissionViewModel,
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		updatePermissionValidator.setPermissionId(id);
 		updatePermissionValidator.validate(permissionViewModel, bindingResult);
 		

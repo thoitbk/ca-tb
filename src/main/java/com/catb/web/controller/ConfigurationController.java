@@ -7,6 +7,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,9 +72,8 @@ public class ConfigurationController {
 	@RequiresPermissions(value = {"configuration:manage"})
 	@RequestMapping(value = "/cm/configurations", method = RequestMethod.POST)
 	public ModelAndView processUpdateConfiguration(
-			@Valid CommonInfoViewModel commonInfoViewModel,
-			BindingResult bindingResult, 
-			HttpServletRequest request, ModelMap model) {
+			@Valid @ModelAttribute("commonInfoViewModel") CommonInfoViewModel commonInfoViewModel,
+			BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("cm/configurations");
 		} else {

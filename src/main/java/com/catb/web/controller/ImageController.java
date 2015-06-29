@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,8 +95,8 @@ public class ImageController {
 	public ModelAndView processCreateImage(
 								@RequestParam(value = "cId", required = false) Integer imageCatalogId,
 								@RequestParam(value = "p", required = false, defaultValue = "1") Integer page,
-								@Valid ImageViewModel imageViewModel, BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("imageViewModel") ImageViewModel imageViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("imageCatalogMap", populateImageCatalogs());
 			
@@ -167,7 +168,7 @@ public class ImageController {
 	@RequestMapping(value = "/cm/image/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateImage(
 			@RequestParam(value = "cId", required = false) Integer catalogId,
-			@PathVariable("id") Integer id, @Valid ImageViewModel imageViewModel, 
+			@PathVariable("id") Integer id, @Valid @ModelAttribute("imageViewModel") ImageViewModel imageViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			Map<String, String> params = new LinkedHashMap<String, String>();
