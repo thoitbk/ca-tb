@@ -99,9 +99,8 @@ public class NewsController {
 	@RequiresPermissions(value = {"news:create"})
 	@RequestMapping(value = "/cm/news/create", method = RequestMethod.POST)
 	public ModelAndView processCreateNews(
-			@Valid NewsViewModel newsViewModel, 
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("newsViewModel") NewsViewModel newsViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("cm/news/create");
 		} else {
@@ -333,7 +332,7 @@ public class NewsController {
 	
 	@RequiresPermissions(value = {"news:manage", "news:approve"}, logical = Logical.OR)
 	@RequestMapping(value = "/cm/news/update/{id}", method = RequestMethod.POST)
-	public ModelAndView processUpdateNews(@PathVariable("id") Integer id, @Valid NewsViewModel newsViewModel, 
+	public ModelAndView processUpdateNews(@PathVariable("id") Integer id, @Valid @ModelAttribute("newsViewModel") NewsViewModel newsViewModel, 
 										BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("cm/news/update");

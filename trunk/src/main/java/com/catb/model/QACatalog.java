@@ -29,6 +29,11 @@ public class QACatalog implements Serializable {
 		
 	}
 
+	public QACatalog(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
 	public QACatalog(Integer id, String name, String description) {
 		this.id = id;
 		this.name = name;

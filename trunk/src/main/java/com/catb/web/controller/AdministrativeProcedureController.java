@@ -29,6 +29,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,9 +110,8 @@ public class AdministrativeProcedureController {
 	@RequiresPermissions(value = {"administrativeProcedure:manage"})
 	@RequestMapping(value = "/cm/administrativeProcedure/add", method = RequestMethod.POST)
 	public ModelAndView processCreateAdministrativeProcedure(
-			@Valid AdministrativeProcedureViewModel administrativeProcedureViewModel, 
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("administrativeProcedureViewModel") AdministrativeProcedureViewModel administrativeProcedureViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("departmentMap", populateDepartments());
 			model.addAttribute("fieldMap", populateFields());
@@ -194,7 +194,8 @@ public class AdministrativeProcedureController {
 	@RequiresPermissions(value = {"administrativeProcedure:manage"})
 	@RequestMapping(value = "/cm/administrativeProcedure/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateAdministrativeProcedure(
-			@PathVariable("id") Integer id, @Valid AdministrativeProcedureViewModel administrativeProcedureViewModel, 
+			@PathVariable("id") Integer id, 
+			@Valid @ModelAttribute("administrativeProcedureViewModel") AdministrativeProcedureViewModel administrativeProcedureViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("departmentMap", populateDepartments());

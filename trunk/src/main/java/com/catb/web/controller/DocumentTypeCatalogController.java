@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,9 +48,8 @@ public class DocumentTypeCatalogController {
 	@RequiresPermissions(value = {"documentType:manage"})
 	@RequestMapping(value = "/cm/documentType/add", method = RequestMethod.POST)
 	public ModelAndView processCreateDocumentTypeCatalog(
-								@Valid DocumentTypeCatalogViewModel documentTypeCatalogViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("documentTypeCatalogViewModel") DocumentTypeCatalogViewModel documentTypeCatalogViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<DocumentTypeCatalog> documentTypeCatalogs = documentTypeCatalogBO.getDocumentTypeCatalogs();
 			model.addAttribute("documentTypeCatalogs", documentTypeCatalogs);
@@ -97,9 +97,8 @@ public class DocumentTypeCatalogController {
 	@RequestMapping(value = "/cm/documentType/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateDocumentTypeCatalog(
 			@PathVariable("id") Integer id, 
-			@Valid DocumentTypeCatalogViewModel documentTypeCatalogViewModel,
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("documentTypeCatalogViewModel") DocumentTypeCatalogViewModel documentTypeCatalogViewModel,
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<DocumentTypeCatalog> documentTypeCatalogs = documentTypeCatalogBO.getDocumentTypeCatalogs();
 			model.addAttribute("documentTypeCatalogs", documentTypeCatalogs);

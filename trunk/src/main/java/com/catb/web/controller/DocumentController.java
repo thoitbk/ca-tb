@@ -29,6 +29,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -108,9 +109,8 @@ public class DocumentController {
 	@RequiresPermissions(value = {"document:manage"})
 	@RequestMapping(value = "/cm/document/add", method = RequestMethod.POST)
 	public ModelAndView processCreateDocument(
-			@Valid DocumentViewModel documentViewModel, 
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("documentViewModel") DocumentViewModel documentViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("departmentMap", populateDepartments());
 			model.addAttribute("documentTypeCatalogMap", populateDocumentTypeCatalog());
@@ -296,7 +296,7 @@ public class DocumentController {
 	@RequiresPermissions(value = {"document:manage"})
 	@RequestMapping(value = "/cm/document/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateDocument(
-			@PathVariable("id") Integer id, @Valid DocumentViewModel documentViewModel, 
+			@PathVariable("id") Integer id, @Valid @ModelAttribute("documentViewModel") DocumentViewModel documentViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("departmentMap", populateDepartments());

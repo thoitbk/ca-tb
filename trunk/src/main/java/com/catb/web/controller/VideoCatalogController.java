@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,8 @@ public class VideoCatalogController {
 	@RequiresPermissions(value = {"videoCatalog:manage"})
 	@RequestMapping(value = "/cm/videoCatalog/add", method = RequestMethod.POST)
 	public ModelAndView processCreateVideoCatalog(
-								@Valid VideoCatalogViewModel videoCatalogViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("videoCatalogViewModel") VideoCatalogViewModel videoCatalogViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("videoCatalogs", videoCatalogBO.getVideoCatalogs());
 			return new ModelAndView("cm/videoCatalog/add");
@@ -81,8 +81,8 @@ public class VideoCatalogController {
 	@RequiresPermissions(value = {"videoCatalog:manage"})
 	@RequestMapping(value = "/cm/videoCatalog/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateVideoCatalog(@PathVariable("id") Integer id, 
-			@Valid VideoCatalogViewModel videoCatalogViewModel, BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("videoCatalogViewModel") VideoCatalogViewModel videoCatalogViewModel, 
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("videoCatalogs", videoCatalogBO.getVideoCatalogs());
 			

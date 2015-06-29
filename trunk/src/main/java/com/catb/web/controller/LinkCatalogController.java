@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,9 +48,8 @@ public class LinkCatalogController {
 	@RequiresPermissions(value = {"link:manage"})
 	@RequestMapping(value = "/cm/linkCatalog/add", method = RequestMethod.POST)
 	public ModelAndView processCreateLinkCatalog(
-								@Valid LinkCatalogViewModel linkCatalogViewModel, 
-								BindingResult bindingResult, 
-								HttpServletRequest request, ModelMap model) {
+								@Valid @ModelAttribute("linkCatalogViewModel") LinkCatalogViewModel linkCatalogViewModel, 
+								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<LinkCatalog> linkCatalogs = linkCatalogBO.getLinkCatalogs();
 			model.addAttribute("linkCatalogs", linkCatalogs);
@@ -109,7 +109,7 @@ public class LinkCatalogController {
 	@RequiresPermissions(value = {"link:manage"})
 	@RequestMapping(value = "/cm/linkCatalog/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateLinkCatalog(@PathVariable("id") Integer id, 
-			@Valid LinkCatalogViewModel linkCatalogViewModel, 
+			@Valid @ModelAttribute("linkCatalogViewModel") LinkCatalogViewModel linkCatalogViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<LinkCatalog> linkCatalogs = linkCatalogBO.getLinkCatalogs();

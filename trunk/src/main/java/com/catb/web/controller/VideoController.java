@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -96,7 +97,7 @@ public class VideoController {
 	public ModelAndView processCreateVideo(
 								@RequestParam(value = "cId", required = false) Integer videoCatalogId,
 								@RequestParam(value = "p", required = false, defaultValue = "1") Integer page,
-								@Valid VideoViewModel videoViewModel, BindingResult bindingResult, 
+								@Valid @ModelAttribute("videoViewModel") VideoViewModel videoViewModel, BindingResult bindingResult, 
 								HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("videoCatalogMap", populateVideoCatalogs());
@@ -176,7 +177,7 @@ public class VideoController {
 	@RequestMapping(value = "/cm/video/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateVideo(
 			@RequestParam(value = "cId", required = false) Integer catalogId,
-			@PathVariable("id") Integer id, @Valid VideoViewModel videoViewModel, 
+			@PathVariable("id") Integer id, @Valid @ModelAttribute("videoViewModel") VideoViewModel videoViewModel, 
 			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			Map<String, String> params = new LinkedHashMap<String, String>();

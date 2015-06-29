@@ -97,9 +97,8 @@ public class NewsCatalogController {
 	@RequiresPermissions(value = {"newsCatalog:manage"})
 	@RequestMapping(value = "/cm/newsCatalog/add", method = RequestMethod.POST)
 	public ModelAndView processCreateNewsCatalog(
-								@Valid NewsCatalogViewModel newsCatalogViewModel, 
-								BindingResult bindingResult, 
-								ModelMap model, HttpServletRequest request) {
+								@Valid @ModelAttribute("newsCatalogViewModel") NewsCatalogViewModel newsCatalogViewModel, 
+								BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<NewsCatalog> newsCatalogs = newsCatalogBO.getNewsCatalog(
 															newsCatalogViewModel.getDisplayLocation(), 
@@ -175,9 +174,8 @@ public class NewsCatalogController {
 	@RequestMapping(value = "/cm/newsCatalog/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateNewsCatalog(
 								@PathVariable("id") Integer id, 
-								@Valid NewsCatalogViewModel newsCatalogViewModel, 
-								BindingResult bindingResult, 
-								ModelMap model, HttpServletRequest request) {
+								@Valid @ModelAttribute("newsCatalogViewModel") NewsCatalogViewModel newsCatalogViewModel, 
+								BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<NewsCatalog> newsCatalogs = newsCatalogBO.getNewsCatalog(newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
 			model.addAttribute("newsCatalogs", newsCatalogs);

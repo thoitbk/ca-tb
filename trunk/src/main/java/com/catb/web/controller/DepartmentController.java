@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,8 @@ public class DepartmentController {
 	@RequiresPermissions(value = {"department:manage"})
 	@RequestMapping(value = "/cm/department/add", method = RequestMethod.POST)
 	public ModelAndView processCreateDepartment(
-			@Valid DepartmentViewModel departmentViewModel,
-			BindingResult bindingResult, 
-			HttpServletRequest request, ModelMap model) {
+			@Valid @ModelAttribute("departmentViewModel") DepartmentViewModel departmentViewModel,
+			BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
 		if (bindingResult.hasErrors()) {
 			List<Department> departments = departmentBO.getDepartments();
 			model.addAttribute("departments", departments);
@@ -93,9 +93,8 @@ public class DepartmentController {
 	@RequestMapping(value = "/cm/department/update/{id}", method = RequestMethod.POST)
 	public ModelAndView processUpdateDepartment(
 			@PathVariable("id") Integer id, 
-			@Valid DepartmentViewModel departmentViewModel,
-			BindingResult bindingResult, 
-			ModelMap model, HttpServletRequest request) {
+			@Valid @ModelAttribute("departmentViewModel") DepartmentViewModel departmentViewModel,
+			BindingResult bindingResult, ModelMap model, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			List<Department> departments = departmentBO.getDepartments();
 			model.addAttribute("departments", departments);
