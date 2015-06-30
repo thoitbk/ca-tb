@@ -15,7 +15,7 @@
 
 <div id="Tin_Chi_Tiet">
 	<div class="DanhMuc">
-		<strong><a href="${ct}/home">${COMMONINFO.homePage}</a> > Thư viện ảnh</strong>
+		<strong>THƯ VIỆN ẢNH</strong>
 	</div>
 	<table style="margin-top: 30px; margin-left: 20px; margin-right: 20px; width: 100%;">
 		<c:forEach begin="0" end="${fn:length(imageGalleries) - 1}" step="3" var="index">

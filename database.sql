@@ -95,13 +95,17 @@ CREATE TABLE `comment` (
   `phone_number` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `content` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `commented_date` datetime DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `answerer` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `reply_content` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `reply_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qa_catalog_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_comment_qa_catalog_idx` (`qa_catalog_id`),
+  CONSTRAINT `FK_comment_qa_catalog` FOREIGN KEY (`qa_catalog_id`) REFERENCES `qa_catalog` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

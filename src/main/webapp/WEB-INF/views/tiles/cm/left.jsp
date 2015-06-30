@@ -63,7 +63,7 @@
 				</ul>
 			</li>
 		</s:hasAnyPermission>
-		<s:hasAnyPermission name="qaCatalog:manage, comment:manage">
+		<s:hasAnyPermission name="qaCatalog:manage, comment:manage, criminalDenouncement:manage">
 			<li class="item ${f:getMenuClass(menuId, 'question', 'selected_item')}" id="question">
 				<img src="${ct}/resources/images/question.png" class="icon_menu" />
 				<h3>Quản trị hỏi đáp & tố cáo</h3>
@@ -77,7 +77,13 @@
 					<shiro:hasPermission name="comment:manage">
 						<li id="question_2" class="${f:getMenuClass(menuItemId, 'question_2', 'selected_subitem')}">
 							<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-							<a href="#">Quản trị câu hỏi</a>
+							<a href="#">Trả lời câu hỏi</a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="criminalDenouncement:manage">
+						<li id="question_3" class="${f:getMenuClass(menuItemId, 'other_4', 'selected_subitem')}">
+							<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
+							<a href="${ct}/cm/criminalDenouncement">Tố giác tội phạm</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>
@@ -147,7 +153,7 @@
 				</ul>
 			</li>
 		</s:hasAnyPermission>
-		<s:hasAnyPermission name="link:manage, ad:manage, introduction:manage, criminalDenouncement:manage">
+		<s:hasAnyPermission name="link:manage, ad:manage, introduction:manage">
 			<li class="item ${f:getMenuClass(menuId, 'other', 'selected_item')}" id="other">
 				<img src="${ct}/resources/images/link.png" class="icon_menu" />
 				<h3>Thông tin khác</h3>
@@ -168,12 +174,6 @@
 						<li id="other_3" class="${f:getMenuClass(menuItemId, 'other_3', 'selected_subitem')}">
 							<img src="${ct}/resources/images/template_f.gif" class="bullet_menu" />
 							<a href="${ct}/cm/intro/add">Thông tin chung</a>
-						</li>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="criminalDenouncement:manage">
-						<li id="other_4" class="${f:getMenuClass(menuItemId, 'other_4', 'selected_subitem')}">
-							<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
-							<a href="${ct}/cm/criminalDenouncement">Thông tin liên hệ</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>

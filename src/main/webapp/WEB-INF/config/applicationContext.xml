@@ -130,6 +130,9 @@
 	<bean id="qaCatalogDAO" class="com.catb.dao.impl.QACatalogDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="commentDAO" class="com.catb.dao.impl.CommentDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -177,5 +180,21 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager"/>
     	<property name="realm" ref="authRealm"/>
+	</bean>
+	
+	<!-- captcha generator -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+	    <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+	            <constructor-arg type="java.util.Properties">
+	                <props>
+	                    <prop key="kaptcha.image.width">200</prop> 
+	                    <prop key="kaptcha.image.height">60</prop>
+	                    <prop key="kaptcha.textproducer.char.string">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</prop>
+	                    <prop key="kaptcha.textproducer.char.length">6</prop>
+	                </props>
+	            </constructor-arg>
+            </bean>
+	    </property>
 	</bean>
 </beans>
