@@ -51,6 +51,11 @@
 		<put-attribute name="left_low" value="/WEB-INF/views/tiles/front/left_low.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="askQuestion" template="/WEB-INF/views/tiles/front/frontBaseLayout.jsp">
+		<put-attribute name="left_high" value="/WEB-INF/views/front/qa/askQuestion.jsp"></put-attribute>
+		<put-attribute name="left_low" value="/WEB-INF/views/tiles/front/left_low.jsp"></put-attribute>
+	</definition>
+	
 	<!-- ==============================================================================
 	  									CONTENT MANAGEMENT
          ============================================================================== -->

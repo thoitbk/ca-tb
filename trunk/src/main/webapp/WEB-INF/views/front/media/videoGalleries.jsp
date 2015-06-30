@@ -11,7 +11,7 @@
 
 <div id="Tin_Chi_Tiet">
 	<div class="DanhMuc">
-		<strong><a href="${ct}/home">${COMMONINFO.homePage}</a> > Thư viện video</strong>
+		<strong>THƯ VIỆN VIDEO</strong>
 	</div>
 	<div class="showing_video">
 		<div id="video_container_details">

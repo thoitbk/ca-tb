@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,6 +55,10 @@ public class Comment implements Serializable {
 	
 	@Column(name = "reply_content")
 	private String replyContent;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "qa_catalog_id")
+	private QACatalog qaCatalog;
 
 	public Comment() {
 		
@@ -71,6 +78,24 @@ public class Comment implements Serializable {
 		this.status = status;
 		this.answerer = answerer;
 		this.replyContent = replyContent;
+	}
+
+	public Comment(Integer id, String name, String address, String phoneNumber,
+			String email, String title, String content, Date commentedDate,
+			Boolean status, String answerer, String replyContent,
+			QACatalog qaCatalog) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.title = title;
+		this.content = content;
+		this.commentedDate = commentedDate;
+		this.status = status;
+		this.answerer = answerer;
+		this.replyContent = replyContent;
+		this.qaCatalog = qaCatalog;
 	}
 
 	public Integer getId() {
@@ -159,5 +184,13 @@ public class Comment implements Serializable {
 
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
+	}
+
+	public QACatalog getQaCatalog() {
+		return qaCatalog;
+	}
+
+	public void setQaCatalog(QACatalog qaCatalog) {
+		this.qaCatalog = qaCatalog;
 	}
 }
