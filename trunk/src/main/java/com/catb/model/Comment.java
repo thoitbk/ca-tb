@@ -48,7 +48,7 @@ public class Comment implements Serializable {
 	private Date commentedDate;
 	
 	@Column(name = "status")
-	private Boolean status;
+	private Integer status;
 	
 	@Column(name = "answerer")
 	private String answerer;
@@ -66,7 +66,7 @@ public class Comment implements Serializable {
 
 	public Comment(Integer id, String name, String address, String phoneNumber,
 			String email, String title, String content, Date commentedDate,
-			Boolean status, String answerer, String replyContent) {
+			Integer status, String answerer, String replyContent) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -82,7 +82,7 @@ public class Comment implements Serializable {
 
 	public Comment(Integer id, String name, String address, String phoneNumber,
 			String email, String title, String content, Date commentedDate,
-			Boolean status, String answerer, String replyContent,
+			Integer status, String answerer, String replyContent,
 			QACatalog qaCatalog) {
 		this.id = id;
 		this.name = name;
@@ -162,11 +162,11 @@ public class Comment implements Serializable {
 		this.commentedDate = commentedDate;
 	}
 
-	public Boolean getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

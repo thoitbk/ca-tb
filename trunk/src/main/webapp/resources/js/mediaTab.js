@@ -20,18 +20,13 @@ jQuery(document).ready(function ($) {
 			                    width: '100%',
 			                    height: '100%',
 			                    aspectratio: '16:12',
-			                    autostart: true
+			                    autostart: false
 			                });
 		            		var list = videoList.append('<ul class="video_ul"></ul>').find('ul');
 		            		for (var i = 0; i < response.length; i++) {
 		            			var caption = response[i].caption;
 		            			var url = response[i].file;
-		            			var s;
-		            			if (i == 0) {
-		            				s = '<li><a href="javascript:void(0);" rel="' + url + '" class="other_video selected_video">' + caption + '</a></li>';
-		            			} else {
-		            				s = '<li><a href="javascript:void(0);" rel="' + url + '" class="other_video">' + caption + '</a></li>';
-		            			}
+		            			var s = '<li><a href="javascript:void(0);" rel="' + url + '" class="other_video">' + caption + '</a></li>';
 		            			list.append(s);
 		            		}
 		            	}

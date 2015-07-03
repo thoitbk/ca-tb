@@ -77,7 +77,7 @@
 					<shiro:hasPermission name="comment:manage">
 						<li id="question_2" class="${f:getMenuClass(menuItemId, 'question_2', 'selected_subitem')}">
 							<img src="${ct}/resources/images/earth_f.gif" class="bullet_menu" />
-							<a href="#">Trả lời câu hỏi</a>
+							<a href="${ct}/cm/comment/show">Trả lời câu hỏi</a>
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="criminalDenouncement:manage">

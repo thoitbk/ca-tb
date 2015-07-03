@@ -230,4 +230,8 @@
 	<definition name="cm/qaCatalog/update" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/qa/updateQACatalog.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/comment/show" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/qa/showQuestions.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
