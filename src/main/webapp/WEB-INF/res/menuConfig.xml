@@ -34,6 +34,7 @@
 			<link>/cm/qaCatalog/update</link>
 		</menuItem>
 		<menuItem id="question_2">
+			<link>/cm/comment/show</link>
 		</menuItem>
 	</menu>
 	<menu id="media">

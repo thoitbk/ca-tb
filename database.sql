@@ -97,7 +97,7 @@ CREATE TABLE `comment` (
   `title` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `commented_date` datetime DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
   `answerer` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `reply_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `qa_catalog_id` int(10) DEFAULT NULL,

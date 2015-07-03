@@ -20,7 +20,7 @@ public class CreateCommentViewModel {
 	private String address;
 	
 	@Size(min = 0, max = 200)
-	@Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$")
+	@Pattern(regexp = "^$|^(?:[0-9] ?){6,14}[0-9]$")
 	private String phoneNumber;
 	
 	@Size(min = 0, max = 200)

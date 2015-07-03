@@ -36,7 +36,6 @@ public class CaptchaController {
 		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
 		// Set standard HTTP/1.0 no-cache header.
 		response.setHeader("Pragma", "no-cache");
-
 		// return a jpeg
 		response.setContentType("image/jpeg");
 

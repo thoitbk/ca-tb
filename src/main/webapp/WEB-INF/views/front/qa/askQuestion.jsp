@@ -4,12 +4,19 @@
 <%@ taglib prefix="f" uri="/WEB-INF/tag/functions.tld" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<link href="${ct}/resources/css/notification.css" rel="stylesheet" type="text/css" />
 <link href="${ct}/resources/css/form.css" rel="stylesheet" type="text/css" />
+
+<script src="${ct}/resources/js/anim.js" type="text/javascript"></script>
 
 <div id="Tin_Chi_Tiet">
 	<div class="DanhMuc">
 		<strong>ĐẶT CÂU HỎI</strong>
 	</div>
+	<c:if test="${not empty msg}">
+		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
+		<c:remove var="msg" scope="session" />
+	</c:if>
 	<form:form method="post" commandName="createCommentViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table style="width: 90%; font-size: 12px; border-spacing: 0 5px; margin-top: 20px;" align="center">
@@ -60,13 +67,14 @@
 			<tr>
 				<td>Mã xác nhận</td>
 				<td>
-					<img alt="" src="${ct}/captcha-generator">
+					<img alt="" src="${ct}/captcha-generator" style="float: left;" id="captcha">
+					<a href="javascript:void(0);" id="refresh_captcha"><img alt="Xem mã khác" src="${ct}/resources/images/refresh.png" style="width: 20px; height: 20px; margin-left: 10px;"></a>
 				</td>
 			</tr>
 			<tr>
 				<td>Nhập mã xác nhận</td>
 				<td>
-					<form:input path="captcha" id="captcha" maxlength="10" cssClass="textbox" cssStyle="width: 200px" cssErrorClass="textbox_error" />
+					<form:input path="captcha" id="captcha" maxlength="10" cssClass="textbox" cssStyle="width: 200px;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
@@ -81,3 +89,11 @@
 		</table>
 	</form:form>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#refresh_captcha').click(function() {
+			$('#captcha').attr('src', '/captcha-generator?q=' + Math.random());
+		});
+	});
+</script>
