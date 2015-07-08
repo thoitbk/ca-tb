@@ -36,6 +36,8 @@ public class Constants {
 	public static final Integer IMAGE_AMOUNT = 10;
 	public static final Integer VIDEO_AMOUNT = 5;
 	public static final Integer VIDEO_PAGE_SIZE = 10;
+	public static final Integer QUESTION_PAGE_SIZE = 20;
+	public static final Integer COMMENT_IN_SAME_CATALOG = 10;
 	
 	public static void load() {
 		try {

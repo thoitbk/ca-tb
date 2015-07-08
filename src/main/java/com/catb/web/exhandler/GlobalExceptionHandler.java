@@ -109,20 +109,29 @@ public class GlobalExceptionHandler {
 	public void handleGeneralException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
 		logger.error("Internal exception: ", ex);
 		
-		try {
-			if (Util.isAjaxRequest(request)) {
-				Status status = new Status(Status.INTERNAL_ERROR, "Intenal error");
-				ObjectMapper objectMapper = new ObjectMapper();
-				String s = objectMapper.writeValueAsString(status);
-				
-				response.setContentType("application/json");
-				PrintWriter printWriter = response.getWriter();
-				printWriter.print(s);
-			} else {
-				response.sendRedirect("/cm/internalError");
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			try {
+				if (Util.isAjaxRequest(request)) {
+					Status status = new Status(Status.INTERNAL_ERROR, "Intenal error");
+					ObjectMapper objectMapper = new ObjectMapper();
+					String s = objectMapper.writeValueAsString(status);
+					
+					response.setContentType("application/json");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.print(s);
+				} else {
+					response.sendRedirect("/cm/internalError");
+				}
+			} catch (Exception e) {
+				logger.error("Response from general exception handler failed due to error of serializing to json or responding", ex);
 			}
-		} catch (Exception e) {
-			logger.error("Response from general exception handler failed due to error of serializing to json or responding", ex);
+		} else {
+			try {
+				response.sendRedirect("/notFound");
+			} catch (Exception e) {
+				logger.error("Exception occurred during processing external request", ex);
+			}
 		}
 	}
 	

@@ -580,6 +580,14 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete comment
+    $("#delComment").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delComment').attr('href');
+        reloadUrl = cp + '/cm/comment/show';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){
