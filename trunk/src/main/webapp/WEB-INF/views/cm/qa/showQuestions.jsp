@@ -67,7 +67,7 @@
 				<td width="5%">
 					<input type="checkbox" name="commentId" id="commentId" value="${comment.id}" class="checkbox" />
 				</td>
-				<td width="70%"><c:out value="${comment.title}"></c:out></td>
+				<td width="70%"><a href="${ct}/cm/comment/view/${comment.id}" class="news_title"><c:out value="${comment.title}"></c:out></a></td>
 				<td width="20%">
 					<c:if test="${comment.status == 0}">Đang chờ trả lời</c:if>
 					<c:if test="${comment.status == 1}">Đã trả lời & chưa hiển thị</c:if>
@@ -75,7 +75,7 @@
 				</td>
 				<td>
 					<a href="${ct}/cm/comment/answer/${comment.id}">
-						<img src="${ct}/resources/images/update.png" alt="Trả lời" class="update" />
+						<img src="${ct}/resources/images/answer.png" alt="Trả lời" class="update" />
 					</a>
 				</td>
 			</tr>

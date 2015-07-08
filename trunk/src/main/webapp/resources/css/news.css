@@ -2283,7 +2283,6 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 .lblBlack
 {
 	font-size: 13px;
-	color: Navy;
 	margin-top: 5px;
 }
 /* .thong-bao
@@ -3096,4 +3095,93 @@ p.lead {
 .related_video_list li a {
 	text-decoration: none;
 	color: #333;
+}
+
+.comment_content {
+	padding: 10px;
+}
+
+.question_title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #27429B;
+	display: block;
+	text-decoration: none;
+	text-align: justify;
+	margin-top: 10px;
+	background-image: url(/resources/images/question_bullet.gif);
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 5px 10px 5px 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.comment_detail {
+	font-family: Arial;
+	text-align: left;
+	line-height: 18px;
+}
+
+.asked_date {
+	color: #666;
+	font-size: 9pt;
+	padding: 3px;
+	font-style: italic;
+	text-align: right;
+}
+
+.answer_title {
+	font-size: 13px;
+	font-weight: bold;
+	color: #27429B;
+	display: block;
+	text-decoration: none;
+	text-align: justify;
+	margin-top: 10px;
+	background-image: url(/resources/images/answer_bullet.gif);
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 5px 10px 5px 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.answeredBy {
+	color: #666;
+	font-size: 9pt;
+	padding: 3px;
+	font-style: italic;
+	text-align: right;
+}
+
+.sameQuestions {
+	font-size: 13px;
+	color: #414B96;
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+	padding-left: 10px;
+	background-image: url(/resources/images/same.png);
+	background-size: 15px 15px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding: 5px 10px 5px 20px;
+	text-decoration: none;
+}
+
+.related_comment {
+	background-image: url(/resources/images/dot4.gif);
+	background-position: left top;
+	background-repeat: no-repeat;
+	border-bottom: 1px dotted #CCCCCC;
+	color: #333333;
+	padding-bottom: 5px;
+	padding-left: 12px;
+	padding-top: 4px;
+	list-style: none;
+}
+
+.related_question_link {
+	text-decoration: none;
 }
