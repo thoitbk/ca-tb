@@ -26,7 +26,15 @@
 		<ul class="bxslider">
 			<c:forEach items="${hotNewses}" var="hotNews">
 				<li>
-					<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}/${f:toFriendlyUrl(hotNews.title)}'><img alt="" src="${hotNews.image}" title="${hotNews.title}"></a>
+					<c:choose>
+						<c:when test="${not empty hotNews.image}">
+							<c:set var="img" value="${hotNews.image}" scope="request"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set var="img" value="${ct}/resources/images/default.png" scope="request"></c:set>
+						</c:otherwise>
+					</c:choose>
+					<a href='${news_ct}/${hotNews.newsCatalog.url}/${hotNews.id}/${f:toFriendlyUrl(hotNews.title)}'><img alt="" src="${img}" title="${hotNews.title}"></a>
 				</li>
 			</c:forEach>
 		</ul>

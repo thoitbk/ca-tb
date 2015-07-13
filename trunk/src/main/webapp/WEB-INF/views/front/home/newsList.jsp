@@ -36,8 +36,16 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
+									<c:choose>
+										<c:when test="${not empty news.image}">
+											<c:set var="img" value="${news.image}" scope="request"></c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set var="img" value="${ct}/resources/images/default.png" scope="request"></c:set>
+										</c:otherwise>
+									</c:choose>
 									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}'>
-										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
+										<img class='news_thumb' src='${img}' alt="Ảnh" />
 									</a>
 									<p class="main_news_title">
 										<a href="${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}">${news.title}</a>
@@ -78,6 +86,14 @@
 							<c:if test="${specialSiteInfo.newses != null and not empty specialSiteInfo.newses}">
 								<c:set var="news" value="${specialSiteInfo.newses[0]}" scope="request" />
 								<div class="main_news">
+									<c:choose>
+										<c:when test="${not empty news.image}">
+											<c:set var="img" value="${news.image}" scope="request"></c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set var="img" value="${ct}/resources/images/default.png" scope="request"></c:set>
+										</c:otherwise>
+									</c:choose>
 									<a href='${news_ct}/${specialSiteInfo.newsCatalog.url}/${news.id}/${f:toFriendlyUrl(news.title)}'>
 										<img class='news_thumb' src='${news.image}' alt="Ảnh" />
 									</a>

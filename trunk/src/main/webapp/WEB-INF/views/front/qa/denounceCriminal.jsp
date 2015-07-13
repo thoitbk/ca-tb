@@ -11,23 +11,17 @@
 
 <div id="Tin_Chi_Tiet">
 	<div class="DanhMuc">
-		<strong>ĐẶT CÂU HỎI</strong>
+		<strong>TỐ GIÁC TỘI PHẠM</strong>
 	</div>
 	<c:if test="${not empty msg}">
 		<div id="alert" class="alert-box success"><c:out value="${msg}"></c:out></div>
 		<c:remove var="msg" scope="session" />
 	</c:if>
-	<form:form method="post" commandName="createCommentViewModel">
+	<form:form method="post" commandName="createCriminalDenouncementViewModel">
 		<form:errors path="*" cssClass="alert-box warning" element="div" />
 		<table style="width: 90%; font-size: 12px; border-spacing: 0 5px; margin-top: 20px;" align="center">
 			<tr>
-				<td>Tiêu đề câu hỏi</td>
-				<td>
-					<form:input path="title" id="title" maxlength="1000" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
-				</td>
-			</tr>
-			<tr>
-				<td>Tên người hỏi</td>
+				<td>Tên</td>
 				<td>
 					<form:input path="name" id="name" maxlength="200" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
@@ -47,19 +41,17 @@
 			<tr>
 				<td>Email</td>
 				<td>
-					<form:input path="email" id="email" maxlength="200" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
+					<form:input path="email" id="email" maxlength="100" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
-				<td>Chủ đề câu hỏi</td>
+				<td>Tiêu đề</td>
 				<td>
-					<form:select path="qaCatalogId" id="qaCatalogId" cssStyle="width: 100%;" cssClass="combobox">
-						<form:options items="${qaCatalogMap}"/>
-					</form:select>
+					<form:input path="title" id="title" maxlength="1000" cssClass="textbox" cssStyle="width: 100%;" cssErrorClass="textbox_error" />
 				</td>
 			</tr>
 			<tr>
-				<td>Nội dung câu hỏi</td>
+				<td>Nội dung</td>
 				<td>
 					<form:textarea path="content" id="content" rows="24" cols="50" cssClass="textmulti" cssStyle="width:100%;" cssErrorClass="textmulti_error"/>
 				</td>
@@ -67,7 +59,7 @@
 			<tr>
 				<td>Mã xác nhận</td>
 				<td>
-					<img alt="" src="${ct}/captcha-generator" style="float: left;" id="captcha">
+					<img alt="" src="${ct}/cd-captcha-generator" style="float: left;" id="captcha">
 					<a href="javascript:void(0);" id="refresh_captcha"><img alt="Xem mã khác" src="${ct}/resources/images/refresh.png" style="width: 20px; height: 20px; margin-left: 10px;"></a>
 				</td>
 			</tr>
@@ -83,7 +75,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="Gửi câu hỏi" class="button" id="sendQuestion" />
+					<input type="submit" value="Gửi" class="button" id="send_denouncement" />
 				</td>
 			</tr>
 		</table>
@@ -93,43 +85,43 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#refresh_captcha').click(function() {
-			$('#captcha').attr('src', '/captcha-generator?q=' + Math.random());
+			$('#captcha').attr('src', '/cd-captcha-generator?q=' + Math.random());
 		});
-		
-		$('#sendQuestion').click(function() {
-			var title = $('#title').val();
-			var name = $('#name').val();
-			var content = $('#content').val();
-			var captcha_confirm = $('#captcha_confirm').val();
-			var error = false;
-			if (title == null || title == '') {
-				$('#title').addClass('textbox_error');
-				error = true;
-			} else {
-				$('#title').removeClass('textbox_error');
-			}
-			if (name == null || name == '') {
-				$('#name').addClass('textbox_error');
-				error = true;
-			} else {
-				$('#name').removeClass('textbox_error');
-			}
-			if (content == null || content == '') {
-				$('#content').addClass('textmulti_error');
-				error = true;
-			} else {
-				$('#content').removeClass('textmulti_error');
-			}
-			if (captcha_confirm == null || captcha_confirm == '') {
-				$('#captcha_confirm').addClass('textbox_error');
-				error = true;
-			} else {
-				$('#captcha_confirm').removeClass('textbox_error');
-			}
-			if (error) {
-				alert('Điền thiếu thông tin');
-				return false;
-			}
-		});
+	});
+	
+	$('#send_denouncement').click(function() {
+		var title = $('#title').val();
+		var name = $('#name').val();
+		var content = $('#content').val();
+		var captcha_confirm = $('#captcha_confirm').val();
+		var error = false;
+		if (title == null || title == '') {
+			$('#title').addClass('textbox_error');
+			error = true;
+		} else {
+			$('#title').removeClass('textbox_error');
+		}
+		if (name == null || name == '') {
+			$('#name').addClass('textbox_error');
+			error = true;
+		} else {
+			$('#name').removeClass('textbox_error');
+		}
+		if (content == null || content == '') {
+			$('#content').addClass('textmulti_error');
+			error = true;
+		} else {
+			$('#content').removeClass('textmulti_error');
+		}
+		if (captcha_confirm == null || captcha_confirm == '') {
+			$('#captcha_confirm').addClass('textbox_error');
+			error = true;
+		} else {
+			$('#captcha_confirm').removeClass('textbox_error');
+		}
+		if (error) {
+			alert('Điền thiếu thông tin');
+			return false;
+		}
 	});
 </script>

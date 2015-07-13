@@ -133,6 +133,9 @@
 	<bean id="commentDAO" class="com.catb.dao.impl.CommentDAOImpl">
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
+	<bean id="criminalDenouncementDAO" class="com.catb.dao.impl.CriminalDenouncementDAOImpl">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
 	
 	<!-- Configuration of shiro filter for authentication and authorization -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
