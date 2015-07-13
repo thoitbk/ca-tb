@@ -25,11 +25,17 @@ public class CriminalDenouncement implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "title")
-	private String title;
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "phone_number")
+	private String phoneNumber;
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "title")
+	private String title;
 	
 	@Column(name = "content")
 	private String content;
@@ -39,7 +45,7 @@ public class CriminalDenouncement implements Serializable {
 	private Date sentDate;
 	
 	@Column(name = "status")
-	private Boolean status;
+	private Integer status;
 	
 	@Column(name = "reply_content")
 	private String replyContent;
@@ -47,14 +53,15 @@ public class CriminalDenouncement implements Serializable {
 	public CriminalDenouncement() {
 		
 	}
-
-	public CriminalDenouncement(Integer id, String name, String title,
-			String email, String content, Date sentDate, Boolean status,
-			String replyContent) {
-		this.id = id;
+	
+	public CriminalDenouncement(String name, String address,
+			String phoneNumber, String email, String title, String content,
+			Date sentDate, Integer status, String replyContent) {
 		this.name = name;
-		this.title = title;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.title = title;
 		this.content = content;
 		this.sentDate = sentDate;
 		this.status = status;
@@ -76,13 +83,21 @@ public class CriminalDenouncement implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getTitle() {
-		return title;
+	
+	public String getAddress() {
+		return address;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {
@@ -91,6 +106,14 @@ public class CriminalDenouncement implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getContent() {
@@ -108,12 +131,12 @@ public class CriminalDenouncement implements Serializable {
 	public void setSentDate(Date sentDate) {
 		this.sentDate = sentDate;
 	}
-
-	public Boolean getStatus() {
+	
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

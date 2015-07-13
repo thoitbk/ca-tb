@@ -35,6 +35,11 @@
 		</menuItem>
 		<menuItem id="question_2">
 			<link>/cm/comment/show</link>
+			<link>/cm/comment/answer</link>
+		</menuItem>
+		<menuItem id="question_3">
+			<link>/cm/denouncement/show</link>
+			<link>/cm/denouncement/reply</link>
 		</menuItem>
 	</menu>
 	<menu id="media">

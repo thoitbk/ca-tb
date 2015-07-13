@@ -118,12 +118,14 @@ DROP TABLE IF EXISTS `criminal_denouncement`;
 CREATE TABLE `criminal_denouncement` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `content` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `sent_date` datetime DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `reply_content` varchar(5000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `reply_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

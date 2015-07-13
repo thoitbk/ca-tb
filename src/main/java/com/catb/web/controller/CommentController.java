@@ -72,7 +72,7 @@ public class CommentController {
 	public ModelAndView processCreateComment(
 								@Valid @ModelAttribute("createCommentViewModel") CreateCommentViewModel createCommentViewModel, 
 								BindingResult bindingResult, HttpServletRequest request, ModelMap model) {
-		String validCode = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		String validCode = (String) request.getSession().getAttribute(Constants.QA_CAPTCHA_KEY);
 		createCommentValidator.setValidCode(validCode);
 		createCommentValidator.validate(createCommentViewModel, bindingResult);
 		

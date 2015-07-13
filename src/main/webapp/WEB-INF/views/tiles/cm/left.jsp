@@ -81,9 +81,9 @@
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="criminalDenouncement:manage">
-						<li id="question_3" class="${f:getMenuClass(menuItemId, 'other_4', 'selected_subitem')}">
+						<li id="question_3" class="${f:getMenuClass(menuItemId, 'question_3', 'selected_subitem')}">
 							<img src="${ct}/resources/images/book_f.gif" class="bullet_menu" />
-							<a href="${ct}/cm/criminalDenouncement">Tố giác tội phạm</a>
+							<a href="${ct}/cm/denouncement/show">Tố giác tội phạm</a>
 						</li>
 					</shiro:hasPermission>
 				</ul>

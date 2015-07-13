@@ -66,6 +66,11 @@
 		<put-attribute name="left_low" value="/WEB-INF/views/tiles/front/left_low.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="denounceCriminal" template="/WEB-INF/views/tiles/front/frontBaseLayout.jsp">
+		<put-attribute name="left_high" value="/WEB-INF/views/front/qa/denounceCriminal.jsp"></put-attribute>
+		<put-attribute name="left_low" value="/WEB-INF/views/tiles/front/left_low.jsp"></put-attribute>
+	</definition>
+	
 	<!-- ==============================================================================
 	  									CONTENT MANAGEMENT
          ============================================================================== -->
@@ -247,5 +252,9 @@
 	
 	<definition name="cm/comment/answer" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/qa/answerQuestion.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="cm/criminalDenouncement/show" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/qa/showCriminalDenouncements.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>
