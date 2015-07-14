@@ -57,7 +57,7 @@
 				</td>
 				<td>
 					<c:if test="${not empty criminalDenouncement.email}">
-						<a href="${ct}/cm/denouncement/answer/${criminalDenouncement.id}">
+						<a href="${ct}/cm/denouncement/reply/${criminalDenouncement.id}">
 							<img src="${ct}/resources/images/send_email.png" alt="Trả lời" class="update" />
 						</a>
 					</c:if>

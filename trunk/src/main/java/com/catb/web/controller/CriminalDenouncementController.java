@@ -26,6 +26,8 @@ import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.CriminalDenouncement;
 import com.catb.model.CriminalDenouncementStatus;
+import com.catb.service.mail.MailSender;
+import com.catb.vo.MailContent;
 import com.catb.web.tag.PageInfo;
 import com.catb.web.util.Util;
 import com.catb.web.validator.CreateCriminalDenouncementValidator;
@@ -114,5 +116,53 @@ public class CriminalDenouncementController {
 		}
 		
 		return new ModelAndView("cm/criminalDenouncement/view");
+	}
+	
+	@RequiresPermissions(value = {"criminalDenouncement:manage"})
+	@RequestMapping(value = "/cm/denouncement/reply/{id}", method = RequestMethod.GET)
+	public ModelAndView replyDenouncement(@PathVariable("id") Integer id, ModelMap model) {
+		CriminalDenouncement criminalDenouncement = criminalDenouncementBO.getCriminalDenouncement(id);
+		model.addAttribute("criminalDenouncement", criminalDenouncement);
+		model.addAttribute("id", id);
+		
+		return new ModelAndView("cm/criminalDenouncement/reply");
+	}
+	
+	@RequiresPermissions(value = {"criminalDenouncement:manage"})
+	@RequestMapping(value = "/cm/denouncement/reply/{id}", method = RequestMethod.POST)
+	public ModelAndView processReplyDenouncement(@PathVariable("id") Integer id, 
+			@RequestParam(value = "replyContent", required = false) String replyContent, 
+			ModelMap model, HttpServletRequest request) {
+		if (replyContent != null && !"".equals(replyContent.trim())) {
+			CriminalDenouncement c = criminalDenouncementBO.getCriminalDenouncement(id);
+			if (c != null && c.getEmail() != null) {
+				try {
+					MailContent mailContent = new MailContent();
+					mailContent.setTitle(c.getTitle());
+					mailContent.setContent(c.getContent());
+					mailContent.setReplyContent(replyContent);
+					
+					MailSender.send(c.getEmail(), mailContent);
+					
+					CriminalDenouncement criminalDenouncement = new CriminalDenouncement();
+					criminalDenouncement.setId(id);
+					criminalDenouncement.setReplyContent(replyContent);
+					criminalDenouncement.setStatus(CriminalDenouncementStatus.ANSWERED_VIA_EMAIL.getStatus());
+					
+					criminalDenouncementBO.updateCriminalDenouncement(criminalDenouncement);
+					
+					request.getSession().setAttribute("msg", PropertiesUtil.getProperty("denouncement.replied.successfully"));
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					request.getSession().setAttribute("msg", PropertiesUtil.getProperty("denouncement.replied.unsuccessfully"));
+				}
+			}
+		} else {
+			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("denouncement.not.replied"));
+		}
+		
+		String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
+		
+		return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/denouncement/show" + queryString));
 	}
 }

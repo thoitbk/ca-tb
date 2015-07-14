@@ -257,4 +257,8 @@
 	<definition name="cm/criminalDenouncement/show" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/cm/qa/showCriminalDenouncements.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="cm/criminalDenouncement/reply" template="/WEB-INF/views/tiles/cm/cmBaseLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/cm/qa/replyDenouncement.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
