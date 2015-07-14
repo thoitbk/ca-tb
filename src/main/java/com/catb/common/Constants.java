@@ -40,6 +40,10 @@ public class Constants {
 	public static final Integer COMMENT_IN_SAME_CATALOG = 10;
 	public static final String QA_CAPTCHA_KEY = "QA_CAPTCHA_KEY";
 	public static final String CD_CAPTCHA_KEY = "CD_CAPTCHA_KEY";
+	public static String SMTP_HOST;
+	public static String SMTP_PORT;
+	public static String EMAIL_SENDER;
+	public static String EMAIL_SENDER_PASSWORD;
 	
 	public static void load() {
 		try {
@@ -57,6 +61,10 @@ public class Constants {
 			IMAGE_URL = config.getString("IMAGE_URL");
 			VIDEO_LOCATION = config.getString("VIDEO_LOCATION");
 			VIDEO_URL = config.getString("VIDEO_URL");
+			SMTP_HOST = config.getString("SMTP_HOST");
+			SMTP_PORT = config.getString("SMTP_PORT");
+			EMAIL_SENDER = config.getString("EMAIL_SENDER");
+			EMAIL_SENDER_PASSWORD = config.getString("EMAIL_SENDER_PASSWORD");
 		} catch (ConfigurationException ex) {
 			logger.error("Loading configuration failed: ", ex);
 		}
