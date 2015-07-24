@@ -107,16 +107,22 @@
 </div>
 <div id="Quang_Cao">
 	<span>
-	<a href=http://thaibinh.xnc.vn/ target='_blank'> <img src="/quangcao1.jpg" width='204'/> </a>
-	<a href=http://thaibinh.gov.vn/ target='_blank'> <img src="/quangcao2.jpg" border='0' width='204'/> </a>
+		<c:forEach items="${ADVERTISEMENTS_LIST}" var="ad">
+			<c:if test="${ad.openBlank}">
+				<a href="${ad.link}" target='_blank'><img src="${ad.image}" alt="" style="width: 100%;" /></a>
+			</c:if>
+			<c:if test="${!ad.openBlank}">
+				<a href="${ad.link}"><img src="${ad.image}" alt="" style="width: 100%;" /></a>
+			</c:if>
+		</c:forEach>
 	</span>
 </div>
-<div id="Luot_Truy_Cap">
+<!-- <div id="Luot_Truy_Cap">
 	<div class='truycap'>Số lượt truy cập:<br /> </div>
 	<div class="space5">
-		&nbsp;
+		<script type="text/javascript" src="http://counter8.bestfreecounterstat.com/private/counter.js?c=567e1ecbea1d5b5680b62929274f3cfc"></script>
 	</div>
-</div>
+</div> -->
 
 <script src="${ct}/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ct}/resources/js/docs.min.js" type="text/javascript"></script>

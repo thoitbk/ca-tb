@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.catb.bo.AdCatalogBO;
 import com.catb.bo.LinkCatalogBO;
 import com.catb.common.Constants;
 import com.catb.dao.statics.ResReader;
@@ -26,6 +27,9 @@ public class ComponentsLoader {
 	
 	@Autowired
 	private LinkCatalogBO linkCatalogBO;
+	
+	@Autowired
+	private AdCatalogBO adCatalogBO;
 	
 	private ServletContext context;
 
@@ -63,6 +67,8 @@ public class ComponentsLoader {
 			
 			logger.info("Loading link list");
 			context.setAttribute("LINK_LIST", linkCatalogBO.getLinkCatalogs());
+			logger.info("Loading advertisements");
+			context.setAttribute("ADVERTISEMENTS_LIST", adCatalogBO.getDisplayedAdCatalogs(Constants.MAX_ADS_NUM));
 			
 			logger.info("Creating required directories...");
 			Util.createFolder(Constants.ADMINISTRATIVE_PROCEDURE_LOCATION);

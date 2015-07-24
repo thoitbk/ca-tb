@@ -16,7 +16,7 @@
 
 <div id="MainDMTin">
 	<div id="Khau_HieuKH">
-		<img src="${ct}/Upload/Galery/Image/14218445_Anh-giao-dien.JPG" />
+		<img src="${ct}/resources/images/slogan.JPG" width="100%" height="100%" />
 	</div>
 	
 	<div id="special_sites">

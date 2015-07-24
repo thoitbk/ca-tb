@@ -15,7 +15,6 @@
 		<menuItem id="info_4">
 			<link>/cm/newsCatalog/add</link>
 			<link>/cm/newsCatalog/update</link>
-			<link>/cm/newsCatalog/delete</link>
 		</menuItem>
 	</menu>
 	<menu id="doc">
@@ -64,38 +63,34 @@
 		<menuItem id="other_1">
 			<link>/cm/linkCatalog/add</link>
 			<link>/cm/linkCatalog/update</link>
-			<link>/cm/linkCatalog/delete</link>
 		</menuItem>
 		<menuItem id="other_2">
+			<link>/cm/adv/add</link>
+			<link>/cm/adv/update</link>
 		</menuItem>
 	</menu>
 	<menu id="catalog">
 		<menuItem id="catalog_1">
 			<link>/cm/position/add</link>
 			<link>/cm/position/update</link>
-			<link>/cm/position/delete</link>
 		</menuItem>
 		<menuItem id="catalog_2">
 			<link>/cm/department/add</link>
 			<link>/cm/department/update</link>
-			<link>/cm/department/delete</link>
 		</menuItem>
 		<menuItem id="catalog_3">
 			<link>/cm/documentType/add</link>
 			<link>/cm/documentType/update</link>
-			<link>/cm/documentType/delete</link>
 		</menuItem>
 		<menuItem id="catalog_4">
 			<link>/cm/field/add</link>
 			<link>/cm/field/update</link>
-			<link>/cm/field/delete</link>
 		</menuItem>
 	</menu>
 	<menu id="system">
 		<menuItem id="system_1">
 			<link>/cm/user/add</link>
 			<link>/cm/user/update</link>
-			<link>/cm/user/delete</link>
 		</menuItem>
 		<menuItem id="system_2">
 			<link>/cm/manageUserRole</link>
@@ -109,12 +104,10 @@
 		<menuItem id="system_4">
 			<link>/cm/role/add</link>
 			<link>/cm/role/update</link>
-			<link>/cm/role/delete</link>
 		</menuItem>
 		<menuItem id="system_7">
 			<link>/cm/permission/add</link>
 			<link>/cm/permission/update</link>
-			<link>/cm/permission/delete</link>
 		</menuItem>
 		<menuItem id="system_8">
 			<link>/cm/configurations</link>

@@ -1,6 +1,7 @@
 package com.catb.web.controller;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import com.catb.bo.NewsCatalogBO;
 import com.catb.common.Constants;
 import com.catb.common.PropertiesUtil;
 import com.catb.model.NewsCatalog;
+import com.catb.web.component.Menu;
 import com.catb.web.component.MenuLoader;
 import com.catb.web.viewmodel.NewsCatalogViewModel;
 import com.catb.web.viewmodel.Status;
@@ -137,7 +139,12 @@ public class NewsCatalogController {
 			newsCatalog.setSpecialSite(newsCatalogViewModel.getSpecialSite());
 			
 			newsCatalogBO.addNewsCatalog(newsCatalog);
-			request.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
+			
+			List<Menu> menuTree = new LinkedList<Menu>();
+			menuTree.add(new Menu(Constants.HOMEPAGE, "/home", 0, null));
+			menuTree.addAll(menuLoader.loadMenuTree());
+			request.getServletContext().setAttribute("MENU_HIERARCHY", menuTree);
+			
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.created.successfully"));
 			
 			return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/newsCatalog/add"));
@@ -193,7 +200,11 @@ public class NewsCatalogController {
 									newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId(), null);
 			newsCatalogBO.updateNewsCatalog(newsCatalog);
 			
-			request.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
+			List<Menu> menuTree = new LinkedList<Menu>();
+			menuTree.add(new Menu(Constants.HOMEPAGE, "/home", 0, null));
+			menuTree.addAll(menuLoader.loadMenuTree());
+			request.getServletContext().setAttribute("MENU_HIERARCHY", menuTree);
+			
 			request.getSession().setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.updated.successfully"));
 			
 			String queryString = String.format("?location=%s&parent=%d", newsCatalogViewModel.getDisplayLocation(), newsCatalogViewModel.getParentId());
@@ -206,7 +217,12 @@ public class NewsCatalogController {
 	@ResponseBody
 	public Status deleteNewsCatalog(@RequestParam("ids") Integer[] ids, HttpSession session) {
 		newsCatalogBO.deleteNewsCatalogs(ids);
-		session.getServletContext().setAttribute("MENU_HIERARCHY", menuLoader.loadMenuTree());
+		
+		List<Menu> menuTree = new LinkedList<Menu>();
+		menuTree.add(new Menu(Constants.HOMEPAGE, "/home", 0, null));
+		menuTree.addAll(menuLoader.loadMenuTree());
+		session.getServletContext().setAttribute("MENU_HIERARCHY", menuTree);
+		
 		session.setAttribute("msg", PropertiesUtil.getProperty("newsCatalog.deleted.successfully"));
 		Status status = new Status(Status.OK, "ok");
 		return status;

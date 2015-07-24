@@ -12,4 +12,5 @@ public interface CriminalDenouncementBO {
 	public CriminalDenouncement getCriminalDenouncement(Integer id);
 	public void updateCriminalDenouncement(CriminalDenouncement criminalDenouncement);
 	public void updateCriminalDenouncementStatus(CriminalDenouncement criminalDenouncement);
+	public void deleteCriminalDenouncements(Integer[] ids);
 }
