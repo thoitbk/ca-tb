@@ -588,6 +588,22 @@ $(document).ready(function() {
         post(postUrl, reloadUrl);
     });
     
+    // Delete denouncement
+    $("#delDenouncement").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delDenouncement').attr('href');
+        reloadUrl = cp + '/cm/denouncement/show';
+        post(postUrl, reloadUrl);
+    });
+    
+    // Delete denouncement
+    $("#delAdvertisement").click(function(event){
+        event.preventDefault();
+        postUrl = $('#delAdvertisement').attr('href');
+        reloadUrl = cp + '/cm/adv/add';
+        post(postUrl, reloadUrl);
+    });
+    
     // Send post request to specific url
     function post(postUrl, reloadUrl) {
         var _ids = $(".checkbox:checked").map(function(){

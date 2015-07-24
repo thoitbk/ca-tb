@@ -41,6 +41,16 @@ public class AdCatalog implements Serializable {
 		
 	}
 
+	public AdCatalog(String title, String link, String image, Boolean display,
+			Integer sqNumber, Boolean openBlank) {
+		this.title = title;
+		this.link = link;
+		this.image = image;
+		this.display = display;
+		this.sqNumber = sqNumber;
+		this.openBlank = openBlank;
+	}
+
 	public AdCatalog(Integer id, String title, String link, String image,
 			Boolean display, Integer sqNumber, Boolean openBlank) {
 		this.id = id;

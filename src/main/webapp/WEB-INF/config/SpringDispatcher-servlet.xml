@@ -56,4 +56,6 @@
 	<mvc:view-controller path="/cm/internalError" view-name="cm/internalError" />
 	<mvc:view-controller path="/cm/notExistedResource" view-name="cm/notExistedResource" />
 	<mvc:view-controller path="/notExistedResource" view-name="notExistedResource" />
+	<mvc:view-controller path="/notFound" view-name="notFound" />
+	<mvc:view-controller path="/search" view-name="search" />
 </beans>

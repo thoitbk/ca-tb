@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -32,6 +34,7 @@ import com.catb.web.tag.PageInfo;
 import com.catb.web.util.Util;
 import com.catb.web.validator.CreateCriminalDenouncementValidator;
 import com.catb.web.viewmodel.CreateCriminalDenouncementViewModel;
+import com.catb.web.viewmodel.Status;
 
 @Controller
 public class CriminalDenouncementController {
@@ -164,5 +167,15 @@ public class CriminalDenouncementController {
 		String queryString = request.getQueryString() != null && !"".equals(request.getQueryString()) ? "?" + request.getQueryString() : "";
 		
 		return new ModelAndView(new RedirectView(request.getContextPath() + "/cm/denouncement/show" + queryString));
+	}
+	
+	@RequiresPermissions(value = {"criminalDenouncement:manage"})
+	@RequestMapping(value = "/cm/denouncement/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Status deleteDenouncements(@RequestParam("ids") Integer[] ids, HttpSession session) {
+		criminalDenouncementBO.deleteCriminalDenouncements(ids);
+		session.setAttribute("msg", PropertiesUtil.getProperty("denouncement.deleted.successfully"));
+		Status status = new Status(Status.OK, "ok");
+		return status;
 	}
 }

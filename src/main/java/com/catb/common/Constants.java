@@ -26,6 +26,11 @@ public class Constants {
 	public static String IMAGE_URL;
 	public static String VIDEO_LOCATION;
 	public static String VIDEO_URL;
+	public static String SMTP_HOST;
+	public static String SMTP_PORT;
+	public static String EMAIL_SENDER;
+	public static String EMAIL_SENDER_PASSWORD;
+	
 	public static final Integer MAX_SQ_NUMBER = 2000000000;
 	public static final String NEWS_PREFIX = "/tin-tuc";
 	public static final String HOMEPAGE = "Trang chủ";
@@ -40,10 +45,7 @@ public class Constants {
 	public static final Integer COMMENT_IN_SAME_CATALOG = 10;
 	public static final String QA_CAPTCHA_KEY = "QA_CAPTCHA_KEY";
 	public static final String CD_CAPTCHA_KEY = "CD_CAPTCHA_KEY";
-	public static String SMTP_HOST;
-	public static String SMTP_PORT;
-	public static String EMAIL_SENDER;
-	public static String EMAIL_SENDER_PASSWORD;
+	public static final Integer MAX_ADS_NUM = 5;
 	
 	public static void load() {
 		try {

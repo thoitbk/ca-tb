@@ -3,7 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
@@ -38,6 +38,7 @@
 		<div id="mainfooter">
 			<jsp:include page="bottom.jsp"></jsp:include>
 		</div>
+		<a href="#" class="back-to-top">Về đầu trang</a>
 	</div>
 </body>
 </html>

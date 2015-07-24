@@ -54,4 +54,13 @@ public class CriminalDenouncementBOImpl implements CriminalDenouncementBO {
 			criminalDenouncementDAO.updateCriminalDenouncement(c);
 		}
 	}
+	
+	@Transactional
+	public void deleteCriminalDenouncements(Integer[] ids) {
+		if (ids != null && ids.length > 0) {
+			for (Integer id : ids) {
+				criminalDenouncementDAO.deleteCriminalDenouncement(id);
+			}
+		}
+	}
 }
