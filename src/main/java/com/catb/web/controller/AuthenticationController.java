@@ -76,6 +76,9 @@ public class AuthenticationController {
 			if (user != null) {
 				UserInfo userInfo = new UserInfo(user.getId(), user.getUsername(), user.getFullName(), user.getGender());
 				request.getSession().setAttribute("userInfo", userInfo);
+			} else {
+				UserInfo userInfo = new UserInfo(null, "Admin", "Admin", true);
+				request.getSession().setAttribute("userInfo", userInfo);
 			}
 			
 			logger.info(String.format("Login successfully - user: %s at %s", username, Util.getIpAddress(request)));

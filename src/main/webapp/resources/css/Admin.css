@@ -25,7 +25,6 @@
 {
 	margin: 0 auto ;
 	padding:0 auto;
-	width: 100%;
 	border: 1px solid #dfdfdf;
 	background: #FFFFFF;
 	overflow:hidden;
@@ -176,15 +175,16 @@
 }
 #adminfooter
 {
-	background:  #FFF ; /*url( "../images/footerAdmin.gif" ) repeat-x top left;*/
-	margin: auto;
+	background: transparent linear-gradient(90deg, #FEDD94 5%, #FEEBC2 100%) repeat scroll 0% 0%;
+	clear: both;
 	color: Black;
-	font-size: 13px;
+	font-size: 12px;
 	line-height:20px;
-	position: relative;
+	margin: auto;
+	padding-bottom: 20px;
+	text-align: left;
 	width: 100%;
-	border: 1px solid #DFDFDF;
-	border-radius: 0px 0px 8px 8px;
+	min-height: 120px;
 }
 #adminfooter .email-footer
 {
@@ -1000,4 +1000,27 @@ span.star
 .video_thumb {
 	width: 60px;
 	height: 60px;
+}
+
+.dev {
+	position: absolute;
+	top: 90px;
+	right: 20px;
+	color: blue;
+}
+
+.back-to-top {
+	position: fixed;
+	bottom: 2em;
+	right: 0px;
+	text-decoration: none;
+	color: #000000;
+	background-color: rgba(235, 235, 235, 0.80);
+	font-size: 12px;
+	padding: 1em;
+	display: none;
+}
+
+.back-to-top:hover {	
+	background-color: rgba(200, 200, 200, 0.50);
 }

@@ -183,9 +183,23 @@
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
     </bean>
+    
+    <bean id="equalMatcher" class="org.apache.shiro.authc.credential.SimpleCredentialsMatcher">
+    </bean>
+    <bean id="superRealm" class="com.catb.auth.SuperRealm">
+    	<property name="credentialsMatcher" ref="equalMatcher"></property>
+    	<property name="name" value="authRealmCache" />
+    </bean>
+    
+    
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager"/>
-    	<property name="realm" ref="authRealm"/>
+    	<property name="realms">
+    		<list>
+    			<ref bean="superRealm" />
+    			<ref bean="authRealm" />
+    		</list>
+    	</property>
 	</bean>
 	
 	<!-- captcha generator -->

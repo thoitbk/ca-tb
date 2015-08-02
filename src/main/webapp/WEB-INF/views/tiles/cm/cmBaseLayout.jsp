@@ -23,8 +23,8 @@
 <body>
 	<div id="wrapper">
 		<div id="top">
-			<div ID="Banner">
-				<embed width="100%" height="113" align="middle" src="" wmode="transparent" />
+			<div ID="Banner" style="margin: 0px auto; width: 100%; height: 133px;">
+				<img alt="" src="${ct}/resources/images/banner.PNG" width="100%" height="100%" />
 			</div>
 		</div>
 		<div id="pagecontents" class="main">
@@ -50,6 +50,7 @@
 		<div id="adminfooter">
 			<jsp:include page="bottom.jsp"></jsp:include>
 		</div>
+		<a href="#" class="back-to-top">Về đầu trang</a>
 	</div>
 	<div class="modal"></div>
 </body>
