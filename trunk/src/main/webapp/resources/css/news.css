@@ -55,7 +55,7 @@ body
 }
 #mainfooter
 {
-	background: #FFFFFF ;
+	background: transparent linear-gradient(90deg, #FEDD94 5%, #FEEBC2 100%) repeat scroll 0% 0%;
 	clear: both;
 	color: Black;
 	font-size: 12px;
@@ -64,6 +64,7 @@ body
 	padding-bottom: 20px;
 	text-align: left;
 	width: 100%;
+	min-height: 120px;
 }
 #mainfooter .email-footer
 {
@@ -88,7 +89,7 @@ body
 }
 #mainfooter .Thong_Tin
 {
-	padding-left: 200px;
+	padding-left: 10px;
 }	
 #mainfooter .Tro_Ve
 {
@@ -1864,7 +1865,7 @@ url("../images/lien-ket-web-site-bg.gif" ) 0 0 repeat-x*/
 	float: left;
 	padding: 5px 0 0 0px;
 	text-align: center;
-	width: 245px;
+	width: 100%;
 }
 #Quang_Cao img
 {
@@ -3008,7 +3009,7 @@ p.lead {
 	padding-bottom: 10px;
 	font-weight: bold;
 	font-size: 13px;
-	background: transparent linear-gradient(180deg, #63B8EE 5%, #B9F9F0 100%) repeat scroll 0% 0%;
+	background: transparent linear-gradient(1180deg, #DDD 5%, #DDF 100%) repeat scroll 0% 0%;
 }
 
 .procedure_link {
@@ -3202,4 +3203,11 @@ p.lead {
 
 .back-to-top:hover {	
 	background-color: rgba(135, 135, 135, 0.50);
+}
+
+.dev {
+	position: absolute;
+	top: 100px;
+	right: 20px;
+	color: blue;
 }

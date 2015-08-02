@@ -7,6 +7,19 @@
 <div>
 	<exTag:menu menuHierarchy="${MENU_HIERARCHY}" request="${pageContext.request}" menuId="menu-bar" selectedClass="active"/>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#search_button').click(function() {
+		var s = $('#s').val();
+		if (s == null || s == '') {
+			alert('Chưa nhập từ khóa tìm kiếm');
+			return false;
+		}
+	})
+});
+</script>
+
 <div id="TopInfo">
 	<div id="InfoLeft">
 		<span id="ngay"></span>    
@@ -19,7 +32,7 @@
 			<input value="001033406891335138810:mvy6sjiyygc" name="cx" type="hidden"/>
 			<input value="FORID:11" name="cof" type="hidden"/>
 			<input type="text" name="s" id="s" placeholder="Tìm kiếm..." value="${param.s}" />
-			<input type="submit" value="Tìm kiếm" />
+			<input type="submit" id="search_button" value="Tìm kiếm" />
 		</form>
 	</div>
 </div>
