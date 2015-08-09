@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="exTag" uri="/WEB-INF/tag/extags.tld" %>
 <script>            
 	jQuery(document).ready(function() {
 		var offset = 220;
@@ -28,6 +29,6 @@
 			Email: conganthaibinh@gmail.com - Website: http://conganthaibinh.gov.vn <br />
 			Bản quyền thuộc về Công an tỉnh Thái Bình
 		</span>
-		<div class="dev">Thiết kế và lập trình bởi <strong><a href="http://thoitbk.blogspot.com/" target="_blank" style="text-decoration: none; color: red;">Trần Anh Thơ</a></strong> - Cán bộ Phòng Tham mưu Công an tỉnh Thái Bình</div>
+		<div class="dev"><exTag:cr/></div>
 	</div>
 </div>
