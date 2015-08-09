@@ -26,6 +26,10 @@
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/catb_db" />
 		<property name="user" value="root" />
 		<property name="password" value="root" />
+		<property name="idleConnectionTestPeriod" value="9000"></property>
+		<property name="maxPoolSize" value="200"></property>
+		<property name="minPoolSize" value="10"></property>
+		<property name="maxConnectionAge" value="18000"></property>
 	</bean>
 	<bean id="hibernate4AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
